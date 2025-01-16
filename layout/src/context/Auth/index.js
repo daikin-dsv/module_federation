@@ -9,14 +9,9 @@ function Auth(props) {
 
     useEffect(() => {
         async function initialize() {
-            // if (process.env.NODE_ENV !== 'development') {
             const sso = await init();
             setIsAuthenticated(sso.authenticated);
             setUser(sso.tokenParsed);
-            // } else {
-            //     setIsAuthenticated(true);
-            //     setUser({});
-            // }
         }
 
         initialize();
