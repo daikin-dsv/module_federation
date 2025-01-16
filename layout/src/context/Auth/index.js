@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { AuthContext } from './context';
-import { init, logout } from './keycloak';
+import { init } from './keycloak';
 
 function Auth(props) {
     const [isAuthenticated, setIsAuthenticated] = useState(false)

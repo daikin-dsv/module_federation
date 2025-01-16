@@ -1,6 +1,6 @@
 import React from 'react';
-import { useUserContext } from './Auth/context';
-import { logout } from './Auth/keycloak';
+import { useUserContext } from '../context/Auth/context';
+import { logout } from '../context/Auth/keycloak';
 
 const User = () => {
     const user = useUserContext();
