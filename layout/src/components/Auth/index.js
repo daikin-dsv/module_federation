@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import { AuthContext } from './context';
 import { init, logout } from './keycloak';
 
 function Auth(props) {
-    init();
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [user, setUser] = useState(null)
 
-    const logoutButton = () => <button onClick={logout}>Logout</button>;
+    useEffect(() => {
+        async function initialize() {
+            // if (process.env.NODE_ENV !== 'development') {
+            const sso = await init();
+            setIsAuthenticated(sso.authenticated);
+            setUser(sso.tokenParsed);
+            // } else {
+            //     setIsAuthenticated(true);
+            //     setUser({});
+            // }
+        }
+
+        initialize();
+    }, []);
 
     return (
-        <>
-            {logoutButton()}
-            {props.children}
-        </>
+        <AuthContext.Provider value={user}>
+            {isAuthenticated && props.children}
+            {!isAuthenticated && 'Loading...'}
+        </AuthContext.Provider>
     );
 }
 

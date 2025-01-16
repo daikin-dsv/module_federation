@@ -23,13 +23,14 @@ const init = async () => {
         });
         if (authenticated) {
             console.info(`Authenticated User: ${keycloak.tokenParsed.preferred_username}`);
-            debugger
         } else {
             console.log('User is not authenticated');
         }
     } catch (error) {
         console.error('Failed to initialize adapter:', error);
     }
+
+    return keycloak;
 };
 
 /**
@@ -37,10 +38,4 @@ const init = async () => {
  */
 const logout = (options) => keycloak.logout(options);
 
-const isAuthenticated = () => {
-    keycloak.authenticated
-    debugger;
-    return keycloak.authenticated
-};
-
-export { init, logout, isAuthenticated };
+export { init, logout };
