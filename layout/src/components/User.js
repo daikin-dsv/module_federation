@@ -9,7 +9,7 @@ const User = () => {
 
     return (
         <>
-            Hello {user.preferred_username && user.preferred_username}
+            Hello {user?.preferred_username && user.preferred_username}
             {user?.preferred_username && logoutButton()}
         </>
     );
