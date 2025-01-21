@@ -10,6 +10,7 @@
     "license": "ISC",
     "description": "",
     "dependencies": {
+        "keycloak-js": "^20.0.5",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
     },
