@@ -42,7 +42,8 @@ module.exports = ({ mode }) => {
                     filename: 'remoteEntry.js',
                     exposes: {
                         './header': './src/components/Header.js',
-                        './footer': './src/components/Footer.js'
+                        './footer': './src/components/Footer.js',
+                        './auth': './src/context/Auth/index.js'
                     },
                     shared: {
                         react: {
