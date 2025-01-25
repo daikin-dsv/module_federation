@@ -4,6 +4,7 @@ const { LAYOUT } = require('../../config');
 
 module.exports = () => ({
     devServer: {
+        historyApiFallback: true, // Redirects all requests to index.html
         port: LAYOUT.PORT
     },
     module: {

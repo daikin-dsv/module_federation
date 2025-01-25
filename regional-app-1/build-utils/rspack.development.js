@@ -4,6 +4,7 @@ const { REGIONAL_APP_1 } = require('../../config');
 
 module.exports = () => ({
     devServer: {
+        historyApiFallback: true, // Redirects all requests to index.html
         port: REGIONAL_APP_1.PORT
     },
     module: {
