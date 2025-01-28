@@ -66,6 +66,15 @@ module.exports = ({ mode }) => {
                         'react-router': {
                             singleton: true,
                             requiredVersion: dependencies['react-router']
+                        },
+                        '@daikin-oss/design-system-web-components': {
+                            singleton: true,
+                            requiredVersion:
+                                dependencies['@daikin-oss/design-system-web-components']
+                        },
+                        '@daikin-oss/dds-tokens': {
+                            singleton: true,
+                            requiredVersion: dependencies['@daikin-oss/dds-tokens']
                         }
                     }
                 }),
