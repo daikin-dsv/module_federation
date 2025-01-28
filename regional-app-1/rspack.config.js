@@ -1,7 +1,6 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
-const { HtmlRspackPlugin } = require('@rspack/core');
+const { HtmlRspackPlugin, rspack } = require('@rspack/core');
 const { merge } = require('webpack-merge');
-const { rspack } = require('@rspack/core');
 
 const modeConfig = (env) => require(`./build-utils/rspack.${env}`)(env);
 const dependencies = require('./package.json').dependencies;

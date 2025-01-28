@@ -24,7 +24,8 @@ export default [
     eslintConfigPrettier,
     {
         rules: {
-            'react/prop-types': 'off'
+            'react/prop-types': 'off',
+            'no-duplicate-imports': 'warn'
         }
     }
 ];
