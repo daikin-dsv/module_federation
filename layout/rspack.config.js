@@ -1,5 +1,5 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
-const { HtmlRspackPlugin } = require('@rspack/core');
+const { HtmlRspackPlugin, CssExtractRspackPlugin } = require('@rspack/core');
 const { merge } = require('webpack-merge');
 
 const modeConfig = (env) => require(`./build-utils/rspack.${env}`)(env);
@@ -33,6 +33,15 @@ module.exports = ({ mode }) => {
                         },
                         type: 'javascript/auto',
                         exclude: /node_modules/
+                    },
+                    {
+                        test: /\.css$/i,
+                        use: [CssExtractRspackPlugin.loader, 'css-loader', 'postcss-loader'],
+                        type: 'javascript/auto',
+                    },
+                    {
+                        test: /\.png$/,
+                        type: 'asset',
                     }
                 ]
             },
@@ -63,8 +72,9 @@ module.exports = ({ mode }) => {
                 new HtmlRspackPlugin({
                     template: './index.html',
                     inject: 'body'
-                })
-            ]
+                }),
+                new CssExtractRspackPlugin({})
+            ],
         },
         modeConfig(mode)
     );
