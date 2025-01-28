@@ -2,8 +2,7 @@ import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 
-import AppRoutes from './AppRoutes';
-import { NAVIGATION_CONFIG } from './AppRoutes';
+import AppRoutes, { NAVIGATION_CONFIG } from './AppRoutes';
 import ErrorBoundary from './ErrorBoundary';
 import './index.css';
 import './webcomponents';

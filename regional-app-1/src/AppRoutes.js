@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
-import { Routes, Route } from 'react-router';
-import { useLocation, useNavigate } from 'react-router';
+import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
 const Widget1 = React.lazy(() => import('Widget/widget1'));
 
