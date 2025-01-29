@@ -1,5 +1,5 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
-const { HtmlRspackPlugin } = require('@rspack/core');
+const { HtmlRspackPlugin, CssExtractRspackPlugin } = require('@rspack/core');
 const { merge } = require('webpack-merge');
 
 const modeConfig = (env) => require(`./build-utils/rspack.${env}`)(env);
@@ -33,6 +33,15 @@ module.exports = ({ mode }) => {
                         },
                         type: 'javascript/auto',
                         exclude: /node_modules/
+                    },
+                    {
+                        test: /\.css$/i,
+                        use: [CssExtractRspackPlugin.loader, 'css-loader', 'postcss-loader'],
+                        type: 'javascript/auto',
+                    },
+                    {
+                        test: /\.png$/,
+                        type: 'asset',
                     }
                 ]
             },
@@ -57,14 +66,24 @@ module.exports = ({ mode }) => {
                         'react-router': {
                             singleton: true,
                             requiredVersion: dependencies['react-router']
+                        },
+                        '@daikin-oss/design-system-web-components': {
+                            singleton: true,
+                            requiredVersion:
+                                dependencies['@daikin-oss/design-system-web-components']
+                        },
+                        '@daikin-oss/dds-tokens': {
+                            singleton: true,
+                            requiredVersion: dependencies['@daikin-oss/dds-tokens']
                         }
                     }
                 }),
                 new HtmlRspackPlugin({
                     template: './index.html',
                     inject: 'body'
-                })
-            ]
+                }),
+                new CssExtractRspackPlugin({})
+            ],
         },
         modeConfig(mode)
     );
