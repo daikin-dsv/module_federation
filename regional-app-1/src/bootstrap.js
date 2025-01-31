@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 
-import AppRoutes, { NAVIGATION_CONFIG } from './AppRoutes';
+import AppRoutes, { NAVIGATION_CONFIG, FOOTER_CONFIG } from './AppRoutes';
 import ErrorBoundary from './ErrorBoundary';
 import './index.css';
 import './webcomponents';
@@ -18,17 +18,20 @@ root.render(
     <Auth>
         <BrowserRouter>
             <ErrorBoundary fallback={<div>Something went wrong</div>}>
-                <div className="flex flex-col h-screen">
+                <div className="flex h-screen flex-col">
                     <Suspense fallback="Loading Header">
                         <Header navigationItems={Object.values(NAVIGATION_CONFIG)} />
                     </Suspense>
-                    <main className="p-4 flex-grow">
+                    <main className="flex-grow p-4">
                         <div>
                             <AppRoutes />
                         </div>
                     </main>
                     <Suspense fallback="Loading Footer">
-                        <Footer />
+                        <Footer
+                            copyRight="2025 Daikin U.S. Corporation"
+                            footerItems={Object.values(FOOTER_CONFIG)}
+                        />
                     </Suspense>
                 </div>
             </ErrorBoundary>

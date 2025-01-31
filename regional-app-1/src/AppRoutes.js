@@ -9,8 +9,24 @@ export const NAVIGATION_CONFIG = Object.freeze({
     NAV3: { name: 'Navigation 3', path: '/navigation3' }
 });
 
-const PATH_TO_NAME = Object.keys(NAVIGATION_CONFIG).reduce((prev, current) => {
-    prev[NAVIGATION_CONFIG[current].path] = NAVIGATION_CONFIG[current].name;
+export const FOOTER_CONFIG = Object.freeze({
+    POLICY: {
+        name: 'Privacy Policy',
+        path: '/policy'
+    },
+    TERMS: {
+        name: 'Terms of Use',
+        path: '/terms'
+    }
+});
+
+const COMBINED_CONFIG = {
+    ...NAVIGATION_CONFIG,
+    ...FOOTER_CONFIG
+};
+
+const PATH_TO_NAME = Object.keys(COMBINED_CONFIG).reduce((prev, current) => {
+    prev[COMBINED_CONFIG[current].path] = COMBINED_CONFIG[current].name;
     return prev;
 }, {});
 
@@ -39,7 +55,7 @@ const AppRoutes = () => {
                 <Route
                     path={NAVIGATION_CONFIG.HOME.path}
                     element={
-                        <div className="flex flex-col justify-center items-center mt-[400px]">
+                        <div className="mt-[400px] flex flex-col items-center justify-center">
                             <div>Regional App Contents</div>
                             <Suspense fallback={<div>Loading Widget 1</div>}>
                                 <Widget1 />
@@ -60,6 +76,22 @@ const AppRoutes = () => {
                     element={
                         <>
                             <div>{NAVIGATION_CONFIG.NAV3.name}</div>
+                        </>
+                    }
+                />
+                <Route
+                    path={FOOTER_CONFIG.POLICY.path}
+                    element={
+                        <>
+                            <div>{FOOTER_CONFIG.POLICY.name}</div>
+                        </>
+                    }
+                />
+                <Route
+                    path={FOOTER_CONFIG.TERMS.path}
+                    element={
+                        <>
+                            <div>{FOOTER_CONFIG.TERMS.name}</div>
                         </>
                     }
                 />
