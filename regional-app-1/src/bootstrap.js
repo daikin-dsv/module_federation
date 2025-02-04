@@ -29,7 +29,7 @@ root.render(
                     </main>
                     <Suspense fallback="Loading Footer">
                         <Footer
-                            copyRight="2025 Daikin U.S. Corporation"
+                            copyright="2025 Daikin U.S. Corporation"
                             footerItems={Object.values(FOOTER_CONFIG)}
                         />
                     </Suspense>
