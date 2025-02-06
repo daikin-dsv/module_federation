@@ -1,17 +1,98 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
+import { ArrowTopRightOnSquareIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+
 import { useUserContext } from '../context/Auth/context';
-import { logout } from '../context/Auth/keycloak';
+import { accountManagement, logout } from '../context/Auth/keycloak';
+import '../webcomponents';
 
-const User = () => {
+const User = ({ language = 'en' }) => {
     const user = useUserContext();
-
-    const logoutButton = () => <button onClick={logout}>Logout</button>;
+    const [menu, setMenu] = useState('main');
 
     return (
-        <>
-            Hello {user?.preferred_username && user.preferred_username}
-            {user?.preferred_username && logoutButton()}
-        </>
+        <Popover>
+            <PopoverButton className="focus:outline-none">
+                <daikin-icon-button color="neutral" variant="ghost">
+                    <UserCircleIcon />
+                </daikin-icon-button>
+            </PopoverButton>
+            <PopoverPanel anchor="bottom end" className="shadow">
+                {menu === 'main' && (
+                    <daikin-card>
+                        <div className="flex flex-col">
+                            <span>
+                                {language === 'ja' ? 'ユーザー名' : 'Signed in as'}
+                            </span>
+                            <span className="font-(--dds-font-weight-bold)">
+                                {user?.preferred_username}
+                            </span>
+                        </div>
+                        <div className="border-y-1 border-(--dds-color-divider) -mx-4 py-2">
+                            <daikin-list>
+                                <daikin-list-item onClick={() => setMenu('profile')}>
+                                    {language === 'ja' ? 'プロフィール' : 'Profile'}
+                                    <daikin-icon
+                                        color="current"
+                                        icon="chevron-right"
+                                        slot="right-icon"
+                                    ></daikin-icon>
+                                </daikin-list-item>
+                            </daikin-list>
+                        </div>
+                        <daikin-card-footer>
+                            <daikin-button
+                                className="w-full"
+                                onClick={logout}
+                                variant="outline"
+                            >
+                                {language === 'ja' ? 'サインアウト' : 'Sign out'}
+                            </daikin-button>
+                        </daikin-card-footer>
+                    </daikin-card>
+                )}
+                {menu === 'profile' && (
+                    <daikin-card>
+                        <daikin-icon-button
+                            color="neutral"
+                            onClick={() => setMenu('main')}
+                            variant="ghost"
+                        >
+                            <daikin-icon
+                                color="current"
+                                icon="chevron-left"
+                            ></daikin-icon>
+                        </daikin-icon-button>
+                        <div className="flex flex-col">
+                            <span className="font-(--dds-font-weight-bold)">
+                                {language === 'ja' ? '名前' : 'Name'}
+                            </span>
+                            <span>
+                                {user?.given_name} {user?.family_name}
+                            </span>
+                            <span className="font-(--dds-font-weight-bold)">
+                                {language === 'ja' ? 'Eメール' : 'Email'}
+                            </span>
+                            <span>{user?.email}</span>
+                        </div>
+                        <daikin-card-footer>
+                            <daikin-button
+                                className="w-full"
+                                onClick={accountManagement}
+                                variant="outline"
+                            >
+                                {language === 'ja' ? 'アカウント管理' : 'Manage Account'}
+                                <ArrowTopRightOnSquareIcon
+                                    slot="right-icon"
+                                    className="h-6 w-6"
+                                />
+                            </daikin-button>
+                        </daikin-card-footer>
+                    </daikin-card>
+                )}
+            </PopoverPanel>
+        </Popover>
     );
 };
 

@@ -12,6 +12,8 @@
     "dependencies": {
         "@daikin-oss/dds-tokens": "^0.3.1",
         "@daikin-oss/design-system-web-components": "^0.7.0",
+        "@headlessui/react": "^2.2.0",
+        "@heroicons/react": "^2.2.0",
         "keycloak-js": "^20.0.5",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
