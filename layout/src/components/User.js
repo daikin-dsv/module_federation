@@ -20,16 +20,16 @@ const User = ({ language = 'en' }) => {
             </PopoverButton>
             <PopoverPanel anchor="bottom end" className="shadow">
                 {menu === 'main' && (
-                    <daikin-card>
+                    <daikin-card className="flex w-80 flex-col">
                         <div className="flex flex-col">
                             <span>
                                 {language === 'ja' ? 'ユーザー名' : 'Signed in as'}
                             </span>
-                            <span className="font-(--dds-font-weight-bold)">
+                            <span className="flex flex-wrap font-(--dds-font-weight-bold) break-all">
                                 {user?.preferred_username}
                             </span>
                         </div>
-                        <div className="border-y-1 border-(--dds-color-divider) -mx-4 py-2">
+                        <div className="-mx-4 border-y-1 border-(--dds-color-divider) py-2">
                             <daikin-list>
                                 <daikin-list-item onClick={() => setMenu('profile')}>
                                     {language === 'ja' ? 'プロフィール' : 'Profile'}
@@ -53,7 +53,7 @@ const User = ({ language = 'en' }) => {
                     </daikin-card>
                 )}
                 {menu === 'profile' && (
-                    <daikin-card>
+                    <daikin-card className="flex w-80 flex-col">
                         <daikin-icon-button
                             color="neutral"
                             onClick={() => setMenu('main')}
@@ -64,17 +64,23 @@ const User = ({ language = 'en' }) => {
                                 icon="chevron-left"
                             ></daikin-icon>
                         </daikin-icon-button>
-                        <div className="flex flex-col">
-                            <span className="font-(--dds-font-weight-bold)">
-                                {language === 'ja' ? '名前' : 'Name'}
-                            </span>
-                            <span>
-                                {user?.given_name} {user?.family_name}
-                            </span>
-                            <span className="font-(--dds-font-weight-bold)">
-                                {language === 'ja' ? 'Eメール' : 'Email'}
-                            </span>
-                            <span>{user?.email}</span>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex flex-col">
+                                <span className="font-(--dds-font-weight-bold)">
+                                    {language === 'ja' ? '名前' : 'Name'}
+                                </span>
+                                <span className="flex flex-wrap break-all">
+                                    {user?.given_name} {user?.family_name}
+                                </span>
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="font-(--dds-font-weight-bold)">
+                                    {language === 'ja' ? 'Eメール' : 'Email'}
+                                </span>
+                                <span className="flex flex-wrap break-all">
+                                    {user?.email}
+                                </span>
+                            </div>
                         </div>
                         <daikin-card-footer>
                             <daikin-button
