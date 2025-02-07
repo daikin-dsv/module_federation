@@ -5,7 +5,7 @@ import Logo from '../assets/daikin_logo.png';
 import '../index.css';
 import User from './User';
 
-const Header = ({ navigationItems = [] }) => {
+const Header = ({ navigationItems = [], language }) => {
     return (
         <header className="flex flex-row justify-between items-center font-daikinSerif h-16 w-full min-w-[360px] border-b-1 border-(--dds-color-divider) pl-3 pr-4">
             <div className="flex items-center gap-4">
@@ -30,7 +30,7 @@ const Header = ({ navigationItems = [] }) => {
                     </ul>
                 </nav>
             </div>
-            <User />
+            <User language={language} />
         </header>
     );
 };

@@ -22,7 +22,9 @@ const init = async () => {
             pkceMethod: 'S256'
         });
         if (authenticated) {
-            console.info(`Authenticated User: ${keycloak.tokenParsed.preferred_username}`);
+            console.info(
+                `Authenticated User: ${keycloak.tokenParsed.preferred_username}`
+            );
         } else {
             console.log('User is not authenticated');
         }
@@ -38,4 +40,9 @@ const init = async () => {
  */
 const logout = (options) => keycloak.logout(options);
 
-export { init, logout };
+/**
+ * Redirects to the Account Console
+ */
+const accountManagement = () => keycloak.accountManagement();
+
+export { init, logout, accountManagement };
