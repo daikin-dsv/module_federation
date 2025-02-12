@@ -22,10 +22,8 @@ root.render(
                     <Suspense fallback="Loading Header">
                         <Header navigationItems={Object.values(NAVIGATION_CONFIG)} />
                     </Suspense>
-                    <main className="flex-grow p-4">
-                        <div>
-                            <AppRoutes />
-                        </div>
+                    <main className="flex-grow overflow-x-scroll p-4">
+                        <AppRoutes />
                     </main>
                     <Suspense fallback="Loading Footer">
                         <Footer
