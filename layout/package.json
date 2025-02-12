@@ -10,7 +10,7 @@
     "license": "ISC",
     "description": "",
     "dependencies": {
-        "@daikin-oss/dds-tokens": "^0.3.1",
+        "@daikin-oss/dds-tokens": "^0.3.2",
         "@daikin-oss/design-system-web-components": "^0.7.0",
         "@headlessui/react": "^2.2.0",
         "@heroicons/react": "^2.2.0",
