@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, Link } from 'react-router';
 
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 
 import Logo from '../assets/daikin_logo.png';
 import '../index.css';
