@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, Link } from 'react-router';
 
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
+import { debounce } from 'lodash';
 
 import Logo from '../assets/daikin_logo.png';
 import '../index.css';
@@ -14,35 +15,33 @@ const Header = ({ navigationItems = [], language }) => {
     const navItemsRef = useRef([]);
 
     useEffect(() => {
-        const getOverflowIndex = (container) => {
-            for (let i = 1; i < container.children.length; ++i) {
-                const previousTop = container.children[i - 1].getBoundingClientRect().top;
-                const currentTop = container.children[i].getBoundingClientRect().top;
-                if (previousTop !== currentTop) {
-                    return i;
+        const container = navItemsRef.current;
+        const resizeObserver = new ResizeObserver(
+            debounce((entries) => {
+                const children = entries[0]?.target?.children;
+                for (let i = 1; i < children?.length; ++i) {
+                    const previousTop = children[i - 1]?.getBoundingClientRect().top;
+                    const currentTop = children[i]?.getBoundingClientRect().top;
+                    if (previousTop !== currentTop) {
+                        setOverflowIndex(i);
+                        setShowMore(true);
+                        return;
+                    }
                 }
-            }
-            return 0;
-        };
-
-        const checkOverflow = () => {
-            const currentOverflowIndex = getOverflowIndex(navItemsRef.current);
-            if (currentOverflowIndex !== 0) {
-                setOverflowIndex(currentOverflowIndex);
-                setShowMore(true);
-            } else {
                 setShowMore(false);
-            }
-        };
+            }, 100)
+        );
 
-        checkOverflow();
-
-        window.addEventListener('resize', checkOverflow);
+        if (container) {
+            resizeObserver.observe(container);
+        }
 
         return () => {
-            window.removeEventListener('resize', checkOverflow);
+            if (container) {
+                resizeObserver.unobserve(container);
+            }
         };
-    }, [navItemsRef.current]);
+    }, []);
 
     return (
         <header className="font-daikinSerif flex h-16 w-full min-w-[360px] flex-row items-center justify-between border-b-1 border-(--dds-color-divider) pr-4 pl-3">
