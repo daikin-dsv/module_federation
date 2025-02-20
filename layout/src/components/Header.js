@@ -82,8 +82,8 @@ const Header = ({ navigationItems = [], language }) => {
                             </PopoverButton>
                             <PopoverPanel anchor="bottom end" className="shadow">
                                 {({ close }) => (
-                                    <daikin-card className="-mx-4 flex flex-col">
-                                        <daikin-list>
+                                    <daikin-card className="flex flex-col">
+                                        <daikin-list className="-mx-4">
                                             {navigationItems
                                                 .slice(
                                                     overflowIndex,
