@@ -4,7 +4,7 @@ const { merge } = require('webpack-merge');
 
 const modeConfig = (env) => require(`./build-utils/rspack.${env}`)(env);
 const dependencies = require('./package.json').dependencies;
-const { WIDGETS } = require('../config');
+const { REGIONAL_APP_2, LAYOUT, WIDGETS } = require('../config');
 
 module.exports = ({ mode }) => {
     const config = merge(
@@ -12,9 +12,9 @@ module.exports = ({ mode }) => {
             mode,
             entry: './src/index.js',
             output: {
-                uniqueName: 'widget_provider',
+                uniqueName: 'regional_app_2',
                 // publicPath must be configured if using manifest
-                publicPath: `http://localhost:${WIDGETS.PORT}/`
+                publicPath: `http://localhost:${REGIONAL_APP_2.PORT}/`
             },
             module: {
                 rules: [
@@ -47,13 +47,10 @@ module.exports = ({ mode }) => {
             },
             plugins: [
                 new ModuleFederationPlugin({
-                    name: WIDGETS.NAME,
-                    filename: 'remoteEntry.js',
-                    exposes: {
-                        './Alarm': './src/components/Alarm.js',
-                        './EnergyGauge': './src/components/EnergyGauge.js',
-                        './InfoCard': './src/components/InfoCard.js',
-                        './Light': './src/components/Light.js'
+                    name: REGIONAL_APP_2.NAME,
+                    remotes: {
+                        Layout: `${LAYOUT.NAME}@http://localhost:${LAYOUT.PORT}/remoteEntry.js`,
+                        Widget: `${WIDGETS.NAME}@http://localhost:${WIDGETS.PORT}/remoteEntry.js`
                     },
                     shared: {
                         react: {
@@ -63,6 +60,10 @@ module.exports = ({ mode }) => {
                         'react-dom': {
                             singleton: true,
                             requiredVersion: dependencies['react-dom']
+                        },
+                        'react-router': {
+                            singleton: true,
+                            requiredVersion: dependencies['react-router']
                         },
                         '@daikin-oss/design-system-web-components': {
                             singleton: true,

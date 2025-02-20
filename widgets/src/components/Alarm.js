@@ -7,7 +7,7 @@ import React from 'react';
 
 import '../index.css';
 
-const Alarm = ({ count = 1, color = 'red' }) => {
+const Alarm = ({ count = 1, color = 'red', language = 'en' }) => {
     const COLORS = {
         red: `text-[#f21a27]`,
         yellow: `text-[#b88700]`,
@@ -28,7 +28,13 @@ const Alarm = ({ count = 1, color = 'red' }) => {
 
                     <div className="flex flex-col items-center text-gray-700">
                         <div className="font-bold">{count}</div>
-                        <div>{count === 1 ? 'Alarm' : 'Alarms'}</div>
+                        <div>
+                            {language === 'ja'
+                                ? 'アラーム'
+                                : count === 1
+                                  ? 'Alarm'
+                                  : 'Alarms'}
+                        </div>
                     </div>
                 </div>
             </daikin-card>
