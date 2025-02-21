@@ -11,7 +11,7 @@ async function getGraphQLQuery(graphQlUrl, token, query, variables = {}) {
             'Authorization': `Bearer ${token}`,
             'apollographql-client-name': 'playwright web-app'
         },
-        credentials: 'include',
+        // credentials: 'include',
         body: JSON.stringify({
             query,
             variables
@@ -59,6 +59,7 @@ function Auth(props) {
                 limit: 2,
                 offset: 1
             };
+            // Access to fetch at 'https://apollo.daikinlab.com/api' from origin 'http://localhost:3004' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
             const graphQlUrl = 'https://apollo.daikinlab.com/api';
             const pokemonGraphQlUrl = 'https://graphql-pokeapi.graphcdn.app/';
             getGraphQLQuery(graphQlUrl, sso.token, query)
