@@ -60,8 +60,8 @@ const Header = ({ navigationItems = [], language }) => {
                                 to={item.path}
                                 className={({ isActive }) =>
                                     isActive
-                                        ? 'flex h-16 grow items-center justify-center border-b-4 border-(--dds-color-common-brand-default) px-4 pt-1 font-(--dds-font-weight-bold) text-(--dds-color-common-brand-default) hover:border-(--dds-color-common-brand-hover) hover:text-(--dds-color-common-brand-hover) focus:border-(--dds-color-common-brand-press) focus:text-(--dds-color-common-brand-press)'
-                                        : 'flex h-16 grow items-center justify-center px-4 text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)'
+                                        ? 'flex h-16 grow items-center justify-center border-b-4 border-(--dds-color-common-brand-default) px-4 pt-1 font-(--dds-font-weight-bold) break-keep text-(--dds-color-common-brand-default) hover:border-(--dds-color-common-brand-hover) hover:text-(--dds-color-common-brand-hover) focus:border-(--dds-color-common-brand-press) focus:text-(--dds-color-common-brand-press)'
+                                        : 'flex h-16 grow items-center justify-center px-4 break-keep text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)'
                                 }
                             >
                                 {item.name}
@@ -71,7 +71,7 @@ const Header = ({ navigationItems = [], language }) => {
                     {showMore && (
                         <Popover>
                             <PopoverButton className="focus:outline-none">
-                                <div className="flex h-16 items-center justify-center gap-2 px-4 text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)">
+                                <div className="flex h-16 items-center justify-center gap-2 px-4 break-keep text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)">
                                     {language === 'ja' ? 'もっと' : 'More'}
                                     <daikin-icon
                                         color="current"
@@ -95,8 +95,8 @@ const Header = ({ navigationItems = [], language }) => {
                                                         to={item.path}
                                                         className={({ isActive }) =>
                                                             isActive
-                                                                ? 'flex h-full w-full items-center p-3 font-(--dds-font-weight-bold) text-(--dds-color-common-brand-default) hover:bg-(--dds-color-common-surface-hover) hover:text-(--dds-color-common-brand-hover) focus:text-(--dds-color-common-brand-press) active:bg-(--dds-color-common-surface-press)'
-                                                                : 'flex h-full w-full items-center p-3 text-(--dds-color-common-neutral-default) hover:bg-(--dds-color-common-surface-hover) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press) active:bg-(--dds-color-common-surface-press)'
+                                                                ? 'flex h-full w-full items-center p-3 font-(--dds-font-weight-bold) break-keep text-(--dds-color-common-brand-default) hover:bg-(--dds-color-common-surface-hover) hover:text-(--dds-color-common-brand-hover) focus:text-(--dds-color-common-brand-press) active:bg-(--dds-color-common-surface-press)'
+                                                                : 'flex h-full w-full items-center p-3 break-keep text-(--dds-color-common-neutral-default) hover:bg-(--dds-color-common-surface-hover) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press) active:bg-(--dds-color-common-surface-press)'
                                                         }
                                                         onClick={() => close()}
                                                     >
