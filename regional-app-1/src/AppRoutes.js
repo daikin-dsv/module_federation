@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query';
+
 import { getEquipments } from './graphqlClient';
 
 const Alarm = React.lazy(() => import('Widget/Alarm'));
