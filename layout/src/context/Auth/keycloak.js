@@ -2,7 +2,7 @@ import Keycloak from 'keycloak-js';
 
 const SSO_URL = 'https://sso-dev.daikinlab.com/auth';
 const SSO_REALM = 'daikin';
-const SSO_CLIENT = 'rad-test2';
+const SSO_CLIENT = 'rad-test';
 
 const keycloak = new Keycloak({
     url: SSO_URL,
