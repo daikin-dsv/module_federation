@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
+import { useUserContext } from 'Layout/auth';
+
 const Alarm = React.lazy(() => import('Widget/Alarm'));
 const EnergyGauge = React.lazy(() => import('Widget/EnergyGauge'));
 const InfoCard = React.lazy(() => import('Widget/InfoCard'));
@@ -49,6 +51,9 @@ const PATH_TO_NAME = Object.keys(COMBINED_CONFIG).reduce((prev, current) => {
 const AppRoutes = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const user = useUserContext();
+    console.log('user', user);
+
     return (
         <>
             <div className="mb-2">
