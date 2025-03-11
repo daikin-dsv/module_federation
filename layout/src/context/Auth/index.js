@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Cookie from 'js-cookie';
 
 import { AuthContext, useUserContext } from './context';
 import { init } from './keycloak';
-
 
 function Auth(props) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -12,9 +10,8 @@ function Auth(props) {
     useEffect(() => {
         async function initialize() {
             const sso = await init();
-            Cookie.set('authorization', `Bearer ${sso.token}`);
             setIsAuthenticated(sso.authenticated);
-            setUser(sso.tokenParsed);
+            setUser({ ...sso.tokenParsed, token: sso.token });
         }
 
         initialize();

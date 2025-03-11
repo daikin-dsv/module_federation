@@ -1,8 +1,9 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 
-import { getEquipments } from './graphqlClient';
+import { initializeGraphQlClient, getEquipments } from './graphqlClient';
+import { useUserContext } from 'Layout/auth';
 
 const Alarm = React.lazy(() => import('Widget/Alarm'));
 const DatabricksWidget = React.lazy(() => import('Widget/DatabricksDashboard'));
@@ -53,6 +54,8 @@ const PATH_TO_NAME = Object.keys(COMBINED_CONFIG).reduce((prev, current) => {
 const AppRoutes = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const user = useUserContext();
+    useEffect(() => initializeGraphQlClient(user.token), []);
 
     const { data } = useQuery(getEquipments({ name: 'RadTest' }));
     const {

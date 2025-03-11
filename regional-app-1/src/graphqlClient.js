@@ -1,5 +1,4 @@
 import { gql, GraphQLClient } from 'graphql-request';
-import Cookie from 'js-cookie';
 
 const graphQlUrl = 'https://apollo.daikinlab.com/api';
 
@@ -13,8 +12,10 @@ const equipmentsQuery = gql`
     }
 `;
 
-const authorization = Cookie.get('authorization');
-const client = new GraphQLClient(graphQlUrl, { headers: { authorization } });
+let client;
+
+export const initializeGraphQlClient = (token) =>
+    client = new GraphQLClient(graphQlUrl, { headers: { authorization: `Bearer ${token}` } });
 
 export const getEquipments = (variables) => ({
     queryKey: ['equipments'],
