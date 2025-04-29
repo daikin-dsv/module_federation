@@ -24,28 +24,7 @@ RUN npm install
 # Build the application
 RUN npm run build
 
-# # Stage 2: Create the final image (uses gcr.io/distroless/nodejs22)
-# FROM gcr.io/distroless/nodejs22
-
-# # Define the working directory
-# WORKDIR /app/layout
-
-# # Copy necessary files from the builder stage
-# # COPY --from=builder /app/dist .
-# COPY --from=builder /app/layout/dist/ /app/layout/dist/
-# COPY --from=builder /app/layout/src/ /app/layout/src/
-# COPY --from=builder /app/layout/node_modules/ /app/layout/node_modules/
-
-# # Expose ports for the application
-# EXPOSE 6001
-
-# # Start the application using the built service
-# CMD ["./src/index.js"]
-
-
-
-
-# Stage 2: Production Stage - Create the final image (https://www.docker.com/blog/how-to-dockerize-react-app/)
+# Stage 2: Production Stage - Create the final image
 FROM nginx:stable-alpine AS production
 
 # Define the working directory
