@@ -7,7 +7,9 @@
         "dev": "npm run dev --prefix=layout & npm run dev --prefix=widgets & npm run dev --prefix=regional-app-1 & npm run dev --prefix=regional-app-2",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint .",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "build:layout": "docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest .",
+        "run:layout": "docker run -t -p 8080:80 layout:latest"
     },
     "author": "",
     "license": "ISC",
