@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
 const Alarm = React.lazy(() => import('Widget/Alarm'));
+const DatabricksWidget = React.lazy(() => import('Widget/DatabricksDashboard'));
 const Light = React.lazy(() => import('Widget/Light'));
 const EnergyGauge = React.lazy(() => import('Widget/EnergyGauge'));
 const InfoCard = React.lazy(() => import('Widget/InfoCard'));
@@ -22,7 +23,7 @@ const ChairIcon = loadIcon('ChairIcon');
 
 export const NAVIGATION_CONFIG = Object.freeze({
     HOME: { name: 'ホーム', path: '/' },
-    NAV2: { name: 'ナビゲーション 2', path: '/navigation2' },
+    NAV2: { name: 'データブリックス', path: '/databricks' },
     NAV3: { name: 'ナビゲーション 3', path: '/navigation3' }
 });
 
@@ -123,9 +124,15 @@ const AppRoutes = () => {
                 <Route
                     path={NAVIGATION_CONFIG.NAV2.path}
                     element={
-                        <>
-                            <div>{NAVIGATION_CONFIG.NAV2.name}</div>
-                        </>
+                        <Suspense fallback={<div>Loading Databricks Widget</div>}>
+                            <div className="h-full">
+                                <DatabricksWidget
+                                    src="https://dbc-b79f98ff-f7c9.cloud.databricks.com/embed/dashboardsv3/01f0254bfedf1dcd9d0fa71416e31266?o=8585847403201286"
+                                    onLoad={() => console.log('Iframe loaded')}
+                                    onError={(error) => console.error(error)}
+                                />
+                            </div>
+                        </Suspense>
                     }
                 />
                 <Route

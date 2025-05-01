@@ -25,7 +25,7 @@ root.render(
                             language="ja"
                         />
                     </Suspense>
-                    <main className="flex-grow overflow-x-scroll p-4">
+                    <main className="flex flex-grow flex-col overflow-x-scroll p-4">
                         <AppRoutes />
                     </main>
                     <Suspense fallback="Loading Footer">
