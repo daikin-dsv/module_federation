@@ -5,7 +5,7 @@
         "nav3": "Navigation 3",
         "policy": "Privacy Policy",
         "terms": "Terms of Use",
-        "loadingWidgets": "Loading Widgets...",
+        "loadingWidgets": "Loading widgets...",
         "building1": "Building 1",
         "building1a": "Building 1A",
         "backupBattery": "Backup Battery",
@@ -16,8 +16,8 @@
     },
     "bootstrapText": {
         "error": "Something went wrong",
-        "loadingHeader": "Loading Header...",
-        "loadingFooter": "Loading Footer...",
+        "loadingHeader": "Loading header...",
+        "loadingFooter": "Loading footer...",
         "copyright": "2025 Daikin U.S. Corporation"
     }
 }
