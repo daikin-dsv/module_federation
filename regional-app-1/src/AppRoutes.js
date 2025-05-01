@@ -1,9 +1,8 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
-import { useUserContext } from 'Layout/auth';
-
 const Alarm = React.lazy(() => import('Widget/Alarm'));
+const DatabricksWidget = React.lazy(() => import('Widget/DatabricksDashboard'));
 const EnergyGauge = React.lazy(() => import('Widget/EnergyGauge'));
 const InfoCard = React.lazy(() => import('Widget/InfoCard'));
 const loadIcon = (iconName) =>
@@ -23,7 +22,7 @@ const ChairIcon = loadIcon('ChairIcon');
 
 export const NAVIGATION_CONFIG = Object.freeze({
     HOME: { name: 'Home', path: '/' },
-    NAV2: { name: 'Navigation 2', path: '/navigation2' },
+    NAV2: { name: 'Databricks', path: '/databricks' },
     NAV3: { name: 'Navigation 3', path: '/navigation3' }
 });
 
@@ -51,8 +50,6 @@ const PATH_TO_NAME = Object.keys(COMBINED_CONFIG).reduce((prev, current) => {
 const AppRoutes = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const user = useUserContext();
-    console.log('user', user);
 
     return (
         <>
@@ -126,9 +123,15 @@ const AppRoutes = () => {
                 <Route
                     path={NAVIGATION_CONFIG.NAV2.path}
                     element={
-                        <>
-                            <div>{NAVIGATION_CONFIG.NAV2.name}</div>
-                        </>
+                        <Suspense fallback={<div>Loading Databricks Widget</div>}>
+                            <div className="h-full">
+                                <DatabricksWidget
+                                    src="https://dbc-b79f98ff-f7c9.cloud.databricks.com/embed/dashboardsv3/01f0253b57821d6594e100fd03dab0c2?o=8585847403201286"
+                                    onLoad={() => console.log('Iframe loaded')}
+                                    onError={(error) => console.error(error)}
+                                />
+                            </div>
+                        </Suspense>
                     }
                 />
                 <Route

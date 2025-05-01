@@ -51,6 +51,8 @@ module.exports = ({ mode }) => {
                     filename: 'remoteEntry.js',
                     exposes: {
                         './Alarm': './src/components/Alarm.js',
+                        './DatabricksDashboard':
+                            './src/components/DatabricksDashboard.js',
                         './EnergyGauge': './src/components/EnergyGauge.js',
                         './InfoCard': './src/components/InfoCard.js',
                         './Light': './src/components/Light.js'
