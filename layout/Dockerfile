@@ -1,6 +1,3 @@
-# docker buildx build --progress=plain --no-cache -t layout .
-# docker buildx build -f layout/Dockerfile --progress=plain --no-cache -t layout:latest ..
-
 # Stage 1: Build the application (uses node:20)
 FROM node:20 AS builder
 
