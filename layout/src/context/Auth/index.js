@@ -11,7 +11,7 @@ function Auth(props) {
         async function initialize() {
             const sso = await init();
             setIsAuthenticated(sso.authenticated);
-            setUser(sso.tokenParsed);
+            setUser({ ...sso.tokenParsed, token: sso.token });
         }
 
         initialize();

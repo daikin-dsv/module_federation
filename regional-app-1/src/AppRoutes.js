@@ -1,5 +1,9 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
+import { useQuery } from '@tanstack/react-query';
+
+import { initializeGraphQlClient, getEquipments } from './graphqlClient';
+import { useUserContext } from 'Layout/auth';
 
 const Alarm = React.lazy(() => import('Widget/Alarm'));
 const DatabricksWidget = React.lazy(() => import('Widget/DatabricksDashboard'));
@@ -50,6 +54,22 @@ const PATH_TO_NAME = Object.keys(COMBINED_CONFIG).reduce((prev, current) => {
 const AppRoutes = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const user = useUserContext();
+    useEffect(() => initializeGraphQlClient(user.token), []);
+
+    const { data } = useQuery(getEquipments({ name: 'RadTest' }));
+    const {
+        battery,
+        buildingName,
+        energyUsage,
+        energyMaxUsage,
+        energyRating,
+        liquidVolume,
+        person,
+        spaceVolume,
+        temperature,
+        vacancy
+    } = data?.equipments?.[0]?.customAttribute || {};
 
     return (
         <>
@@ -78,42 +98,42 @@ const AppRoutes = () => {
                                 <div className="flex flex-wrap gap-4">
                                     <Alarm />
                                     <EnergyGauge
-                                        usage={5750.23}
-                                        maxUsage={6000}
-                                        buildingName="Building 1"
+                                        usage={parseFloat(energyUsage)}
+                                        maxUsage={parseInt(energyMaxUsage)}
+                                        buildingName={buildingName}
                                     />
                                 </div>
                                 <div className="flex flex-wrap content-start justify-start gap-2">
                                     <InfoCard
                                         icon={FireIcon}
-                                        label="Building 1A"
-                                        value="512 ft³"
+                                        label={buildingName}
+                                        value={spaceVolume}
                                     />
                                     <InfoCard
                                         icon={WaterIcon}
-                                        label="Building 1A"
-                                        value="293.6 gal"
+                                        label={buildingName}
+                                        value={liquidVolume}
                                     />
                                     <InfoCard
                                         icon={BatteryIcon}
                                         label="Backup Battery"
-                                        value="54%"
+                                        value={battery}
                                     />
                                     <InfoCard
                                         icon={TemperatureIcon}
                                         label="Room 1"
-                                        value="72 °F"
+                                        value={temperature}
                                     />
                                     <InfoCard
                                         icon={StarIcon}
                                         label="Energy Rating"
-                                        value="8.5"
+                                        value={parseFloat(energyRating)}
                                     />
-                                    <InfoCard icon={PersonIcon} label="Staff" value="5" />
+                                    <InfoCard icon={PersonIcon} label="Staff" value={person} />
                                     <InfoCard
                                         icon={ChairIcon}
                                         label="Vacancy"
-                                        value="12"
+                                        value={vacancy}
                                     />
                                 </div>
                             </Suspense>
