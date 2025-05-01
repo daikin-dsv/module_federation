@@ -1,0 +1,28 @@
+{
+    "alarmText": {
+        "en": {
+            "alarm": "Alarm",
+            "alarms": "Alarms"
+            
+        },
+        "ja": {
+            "alarm": "アラーム"
+        }
+    },
+    "lightText": {
+        "en": {
+            "on": "On",
+            "off": "Off"
+            
+        },
+        "ja": {
+            "on": "オン",
+            "off": "オフ"
+        }
+    },
+    "bootstrapText": {
+        "dsv": "DSV",
+        "water": "Water",
+        "lobby": "Lobby"
+    }
+}

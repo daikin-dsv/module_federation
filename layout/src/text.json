@@ -1,0 +1,32 @@
+{
+    "footerText": {
+        "daikin": "Daikin"
+    },
+    "headerText": {
+        "en": {
+            "more": "More"
+            
+        },
+        "ja": {
+            "more": "もっと"
+        }
+    },
+    "userText": {
+        "en": {
+            "email": "Email",
+            "manageAccount": "Manage Account",
+            "name": "Name",
+            "profile": "Profile",
+            "signedIn": "Signed in as",
+            "signOut": "Sign out"
+        },
+        "ja": {
+            "email": "Eメール",
+            "manageAccount": "アカウント管理",
+            "name": "名前",
+            "profile": "プロフィール",
+            "signedIn": "ユーザー名",
+            "signOut": "サインアウト"
+        }
+    }
+}

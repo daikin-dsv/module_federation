@@ -6,6 +6,7 @@ import React from 'react';
 // import '@daikin-oss/design-system-web-components/components/icon/index.js';
 
 import '../index.css';
+import { lightText } from '../text.json';
 
 const Light = ({ label, language = 'en' }) => {
     const [state, setState] = React.useState('on');
@@ -50,7 +51,7 @@ const Light = ({ label, language = 'en' }) => {
                                         setShowToggle(false);
                                     }}
                                 >
-                                    {language === 'ja' ? 'オン' : 'On'}
+                                    {language === 'ja' ? lightText.ja.on : lightText.en.on}
                                 </div>
 
                                 {/* Bottom Half - "Off" */}
@@ -62,7 +63,7 @@ const Light = ({ label, language = 'en' }) => {
                                         setShowToggle(false);
                                     }}
                                 >
-                                    {language === 'ja' ? 'オフ' : 'Off'}
+                                    {language === 'ja' ? lightText.ja.off : lightText.en.off}
                                 </div>
                             </div>
                         ) : null}
@@ -72,11 +73,11 @@ const Light = ({ label, language = 'en' }) => {
                         <div className="font-bold">
                             {state === 'on'
                                 ? language === 'ja'
-                                    ? 'オン'
-                                    : 'On'
+                                    ? lightText.ja.on
+                                    : lightText.en.on
                                 : language === 'ja'
-                                  ? 'オフ'
-                                  : 'Off'}
+                                ? lightText.ja.off
+                                : lightText.en.off}
                         </div>
 
                         <div>{label}</div>

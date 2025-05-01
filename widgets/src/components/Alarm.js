@@ -6,6 +6,7 @@ import React from 'react';
 // import '@daikin-oss/design-system-web-components/components/icon/index.js';
 
 import '../index.css';
+import { alarmText } from '../text.json';
 
 const Alarm = ({ count = 1, color = 'red', language = 'en' }) => {
     const COLORS = {
@@ -30,10 +31,10 @@ const Alarm = ({ count = 1, color = 'red', language = 'en' }) => {
                         <div className="font-bold">{count}</div>
                         <div>
                             {language === 'ja'
-                                ? 'アラーム'
+                                ? alarmText.ja.alarm
                                 : count === 1
-                                  ? 'Alarm'
-                                  : 'Alarms'}
+                                  ? alarmText.en.alarm
+                                  : alarmText.en.alarms}
                         </div>
                     </div>
                 </div>

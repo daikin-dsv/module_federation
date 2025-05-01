@@ -1,0 +1,23 @@
+{
+    "appRoutesText": {
+        "home": "Home",
+        "databricks": "Databricks",
+        "nav3": "Navigation 3",
+        "policy": "Privacy Policy",
+        "terms": "Terms of Use",
+        "loadingWidgets": "Loading Widgets...",
+        "building1": "Building 1",
+        "building1a": "Building 1A",
+        "backupBattery": "Backup Battery",
+        "room1": "Room 1",
+        "energyRating": "Energy Rating",
+        "staff": "Staff",
+        "vacancy": "Vacancy"
+    },
+    "bootstrapText": {
+        "error": "Something went wrong",
+        "loadingHeader": "Loading Header...",
+        "loadingFooter": "Loading Footer...",
+        "copyright": "2025 Daikin U.S. Corporation"
+    }
+}
