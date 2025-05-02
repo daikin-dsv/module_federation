@@ -130,12 +130,11 @@ jobs:
       matrix:
         services: ${{ fromJson(needs.init-aws.outputs.MICRO_FRONTEND) }}
     steps:
-      - name: Checkout
+      # Step to checkout code repo
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository_owner }}/module_federation
-          ref: ${{ env.CODE_VERSION }}
-          token: ${{ secrets.PAT_TOKEN }}
+          ref: ${{ inputs.code_version }}
       - name: Cache node modules
         uses: actions/cache@v4
         with:
