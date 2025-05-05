@@ -24,7 +24,7 @@ const User = ({ language = 'en' }) => {
                     <daikin-card className="flex w-80 flex-col">
                         <div className="flex flex-col">
                             <span>
-                                {language === 'ja' ? userText.ja.signedIn : userText.en.signedIn}
+                                {userText[language].signedIn}
                             </span>
                             <span className="flex flex-wrap font-(--dds-font-weight-bold) break-all">
                                 {user?.preferred_username}
@@ -33,7 +33,7 @@ const User = ({ language = 'en' }) => {
                         <div className="-mx-4 border-y-1 border-(--dds-color-divider) py-2">
                             <daikin-list>
                                 <daikin-list-item onClick={() => setMenu('profile')}>
-                                    {language === 'ja' ? userText.ja.profile : userText.en.profile}
+                                    {userText[language].profile}
                                     <daikin-icon
                                         color="current"
                                         icon="chevron-right"
@@ -48,7 +48,7 @@ const User = ({ language = 'en' }) => {
                                 onClick={logout}
                                 variant="outline"
                             >
-                                {language === 'ja' ? userText.ja.signOut : userText.en.signOut}
+                                {userText[language].signOut}
                             </daikin-button>
                         </daikin-card-footer>
                     </daikin-card>
@@ -68,7 +68,7 @@ const User = ({ language = 'en' }) => {
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-col">
                                 <span className="font-(--dds-font-weight-bold)">
-                                    {language === 'ja' ? userText.ja.name : userText.en.name}
+                                    {userText[language].name}
                                 </span>
                                 <span className="flex flex-wrap break-all">
                                     {user?.given_name} {user?.family_name}
@@ -76,7 +76,7 @@ const User = ({ language = 'en' }) => {
                             </div>
                             <div className="flex flex-col">
                                 <span className="font-(--dds-font-weight-bold)">
-                                    {language === 'ja' ? userText.ja.email : userText.en.signedIn}
+                                    {userText[language].email}
                                 </span>
                                 <span className="flex flex-wrap break-all">
                                     {user?.email}
@@ -89,7 +89,7 @@ const User = ({ language = 'en' }) => {
                                 onClick={accountManagement}
                                 variant="outline"
                             >
-                                {language === 'ja' ? userText.ja.manageAccount : userText.en.manageAccount}
+                                {userText[language].manageAccount}
                                 <ArrowTopRightOnSquareIcon
                                     slot="right-icon"
                                     className="h-6 w-6"

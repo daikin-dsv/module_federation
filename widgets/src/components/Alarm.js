@@ -30,11 +30,7 @@ const Alarm = ({ count = 1, color = 'red', language = 'en' }) => {
                     <div className="flex flex-col items-center text-gray-700">
                         <div className="font-bold">{count}</div>
                         <div>
-                            {language === 'ja'
-                                ? alarmText.ja.alarm
-                                : count === 1
-                                  ? alarmText.en.alarm
-                                  : alarmText.en.alarms}
+                            {count === 1 ? alarmText[language].alarm : alarmText[language].alarms}
                         </div>
                     </div>
                 </div>

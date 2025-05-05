@@ -6,7 +6,8 @@
             
         },
         "ja": {
-            "alarm": "アラーム"
+            "alarm": "アラーム",
+            "alarms": "アラーム"
         }
     },
     "lightText": {

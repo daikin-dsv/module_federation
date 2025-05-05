@@ -10,7 +10,7 @@ import '../webcomponents';
 import User from './User';
 import { headerText } from '../text.json';
 
-const Header = ({ navigationItems = [], language }) => {
+const Header = ({ navigationItems = [], language = 'en' }) => {
     const [showMore, setShowMore] = useState(false);
     const [overflowIndex, setOverflowIndex] = useState(0);
     const navItemsRef = useRef([]);
@@ -73,7 +73,7 @@ const Header = ({ navigationItems = [], language }) => {
                         <Popover>
                             <PopoverButton className="focus:outline-none">
                                 <div className="flex h-16 items-center justify-center gap-2 px-4 break-keep text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)">
-                                    {language === 'ja' ? headerText.ja.more : headerText.en.more}
+                                    {headerText[language].more}
                                     <daikin-icon
                                         color="current"
                                         icon="chevron-down"

@@ -51,7 +51,7 @@ const Light = ({ label, language = 'en' }) => {
                                         setShowToggle(false);
                                     }}
                                 >
-                                    {language === 'ja' ? lightText.ja.on : lightText.en.on}
+                                    {lightText[language].on}
                                 </div>
 
                                 {/* Bottom Half - "Off" */}
@@ -63,7 +63,7 @@ const Light = ({ label, language = 'en' }) => {
                                         setShowToggle(false);
                                     }}
                                 >
-                                    {language === 'ja' ? lightText.ja.off : lightText.en.off}
+                                    {lightText[language].off}
                                 </div>
                             </div>
                         ) : null}
@@ -72,12 +72,9 @@ const Light = ({ label, language = 'en' }) => {
                     <div className="flex flex-col items-center text-gray-700">
                         <div className="font-bold">
                             {state === 'on'
-                                ? language === 'ja'
-                                    ? lightText.ja.on
-                                    : lightText.en.on
-                                : language === 'ja'
-                                ? lightText.ja.off
-                                : lightText.en.off}
+                                ? lightText[language].on
+                                : lightText[language].off
+                            }
                         </div>
 
                         <div>{label}</div>
