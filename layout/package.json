@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "rspack serve --env mode=development",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "rspack build --env mode=production"
+        "build": "rspack build --env mode=production",
+        "build-docker": "pwsh ../build-service.ps1 -ServiceName $npm_package_name -ServiceVersion $npm_package_version"
     },
     "author": "",
     "license": "ISC",
