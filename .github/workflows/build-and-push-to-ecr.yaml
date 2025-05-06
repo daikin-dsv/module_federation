@@ -185,7 +185,7 @@ jobs:
       - name: check image was built & pushed
         shell: bash
         run: |
-          REPOSITORY_NAME=daikin/${{ matrix.services }}
+          REPOSITORY_NAME=daikin/rad/${{ matrix.services }}
           IMAGE_TAG=${{needs.init-aws.outputs.IMAGE_TAG}}
           PLATFORM=${{ env.PLATFORM }}
           ARCHITECTURES=$(aws ecr batch-get-image --repository-name $REPOSITORY_NAME --region ${{ vars.AWS_REGION }} --image-ids imageTag=$IMAGE_TAG --query 'images[].imageManifest' --output text --accepted-media-types application/vnd.oci.image.manifest.v1+json | jq -r '.manifests[].platform.architecture | select(. != "unknown")')
