@@ -21,7 +21,7 @@ on:
       microfrontend:
         type: string
         description: Micro frontend Images to be built (all by default)
-        default: '["layout","widgets","regional-app-1","regional-app-2"]'
+        default: '["layout"]'
   workflow_call:
     inputs:
       deploy_image_tag:
