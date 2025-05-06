@@ -8,8 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint .",
         "format": "prettier --write .",
-        "build:layout": "docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest .",
-        "run:layout": "docker run -t -p 8080:80 layout:latest"
+        "build-and-run:layout": "docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest . && docker run -t -p 8080:80 layout:latest"
     },
     "author": "",
     "license": "ISC",

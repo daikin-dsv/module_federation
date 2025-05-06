@@ -1,3 +1,6 @@
+# Build: docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest .
+# Run: docker run -t -p 8080:80 layout:latest
+
 # Stage 1: Build the application (uses node:20)
 FROM node:20 AS builder
 
