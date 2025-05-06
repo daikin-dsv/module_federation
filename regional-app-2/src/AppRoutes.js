@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
+import { appRoutesText } from './text.json';
+
 const Alarm = React.lazy(() => import('Widget/Alarm'));
 const DatabricksWidget = React.lazy(() => import('Widget/DatabricksDashboard'));
 const Light = React.lazy(() => import('Widget/Light'));
@@ -22,18 +24,18 @@ const PersonIcon = loadIcon('PersonIcon');
 const ChairIcon = loadIcon('ChairIcon');
 
 export const NAVIGATION_CONFIG = Object.freeze({
-    HOME: { name: 'ホーム', path: '/' },
-    NAV2: { name: 'データブリックス', path: '/databricks' },
-    NAV3: { name: 'ナビゲーション 3', path: '/navigation3' }
+    HOME: { name: appRoutesText.home, path: '/' },
+    NAV2: { name: appRoutesText.databricks, path: '/databricks' },
+    NAV3: { name: appRoutesText.nav3, path: '/navigation3' }
 });
 
 export const FOOTER_CONFIG = Object.freeze({
     POLICY: {
-        name: 'プライバシー',
+        name: appRoutesText.policy,
         path: '/policy'
     },
     TERMS: {
-        name: '利用規約',
+        name: appRoutesText.terms,
         path: '/terms'
     }
 });
@@ -74,48 +76,48 @@ const AppRoutes = () => {
                     path={NAVIGATION_CONFIG.HOME.path}
                     element={
                         <div className="mt-2 grid w-full grid-cols-1 gap-4 sm:grid-cols-[auto_auto] md:grid-cols-[auto_1fr] md:grid-rows-[auto]">
-                            <Suspense fallback={<div>Loading Widget 1</div>}>
+                            <Suspense fallback={<div>{appRoutesText.loadingWidgets}</div>}>
                                 <div className="flex flex-wrap gap-4">
                                     <Alarm count={0} color={'green'} language="ja" />
-                                    <Light label="知識の森" language="ja" />
+                                    <Light label={appRoutesText.chishikiNoMori} language="ja" />
                                     <EnergyGauge
                                         usage={3940.23}
                                         maxUsage={7500}
-                                        buildingName="ビル 1"
+                                        buildingName={appRoutesText.building1}
                                     />
                                 </div>
                                 <div className="flex flex-wrap content-start justify-start gap-2">
                                     <InfoCard
                                         icon={FireIcon}
-                                        label="ビルA"
+                                        label={appRoutesText.building1a}
                                         value="47.6 m²"
                                     />
                                     <InfoCard
                                         icon={WaterIcon}
-                                        label="ビルA"
+                                        label={appRoutesText.building1a}
                                         value="1111 L"
                                     />
                                     <InfoCard
                                         icon={BatteryIcon}
-                                        label="非常用電源"
+                                        label={appRoutesText.backupBattery}
                                         value="54%"
                                     />
                                     <InfoCard
                                         icon={TemperatureIcon}
-                                        label="会議室 2"
+                                        label={appRoutesText.meetingRoom2}
                                         value="22℃"
                                     />
                                     <InfoCard
                                         icon={StarIcon}
-                                        label="エネルギー評価"
+                                        label={appRoutesText.energyRating}
                                         value="9.5"
                                     />
                                     <InfoCard
                                         icon={PersonIcon}
-                                        label="スタッフ"
+                                        label={appRoutesText.staff}
                                         value="25"
                                     />
-                                    <InfoCard icon={ChairIcon} label="空席" value="12" />
+                                    <InfoCard icon={ChairIcon} label={appRoutesText.vacancy} value="12" />
                                 </div>
                             </Suspense>
                         </div>

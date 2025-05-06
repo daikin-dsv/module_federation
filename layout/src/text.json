@@ -1,0 +1,16 @@
+{
+    "footerText": {
+        "daikin": "Daikin"
+    },
+    "headerText": {
+        "more": "More"
+    },
+    "userText": {
+       "email": "Email",
+        "manageAccount": "Manage Account",
+        "name": "Name",
+        "profile": "Profile",
+        "signedIn": "Signed in as",
+        "signOut": "Sign out"
+    }
+}

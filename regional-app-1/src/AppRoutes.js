@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
+import { appRoutesText } from './text.json';
+
 const Alarm = React.lazy(() => import('Widget/Alarm'));
 const DatabricksWidget = React.lazy(() => import('Widget/DatabricksDashboard'));
 const EnergyGauge = React.lazy(() => import('Widget/EnergyGauge'));
@@ -21,18 +23,18 @@ const PersonIcon = loadIcon('PersonIcon');
 const ChairIcon = loadIcon('ChairIcon');
 
 export const NAVIGATION_CONFIG = Object.freeze({
-    HOME: { name: 'Home', path: '/' },
-    NAV2: { name: 'Databricks', path: '/databricks' },
-    NAV3: { name: 'Navigation 3', path: '/navigation3' }
+    HOME: { name: appRoutesText.home, path: '/' },
+    NAV2: { name: appRoutesText.databricks, path: '/databricks' },
+    NAV3: { name: appRoutesText.nav3, path: '/navigation3' }
 });
 
 export const FOOTER_CONFIG = Object.freeze({
     POLICY: {
-        name: 'Privacy Policy',
+        name: appRoutesText.policy,
         path: '/policy'
     },
     TERMS: {
-        name: 'Terms of Use',
+        name: appRoutesText.terms,
         path: '/terms'
     }
 });
@@ -74,45 +76,45 @@ const AppRoutes = () => {
                     path={NAVIGATION_CONFIG.HOME.path}
                     element={
                         <div className="mt-2 grid w-full grid-cols-1 gap-4 sm:grid-cols-[auto_auto] md:grid-cols-[auto_1fr] md:grid-rows-[auto]">
-                            <Suspense fallback={<div>Loading Widget 1</div>}>
+                            <Suspense fallback={<div>{appRoutesText.loadingWidgets}</div>}>
                                 <div className="flex flex-wrap gap-4">
                                     <Alarm />
                                     <EnergyGauge
                                         usage={5750.23}
                                         maxUsage={6000}
-                                        buildingName="Building 1"
+                                        buildingName={appRoutesText.building1}
                                     />
                                 </div>
                                 <div className="flex flex-wrap content-start justify-start gap-2">
                                     <InfoCard
                                         icon={FireIcon}
-                                        label="Building 1A"
+                                        label={appRoutesText.building1a}
                                         value="512 ft³"
                                     />
                                     <InfoCard
                                         icon={WaterIcon}
-                                        label="Building 1A"
+                                        label={appRoutesText.building1a}
                                         value="293.6 gal"
                                     />
                                     <InfoCard
                                         icon={BatteryIcon}
-                                        label="Backup Battery"
+                                        label={appRoutesText.backupBattery}
                                         value="54%"
                                     />
                                     <InfoCard
                                         icon={TemperatureIcon}
-                                        label="Room 1"
+                                        label={appRoutesText.room1}
                                         value="72 °F"
                                     />
                                     <InfoCard
                                         icon={StarIcon}
-                                        label="Energy Rating"
+                                        label={appRoutesText.energyRating}
                                         value="8.5"
                                     />
-                                    <InfoCard icon={PersonIcon} label="Staff" value="5" />
+                                    <InfoCard icon={PersonIcon} label={appRoutesText.staff} value="5" />
                                     <InfoCard
                                         icon={ChairIcon}
-                                        label="Vacancy"
+                                        label={appRoutesText.vacancy}
                                         value="12"
                                     />
                                 </div>

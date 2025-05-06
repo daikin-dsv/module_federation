@@ -6,8 +6,9 @@ import { ArrowTopRightOnSquareIcon, UserCircleIcon } from '@heroicons/react/24/s
 import { useUserContext } from '../context/Auth/context';
 import { accountManagement, logout } from '../context/Auth/keycloak';
 import '../webcomponents';
+import { userText } from '../text.json';
 
-const User = ({ language = 'en' }) => {
+const User = ({ text = userText }) => {
     const user = useUserContext();
     const [menu, setMenu] = useState('main');
 
@@ -23,7 +24,7 @@ const User = ({ language = 'en' }) => {
                     <daikin-card className="flex w-80 flex-col">
                         <div className="flex flex-col">
                             <span>
-                                {language === 'ja' ? 'ユーザー名' : 'Signed in as'}
+                                {text.signedIn}
                             </span>
                             <span className="flex flex-wrap font-(--dds-font-weight-bold) break-all">
                                 {user?.preferred_username}
@@ -32,7 +33,7 @@ const User = ({ language = 'en' }) => {
                         <div className="-mx-4 border-y-1 border-(--dds-color-divider) py-2">
                             <daikin-list>
                                 <daikin-list-item onClick={() => setMenu('profile')}>
-                                    {language === 'ja' ? 'プロフィール' : 'Profile'}
+                                    {text.profile}
                                     <daikin-icon
                                         color="current"
                                         icon="chevron-right"
@@ -47,7 +48,7 @@ const User = ({ language = 'en' }) => {
                                 onClick={logout}
                                 variant="outline"
                             >
-                                {language === 'ja' ? 'サインアウト' : 'Sign out'}
+                                {text.signOut}
                             </daikin-button>
                         </daikin-card-footer>
                     </daikin-card>
@@ -67,7 +68,7 @@ const User = ({ language = 'en' }) => {
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-col">
                                 <span className="font-(--dds-font-weight-bold)">
-                                    {language === 'ja' ? '名前' : 'Name'}
+                                    {text.name}
                                 </span>
                                 <span className="flex flex-wrap break-all">
                                     {user?.given_name} {user?.family_name}
@@ -75,7 +76,7 @@ const User = ({ language = 'en' }) => {
                             </div>
                             <div className="flex flex-col">
                                 <span className="font-(--dds-font-weight-bold)">
-                                    {language === 'ja' ? 'Eメール' : 'Email'}
+                                    {text.email}
                                 </span>
                                 <span className="flex flex-wrap break-all">
                                     {user?.email}
@@ -88,7 +89,7 @@ const User = ({ language = 'en' }) => {
                                 onClick={accountManagement}
                                 variant="outline"
                             >
-                                {language === 'ja' ? 'アカウント管理' : 'Manage Account'}
+                                {text.manageAccount}
                                 <ArrowTopRightOnSquareIcon
                                     slot="right-icon"
                                     className="h-6 w-6"

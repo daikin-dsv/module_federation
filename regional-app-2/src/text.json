@@ -1,0 +1,35 @@
+{
+    "appRoutesText": {
+        "home": "ホーム",
+        "databricks": "データブリックス",
+        "nav3": "ナビゲーション 3",
+        "policy": "プライバシー",
+        "terms": "利用規約",
+        "loadingWidgets": "ウィジェットロード中...",
+        "chishikiNoMori": "知識の森",
+        "building1": "ビル 1",
+        "building1a": "ビル 1A",
+        "backupBattery": "非常用電源",
+        "meetingRoom2": "会議室 2",
+        "energyRating": "エネルギー評価",
+        "staff": "スタッフ",
+        "vacancy": "空席"
+    },
+    "bootstrapText": {
+        "error": "エラーが発生しました",
+        "loadingHeader": "ヘッダーロード中...",
+        "loadingFooter": "フッターロード中...",
+        "copyright": "2025 Daikin U.S. Corporation"
+    },
+    "headerText": {
+        "more": "もっと"
+    },
+    "userText": {
+       "email": "Eメール",
+        "manageAccount": "アカウント管理",
+        "name": "名前",
+        "profile": "プロフィール",
+        "signedIn": "ユーザー名",
+        "signOut": "サインアウト"
+    }
+}

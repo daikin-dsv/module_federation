@@ -6,8 +6,9 @@ import React from 'react';
 // import '@daikin-oss/design-system-web-components/components/icon/index.js';
 
 import '../index.css';
+import { alarmText } from '../text.json';
 
-const Alarm = ({ count = 1, color = 'red', language = 'en' }) => {
+const Alarm = ({ count = 1, color = 'red', text = alarmText }) => {
     const COLORS = {
         red: `text-[#f21a27]`,
         yellow: `text-[#b88700]`,
@@ -29,11 +30,7 @@ const Alarm = ({ count = 1, color = 'red', language = 'en' }) => {
                     <div className="flex flex-col items-center text-gray-700">
                         <div className="font-bold">{count}</div>
                         <div>
-                            {language === 'ja'
-                                ? 'アラーム'
-                                : count === 1
-                                  ? 'Alarm'
-                                  : 'Alarms'}
+                            {count === 1 ? text.alarm : text.alarms}
                         </div>
                     </div>
                 </div>

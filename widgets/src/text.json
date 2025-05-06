@@ -1,0 +1,15 @@
+{
+    "alarmText": {
+        "alarm": "Alarm",
+        "alarms": "Alarms"
+    },
+    "lightText": {
+        "on": "On",
+        "off": "Off"
+    },
+    "bootstrapText": {
+        "dsv": "DSV",
+        "water": "Water",
+        "lobby": "Lobby"
+    }
+}
