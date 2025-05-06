@@ -74,17 +74,8 @@ if ($true) {
 
 Write-Host ($BuildConfig | ConvertTo-Json)
 
-# Set-Location ../..
-# Get-Location
-# return
+Set-Location $BuildConfig.RepoDir
 
-# if node.js project
-if (Test-Path "$($BuildConfig.RepoDir)/$($BuildConfig.ServiceName)/package.json") {
-    Set-Location $BuildConfig.RepoDir
-}
-else {
-    Set-Location "$($BuildConfig.RepoDir)/$($BuildConfig.ServiceName)"
-}
 $BuildConfig.BuildDir = Get-Location
 Write-Host "Current Build Directory is $($BuildConfig.BuildDir)"
 
@@ -100,9 +91,6 @@ else {
     Write-Host "No .dockerignore file found at $SourceDockerignore"
 }
 
-if ($BuildConfig.IsRemote) {
-    npm run aws-docker-login --prefix $BuildConfig.DeployRepoPath -- -configName "apollo"
-}
 if (!$env:CI) {
     # https://stackoverflow.com/questions/44084846/cannot-connect-to-the-docker-daemon-on-macos
     $env:DOCKER_HOST = "unix:///Users/$env:USER/Library/Containers/com.docker.docker/Data/docker.raw.sock"
@@ -136,11 +124,7 @@ else {
         # building separate images for each platform
         $private:PlatformArgument = "--platform $_"
         if (!$_) { $PlatformArgument = "" }
-        $private:LoadDir = $BuildConfig.ProjectDir
-        # if node.js project
-        if (Test-Path "$($BuildConfig.RepoDir)/$($BuildConfig.ServiceName)/package.json") {
-            $private:LoadDir = $BuildConfig.RepoDir
-        }
+        $private:LoadDir = $BuildConfig.RepoDir
         $BuildConfig.Command = "
     docker buildx build $PlatformArgument -t $($BuildConfig.PushTag) --progress=$($BuildConfig.BuildProgress) --build-arg service_name=$($BuildConfig.ServiceName) -f $($BuildConfig.RepoDir)/$($BuildConfig.ServiceName)/Dockerfile --load $LoadDir
     "
