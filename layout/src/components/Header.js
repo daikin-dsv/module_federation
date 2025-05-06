@@ -7,10 +7,9 @@ import debounce from 'lodash/debounce';
 import Logo from '../assets/daikin_logo.png';
 import '../index.css';
 import '../webcomponents';
-import User from './User';
 import { headerText } from '../text.json';
 
-const Header = ({ navigationItems = [], language = 'en' }) => {
+const Header = ({ navigationItems = [], text = headerText, children }) => {
     const [showMore, setShowMore] = useState(false);
     const [overflowIndex, setOverflowIndex] = useState(0);
     const navItemsRef = useRef([]);
@@ -73,7 +72,7 @@ const Header = ({ navigationItems = [], language = 'en' }) => {
                         <Popover>
                             <PopoverButton className="focus:outline-none">
                                 <div className="flex h-16 items-center justify-center gap-2 px-4 break-keep text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)">
-                                    {headerText[language].more}
+                                    {text.more}
                                     <daikin-icon
                                         color="current"
                                         icon="chevron-down"
@@ -112,7 +111,9 @@ const Header = ({ navigationItems = [], language = 'en' }) => {
                     )}
                 </nav>
             </div>
-            <User language={language} />
+            <div>
+                {children}
+            </div>
         </header>
     );
 };

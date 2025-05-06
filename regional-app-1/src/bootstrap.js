@@ -10,6 +10,7 @@ import { bootstrapText } from './text.json';
 
 const Auth = React.lazy(() => import('Layout/auth'));
 const Header = React.lazy(() => import('Layout/header'));
+const User = React.lazy(() => import('Layout/user'));
 const Footer = React.lazy(() => import('Layout/footer'));
 
 const rootElement = document.getElementById('root');
@@ -21,7 +22,9 @@ root.render(
             <ErrorBoundary fallback={<div>{bootstrapText.error}</div>}>
                 <div className="flex h-screen flex-col">
                     <Suspense fallback={bootstrapText.loadingHeader}>
-                        <Header navigationItems={Object.values(NAVIGATION_CONFIG)} />
+                        <Header navigationItems={Object.values(NAVIGATION_CONFIG)}>
+                            <User />
+                        </Header>
                     </Suspense>
                     <main className="flex flex-grow flex-col overflow-x-scroll p-4">
                         <AppRoutes />

@@ -52,6 +52,7 @@ module.exports = ({ mode }) => {
                     exposes: {
                         './header': './src/components/Header.js',
                         './footer': './src/components/Footer.js',
+                        './user': './src/components/User.js',
                         './auth': './src/context/Auth/index.js'
                     },
                     shared: {

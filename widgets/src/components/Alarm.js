@@ -8,7 +8,7 @@ import React from 'react';
 import '../index.css';
 import { alarmText } from '../text.json';
 
-const Alarm = ({ count = 1, color = 'red', language = 'en' }) => {
+const Alarm = ({ count = 1, color = 'red', text = alarmText }) => {
     const COLORS = {
         red: `text-[#f21a27]`,
         yellow: `text-[#b88700]`,
@@ -30,7 +30,7 @@ const Alarm = ({ count = 1, color = 'red', language = 'en' }) => {
                     <div className="flex flex-col items-center text-gray-700">
                         <div className="font-bold">{count}</div>
                         <div>
-                            {count === 1 ? alarmText[language].alarm : alarmText[language].alarms}
+                            {count === 1 ? text.alarm : text.alarms}
                         </div>
                     </div>
                 </div>

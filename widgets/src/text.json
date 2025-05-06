@@ -1,25 +1,11 @@
 {
     "alarmText": {
-        "en": {
-            "alarm": "Alarm",
-            "alarms": "Alarms"
-            
-        },
-        "ja": {
-            "alarm": "アラーム",
-            "alarms": "アラーム"
-        }
+        "alarm": "Alarm",
+        "alarms": "Alarms"
     },
     "lightText": {
-        "en": {
-            "on": "On",
-            "off": "Off"
-            
-        },
-        "ja": {
-            "on": "オン",
-            "off": "オフ"
-        }
+        "on": "On",
+        "off": "Off"
     },
     "bootstrapText": {
         "dsv": "DSV",

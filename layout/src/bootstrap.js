@@ -4,13 +4,16 @@ import { BrowserRouter } from 'react-router';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
+import User from './components/User';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
 root.render(
     <BrowserRouter>
-        <Header />
+        <Header>
+            <User />
+        </Header>
         <Footer />
     </BrowserRouter>
 );

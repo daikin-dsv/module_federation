@@ -8,7 +8,7 @@ import React from 'react';
 import '../index.css';
 import { lightText } from '../text.json';
 
-const Light = ({ label, language = 'en' }) => {
+const Light = ({ label, text = lightText }) => {
     const [state, setState] = React.useState('on');
     const [showToggle, setShowToggle] = React.useState(false);
     const COLORS = {
@@ -51,7 +51,7 @@ const Light = ({ label, language = 'en' }) => {
                                         setShowToggle(false);
                                     }}
                                 >
-                                    {lightText[language].on}
+                                    {text.on}
                                 </div>
 
                                 {/* Bottom Half - "Off" */}
@@ -63,7 +63,7 @@ const Light = ({ label, language = 'en' }) => {
                                         setShowToggle(false);
                                     }}
                                 >
-                                    {lightText[language].off}
+                                    {text.off}
                                 </div>
                             </div>
                         ) : null}
@@ -72,8 +72,8 @@ const Light = ({ label, language = 'en' }) => {
                     <div className="flex flex-col items-center text-gray-700">
                         <div className="font-bold">
                             {state === 'on'
-                                ? lightText[language].on
-                                : lightText[language].off
+                                ? text.on
+                                : text.off
                             }
                         </div>
 

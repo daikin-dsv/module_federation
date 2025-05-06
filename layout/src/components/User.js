@@ -8,7 +8,7 @@ import { accountManagement, logout } from '../context/Auth/keycloak';
 import '../webcomponents';
 import { userText } from '../text.json';
 
-const User = ({ language = 'en' }) => {
+const User = ({ text = userText }) => {
     const user = useUserContext();
     const [menu, setMenu] = useState('main');
 
@@ -24,7 +24,7 @@ const User = ({ language = 'en' }) => {
                     <daikin-card className="flex w-80 flex-col">
                         <div className="flex flex-col">
                             <span>
-                                {userText[language].signedIn}
+                                {text.signedIn}
                             </span>
                             <span className="flex flex-wrap font-(--dds-font-weight-bold) break-all">
                                 {user?.preferred_username}
@@ -33,7 +33,7 @@ const User = ({ language = 'en' }) => {
                         <div className="-mx-4 border-y-1 border-(--dds-color-divider) py-2">
                             <daikin-list>
                                 <daikin-list-item onClick={() => setMenu('profile')}>
-                                    {userText[language].profile}
+                                    {text.profile}
                                     <daikin-icon
                                         color="current"
                                         icon="chevron-right"
@@ -48,7 +48,7 @@ const User = ({ language = 'en' }) => {
                                 onClick={logout}
                                 variant="outline"
                             >
-                                {userText[language].signOut}
+                                {text.signOut}
                             </daikin-button>
                         </daikin-card-footer>
                     </daikin-card>
@@ -68,7 +68,7 @@ const User = ({ language = 'en' }) => {
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-col">
                                 <span className="font-(--dds-font-weight-bold)">
-                                    {userText[language].name}
+                                    {text.name}
                                 </span>
                                 <span className="flex flex-wrap break-all">
                                     {user?.given_name} {user?.family_name}
@@ -76,7 +76,7 @@ const User = ({ language = 'en' }) => {
                             </div>
                             <div className="flex flex-col">
                                 <span className="font-(--dds-font-weight-bold)">
-                                    {userText[language].email}
+                                    {text.email}
                                 </span>
                                 <span className="flex flex-wrap break-all">
                                     {user?.email}
@@ -89,7 +89,7 @@ const User = ({ language = 'en' }) => {
                                 onClick={accountManagement}
                                 variant="outline"
                             >
-                                {userText[language].manageAccount}
+                                {text.manageAccount}
                                 <ArrowTopRightOnSquareIcon
                                     slot="right-icon"
                                     className="h-6 w-6"

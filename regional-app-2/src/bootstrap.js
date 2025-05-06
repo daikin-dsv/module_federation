@@ -6,10 +6,11 @@ import AppRoutes, { NAVIGATION_CONFIG, FOOTER_CONFIG } from './AppRoutes';
 import ErrorBoundary from './ErrorBoundary';
 import './index.css';
 import './webcomponents';
-import { bootstrapText } from './text.json';
+import { bootstrapText, headerText, userText } from './text.json';
 
 const Auth = React.lazy(() => import('Layout/auth'));
 const Header = React.lazy(() => import('Layout/header'));
+const User = React.lazy(() => import('Layout/user'));
 const Footer = React.lazy(() => import('Layout/footer'));
 
 const rootElement = document.getElementById('root');
@@ -23,8 +24,10 @@ root.render(
                     <Suspense fallback={bootstrapText.loadingHeader}>
                         <Header
                             navigationItems={Object.values(NAVIGATION_CONFIG)}
-                            language="ja"
-                        />
+                            text={headerText}
+                            >
+                            <User text={userText} />
+                        </Header>
                     </Suspense>
                     <main className="flex flex-grow flex-col overflow-x-scroll p-4">
                         <AppRoutes />
