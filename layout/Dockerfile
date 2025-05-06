@@ -8,9 +8,6 @@ FROM node:20 AS builder
 # Define the working directory
 WORKDIR /app/layout
 
-# # Copy the root package.json, package-lock.json files
-# COPY layout/package.json .
-
 # Copy the configuration file
 COPY config.js /app/config.js
 
