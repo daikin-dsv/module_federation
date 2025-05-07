@@ -11,3 +11,14 @@ PoC to demonstrate a MFE architecture for an energy management dashboard
 In the root folder, run `npm install` to download all dependencies.
 Then run `npm run dev` to build and serve all apps simultaneously.
 For the ports each app is running on, refer to `config.js`.
+
+## Variables and Secrets
+
+### Variables
+
+#### Variables for each environments
+
+- `AWS_ACCOUNT_ID`: Account ID which is placed ECR repository
+- `AWS_REGION`: AWS Region which is placed ECR repository
+- `CONTAINER_REPOSITORY_ACCOUNT`: `AWS_ACCOUNT_ID` which is located ECR repository. If cluster and ECR are placed at the same AWS Account, then this can be skipped.
+- `CONTAINER_REPOSITORY_REGION`: `AWS_REGION` which is located ECR repository. If cluster and ECR are placed at the same AWS Account, then this can be skipped.
