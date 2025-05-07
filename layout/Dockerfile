@@ -13,7 +13,6 @@ COPY config.js /app/config.js
 
 # Copy the rest of the application code
 COPY layout/ /app/layout
-# COPY . ./layout
 
 # Install dependencies
 RUN npm install

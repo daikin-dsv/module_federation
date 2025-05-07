@@ -1,7 +1,6 @@
 name: build and push to ecr
 
 on:
-  push:
   workflow_dispatch:
     inputs:
       deploy_image_tag:
