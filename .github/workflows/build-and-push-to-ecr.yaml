@@ -1,6 +1,7 @@
 name: build and push to ecr
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       deploy_image_tag:
@@ -20,7 +21,7 @@ on:
       microfrontend:
         type: string
         description: Micro frontend Images to be built (all by default)
-        default: '["layout"]'
+        default: '["layout","widgets","regional-app-1","regional-app-2"]'
   workflow_call:
     inputs:
       deploy_image_tag:
@@ -39,7 +40,7 @@ on:
       microfrontend:
         type: string
         description: Micro frontend Images to be built (all by default)
-        default: '["layout"]'
+        default: '["layout","widgets","regional-app-1","regional-app-2"]'
 
 env:
   NODE_OPTIONS: '--max_old_space_size=4096 --no-network-family-autoselection'
@@ -49,7 +50,7 @@ env:
   CODE_VERSION: ${{ github.ref_name }}
   DEPLOY_IMAGE_TAG: ${{ inputs.deploy_image_tag || 'latest' }}
   PLATFORM: ${{ inputs.platform || 'linux/amd64,linux/arm64' }}
-  MICRO_FRONTEND: ${{ inputs.microfrontend || '["layout"]' }}
+  MICRO_FRONTEND: ${{ inputs.microfrontend || '["layout","widgets","regional-app-1","regional-app-2"]' }}
 
 jobs:
   cleanup:
@@ -64,7 +65,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh cache delete --all --succeed-on-no-caches
+          gh cache delete --all
   init-aws:
     runs-on: ubuntu-24.04
     environment: build
