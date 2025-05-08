@@ -4,7 +4,9 @@
     "main": "index.js",
     "scripts": {
         "dev": "rspack serve --env mode=development",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rspack build --env mode=production",
+        "build-docker": "pwsh ../build-service.ps1 -ServiceName $npm_package_name -ServiceVersion $npm_package_version"
     },
     "author": "",
     "license": "ISC",
@@ -21,6 +23,7 @@
         "@rspack/core": "^1.1.8",
         "@rspack/plugin-react-refresh": "^1.0.1",
         "@tailwindcss/postcss": "^4.0.4",
+        "css-loader": "^7.1.2",
         "postcss": "^8.5.1",
         "postcss-loader": "^8.1.1",
         "react-refresh": "^0.16.0",

@@ -1,18 +1,18 @@
-# Build: docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest .
-# Run: docker run -t -p 8080:80 layout:latest
+# Build: docker buildx build -f widgets/Dockerfile --progress=plain -t widgets:latest .
+# Run: docker run -t -p 8080:80 widgets:latest
 
 # Stage 1: Build the application (uses node:20)
 FROM node:20 AS builder
 
 
 # Define the working directory
-WORKDIR /app/layout
+WORKDIR /app/widgets
 
 # Copy the configuration file
 COPY config.js /app/config.js
 
 # Copy the rest of the application code
-COPY layout/ /app/layout
+COPY widgets/ /app/widgets
 
 # Install dependencies
 RUN npm install
@@ -24,10 +24,10 @@ RUN npm run build
 FROM nginx:stable-alpine AS production
 
 # Define the working directory
-WORKDIR /app/layout
+WORKDIR /app/widgets
 
 # Copy necessary files from the builder stage
-COPY --from=builder /app/layout/dist/ /usr/share/nginx/html
+COPY --from=builder /app/widgets/dist/ /usr/share/nginx/html
 
 EXPOSE 80
 
