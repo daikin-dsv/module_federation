@@ -21,8 +21,7 @@ RUN npm install
 RUN npm run build
 
 # Stage 2: Production Stage - Create the final image
-# FROM nginx:stable-alpine AS production
-FROM nginx:alpine-debug AS production
+FROM nginx:stable-alpine AS production
 
 # Define the working directory
 WORKDIR /app/layout
