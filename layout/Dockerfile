@@ -33,4 +33,4 @@ COPY --from=builder /app/layout/dist/ /usr/share/nginx/html
 #  (80 for rad-layout, 8080 for readiness probes, 9090 for metrics)
 EXPOSE 80 8080 9090
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off; debug;"]
