@@ -1,5 +1,5 @@
 # Build: docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest .
-# Run: docker run -t -p 8080:80 layout:latest
+# Run: docker run -d -t -p 8080:80 layout:latest
 
 # Stage 1: Build the application (uses node:20)
 FROM node:20 AS builder
@@ -29,6 +29,8 @@ WORKDIR /app/layout
 # Copy necessary files from the builder stage
 COPY --from=builder /app/layout/dist/ /usr/share/nginx/html
 
-EXPOSE 80
+# Expose ports for the application
+#  (80 for rad-layout, 8080 for readiness probes, 9090 for metrics)
+EXPOSE 80 8080 9090
 
 CMD ["nginx", "-g", "daemon off;"]
