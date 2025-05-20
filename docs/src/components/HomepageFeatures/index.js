@@ -76,7 +76,7 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Databricks BI Dasbhoard',
+    title: 'Databricks BI Dashboard',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
