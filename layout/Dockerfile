@@ -30,7 +30,7 @@ WORKDIR /app/layout
 COPY --from=builder /app/layout/dist/ /usr/share/nginx/html
 
 # Use custom nginx config
-COPY  --from=builder /app/layout/nginx.conf /etc/nginx/nginx.conf
+# COPY  --from=builder /app/layout/nginx.conf /etc/nginx/nginx.conf
 
 # Expose ports for the application
 #  (80 for rad-layout, 8080 for readiness probes, 9090 for metrics)
