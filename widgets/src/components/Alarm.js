@@ -29,9 +29,7 @@ const Alarm = ({ count = 1, color = 'red', text = alarmText }) => {
 
                     <div className="flex flex-col items-center text-gray-700">
                         <div className="font-bold">{count}</div>
-                        <div>
-                            {count === 1 ? text.alarm : text.alarms}
-                        </div>
+                        <div>{count === 1 ? text.alarm : text.alarms}</div>
                     </div>
                 </div>
             </daikin-card>

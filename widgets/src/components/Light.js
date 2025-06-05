@@ -71,10 +71,7 @@ const Light = ({ label, text = lightText }) => {
 
                     <div className="flex flex-col items-center text-gray-700">
                         <div className="font-bold">
-                            {state === 'on'
-                                ? text.on
-                                : text.off
-                            }
+                            {state === 'on' ? text.on : text.off}
                         </div>
 
                         <div>{label}</div>
