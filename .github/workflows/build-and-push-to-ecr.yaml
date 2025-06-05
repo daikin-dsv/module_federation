@@ -154,24 +154,24 @@ jobs:
           chown -R 1001:1001 /var/run/docker.sock
       - name: build-and-push-${{ matrix.services }}
         run: |
-            # Configure cache
-            rm -rf ./.npm-cache || true
-            mkdir -p ./.npm-cache || true
-            npm cache clean -f
-            export npm_config_cache=./.npm-cache
-            if [[ ${{ matrix.services }} == docs-manager ]]; then
-              echo "Install modules for docs-manager"
-              chown -R 1001:1001 ~/.cache
-              npm install -w ${{ matrix.services }} --include-workspace-root
-            fi
-            if [[ ${{ matrix.services }} == web-app ]]; then
-              echo "Install modules for web-app"
-              chown -R 1001:1001 ~/.cache
-              npm install -w ${{ matrix.services }} --include-workspace-root
-            fi
+          # Configure cache
+          rm -rf ./.npm-cache || true
+          mkdir -p ./.npm-cache || true
+          npm cache clean -f
+          export npm_config_cache=./.npm-cache
+          if [[ ${{ matrix.services }} == docs-manager ]]; then
+            echo "Install modules for docs-manager"
+            chown -R 1001:1001 ~/.cache
+            npm install -w ${{ matrix.services }} --include-workspace-root
+          fi
+          if [[ ${{ matrix.services }} == web-app ]]; then
+            echo "Install modules for web-app"
+            chown -R 1001:1001 ~/.cache
+            npm install -w ${{ matrix.services }} --include-workspace-root
+          fi
 
-            npm run build-docker --prefix ${{ matrix.services }} -- -platform ${{ env.PLATFORM }} -remote -tag ${{needs.init-aws.outputs.IMAGE_TAG}} -EcrRegistry ${{ env.ECR_REGISTRY }}
-            npm run build-docker --prefix ${{ matrix.services }} -- -platform ${{ env.PLATFORM }} -remote -tag "latest" -EcrRegistry ${{ env.ECR_REGISTRY }}
+          npm run build-docker --prefix ${{ matrix.services }} -- -platform ${{ env.PLATFORM }} -remote -tag ${{needs.init-aws.outputs.IMAGE_TAG}} -EcrRegistry ${{ env.ECR_REGISTRY }}
+          npm run build-docker --prefix ${{ matrix.services }} -- -platform ${{ env.PLATFORM }} -remote -tag "latest" -EcrRegistry ${{ env.ECR_REGISTRY }}
         env:
           NX_REJECT_UNKNOWN_LOCAL_CACHE: 0
           ECR_REGISTRY: ${{ env.ECR_REGISTRY }}

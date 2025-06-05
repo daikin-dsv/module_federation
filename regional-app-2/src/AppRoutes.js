@@ -76,10 +76,15 @@ const AppRoutes = () => {
                     path={NAVIGATION_CONFIG.HOME.path}
                     element={
                         <div className="mt-2 grid w-full grid-cols-1 gap-4 sm:grid-cols-[auto_auto] md:grid-cols-[auto_1fr] md:grid-rows-[auto]">
-                            <Suspense fallback={<div>{appRoutesText.loadingWidgets}</div>}>
+                            <Suspense
+                                fallback={<div>{appRoutesText.loadingWidgets}</div>}
+                            >
                                 <div className="flex flex-wrap gap-4">
                                     <Alarm count={0} color={'green'} language="ja" />
-                                    <Light label={appRoutesText.chishikiNoMori} language="ja" />
+                                    <Light
+                                        label={appRoutesText.chishikiNoMori}
+                                        language="ja"
+                                    />
                                     <EnergyGauge
                                         usage={3940.23}
                                         maxUsage={7500}
@@ -117,7 +122,11 @@ const AppRoutes = () => {
                                         label={appRoutesText.staff}
                                         value="25"
                                     />
-                                    <InfoCard icon={ChairIcon} label={appRoutesText.vacancy} value="12" />
+                                    <InfoCard
+                                        icon={ChairIcon}
+                                        label={appRoutesText.vacancy}
+                                        value="12"
+                                    />
                                 </div>
                             </Suspense>
                         </div>
