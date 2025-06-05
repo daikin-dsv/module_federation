@@ -35,13 +35,29 @@ module.exports = ({ mode }) => {
                         exclude: /node_modules/
                     },
                     {
+                        test: /\.css$/,
+                        resourceQuery: /inline/,
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: { exportType: 'string' }
+                            },
+                            'postcss-loader'
+                        ]
+                    },
+                    {
                         test: /\.css$/i,
-                        use: [CssExtractRspackPlugin.loader, 'css-loader', 'postcss-loader'],
-                        type: 'javascript/auto',
+                        resourceQuery: { not: /inline/ },
+                        use: [
+                            CssExtractRspackPlugin.loader,
+                            'css-loader',
+                            'postcss-loader'
+                        ],
+                        type: 'javascript/auto'
                     },
                     {
                         test: /\.png$/,
-                        type: 'asset',
+                        type: 'asset'
                     }
                 ]
             },
@@ -56,18 +72,6 @@ module.exports = ({ mode }) => {
                         './auth': './src/context/Auth/index.js'
                     },
                     shared: {
-                        react: {
-                            singleton: true,
-                            requiredVersion: dependencies.react
-                        },
-                        'react-dom': {
-                            singleton: true,
-                            requiredVersion: dependencies['react-dom']
-                        },
-                        'react-router': {
-                            singleton: true,
-                            requiredVersion: dependencies['react-router']
-                        },
                         '@daikin-oss/design-system-web-components': {
                             singleton: true,
                             requiredVersion:
@@ -84,7 +88,7 @@ module.exports = ({ mode }) => {
                     inject: 'body'
                 }),
                 new CssExtractRspackPlugin({})
-            ],
+            ]
         },
         modeConfig(mode)
     );

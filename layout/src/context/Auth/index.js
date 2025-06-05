@@ -1,29 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import { LitElement, html } from 'lit';
 
-import { AuthContext, useUserContext } from './context';
-import { init } from './keycloak';
+import { authStore } from './context.js';
+import { init } from './keycloak.js';
 
-function Auth(props) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [user, setUser] = useState(null);
+export class AuthProvider extends LitElement {
+    static properties = {
+        isAuthenticated: { type: Boolean },
+        user: { type: Object }
+    };
 
-    useEffect(() => {
-        async function initialize() {
-            const sso = await init();
-            setIsAuthenticated(sso.authenticated);
-            setUser(sso.tokenParsed);
-        }
+    constructor() {
+        super();
+        this.isAuthenticated = false;
+        this.user = null;
+    }
 
-        initialize();
-    }, []);
+    connectedCallback() {
+        super.connectedCallback();
+        this._initialize();
+    }
 
-    return (
-        <AuthContext.Provider value={user}>
-            {isAuthenticated && props.children}
-            {!isAuthenticated && 'Loading...'}
-        </AuthContext.Provider>
-    );
+    async _initialize() {
+        const sso = await init();
+        this.isAuthenticated = sso.authenticated;
+        this.user = sso.tokenParsed;
+        authStore.dispatchEvent(new CustomEvent('auth-changed', { detail: this.user }));
+        this.requestUpdate();
+    }
+
+    render() {
+        return this.isAuthenticated ? html`<slot></slot>` : html`Loading...`;
+    }
 }
 
-export default Auth;
-export { useUserContext };
+customElements.define('auth-provider', AuthProvider);

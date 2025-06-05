@@ -1,9 +1,2 @@
-import { createContext, useContext } from 'react';
-
-export const AuthContext = createContext(null);
-
-export function useUserContext() {
-    const user = useContext(AuthContext);
-
-    return user;
-};
+// A simple event-based auth store for web components
+export const authStore = new EventTarget();

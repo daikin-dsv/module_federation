@@ -1,19 +1,43 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
+import { render, html } from 'lit';
 
-import Footer from './components/Footer';
-import Header from './components/Header';
-import User from './components/User';
+import './components/Footer.js';
+import './components/Header.js';
+import './components/User.js';
+import './context/Auth/index.js';
+import './index.css';
 
-const rootElement = document.getElementById('root');
-const root = createRoot(rootElement);
+const root = document.getElementById('root');
+root.replaceChildren();
 
-root.render(
-    <BrowserRouter>
-        <Header>
-            <User />
-        </Header>
-        <Footer />
-    </BrowserRouter>
+render(
+    html`
+        <auth-provider>
+            <app-header>
+                <user-profile></user-profile>
+                <a slot="route" href="/home" active>Home</a>
+                <a slot="route" href="/about">About</a>
+                <a slot="route" href="/contact">Contact</a>
+            </app-header>
+            <app-footer></app-footer>
+        </auth-provider>
+    `,
+    root
 );
+
+// Automatically toggle `active` on route links based on current path
+function updateActiveLinks() {
+    const links = root.querySelectorAll('a[slot="route"]');
+    const current = window.location.pathname;
+    links.forEach((link) => {
+        if (link.getAttribute('href') === current) {
+            link.setAttribute('active', '');
+        } else {
+            link.removeAttribute('active');
+        }
+    });
+}
+
+// Initial run
+updateActiveLinks();
+// Update on history navigation
+window.addEventListener('popstate', updateActiveLinks);
