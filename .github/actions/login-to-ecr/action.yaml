@@ -7,10 +7,10 @@ outputs:
 inputs:
   CONTAINER_REPOSITORY_ACCOUNT:
     description: AWS Account ID of ECR repo
-    default: "691081673514"
+    default: '691081673514'
   CONTAINER_REPOSITORY_REGION:
     description: ecr region
-    default: "us-west-2"
+    default: 'us-west-2'
   AWS_ACCOUNT_ID:
     description: AWS Account ID
     required: true
@@ -18,7 +18,7 @@ inputs:
     description: AWS Region
     required: true
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Setup Role Duration
       shell: bash
