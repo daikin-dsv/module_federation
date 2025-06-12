@@ -33,4 +33,4 @@ jobs:
       - name: Deploy to GitHub Pages
         run: npm run deploy-github-pages:all -- -u "github-actions-bot <support+actions@github.com>"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
