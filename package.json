@@ -17,7 +17,7 @@
         "deploy-github-pages:widgets": "gh-pages -d widgets/dist -b gh-pages -p widgets",
         "deploy-github-pages:regional-app-1": "gh-pages -d regional-app-1/dist -b gh-pages -p regional-app-1",
         "deploy-github-pages:regional-app-2": "gh-pages -d regional-app-2/dist -b gh-pages -p regional-app-2",
-        "deploy-github-pages:all": "npm run deploy:layout && npm run deploy:widgets && npm run deploy:regional-app-1 && npm run deploy:regional-app-2"
+        "deploy-github-pages:all": "npm run deploy-github-pages:layout && npm run deploy-github-pages:widgets && npm run deploy-github-pages:regional-app-1 && npm run deploy-github-pages:regional-app-2"
     },
     "author": "",
     "license": "ISC",
