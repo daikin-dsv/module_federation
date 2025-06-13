@@ -1,0 +1,51 @@
+name: login-to-ecr
+description: Common procedures for logging into the ECR
+outputs:
+  ECR_PASSWORD:
+    description: ECR Password
+    value: ${{ steps.set-password.outputs.ECR_PASSWORD }}
+inputs:
+  CONTAINER_REPOSITORY_ACCOUNT:
+    description: AWS Account ID of ECR repo
+    default: '691081673514'
+  CONTAINER_REPOSITORY_REGION:
+    description: ecr region
+    default: 'us-west-2'
+  AWS_ACCOUNT_ID:
+    description: AWS Account ID
+    required: true
+  AWS_REGION:
+    description: AWS Region
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Role Duration
+      shell: bash
+      run: |
+        if [ "${{ github.repository_owner }}" = "daikin-dsv" ]; then
+          echo "RDS=7200" >> $GITHUB_ENV
+        else
+          echo "RDS=3600" >> $GITHUB_ENV
+        fi
+    - name: Configure AWS Credentials for ECR
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ inputs.CONTAINER_REPOSITORY_REGION }}
+        role-to-assume: arn:aws:iam::${{ inputs.CONTAINER_REPOSITORY_ACCOUNT }}:role/dosatsu-microservice-github-actions-role
+        role-session-name: dosatsu-cicd-github-action
+        role-duration-seconds: ${{ env.RDS }}
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+    - name: Set password from aws cli
+      id: set-password
+      run: echo "ECR_PASSWORD=$(aws ecr get-login-password)" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: Configure AWS Credentials for accessing target AWS account
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ inputs.AWS_REGION }}
+        role-to-assume: arn:aws:iam::${{ inputs.AWS_ACCOUNT_ID }}:role/dosatsu-microservice-github-actions-role
+        role-session-name: dosatsu-cicd-github-action
+        role-duration-seconds: ${{ env.RDS }}

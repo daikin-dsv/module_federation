@@ -1,0 +1,216 @@
+name: build and push to ecr
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_image_tag:
+        description: deploy image tag
+        type: string
+        default: latest
+      platform:
+        type: choice
+        description: 'Image Architecture'
+        options:
+          - 'linux/amd64'
+          - 'linux/arm64'
+          - 'linux/amd64,linux/arm64'
+      image_tag:
+        type: string
+        description: Image tag to be pushed to ECR
+      microfrontend:
+        type: string
+        description: Micro frontend Images to be built (all by default)
+        default: '["layout","widgets","regional-app-1","regional-app-2"]'
+  workflow_call:
+    inputs:
+      deploy_image_tag:
+        type: string
+        description: 'Image Tag for the deploy/ container (default: latest)'
+        required: true
+      platform:
+        type: string
+        description: 'Platform architecture (default: linux/amd64,linux/arm64)'
+        default: 'linux/amd64,linux/arm64'
+        required: true
+      image_tag:
+        description: 'Image Tag for the micro frontend images to be pushed to ECR (default: develop-local)'
+        type: string
+        required: true
+      microfrontend:
+        type: string
+        description: Micro frontend Images to be built (all by default)
+        default: '["layout","widgets","regional-app-1","regional-app-2"]'
+
+env:
+  NODE_OPTIONS: '--max_old_space_size=4096 --no-network-family-autoselection'
+  ECR_REPOSITORY: daikin/deploy
+  ECR_REGISTRY: ${{ vars.CONTAINER_REPOSITORY_ACCOUNT || vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.CONTAINER_REPOSITORY_REGION || vars.AWS_REGION }}.amazonaws.com
+  IMAGE_TAG: ${{ inputs.image_tag || github.ref_name }}
+  CODE_VERSION: ${{ github.ref_name }}
+  DEPLOY_IMAGE_TAG: ${{ inputs.deploy_image_tag || 'latest' }}
+  PLATFORM: ${{ inputs.platform || 'linux/amd64,linux/arm64' }}
+  MICRO_FRONTEND: ${{ inputs.microfrontend || '["layout","widgets","regional-app-1","regional-app-2"]' }}
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Remove unnecessary files
+        run: |
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+      - name: Clear github cache
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh cache delete --all --succeed-on-no-caches
+  init-aws:
+    runs-on: ubuntu-24.04
+    environment: build
+    outputs:
+      ECR_USERNAME: AWS
+      ECR_PASSWORD: ${{ steps.initialization.outputs.ECR_PASSWORD }}
+      ECR_IMAGE: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.DEPLOY_IMAGE_TAG }}
+      IMAGE_TAG: ${{ steps.image_tag.outputs.IMAGE_TAG }}
+      MICRO_FRONTEND: ${{ env.MICRO_FRONTEND }}
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Initialize
+        id: initialization
+        uses: ./.github/actions/login-to-ecr
+        with:
+          CONTAINER_REPOSITORY_ACCOUNT: ${{ vars.CONTAINER_REPOSITORY_ACCOUNT || vars.AWS_ACCOUNT_ID }}
+          CONTAINER_REPOSITORY_REGION: ${{ vars.CONTAINER_REPOSITORY_REGION || vars.AWS_REGION }}
+          AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ vars.AWS_REGION }}
+      - name: Refine image tag
+        id: image_tag
+        run: |
+          IMAGE_TAG=$(echo $IMAGE_TAG | sed -r 's,/,-,g')
+          echo "IMAGE_TAG=$IMAGE_TAG"
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
+      - name: Print image tag
+        run: |
+          {
+            echo "### :rocket: micro frontend image tags
+            - Image tag: $IMAGE_TAG
+            ### :computer: micro frontend image platform(s)
+            - Platform(s): ${{ env.PLATFORM }}
+            ### :package: micro frontend images to build
+            - Micro frontends: ${{ env.MICRO_FRONTEND }}
+            "
+          } >> $GITHUB_STEP_SUMMARY
+
+  build-and-push-node-micro-frontend:
+    name: build & push (${{ matrix.services }})
+    needs: init-aws
+    runs-on: ubuntu-24.04
+    environment: build
+    container:
+      image: ${{ needs.init-aws.outputs.ECR_IMAGE }}
+      credentials:
+        username: ${{ needs.init-aws.outputs.ECR_USERNAME }}
+        password: ${{ needs.init-aws.outputs.ECR_PASSWORD }}
+      volumes:
+        - /usr/local/microfrontend
+        - /etc/passwd:/etc/passwd
+    permissions:
+      id-token: write
+      contents: write
+    strategy:
+      fail-fast: false
+      # max-parallel: 5
+      matrix:
+        services: ${{ fromJson(needs.init-aws.outputs.MICRO_FRONTEND) }}
+    steps:
+      # Step to checkout code repo
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.code_version }}
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ./node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: node-modules-
+      - name: Initialize aws
+        id: initialization
+        uses: ./.github/actions/login-to-ecr
+        with:
+          CONTAINER_REPOSITORY_ACCOUNT: ${{ vars.CONTAINER_REPOSITORY_ACCOUNT || vars.AWS_ACCOUNT_ID }}
+          CONTAINER_REPOSITORY_REGION: ${{ vars.CONTAINER_REPOSITORY_REGION || vars.AWS_REGION }}
+          AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ vars.AWS_REGION }}
+      - name: change owner of docker config
+        run: |
+          chown -R 1001:1001 ~/.docker
+          chown -R 1001:1001 /var/run/docker.sock
+      - name: build-and-push-${{ matrix.services }}
+        run: |
+          # Configure cache
+          rm -rf ./.npm-cache || true
+          mkdir -p ./.npm-cache || true
+          npm cache clean -f
+          export npm_config_cache=./.npm-cache
+          if [[ ${{ matrix.services }} == docs-manager ]]; then
+            echo "Install modules for docs-manager"
+            chown -R 1001:1001 ~/.cache
+            npm install -w ${{ matrix.services }} --include-workspace-root
+          fi
+          if [[ ${{ matrix.services }} == web-app ]]; then
+            echo "Install modules for web-app"
+            chown -R 1001:1001 ~/.cache
+            npm install -w ${{ matrix.services }} --include-workspace-root
+          fi
+
+          npm run build-docker --prefix ${{ matrix.services }} -- -platform ${{ env.PLATFORM }} -remote -tag ${{needs.init-aws.outputs.IMAGE_TAG}} -EcrRegistry ${{ env.ECR_REGISTRY }}
+          npm run build-docker --prefix ${{ matrix.services }} -- -platform ${{ env.PLATFORM }} -remote -tag "latest" -EcrRegistry ${{ env.ECR_REGISTRY }}
+        env:
+          NX_REJECT_UNKNOWN_LOCAL_CACHE: 0
+          ECR_REGISTRY: ${{ env.ECR_REGISTRY }}
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: logs-${{ matrix.services }}-attempt-${{ github.run_attempt }}
+          path: ~/.npm/_logs
+      - name: check image was built & pushed
+        shell: bash
+        run: |
+          REPOSITORY_NAME=daikin/rad/${{ matrix.services }}
+          IMAGE_TAG=${{needs.init-aws.outputs.IMAGE_TAG}}
+          PLATFORM=${{ env.PLATFORM }}
+          ARCHITECTURES=$(aws ecr batch-get-image --repository-name $REPOSITORY_NAME --region ${{ vars.AWS_REGION }} --image-ids imageTag=$IMAGE_TAG --query 'images[].imageManifest' --output text --accepted-media-types application/vnd.oci.image.manifest.v1+json | jq -r '.manifests[].platform.architecture | select(. != "unknown")')
+          echo "Architectures found for this image:"
+          echo $ARCHITECTURES
+          if [[ "$PLATFORM" == "linux/amd64,linux/arm64" ]]; then
+            if [[ "$ARCHITECTURES" == *"amd64"* && "$ARCHITECTURES" == *"arm64"* ]]; then
+              echo "All necessary architectures found for this image";
+            else
+              echo "ERROR - not all necessary architectures found for this image";
+              exit 1
+            fi
+          fi
+          if [[ "$PLATFORM" == "linux/amd64" ]]; then
+            if [[ "$ARCHITECTURES" == *"amd64"* ]]; then
+              echo "All necessary architectures found for this image";
+            else
+              echo "ERROR - not all necessary architectures found for this image";
+              exit 1
+            fi
+          fi
+          if [[ "$PLATFORM" == "linux/arm64" ]]; then
+            if [[ "$ARCHITECTURES" == *"arm64"* ]]; then
+              echo "All necessary architectures found for this image";
+            else
+              echo "ERROR - not all necessary architectures found for this image";
+              exit 1
+            fi
+          fi
