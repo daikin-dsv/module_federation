@@ -97,6 +97,7 @@
         }
       },
       "usedIn": [
+        "./user",
         "./auth"
       ]
     }
@@ -159,7 +160,9 @@
       "path": "./user",
       "id": "Layout:user",
       "name": "user",
-      "requires": [],
+      "requires": [
+        "react"
+      ],
       "file": "src/components/User.js",
       "assets": {
         "js": {
