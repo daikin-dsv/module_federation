@@ -1,0 +1,195 @@
+{
+  "id": "Widget",
+  "name": "Widget",
+  "metaData": {
+    "name": "Widget",
+    "type": "app",
+    "buildInfo": {
+      "buildVersion": "1.0.0",
+      "buildName": "widgets"
+    },
+    "remoteEntry": {
+      "name": "remoteEntry.js",
+      "path": "",
+      "type": "global"
+    },
+    "types": {
+      "path": "",
+      "name": "",
+      "zip": "",
+      "api": ""
+    },
+    "globalName": "Widget",
+    "pluginVersion": "0.8.8",
+    "prefetchInterface": false,
+    "publicPath": ""
+  },
+  "shared": [
+    {
+      "singleton": true,
+      "requiredVersion": "^19.0.0",
+      "shareScope": "default",
+      "name": "react-dom",
+      "version": "19.0.0",
+      "eager": false,
+      "id": "Widget:react-dom",
+      "assets": {
+        "js": {
+          "async": [
+            "bundle.b98b6dfb3bbdb227.js"
+          ],
+          "sync": [
+            "bundle.81612293e864998e.js",
+            "bundle.2d126f2875e9fb67.js"
+          ]
+        },
+        "css": {
+          "async": [],
+          "sync": []
+        }
+      },
+      "usedIn": []
+    },
+    {
+      "singleton": true,
+      "requiredVersion": "^19.0.0",
+      "shareScope": "default",
+      "name": "react",
+      "version": "19.0.0",
+      "eager": false,
+      "id": "Widget:react",
+      "assets": {
+        "js": {
+          "async": [],
+          "sync": [
+            "bundle.b98b6dfb3bbdb227.js"
+          ]
+        },
+        "css": {
+          "async": [],
+          "sync": []
+        }
+      },
+      "usedIn": [
+        "./InfoCard",
+        "./DatabricksDashboard"
+      ]
+    }
+  ],
+  "remotes": [],
+  "exposes": [
+    {
+      "path": "./Alarm",
+      "id": "Widget:Alarm",
+      "name": "Alarm",
+      "requires": [],
+      "file": "src/components/Alarm.js",
+      "assets": {
+        "js": {
+          "sync": [
+            "bundle.8604a4a6d2f2293e.js"
+          ],
+          "async": [
+            "bundle.b98b6dfb3bbdb227.js"
+          ]
+        },
+        "css": {
+          "sync": [
+            "948.css"
+          ],
+          "async": []
+        }
+      }
+    },
+    {
+      "path": "./DatabricksDashboard",
+      "id": "Widget:DatabricksDashboard",
+      "name": "DatabricksDashboard",
+      "requires": [
+        "react"
+      ],
+      "file": "src/components/DatabricksDashboard.js",
+      "assets": {
+        "js": {
+          "sync": [
+            "bundle.f9bc2f8daf7c60a0.js"
+          ],
+          "async": [
+            "bundle.b98b6dfb3bbdb227.js"
+          ]
+        },
+        "css": {
+          "sync": [],
+          "async": []
+        }
+      }
+    },
+    {
+      "path": "./EnergyGauge",
+      "id": "Widget:EnergyGauge",
+      "name": "EnergyGauge",
+      "requires": [],
+      "file": "src/components/EnergyGauge.js",
+      "assets": {
+        "js": {
+          "sync": [
+            "bundle.ebb63fba233b5824.js"
+          ],
+          "async": [
+            "bundle.b98b6dfb3bbdb227.js"
+          ]
+        },
+        "css": {
+          "sync": [],
+          "async": []
+        }
+      }
+    },
+    {
+      "path": "./InfoCard",
+      "id": "Widget:InfoCard",
+      "name": "InfoCard",
+      "requires": [
+        "react"
+      ],
+      "file": "src/components/InfoCard.js",
+      "assets": {
+        "js": {
+          "sync": [
+            "bundle.bd5a8f62a77dd452.js"
+          ],
+          "async": [
+            "bundle.b98b6dfb3bbdb227.js"
+          ]
+        },
+        "css": {
+          "sync": [],
+          "async": []
+        }
+      }
+    },
+    {
+      "path": "./Light",
+      "id": "Widget:Light",
+      "name": "Light",
+      "requires": [],
+      "file": "src/components/Light.js",
+      "assets": {
+        "js": {
+          "sync": [
+            "bundle.a5a62fabef4b4425.js"
+          ],
+          "async": [
+            "bundle.b98b6dfb3bbdb227.js"
+          ]
+        },
+        "css": {
+          "sync": [
+            "948.css"
+          ],
+          "async": []
+        }
+      }
+    }
+  ]
+}
