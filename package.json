@@ -13,7 +13,7 @@
         "format": "prettier --write .",
         "build-and-run:layout": "docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest . && docker run -t -p 8080:80 layout:latest",
         "build": "npm run build --prefix=layout && npm run build --prefix=widgets && npm run build --prefix=regional-app-1 && npm run build --prefix=regional-app-2",
-        "deploy-github-pages:layout": "NODE_DEBUG=gh-pages gh-pages -d layout/dist -b gh-pages -p layout --repo=https://$GH_TOKEN@github.com/daikin-dsv/module_federation.git",
+        "deploy-github-pages:layout": "NODE_DEBUG=gh-pages gh-pages -d layout/dist -b gh-pages -p layout",
         "deploy-github-pages:widgets": "gh-pages -d widgets/dist -b gh-pages -p widgets --repo=https://$GH_TOKEN@github.com/daikin-dsv/module_federation.git",
         "deploy-github-pages:regional-app-1": "gh-pages -d regional-app-1/dist -b gh-pages -p regional-app-1 --repo=https://$GH_TOKEN@github.com/daikin-dsv/module_federation.git",
         "deploy-github-pages:regional-app-2": "gh-pages -d regional-app-2/dist -b gh-pages -p regional-app-2 --repo=https://$GH_TOKEN@github.com/daikin-dsv/module_federation.git",
