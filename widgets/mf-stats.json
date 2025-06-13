@@ -71,7 +71,6 @@
         }
       },
       "usedIn": [
-        "./InfoCard",
         "./DatabricksDashboard"
       ]
     }
@@ -149,9 +148,7 @@
       "path": "./InfoCard",
       "id": "Widget:InfoCard",
       "name": "InfoCard",
-      "requires": [
-        "react"
-      ],
+      "requires": [],
       "file": "src/components/InfoCard.js",
       "assets": {
         "js": {
