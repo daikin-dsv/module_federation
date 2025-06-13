@@ -10,7 +10,8 @@ on:
   #     - main
 
 permissions:
-  contents: read
+  # for github pages branch
+  contents: write
   id-token: write
   actions: write
   pages: write
