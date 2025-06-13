@@ -1,0 +1,142 @@
+{
+  "id": "Regional_App_1",
+  "name": "Regional_App_1",
+  "metaData": {
+    "name": "Regional_App_1",
+    "type": "app",
+    "buildInfo": {
+      "buildVersion": "1.0.0",
+      "buildName": "regional-app-1"
+    },
+    "remoteEntry": {
+      "name": "",
+      "path": "",
+      "type": "global"
+    },
+    "types": {
+      "path": "",
+      "name": "",
+      "zip": "",
+      "api": ""
+    },
+    "globalName": "Regional_App_1",
+    "pluginVersion": "0.8.8",
+    "prefetchInterface": false,
+    "publicPath": ""
+  },
+  "shared": [
+    {
+      "id": "Regional_App_1:react-dom",
+      "name": "react-dom",
+      "version": "19.0.0",
+      "singleton": true,
+      "requiredVersion": "^19.0.0",
+      "assets": {
+        "js": {
+          "async": [
+            "bundle.02dcb2bbb956aedf.js"
+          ],
+          "sync": [
+            "bundle.2dd7fe62a90df84a.js",
+            "bundle.993027f3e5591727.js"
+          ]
+        },
+        "css": {
+          "async": [],
+          "sync": []
+        }
+      }
+    },
+    {
+      "id": "Regional_App_1:react-router",
+      "name": "react-router",
+      "version": "7.1.3",
+      "singleton": true,
+      "requiredVersion": "^7.1.3",
+      "assets": {
+        "js": {
+          "async": [
+            "bundle.02dcb2bbb956aedf.js"
+          ],
+          "sync": [
+            "bundle.1932719c8a47357e.js"
+          ]
+        },
+        "css": {
+          "async": [],
+          "sync": []
+        }
+      }
+    },
+    {
+      "id": "Regional_App_1:react",
+      "name": "react",
+      "version": "19.0.0",
+      "singleton": true,
+      "requiredVersion": "^19.0.0",
+      "assets": {
+        "js": {
+          "async": [],
+          "sync": [
+            "bundle.02dcb2bbb956aedf.js"
+          ]
+        },
+        "css": {
+          "async": [],
+          "sync": []
+        }
+      }
+    }
+  ],
+  "remotes": [
+    {
+      "federationContainerName": "Layout",
+      "moduleName": "auth",
+      "alias": "Layout",
+      "entry": "http://localhost:3001/remoteEntry.js"
+    },
+    {
+      "federationContainerName": "Layout",
+      "moduleName": "header",
+      "alias": "Layout",
+      "entry": "http://localhost:3001/remoteEntry.js"
+    },
+    {
+      "federationContainerName": "Layout",
+      "moduleName": "user",
+      "alias": "Layout",
+      "entry": "http://localhost:3001/remoteEntry.js"
+    },
+    {
+      "federationContainerName": "Layout",
+      "moduleName": "footer",
+      "alias": "Layout",
+      "entry": "http://localhost:3001/remoteEntry.js"
+    },
+    {
+      "federationContainerName": "Widget",
+      "moduleName": "Alarm",
+      "alias": "Widget",
+      "entry": "http://localhost:3002/remoteEntry.js"
+    },
+    {
+      "federationContainerName": "Widget",
+      "moduleName": "DatabricksDashboard",
+      "alias": "Widget",
+      "entry": "http://localhost:3002/remoteEntry.js"
+    },
+    {
+      "federationContainerName": "Widget",
+      "moduleName": "EnergyGauge",
+      "alias": "Widget",
+      "entry": "http://localhost:3002/remoteEntry.js"
+    },
+    {
+      "federationContainerName": "Widget",
+      "moduleName": "InfoCard",
+      "alias": "Widget",
+      "entry": "http://localhost:3002/remoteEntry.js"
+    }
+  ],
+  "exposes": []
+}
