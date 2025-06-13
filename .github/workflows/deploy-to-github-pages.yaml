@@ -9,6 +9,12 @@ on:
   #   branches:
   #     - main
 
+permissions:
+  contents: read
+  id-token: write
+  actions: write
+  pages: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
