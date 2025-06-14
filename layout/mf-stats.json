@@ -73,7 +73,7 @@
         }
       },
       "usedIn": [
-        "./footer"
+        "./header"
       ]
     },
     {
@@ -108,7 +108,9 @@
       "path": "./header",
       "id": "Layout:header",
       "name": "header",
-      "requires": [],
+      "requires": [
+        "react-router"
+      ],
       "file": "src/components/Header.js",
       "assets": {
         "js": {
@@ -134,9 +136,7 @@
       "path": "./footer",
       "id": "Layout:footer",
       "name": "footer",
-      "requires": [
-        "react-router"
-      ],
+      "requires": [],
       "file": "src/components/Footer.js",
       "assets": {
         "js": {
