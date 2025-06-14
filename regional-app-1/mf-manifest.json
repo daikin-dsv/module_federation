@@ -93,49 +93,49 @@
       "federationContainerName": "Layout",
       "moduleName": "auth",
       "alias": "Layout",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+      "entry": "http://localhost:3001/remoteEntry.js"
     },
     {
       "federationContainerName": "Layout",
       "moduleName": "header",
       "alias": "Layout",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+      "entry": "http://localhost:3001/remoteEntry.js"
     },
     {
       "federationContainerName": "Layout",
       "moduleName": "user",
       "alias": "Layout",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+      "entry": "http://localhost:3001/remoteEntry.js"
     },
     {
       "federationContainerName": "Layout",
       "moduleName": "footer",
       "alias": "Layout",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+      "entry": "http://localhost:3001/remoteEntry.js"
     },
     {
       "federationContainerName": "Widget",
       "moduleName": "Alarm",
       "alias": "Widget",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
+      "entry": "http://localhost:3002/remoteEntry.js"
     },
     {
       "federationContainerName": "Widget",
       "moduleName": "DatabricksDashboard",
       "alias": "Widget",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
+      "entry": "http://localhost:3002/remoteEntry.js"
     },
     {
       "federationContainerName": "Widget",
       "moduleName": "EnergyGauge",
       "alias": "Widget",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
+      "entry": "http://localhost:3002/remoteEntry.js"
     },
     {
       "federationContainerName": "Widget",
       "moduleName": "InfoCard",
       "alias": "Widget",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
+      "entry": "http://localhost:3002/remoteEntry.js"
     }
   ],
   "exposes": []
