@@ -71,6 +71,7 @@
         }
       },
       "usedIn": [
+        "./EnergyGauge",
         "./DatabricksDashboard"
       ]
     }
@@ -127,7 +128,9 @@
       "path": "./EnergyGauge",
       "id": "Widget:EnergyGauge",
       "name": "EnergyGauge",
-      "requires": [],
+      "requires": [
+        "react"
+      ],
       "file": "src/components/EnergyGauge.js",
       "assets": {
         "js": {
