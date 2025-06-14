@@ -73,7 +73,7 @@
         }
       },
       "usedIn": [
-        "./header"
+        "./footer"
       ]
     },
     {
@@ -97,7 +97,7 @@
         }
       },
       "usedIn": [
-        "./user",
+        "./footer",
         "./auth"
       ]
     }
@@ -108,9 +108,7 @@
       "path": "./header",
       "id": "Layout:header",
       "name": "header",
-      "requires": [
-        "react-router"
-      ],
+      "requires": [],
       "file": "src/components/Header.js",
       "assets": {
         "js": {
@@ -136,7 +134,10 @@
       "path": "./footer",
       "id": "Layout:footer",
       "name": "footer",
-      "requires": [],
+      "requires": [
+        "react",
+        "react-router"
+      ],
       "file": "src/components/Footer.js",
       "assets": {
         "js": {
@@ -160,9 +161,7 @@
       "path": "./user",
       "id": "Layout:user",
       "name": "user",
-      "requires": [
-        "react"
-      ],
+      "requires": [],
       "file": "src/components/User.js",
       "assets": {
         "js": {
