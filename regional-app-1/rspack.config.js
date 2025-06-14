@@ -49,8 +49,10 @@ module.exports = ({ mode }) => {
                 new ModuleFederationPlugin({
                     name: REGIONAL_APP_1.NAME,
                     remotes: {
-                        Layout: `${LAYOUT.NAME}@${process.env.LAYOUT_URL || `http://localhost:${LAYOUT.PORT}`}/remoteEntry.js`,
-                        Widget: `${WIDGETS.NAME}@${process.env.WIDGETS_URL || `http://localhost:${WIDGETS.PORT}`}/remoteEntry.js`,
+                        // Layout: `${LAYOUT.NAME}@${process.env.LAYOUT_URL || `http://localhost:${LAYOUT.PORT}`}/remoteEntry.js`,
+                        // Widget: `${WIDGETS.NAME}@${process.env.WIDGETS_URL || `http://localhost:${WIDGETS.PORT}`}/remoteEntry.js`,
+                        Layout: `${LAYOUT.NAME}@https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js`,
+                        Widget: `${WIDGETS.NAME}@https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js`,
                     },
                     shared: {
                         react: {
