@@ -14,7 +14,8 @@ module.exports = ({ mode }) => {
             output: {
                 uniqueName: 'regional_app_1',
                 // publicPath must be configured if using manifest
-                publicPath: `http://localhost:${REGIONAL_APP_1.PORT}/`
+                // publicPath: `http://localhost:${REGIONAL_APP_1.PORT}/`
+                publicPath: 'https://turbo-doodle-2nm87nq.pages.github.io/regional-app-1/'
             },
             module: {
                 rules: [
