@@ -14,7 +14,7 @@ module.exports = ({ mode }) => {
             output: {
                 uniqueName: 'widget_provider',
                 // publicPath must be configured if using manifest
-                publicPath: `http://localhost:${WIDGETS.PORT}/`
+                publicPath: `${process.env.WIDGETS_URL || `http://localhost:${WIDGETS.PORT}`}/`
             },
             module: {
                 rules: [
