@@ -59,7 +59,7 @@ module.exports = ({ mode }) => {
             plugins: [
                 new ModuleFederationPlugin({
                     name: WIDGETS.NAME,
-                    filename: 'remoteEntry.js',
+                    filename: 'widgetsRemoteEntry.js',
                     exposes: {
                         './Alarm': './src/components/Alarm.js',
                         './DatabricksDashboard':
