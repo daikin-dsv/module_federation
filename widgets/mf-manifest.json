@@ -9,7 +9,7 @@
       "buildName": "widgets"
     },
     "remoteEntry": {
-      "name": "remoteEntry.js",
+      "name": "widgetsRemoteEntry.js",
       "path": "",
       "type": "global"
     },

@@ -9,7 +9,7 @@
       "buildName": "widgets"
     },
     "remoteEntry": {
-      "name": "remoteEntry.js",
+      "name": "widgetsRemoteEntry.js",
       "path": "",
       "type": "global"
     },
@@ -71,7 +71,6 @@
         }
       },
       "usedIn": [
-        "./Alarm",
         "./DatabricksDashboard"
       ]
     }
@@ -82,9 +81,7 @@
       "path": "./Alarm",
       "id": "Widget:Alarm",
       "name": "Alarm",
-      "requires": [
-        "react"
-      ],
+      "requires": [],
       "file": "src/components/Alarm.js",
       "assets": {
         "js": {
