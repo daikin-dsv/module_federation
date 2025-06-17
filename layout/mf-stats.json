@@ -72,7 +72,9 @@
           "sync": []
         }
       },
-      "usedIn": []
+      "usedIn": [
+        "./footer"
+      ]
     },
     {
       "singleton": true,
@@ -95,6 +97,7 @@
         }
       },
       "usedIn": [
+        "./user",
         "./auth"
       ]
     }
@@ -131,7 +134,9 @@
       "path": "./footer",
       "id": "Layout:footer",
       "name": "footer",
-      "requires": [],
+      "requires": [
+        "react-router"
+      ],
       "file": "src/components/Footer.js",
       "assets": {
         "js": {
@@ -155,7 +160,9 @@
       "path": "./user",
       "id": "Layout:user",
       "name": "user",
-      "requires": [],
+      "requires": [
+        "react"
+      ],
       "file": "src/components/User.js",
       "assets": {
         "js": {
