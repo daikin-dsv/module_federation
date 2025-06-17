@@ -22,7 +22,7 @@
     "globalName": "Widget",
     "pluginVersion": "0.8.8",
     "prefetchInterface": false,
-    "publicPath": ""
+    "publicPath": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/"
   },
   "shared": [
     {
@@ -71,6 +71,7 @@
         }
       },
       "usedIn": [
+        "./Alarm",
         "./DatabricksDashboard"
       ]
     }
@@ -81,7 +82,9 @@
       "path": "./Alarm",
       "id": "Widget:Alarm",
       "name": "Alarm",
-      "requires": [],
+      "requires": [
+        "react"
+      ],
       "file": "src/components/Alarm.js",
       "assets": {
         "js": {
