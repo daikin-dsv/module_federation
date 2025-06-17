@@ -14,9 +14,7 @@ module.exports = ({ mode }) => {
             output: {
                 uniqueName: 'widget_provider',
                 // publicPath must be configured if using manifest
-                // publicPath: `${process.env.WIDGETS_URL || `http://localhost:${WIDGETS.PORT}`}/`
-                publicPath: 'https://turbo-doodle-2nm87nq.pages.github.io/widgets/',
-                chunkFilename: '[name].[contenthash].js'
+                publicPath: `http://localhost:${WIDGETS.PORT}/`
             },
             module: {
                 rules: [
@@ -61,7 +59,7 @@ module.exports = ({ mode }) => {
             plugins: [
                 new ModuleFederationPlugin({
                     name: WIDGETS.NAME,
-                    filename: 'widgetsRemoteEntry.js',
+                    filename: 'remoteEntry.js',
                     exposes: {
                         './Alarm': './src/components/Alarm.js',
                         './DatabricksDashboard':

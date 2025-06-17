@@ -1,6 +1,6 @@
 module.exports = () => ({
     output: {
         filename: 'bundle.[contenthash].js',
-        publicPath: ''
+        publicPath: `${process.env.LAYOUT_URL}/`,
     }
 });
