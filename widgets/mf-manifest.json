@@ -34,11 +34,11 @@
       "assets": {
         "js": {
           "async": [
-            "bundle.b98b6dfb3bbdb227.js"
+            "964.47cdeb2569fedc60.js"
           ],
           "sync": [
-            "bundle.81612293e864998e.js",
-            "bundle.2d126f2875e9fb67.js"
+            "173.f59e01990c0856a1.js",
+            "27.13c2b312998710d5.js"
           ]
         },
         "css": {
@@ -57,7 +57,7 @@
         "js": {
           "async": [],
           "sync": [
-            "bundle.b98b6dfb3bbdb227.js"
+            "964.47cdeb2569fedc60.js"
           ]
         },
         "css": {
@@ -75,10 +75,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.8604a4a6d2f2293e.js"
+            "__federation_expose_Alarm.1cba272c4dfca9c7.js"
           ],
           "async": [
-            "bundle.b98b6dfb3bbdb227.js"
+            "964.47cdeb2569fedc60.js"
           ]
         },
         "css": {
@@ -96,10 +96,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.f9bc2f8daf7c60a0.js"
+            "__federation_expose_DatabricksDashboard.a10da6878182853b.js"
           ],
           "async": [
-            "bundle.b98b6dfb3bbdb227.js"
+            "964.47cdeb2569fedc60.js"
           ]
         },
         "css": {
@@ -115,10 +115,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.ebb63fba233b5824.js"
+            "__federation_expose_EnergyGauge.66cf074756570e96.js"
           ],
           "async": [
-            "bundle.b98b6dfb3bbdb227.js"
+            "964.47cdeb2569fedc60.js"
           ]
         },
         "css": {
@@ -134,10 +134,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.bd5a8f62a77dd452.js"
+            "__federation_expose_InfoCard.06438a290bc20226.js"
           ],
           "async": [
-            "bundle.b98b6dfb3bbdb227.js"
+            "964.47cdeb2569fedc60.js"
           ]
         },
         "css": {
@@ -153,10 +153,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.a5a62fabef4b4425.js"
+            "__federation_expose_Light.04fd1ccd1150247b.js"
           ],
           "async": [
-            "bundle.b98b6dfb3bbdb227.js"
+            "964.47cdeb2569fedc60.js"
           ]
         },
         "css": {
