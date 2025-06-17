@@ -14,7 +14,8 @@ module.exports = ({ mode }) => {
             output: {
                 uniqueName: 'widget_provider',
                 // publicPath must be configured if using manifest
-                publicPath: `${process.env.WIDGETS_URL || `http://localhost:${WIDGETS.PORT}`}/`
+                // publicPath: `${process.env.WIDGETS_URL || `http://localhost:${WIDGETS.PORT}`}/`
+                publicPath: 'https://turbo-doodle-2nm87nq.pages.github.io/widgets/'
             },
             module: {
                 rules: [
