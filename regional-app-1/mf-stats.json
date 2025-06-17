@@ -146,7 +146,7 @@
       "usedIn": [
         "src/bootstrap.js + 4 modules"
       ],
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/widgetsRemoteEntry.js"
+      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
     },
     {
       "alias": "Widget",
@@ -156,7 +156,7 @@
       "usedIn": [
         "src/bootstrap.js + 4 modules"
       ],
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/widgetsRemoteEntry.js"
+      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
     },
     {
       "alias": "Widget",
@@ -166,7 +166,7 @@
       "usedIn": [
         "src/bootstrap.js + 4 modules"
       ],
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/widgetsRemoteEntry.js"
+      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
     },
     {
       "alias": "Widget",
@@ -176,7 +176,7 @@
       "usedIn": [
         "src/bootstrap.js + 4 modules"
       ],
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/widgetsRemoteEntry.js"
+      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
     }
   ],
   "exposes": []
