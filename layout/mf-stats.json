@@ -22,7 +22,7 @@
     "globalName": "Layout",
     "pluginVersion": "0.8.8",
     "prefetchInterface": false,
-    "publicPath": ""
+    "publicPath": "https://turbo-doodle-2nm87nq.pages.github.io/layout/"
   },
   "shared": [
     {
@@ -72,9 +72,7 @@
           "sync": []
         }
       },
-      "usedIn": [
-        "./footer"
-      ]
+      "usedIn": []
     },
     {
       "singleton": true,
@@ -134,9 +132,7 @@
       "path": "./footer",
       "id": "Layout:footer",
       "name": "footer",
-      "requires": [
-        "react-router"
-      ],
+      "requires": [],
       "file": "src/components/Footer.js",
       "assets": {
         "js": {
