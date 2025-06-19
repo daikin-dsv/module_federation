@@ -48,10 +48,15 @@ module.exports = ({ mode }) => {
             plugins: [
                 new ModuleFederationPlugin({
                     name: REGIONAL_APP_1.NAME,
-                    remotes: {
-                        Layout: `${LAYOUT.NAME}@http://localhost:${LAYOUT.PORT}/remoteEntry.js`,
-                        Widget: `${WIDGETS.NAME}@http://localhost:${WIDGETS.PORT}/remoteEntry.js`
-                    },
+                    remotes: mode === 'production'
+                        ? {
+                            Layout: `${LAYOUT.NAME}@${process.env.LAYOUT_URL}/remoteEntry.js`,
+                            Widget: `${WIDGETS.NAME}@${process.env.WIDGETS_URL}/remoteEntry.js`
+                        }
+                        : {
+                            Layout: `${LAYOUT.NAME}@http://localhost:${LAYOUT.PORT}/remoteEntry.js`,
+                            Widget: `${WIDGETS.NAME}@http://localhost:${WIDGETS.PORT}/remoteEntry.js`,
+                        },
                     shared: {
                         react: {
                             singleton: true,
