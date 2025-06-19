@@ -24,70 +24,7 @@
     "prefetchInterface": false,
     "publicPath": "https://turbo-doodle-2nm87nq.pages.github.io/layout/"
   },
-  "shared": [
-    {
-      "id": "Layout:react-dom",
-      "name": "react-dom",
-      "version": "19.0.0",
-      "singleton": true,
-      "requiredVersion": "^19.0.0",
-      "assets": {
-        "js": {
-          "async": [
-            "bundle.46b4749782ae36d4.js"
-          ],
-          "sync": [
-            "bundle.d17e8211a332fdde.js",
-            "bundle.aac133c9b30a7d2d.js"
-          ]
-        },
-        "css": {
-          "async": [],
-          "sync": []
-        }
-      }
-    },
-    {
-      "id": "Layout:react-router",
-      "name": "react-router",
-      "version": "7.1.3",
-      "singleton": true,
-      "requiredVersion": "^7.1.3",
-      "assets": {
-        "js": {
-          "async": [
-            "bundle.46b4749782ae36d4.js"
-          ],
-          "sync": [
-            "bundle.eb173b327b3bde89.js"
-          ]
-        },
-        "css": {
-          "async": [],
-          "sync": []
-        }
-      }
-    },
-    {
-      "id": "Layout:react",
-      "name": "react",
-      "version": "19.0.0",
-      "singleton": true,
-      "requiredVersion": "^19.0.0",
-      "assets": {
-        "js": {
-          "async": [],
-          "sync": [
-            "bundle.46b4749782ae36d4.js"
-          ]
-        },
-        "css": {
-          "async": [],
-          "sync": []
-        }
-      }
-    }
-  ],
+  "shared": [],
   "remotes": [],
   "exposes": [
     {
@@ -96,19 +33,14 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.7a7a817c932a6539.js",
-            "bundle.3681ea3d24e085ac.js"
+            "bundle.13b6d3796d2d4815.js",
+            "bundle.417e053a0389f6c2.js",
+            "bundle.c7d164a71d6a1702.js"
           ],
-          "async": [
-            "bundle.46b4749782ae36d4.js",
-            "bundle.aac133c9b30a7d2d.js",
-            "bundle.eb173b327b3bde89.js"
-          ]
+          "async": []
         },
         "css": {
-          "sync": [
-            "287.css"
-          ],
+          "sync": [],
           "async": []
         }
       },
@@ -120,17 +52,13 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.96ec121df9027522.js"
+            "bundle.417e053a0389f6c2.js",
+            "bundle.31e68e71b237bf76.js"
           ],
-          "async": [
-            "bundle.46b4749782ae36d4.js",
-            "bundle.eb173b327b3bde89.js"
-          ]
+          "async": []
         },
         "css": {
-          "sync": [
-            "287.css"
-          ],
+          "sync": [],
           "async": []
         }
       },
@@ -142,14 +70,12 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.7a7a817c932a6539.js",
+            "bundle.13b6d3796d2d4815.js",
             "bundle.88621e75215311c4.js",
-            "bundle.398955feb9581e3f.js"
+            "bundle.417e053a0389f6c2.js",
+            "bundle.35d37608505ec619.js"
           ],
-          "async": [
-            "bundle.46b4749782ae36d4.js",
-            "bundle.aac133c9b30a7d2d.js"
-          ]
+          "async": []
         },
         "css": {
           "sync": [],
@@ -165,11 +91,9 @@
         "js": {
           "sync": [
             "bundle.88621e75215311c4.js",
-            "bundle.bd340511790f4c98.js"
+            "bundle.69561f643fefb952.js"
           ],
-          "async": [
-            "bundle.46b4749782ae36d4.js"
-          ]
+          "async": []
         },
         "css": {
           "sync": [],
