@@ -1,3 +1,5 @@
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
+
 const { LAYOUT, WIDGETS } = require('../../config');
 
 module.exports = () => ({
