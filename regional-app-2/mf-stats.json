@@ -1,0 +1,193 @@
+{
+  "id": "Regional_App_2",
+  "name": "Regional_App_2",
+  "metaData": {
+    "name": "Regional_App_2",
+    "type": "app",
+    "buildInfo": {
+      "buildVersion": "1.0.0",
+      "buildName": "regional-app-2"
+    },
+    "remoteEntry": {
+      "name": "",
+      "path": "",
+      "type": "global"
+    },
+    "types": {
+      "path": "",
+      "name": "",
+      "zip": "",
+      "api": ""
+    },
+    "globalName": "Regional_App_2",
+    "pluginVersion": "0.8.8",
+    "prefetchInterface": false,
+    "publicPath": ""
+  },
+  "shared": [
+    {
+      "singleton": true,
+      "requiredVersion": "^19.0.0",
+      "shareScope": "default",
+      "name": "react-dom",
+      "version": "19.0.0",
+      "eager": false,
+      "id": "Regional_App_2:react-dom",
+      "assets": {
+        "js": {
+          "async": [
+            "bundle.29d6406247d84eea.js"
+          ],
+          "sync": [
+            "bundle.376c6c212536d14b.js",
+            "bundle.4e3d4c2944668f3e.js"
+          ]
+        },
+        "css": {
+          "async": [],
+          "sync": []
+        }
+      },
+      "usedIn": []
+    },
+    {
+      "singleton": true,
+      "requiredVersion": "^7.1.3",
+      "shareScope": "default",
+      "name": "react-router",
+      "version": "7.1.3",
+      "eager": false,
+      "id": "Regional_App_2:react-router",
+      "assets": {
+        "js": {
+          "async": [
+            "bundle.29d6406247d84eea.js"
+          ],
+          "sync": [
+            "bundle.3a060ca0c7a6c613.js"
+          ]
+        },
+        "css": {
+          "async": [],
+          "sync": []
+        }
+      },
+      "usedIn": []
+    },
+    {
+      "singleton": true,
+      "requiredVersion": "^19.0.0",
+      "shareScope": "default",
+      "name": "react",
+      "version": "19.0.0",
+      "eager": false,
+      "id": "Regional_App_2:react",
+      "assets": {
+        "js": {
+          "async": [],
+          "sync": [
+            "bundle.29d6406247d84eea.js"
+          ]
+        },
+        "css": {
+          "async": [],
+          "sync": []
+        }
+      },
+      "usedIn": []
+    }
+  ],
+  "remotes": [
+    {
+      "alias": "Layout",
+      "consumingFederationContainerName": "Regional_App_2",
+      "federationContainerName": "Layout",
+      "moduleName": "auth",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "http://localhost:3001/remoteEntry.js"
+    },
+    {
+      "alias": "Layout",
+      "consumingFederationContainerName": "Regional_App_2",
+      "federationContainerName": "Layout",
+      "moduleName": "header",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "http://localhost:3001/remoteEntry.js"
+    },
+    {
+      "alias": "Layout",
+      "consumingFederationContainerName": "Regional_App_2",
+      "federationContainerName": "Layout",
+      "moduleName": "user",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "http://localhost:3001/remoteEntry.js"
+    },
+    {
+      "alias": "Layout",
+      "consumingFederationContainerName": "Regional_App_2",
+      "federationContainerName": "Layout",
+      "moduleName": "footer",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "http://localhost:3001/remoteEntry.js"
+    },
+    {
+      "alias": "Widget",
+      "consumingFederationContainerName": "Regional_App_2",
+      "federationContainerName": "Widget",
+      "moduleName": "Alarm",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "http://localhost:3002/remoteEntry.js"
+    },
+    {
+      "alias": "Widget",
+      "consumingFederationContainerName": "Regional_App_2",
+      "federationContainerName": "Widget",
+      "moduleName": "DatabricksDashboard",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "http://localhost:3002/remoteEntry.js"
+    },
+    {
+      "alias": "Widget",
+      "consumingFederationContainerName": "Regional_App_2",
+      "federationContainerName": "Widget",
+      "moduleName": "Light",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "http://localhost:3002/remoteEntry.js"
+    },
+    {
+      "alias": "Widget",
+      "consumingFederationContainerName": "Regional_App_2",
+      "federationContainerName": "Widget",
+      "moduleName": "EnergyGauge",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "http://localhost:3002/remoteEntry.js"
+    },
+    {
+      "alias": "Widget",
+      "consumingFederationContainerName": "Regional_App_2",
+      "federationContainerName": "Widget",
+      "moduleName": "InfoCard",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "http://localhost:3002/remoteEntry.js"
+    }
+  ],
+  "exposes": []
+}
