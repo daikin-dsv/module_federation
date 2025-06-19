@@ -5,10 +5,6 @@ on:
     branches:
       - '**'
 
-  # push:
-  #   branches:
-  #     - main
-
 permissions:
   # for github pages branch
   contents: write
@@ -29,6 +25,9 @@ jobs:
 
       - name: Build Project
         run: npm run build
+        env:
+          LAYOUT_URL: https://turbo-doodle-2nm87nq.pages.github.io/layout
+          WIDGETS_URL: https://turbo-doodle-2nm87nq.pages.github.io/widgets
 
       - name: Setup Git Credentials
         run: |
@@ -39,5 +38,3 @@ jobs:
           # git config --global credential.helper store
       - name: Deploy to GitHub Pages
         run: npm run deploy-github-pages:all -- -u "github-actions-bot <support+actions@github.com>"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
