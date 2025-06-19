@@ -37,4 +37,4 @@ jobs:
           # echo "https://${{ secrets.GITHUB_TOKEN }}@github.com" > ~/.git-credentials
           # git config --global credential.helper store
       - name: Deploy to GitHub Pages
-        run: npm run deploy-github-pages:all -- -u "github-actions-bot <support+actions@github.com>"
+        run: npm run deploy-github-pages:all
