@@ -104,7 +104,7 @@
       "federationContainerName": "Layout",
       "moduleName": "auth",
       "usedIn": [
-        "src/bootstrap.js + 4 modules"
+        "src/bootstrap.js + 5 modules"
       ],
       "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
     },
@@ -114,7 +114,7 @@
       "federationContainerName": "Layout",
       "moduleName": "header",
       "usedIn": [
-        "src/bootstrap.js + 4 modules"
+        "src/bootstrap.js + 5 modules"
       ],
       "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
     },
@@ -124,7 +124,7 @@
       "federationContainerName": "Layout",
       "moduleName": "user",
       "usedIn": [
-        "src/bootstrap.js + 4 modules"
+        "src/bootstrap.js + 5 modules"
       ],
       "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
     },
@@ -134,7 +134,7 @@
       "federationContainerName": "Layout",
       "moduleName": "footer",
       "usedIn": [
-        "src/bootstrap.js + 4 modules"
+        "src/bootstrap.js + 5 modules"
       ],
       "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
     },
@@ -144,7 +144,7 @@
       "federationContainerName": "Widget",
       "moduleName": "Alarm",
       "usedIn": [
-        "src/bootstrap.js + 4 modules"
+        "src/bootstrap.js + 5 modules"
       ],
       "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
     },
@@ -154,7 +154,7 @@
       "federationContainerName": "Widget",
       "moduleName": "DatabricksDashboard",
       "usedIn": [
-        "src/bootstrap.js + 4 modules"
+        "src/bootstrap.js + 5 modules"
       ],
       "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
     },
@@ -164,7 +164,7 @@
       "federationContainerName": "Widget",
       "moduleName": "EnergyGauge",
       "usedIn": [
-        "src/bootstrap.js + 4 modules"
+        "src/bootstrap.js + 5 modules"
       ],
       "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
     },
@@ -174,7 +174,7 @@
       "federationContainerName": "Widget",
       "moduleName": "InfoCard",
       "usedIn": [
-        "src/bootstrap.js + 4 modules"
+        "src/bootstrap.js + 5 modules"
       ],
       "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
     }
