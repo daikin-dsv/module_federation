@@ -71,6 +71,7 @@
         }
       },
       "usedIn": [
+        "./Alarm",
         "./DatabricksDashboard"
       ]
     }
@@ -81,7 +82,9 @@
       "path": "./Alarm",
       "id": "Widget:Alarm",
       "name": "Alarm",
-      "requires": [],
+      "requires": [
+        "react"
+      ],
       "file": "src/components/Alarm.js",
       "assets": {
         "js": {
