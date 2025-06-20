@@ -1,5 +1,5 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
-const { HtmlRspackPlugin, rspack } = require('@rspack/core');
+const { HtmlRspackPlugin, rspack, DefinePlugin } = require('@rspack/core');
 const { merge } = require('webpack-merge');
 
 const modeConfig = (env) => require(`./build-utils/rspack.${env}`)(env);
@@ -85,7 +85,10 @@ module.exports = ({ mode }) => {
                     template: './index.html',
                     inject: 'body'
                 }),
-                new rspack.CssExtractRspackPlugin({})
+                new rspack.CssExtractRspackPlugin({}),
+                new DefinePlugin({
+                    'process.env.APP_PATH': JSON.stringify(process.env.APP_PATH || '')
+                })
             ]
         },
         modeConfig(mode)

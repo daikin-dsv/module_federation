@@ -46,19 +46,19 @@ const PersonIcon = loadIcon('PersonIcon');
 const ChairIcon = loadIcon('ChairIcon');
 
 export const NAVIGATION_CONFIG = Object.freeze({
-    HOME: { name: appRoutesText.home, path: '/' },
-    NAV2: { name: appRoutesText.databricks, path: '/databricks' },
-    NAV3: { name: appRoutesText.nav3, path: '/navigation3' }
+    HOME: { name: appRoutesText.home, path: `${process.env.APP_PATH}/` },
+    NAV2: { name: appRoutesText.databricks, path: `${process.env.APP_PATH}/databricks` },
+    NAV3: { name: appRoutesText.nav3, path: `${process.env.APP_PATH}/navigation3` }
 });
 
 export const FOOTER_CONFIG = Object.freeze({
     POLICY: {
         name: appRoutesText.policy,
-        path: '/policy'
+        path: `${process.env.APP_PATH}/policy`
     },
     TERMS: {
         name: appRoutesText.terms,
-        path: '/terms'
+        path: `${process.env.APP_PATH}/terms`
     }
 });
 
