@@ -36,7 +36,7 @@ const root = createRoot(rootElement);
 
 root.render(
     <AuthProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.APP_PATH}>
             <ErrorBoundary fallback={<div>{bootstrapText.error}</div>}>
                 <div className="flex h-screen flex-col">
                     <Suspense fallback={bootstrapText.loadingHeader}>
