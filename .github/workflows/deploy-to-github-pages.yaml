@@ -24,7 +24,13 @@ jobs:
         run: npm install
 
       - name: Build Project
-        run: npm run build
+        run: |
+          npm run build
+          # Copy index.html to 404.html to "rewrite" all unknown routes back to index.html (when deploying to GitHub Pages)
+          cp layout/build/index.html layout/build/404.html
+          cp widgets/build/index.html widgets/build/404.html
+          cp regional-app-1/build/index.html regional-app-1/build/404.html
+          cp regional-app-2/build/index.html regional-app-2/build/404.html
         env:
           LAYOUT_URL: https://turbo-doodle-2nm87nq.pages.github.io/layout
           WIDGETS_URL: https://turbo-doodle-2nm87nq.pages.github.io/widgets
@@ -42,3 +48,4 @@ jobs:
           # git config --global credential.helper store
       - name: Deploy to GitHub Pages
         run: npm run deploy-github-pages:all
+        # cp dist/index.html dist/404.html
