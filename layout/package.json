@@ -2,6 +2,9 @@
     "name": "layout",
     "version": "1.0.0",
     "main": "index.js",
+    "sideEffects": [
+        "*.css"
+    ],
     "scripts": {
         "dev": "rspack serve --env mode=development",
         "test": "cd .. && npx playwright test layout/tests/e2e/",
