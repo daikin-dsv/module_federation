@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "npm run dev --prefix=layout & npm run dev --prefix=widgets & npm run dev --prefix=regional-app-1 & npm run dev --prefix=regional-app-2",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint .",
+        "lint": "eslint . && npm run lint:lit-analyzer",
+        "lint:lit-analyzer": "lit-analyzer \"{layout,widgets}/src/**/*.{js,ts}\"",
         "format": "prettier --write .",
         "build-and-run:layout": "docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest . && docker run -t -p 8080:80 layout:latest"
     },
@@ -23,6 +24,7 @@
         "globals": "^15.14.0",
         "husky": "^9.1.7",
         "lint-staged": "^16.1.0",
+        "lit-analyzer": "^2.0.3",
         "prettier": "^3.5.3",
         "prettier-plugin-tailwindcss": "^0.6.12"
     },
