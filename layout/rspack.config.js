@@ -50,7 +50,13 @@ module.exports = ({ mode }) => {
                         resourceQuery: { not: /inline/ },
                         use: [
                             CssExtractRspackPlugin.loader,
-                            'css-loader',
+                            // 'css-loader',
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    importLoaders: 1,
+                                },
+                            },
                             'postcss-loader'
                         ],
                         type: 'javascript/auto'
