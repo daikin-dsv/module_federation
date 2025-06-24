@@ -50,6 +50,8 @@ const Light = ({ label, text = lightText }) => {
                                         setState('on');
                                         setShowToggle(false);
                                     }}
+                                    role="button"
+                                    tabIndex={0}
                                 >
                                     {text.on}
                                 </div>
@@ -62,6 +64,8 @@ const Light = ({ label, text = lightText }) => {
                                         setState('off');
                                         setShowToggle(false);
                                     }}
+                                    role="button"
+                                    tabIndex={0}
                                 >
                                     {text.off}
                                 </div>

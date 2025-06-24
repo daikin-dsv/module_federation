@@ -30,7 +30,14 @@ const DatabricksWidget = ({ src, width = '100%', height = '100%', onLoad, onErro
     }, [onLoad, onError]);
 
     return (
-        <iframe ref={iframeRef} src={src} width={width} height={height} allowFullScreen />
+        <iframe
+            title="Databricks widget"
+            ref={iframeRef}
+            src={src}
+            width={width}
+            height={height}
+            allowFullScreen
+        />
     );
 };
 
