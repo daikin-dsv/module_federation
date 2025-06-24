@@ -1,5 +1,6 @@
 import pluginJs from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import { configs as litConfigs } from 'eslint-plugin-lit';
 import pluginReact from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -26,11 +27,13 @@ export default [
     pluginJs.configs.recommended,
     pluginReact.configs.flat.recommended,
     reactHooks.configs['recommended-latest'],
+    jsxA11y.flatConfigs.recommended,
     eslintConfigPrettier,
     {
         rules: {
             'react/prop-types': 'off',
-            'no-duplicate-imports': 'warn'
+            'no-duplicate-imports': 'warn',
+            'jsx-a11y/click-events-have-key-events': 'off'
         }
     },
     {
