@@ -1,3 +1,4 @@
 @import 'tailwindcss';
 
 @import url('@daikin-oss/dds-tokens/css/daikin/Light/variables.css');
+@import '../../node_modules/@daikin-oss/dds-tokens/build/css/daikin/Light/variables.css';
