@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "rspack serve --env mode=development",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "npx eslint . --config ../eslint.config.mjs",
+        "lint": "npm run lint:eslint && npm run lint:lit-analyzer",
+        "lint:eslint": "npx eslint . --config ../eslint.config.mjs",
         "lint:lit-analyzer": "npx lit-analyzer \"src/**/*.{js,ts}\"",
         "format": "npx prettier --write .",
         "build": "rspack build --env mode=production",
