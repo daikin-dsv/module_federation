@@ -40,7 +40,7 @@ export class UserProfile extends LitElement {
 
         return html`
             <div>
-                <button popovertarget="popover-panel">
+                <button popovertarget="popover-panel" data-testid="user-profile-button">
                     <daikin-icon-button
                         color="neutral"
                         variant="ghost"
@@ -96,6 +96,7 @@ export class UserProfile extends LitElement {
                                           class="w-full"
                                           @click="${logout}"
                                           variant="outline"
+                                          data-testid="sign-out-button"
                                       >
                                           ${this.text.signOut}
                                       </daikin-button>

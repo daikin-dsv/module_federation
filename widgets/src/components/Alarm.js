@@ -17,7 +17,7 @@ const Alarm = ({ count = 1, color = 'red', text = alarmText }) => {
 
     return (
         <>
-            <daikin-card outline className="max-h-[274px]">
+            <daikin-card outline className="max-h-[274px]" data-testid="alarm-card">
                 <div className="flex h-[240px] w-[240px] flex-col items-center justify-center">
                     <div className={`mb-2 h-40 w-40 ${COLORS[color]}`}>
                         <daikin-icon
