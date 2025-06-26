@@ -1,0 +1,13 @@
+{
+    "appRoutesText": {
+        "home": "Home",
+        "alerts": "Alerts",
+        "loadingAlerts": "Loading alerts..."
+    },
+    "bootstrapText": {
+        "error": "Something went wrong",
+        "loadingHeader": "Loading header...",
+        "loadingFooter": "Loading footer...",
+        "copyright": "2025 Daikin Open Innovation Lab Silicon Valley"
+    }
+}
