@@ -1,8 +1,4 @@
-const {
-    expect,
-    test,
-    logout,
-} = require('../helper');
+const { expect, test, logout } = require('../helper');
 
 test.afterAll(async ({ layoutPage }) => {
     await logout(layoutPage);

@@ -1,7 +1,4 @@
-const {
-    expect,
-    test
-} = require('../helper');
+const { expect, test } = require('../helper');
 
 test.describe('Widgets', () => {
     test('Alarm card is visible', async ({ widgetsPage }) => {
