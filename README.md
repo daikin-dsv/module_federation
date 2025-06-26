@@ -28,6 +28,6 @@ For the ports each app is running on, refer to `config.js`.
 1. `cd deploy`
 1. `npm run generate-test-secrets -- -configName local -playwright -outpath ../module_federation/env/` generate test secrets
 1. `cd ../module_federation`
-1. `echo "LAYOUT_BASE_URL=http://localhost:3001\nWIDGETS_BASE_URL=http://localhost:3002\nKEYCLOAK_LOGOUT_URL=https://sso-dev.daikinlab.com/auth/realms/daikin/protocol/openid-connect/auth" >> env/local.env` to add add values
+1. `echo "LAYOUT_BASE_URL=http://localhost:3001\nWIDGETS_BASE_URL=http://localhost:3002" >> env/local.env` to add add values
 1. `ENV=local npm run test` runs tests in CLI
 1. `ENV=local npm run test:dev` opens open UI mode
