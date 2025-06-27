@@ -25,14 +25,29 @@ export default [
         }
     },
     pluginJs.configs.recommended,
-    pluginReact.configs.flat.recommended,
-    reactHooks.configs['recommended-latest'],
-    jsxA11y.flatConfigs.recommended,
     eslintConfigPrettier,
     {
         rules: {
-            'react/prop-types': 'off',
-            'no-duplicate-imports': 'warn',
+            'no-duplicate-imports': 'warn'
+        }
+    },
+    {
+        files: ['{regional-app-1,regional-app-2,widgets,docs}/**/*.{js,mjs,cjs,jsx}'],
+        ...pluginReact.configs.flat.recommended,
+        rules: {
+            ...pluginReact.configs.flat.recommended.rules,
+            'react/prop-types': 'off'
+        }
+    },
+    {
+        files: ['{regional-app-1,regional-app-2,widgets,docs}/**/*.{js,mjs,cjs,jsx}'],
+        ...reactHooks.configs['recommended-latest']
+    },
+    {
+        files: ['{regional-app-1,regional-app-2,widgets,docs}/**/*.{js,mjs,cjs,jsx}'],
+        ...jsxA11y.flatConfigs.recommended,
+        rules: {
+            ...jsxA11y.flatConfigs.recommended.rules,
             'jsx-a11y/click-events-have-key-events': 'off'
         }
     },
