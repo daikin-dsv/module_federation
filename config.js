@@ -14,5 +14,9 @@ module.exports = Object.freeze({
     REGIONAL_APP_2: {
         NAME: 'Regional_App_2',
         PORT: 3005
+    },
+    EVA: {
+        NAME: 'Eva',
+        PORT: 3006
     }
 });

@@ -199,7 +199,7 @@ export class HeaderComponent extends LitElement {
                             >
                                 <slot name="route"></slot>
                             </div>
-                            // TODO - ZEN-12089 // Replace with DDS Menu
+                            ${/* // TODO - ZEN-12089 // Replace with DDS Menu */''}
                             <div class="${this.showMore ? 'visible' : 'invisible'}">
                                 <button
                                     class="flex h-16 items-center justify-center gap-2 px-4 break-keep text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)"
