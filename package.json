@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "dev": "npm run dev --prefix=layout & npm run dev --prefix=widgets & npm run dev --prefix=regional-app-1 & npm run dev --prefix=regional-app-2 & npm run dev --prefix=eva",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "npx playwright test",
+        "test:dev": "npx playwright test --ui",
         "lint": "npm run lint:eslint && npm run lint:lit-analyzer",
         "lint:eslint": "eslint .",
         "lint:lit-analyzer": "lit-analyzer \"layout/src/**/*.{js,ts}\"",
@@ -16,7 +17,10 @@
     "license": "ISC",
     "devDependencies": {
         "@eslint/js": "^9.28.0",
+        "@playwright/test": "^1.53.1",
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+        "@types/node": "^24.0.4",
+        "dotenv": "^16.5.0",
         "eslint": "^9.28.0",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-lit": "^2.1.1",
