@@ -40,7 +40,7 @@ export class UserProfile extends LitElement {
 
         return html`
             <div>
-                <button popovertarget="popover-panel" data-testid="user-profile-button">
+                <button popovertarget="popover-panel">
                     <daikin-icon-button
                         color="neutral"
                         variant="ghost"
