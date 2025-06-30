@@ -3,14 +3,37 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
 import { appRoutesText } from './text.json';
 
-const Alarm = React.lazy(() => import('Widget/Alarm'));
-const DatabricksWidget = React.lazy(() => import('Widget/DatabricksDashboard'));
-const EnergyGauge = React.lazy(() => import('Widget/EnergyGauge'));
-const InfoCard = React.lazy(() => import('Widget/InfoCard'));
+const Alarm = React.lazy(() =>
+    import('Widget/Alarm').then(() => ({
+        default: (props) => <widget-alarm {...props}></widget-alarm>
+    }))
+);
+const DatabricksWidget = React.lazy(() =>
+    import('Widget/DatabricksDashboard').then(() => ({
+        default: (props) => <databricks-dashboard {...props}></databricks-dashboard>
+    }))
+);
+const EnergyGauge = React.lazy(() =>
+    import('Widget/EnergyGauge').then(() => ({
+        default: (props) => <energy-gauge {...props}></energy-gauge>
+    }))
+);
+const InfoCard = React.lazy(() =>
+    import('Widget/InfoCard').then(() => ({
+        default: ({ icon: Icon, ...p }) => (
+            <info-card {...p}>{Icon && <Icon slot="icon" />}</info-card>
+        )
+    }))
+);
 const loadIcon = (iconName) =>
     React.lazy(() =>
         import('Widget/InfoCard').then((module) => ({
-            default: module[iconName]
+            default: (props) => (
+                <span
+                    {...props}
+                    dangerouslySetInnerHTML={{ __html: module[iconName] }}
+                />
+            )
         }))
     );
 

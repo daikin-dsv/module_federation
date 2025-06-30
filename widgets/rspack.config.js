@@ -1,5 +1,5 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
-const { HtmlRspackPlugin, rspack } = require('@rspack/core');
+const { HtmlRspackPlugin, CssExtractRspackPlugin } = require('@rspack/core');
 const { merge } = require('webpack-merge');
 
 const modeConfig = (env) => require(`./build-utils/rspack.${env}`)(env);
@@ -25,8 +25,7 @@ module.exports = ({ mode }) => {
                             options: {
                                 jsc: {
                                     parser: {
-                                        syntax: 'ecmascript',
-                                        jsx: true
+                                        syntax: 'ecmascript'
                                     }
                                 }
                             }
@@ -35,10 +34,22 @@ module.exports = ({ mode }) => {
                         exclude: /node_modules/
                     },
                     {
-                        test: /\.css$/i,
+                        test: /\.css$/,
+                        resourceQuery: /inline/,
                         use: [
-                            rspack.CssExtractRspackPlugin.loader, // Injects styles into DOM
-                            'css-loader', // Resolves @import and url()
+                            {
+                                loader: 'css-loader',
+                                options: { exportType: 'string' }
+                            },
+                            'postcss-loader'
+                        ]
+                    },
+                    {
+                        test: /\.css$/i,
+                        resourceQuery: { not: /inline/ },
+                        use: [
+                            CssExtractRspackPlugin.loader,
+                            'css-loader',
                             'postcss-loader'
                         ],
                         type: 'javascript/auto'
@@ -58,14 +69,6 @@ module.exports = ({ mode }) => {
                         './Light': './src/components/Light.js'
                     },
                     shared: {
-                        react: {
-                            singleton: true,
-                            requiredVersion: dependencies.react
-                        },
-                        'react-dom': {
-                            singleton: true,
-                            requiredVersion: dependencies['react-dom']
-                        },
                         '@daikin-oss/design-system-web-components': {
                             singleton: true,
                             requiredVersion:
@@ -81,7 +84,7 @@ module.exports = ({ mode }) => {
                     template: './index.html',
                     inject: 'body'
                 }),
-                new rspack.CssExtractRspackPlugin({})
+                new CssExtractRspackPlugin({})
             ]
         },
         modeConfig(mode)
