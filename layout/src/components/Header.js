@@ -180,7 +180,6 @@ export class HeaderComponent extends LitElement {
         return html`
             <header
                 class="font-daikinSerif flex h-16 w-full min-w-[360px] flex-row items-center justify-between border border-solid border-[var(--dds-color-divider)] pr-4 pl-3"
-                data-testid="header"
             >
                 <div class="flex flex-grow items-center gap-5">
                     <slot name="logo">

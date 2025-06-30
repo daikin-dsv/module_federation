@@ -96,7 +96,6 @@ export class UserProfile extends LitElement {
                                           class="w-full"
                                           @click="${logout}"
                                           variant="outline"
-                                          data-testid="sign-out-button"
                                       >
                                           ${this.text.signOut}
                                       </daikin-button>
