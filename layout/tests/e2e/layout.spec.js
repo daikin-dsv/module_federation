@@ -1,4 +1,4 @@
-const { expect, test } = require('../helper');
+const { expect, test } = require('../../../tests/helper');
 
 test.describe('Layout', () => {
     test('Header is visible', async ({ layoutPage }) => {

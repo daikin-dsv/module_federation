@@ -4,7 +4,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "rspack serve --env mode=development",
-        "test": "cd .. && npx playwright test tests/widgets/",
+        "test": "cd .. && npx playwright test widgets/tests/e2e/",
         "lint": "npx eslint . --config ../eslint.config.mjs",
         "format": "npx prettier --write .",
         "build": "rspack build --env mode=production",

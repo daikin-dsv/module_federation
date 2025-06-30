@@ -4,7 +4,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "rspack serve --env mode=development",
-        "test": "cd .. && npx playwright test tests/layout/",
+        "test": "cd .. && npx playwright test layout/tests/e2e/",
         "lint": "npm run lint:eslint && npm run lint:lit-analyzer",
         "lint:eslint": "npx eslint . --config ../eslint.config.mjs",
         "lint:lit-analyzer": "npx lit-analyzer \"src/**/*.{js,ts}\"",
