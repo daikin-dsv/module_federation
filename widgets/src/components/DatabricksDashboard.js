@@ -1,4 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import { LitElement, html, css, unsafeCSS } from 'lit';
+
+import tailwindStyles from '../index.css?inline';
 
 /**
  * Simple iframe wrapper for Databricks embed URLs.
@@ -10,28 +12,43 @@ import React, { useEffect, useRef } from 'react';
  * @param {Function} [props.onLoad] - Callback when iframe loads.
  * @param {Function} [props.onError] - Callback when iframe errors.
  */
-const DatabricksWidget = ({ src, width = '100%', height = '100%', onLoad, onError }) => {
-    const iframeRef = useRef(null);
-    useEffect(() => {
-        const iframe = iframeRef.current;
+export class DatabricksWidget extends LitElement {
+    static properties = {
+        src: { type: String },
+        width: { type: String },
+        height: { type: String }
+    };
+
+    constructor() {
+        super();
+        this.src = '';
+        this.width = '100%';
+        this.height = '100%';
+    }
+
+    static styles = css`
+        ${unsafeCSS(tailwindStyles)}
+    `;
+
+    firstUpdated() {
+        const iframe = this.shadowRoot.querySelector('iframe');
         if (!iframe) return;
-        const handleLoad = () => {
-            if (onLoad) onLoad();
-        };
-        const handleError = () =>
-            onError && onError(new Error('Databricks iframe failed to load'));
-        iframe.addEventListener('load', handleLoad);
-        iframe.addEventListener('error', handleError);
+        iframe.addEventListener('load', () => {
+            this.dispatchEvent(new CustomEvent('load'));
+        });
+        iframe.addEventListener('error', () => {
+            this.dispatchEvent(new CustomEvent('error'));
+        });
+    }
 
-        return () => {
-            iframe.removeEventListener('load', handleLoad);
-            iframe.removeEventListener('error', handleError);
-        };
-    }, [onLoad, onError]);
+    render() {
+        return html`<iframe
+            src="${this.src}"
+            width="${this.width}"
+            height="${this.height}"
+            allowfullscreen
+        ></iframe>`;
+    }
+}
 
-    return (
-        <iframe ref={iframeRef} src={src} width={width} height={height} allowFullScreen />
-    );
-};
-
-export default DatabricksWidget;
+customElements.define('databricks-dashboard', DatabricksWidget);

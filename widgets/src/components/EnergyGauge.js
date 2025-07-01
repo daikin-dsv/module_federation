@@ -1,14 +1,12 @@
-import React from 'react';
-
 import {
     colorBlue50,
     colorCommonBrandDefault,
     colorGray70
 } from '@daikin-oss/dds-tokens/js/daikin/Light/variables.js';
+import '@daikin-oss/design-system-web-components/components/card/index.js';
+import { LitElement, html, css, unsafeCSS } from 'lit';
 
-// This errors out because of duplicate custom element definitions
-// Requested a fix from DDS Team: DDS-1911
-// import '@daikin-oss/design-system-web-components/components/card/index.js';
+import tailwindStyles from '../index.css?inline';
 
 /**
  * A half-circle energy gauge:
@@ -16,86 +14,104 @@ import {
  *  - The bottom is left empty (the gap).
  *  - Displays the kWh usage, an icon, and the building name.
  */
-const EnergyGauge = ({ usage, maxUsage, buildingName }) => {
-    const radius = 120;
-    const percent = (usage / maxUsage) * 100;
-    const strokeWidth = 10;
-    const innerRadius = radius - strokeWidth;
-    const circumference = innerRadius * 2 * Math.PI;
-    const arc = circumference * 0.75;
-    const dashArray = `${arc} ${circumference}`;
-    const transform = `rotate(135, ${radius}, ${radius})`;
-    const offset = arc - (percent / 100) * arc;
+export class EnergyGaugeComponent extends LitElement {
+    static properties = {
+        usage: { type: Number },
+        maxUsage: { type: Number },
+        buildingName: { type: String }
+    };
 
-    return (
-        <daikin-card outline className="max-h-[274px]">
-            <div className="relative flex h-[240px] w-[240px] items-center justify-center">
-                <svg height={radius * 2} width={radius * 2}>
-                    <defs>
-                        <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-                            <stop
-                                offset="15%"
-                                stopColor={colorCommonBrandDefault}
-                                stopOpacity="1"
-                            />
-                            <stop offset="85%" stopColor={colorBlue50} stopOpacity="1" />
-                        </linearGradient>
-                    </defs>
+    constructor() {
+        super();
+        this.usage = 0;
+        this.maxUsage = 0;
+        this.buildingName = '';
+    }
 
-                    <circle
-                        className="gauge_base"
-                        cx={radius}
-                        cy={radius}
-                        fill="transparent"
-                        r={innerRadius}
-                        stroke={colorGray70}
-                        strokeDasharray={dashArray}
-                        strokeLinecap="round"
-                        strokeWidth="15"
-                        transform={transform}
-                    />
+    static styles = css`
+        ${unsafeCSS(tailwindStyles)}
+    `;
 
-                    <circle
-                        className="gauge_percent"
-                        cx={radius}
-                        cy={radius}
-                        fill="transparent"
-                        r={innerRadius}
-                        stroke="url(#grad)"
-                        strokeDasharray={dashArray}
-                        strokeDashoffset={offset}
-                        strokeLinecap="round"
-                        strokeWidth="15"
-                        transform={transform}
-                    />
-                </svg>
+    render() {
+        const radius = 120;
+        const percent = (this.usage / this.maxUsage) * 100;
+        const strokeWidth = 10;
+        const innerRadius = radius - strokeWidth;
+        const circumference = innerRadius * 2 * Math.PI;
+        const arc = circumference * 0.75;
+        const dashArray = `${arc} ${circumference}`;
+        const transform = `rotate(135, ${radius}, ${radius})`;
+        const offset = arc - (percent / 100) * arc;
 
-                {/* Centered usage info */}
-                <div className="absolute flex flex-col items-center justify-center">
-                    {/* Lightning icon */}
-                    <svg
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        className={`mb-1 h-14 w-14 text-[#0097e0]`}
-                    >
-                        <path d="M13 2L3 14H11L9 22L19 10H11L13 2Z" />
+        return html`
+            <daikin-card outline class="max-h-[274px]">
+                <div
+                    class="relative flex h-[240px] w-[240px] items-center justify-center"
+                >
+                    <svg height="${radius * 2}" width="${radius * 2}">
+                        <defs>
+                            <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+                                <stop
+                                    offset="15%"
+                                    stop-color="${colorCommonBrandDefault}"
+                                    stop-opacity="1"
+                                />
+                                <stop
+                                    offset="85%"
+                                    stop-color="${colorBlue50}"
+                                    stop-opacity="1"
+                                />
+                            </linearGradient>
+                        </defs>
+                        <circle
+                            class="gauge_base"
+                            cx="${radius}"
+                            cy="${radius}"
+                            fill="transparent"
+                            r="${innerRadius}"
+                            stroke="${colorGray70}"
+                            stroke-dasharray="${dashArray}"
+                            stroke-linecap="round"
+                            stroke-width="15"
+                            transform="${transform}"
+                        ></circle>
+                        <circle
+                            class="gauge_percent"
+                            cx="${radius}"
+                            cy="${radius}"
+                            fill="transparent"
+                            r="${innerRadius}"
+                            stroke="url(#grad)"
+                            stroke-dasharray="${dashArray}"
+                            stroke-dashoffset="${offset}"
+                            stroke-linecap="round"
+                            stroke-width="15"
+                            transform="${transform}"
+                        ></circle>
                     </svg>
 
-                    <div className="font-medium text-gray-800">
-                        {usage.toFixed(1)} kWh
+                    <div class="absolute flex flex-col items-center justify-center">
+                        <svg
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                            class="mb-1 h-14 w-14 text-[#0097e0]"
+                        >
+                            <path d="M13 2L3 14H11L9 22L19 10H11L13 2Z" />
+                        </svg>
+                        <div class="font-medium text-gray-800">
+                            ${this.usage.toFixed(1)} kWh
+                        </div>
+                        <div class="text-xs text-[#616161]">${this.buildingName}</div>
                     </div>
-                    <div className="text-xs text-[#616161]">{buildingName}</div>
-                </div>
 
-                {/* Left/bottom label: "0" */}
-                <div className="absolute bottom-2 left-10 text-xs text-[#616161]">0</div>
-                {/* Right/bottom label: maxUsage */}
-                <div className="absolute right-10 bottom-2 text-xs text-[#616161]">
-                    {maxUsage}
+                    <div class="absolute bottom-2 left-10 text-xs text-[#616161]">0</div>
+                    <div class="absolute right-10 bottom-2 text-xs text-[#616161]">
+                        ${this.maxUsage}
+                    </div>
                 </div>
-            </div>
-        </daikin-card>
-    );
-};
+            </daikin-card>
+        `;
+    }
+}
 
-export default EnergyGauge;
+customElements.define('energy-gauge', EnergyGaugeComponent);
