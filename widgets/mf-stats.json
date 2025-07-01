@@ -24,57 +24,7 @@
     "prefetchInterface": false,
     "publicPath": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/"
   },
-  "shared": [
-    {
-      "singleton": true,
-      "requiredVersion": "^19.0.0",
-      "shareScope": "default",
-      "name": "react-dom",
-      "version": "19.0.0",
-      "eager": false,
-      "id": "Widget:react-dom",
-      "assets": {
-        "js": {
-          "async": [
-            "bundle.b98b6dfb3bbdb227.js"
-          ],
-          "sync": [
-            "bundle.81612293e864998e.js",
-            "bundle.2d126f2875e9fb67.js"
-          ]
-        },
-        "css": {
-          "async": [],
-          "sync": []
-        }
-      },
-      "usedIn": []
-    },
-    {
-      "singleton": true,
-      "requiredVersion": "^19.0.0",
-      "shareScope": "default",
-      "name": "react",
-      "version": "19.0.0",
-      "eager": false,
-      "id": "Widget:react",
-      "assets": {
-        "js": {
-          "async": [],
-          "sync": [
-            "bundle.b98b6dfb3bbdb227.js"
-          ]
-        },
-        "css": {
-          "async": [],
-          "sync": []
-        }
-      },
-      "usedIn": [
-        "./DatabricksDashboard"
-      ]
-    }
-  ],
+  "shared": [],
   "remotes": [],
   "exposes": [
     {
@@ -86,16 +36,15 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.8604a4a6d2f2293e.js"
+            "bundle.e6b638e8660bb21b.js",
+            "bundle.93bbeb9edc410ef7.js",
+            "bundle.626db43058c3e19c.js",
+            "bundle.cce55cf5ebfbc0ac.js"
           ],
-          "async": [
-            "bundle.b98b6dfb3bbdb227.js"
-          ]
+          "async": []
         },
         "css": {
-          "sync": [
-            "248.css"
-          ],
+          "sync": [],
           "async": []
         }
       }
@@ -104,18 +53,16 @@
       "path": "./DatabricksDashboard",
       "id": "Widget:DatabricksDashboard",
       "name": "DatabricksDashboard",
-      "requires": [
-        "react"
-      ],
+      "requires": [],
       "file": "src/components/DatabricksDashboard.js",
       "assets": {
         "js": {
           "sync": [
-            "bundle.f9bc2f8daf7c60a0.js"
+            "bundle.e6b638e8660bb21b.js",
+            "bundle.626db43058c3e19c.js",
+            "bundle.ba977e119da7da16.js"
           ],
-          "async": [
-            "bundle.b98b6dfb3bbdb227.js"
-          ]
+          "async": []
         },
         "css": {
           "sync": [],
@@ -132,11 +79,12 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.ebb63fba233b5824.js"
+            "bundle.e6b638e8660bb21b.js",
+            "bundle.93bbeb9edc410ef7.js",
+            "bundle.626db43058c3e19c.js",
+            "bundle.81e887be1b136284.js"
           ],
-          "async": [
-            "bundle.b98b6dfb3bbdb227.js"
-          ]
+          "async": []
         },
         "css": {
           "sync": [],
@@ -153,11 +101,12 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.bd5a8f62a77dd452.js"
+            "bundle.e6b638e8660bb21b.js",
+            "bundle.93bbeb9edc410ef7.js",
+            "bundle.626db43058c3e19c.js",
+            "bundle.50d10798ba7f59c9.js"
           ],
-          "async": [
-            "bundle.b98b6dfb3bbdb227.js"
-          ]
+          "async": []
         },
         "css": {
           "sync": [],
@@ -174,16 +123,15 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.a5a62fabef4b4425.js"
+            "bundle.e6b638e8660bb21b.js",
+            "bundle.93bbeb9edc410ef7.js",
+            "bundle.626db43058c3e19c.js",
+            "bundle.5b7e12f3d8341db8.js"
           ],
-          "async": [
-            "bundle.b98b6dfb3bbdb227.js"
-          ]
+          "async": []
         },
         "css": {
-          "sync": [
-            "248.css"
-          ],
+          "sync": [],
           "async": []
         }
       }
