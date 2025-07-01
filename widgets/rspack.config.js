@@ -25,8 +25,7 @@ module.exports = ({ mode }) => {
                             options: {
                                 jsc: {
                                     parser: {
-                                        syntax: 'ecmascript',
-                                        jsx: true
+                                        syntax: 'ecmascript'
                                     }
                                 }
                             }
@@ -35,7 +34,19 @@ module.exports = ({ mode }) => {
                         exclude: /node_modules/
                     },
                     {
+                        test: /\.css$/,
+                        resourceQuery: /inline/,
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: { exportType: 'string' }
+                            },
+                            'postcss-loader'
+                        ]
+                    },
+                    {
                         test: /\.css$/i,
+                        resourceQuery: { not: /inline/ },
                         use: [
                             rspack.CssExtractRspackPlugin.loader, // Injects styles into DOM
                             'css-loader', // Resolves @import and url()
@@ -58,14 +69,6 @@ module.exports = ({ mode }) => {
                         './Light': './src/components/Light.js'
                     },
                     shared: {
-                        react: {
-                            singleton: true,
-                            requiredVersion: dependencies.react
-                        },
-                        'react-dom': {
-                            singleton: true,
-                            requiredVersion: dependencies['react-dom']
-                        },
                         '@daikin-oss/design-system-web-components': {
                             singleton: true,
                             requiredVersion:

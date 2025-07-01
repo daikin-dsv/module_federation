@@ -17,7 +17,7 @@
     "description": "",
     "dependencies": {
         "@daikin-oss/dds-tokens": "^0.3.2",
-        "@daikin-oss/design-system-web-components": "^0.7.0",
+        "@daikin-oss/design-system-web-components": "^1.1.0",
         "keycloak-js": "^26.2.0",
         "lit": "^3.3.0",
         "lodash": "^4.17.21"

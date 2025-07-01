@@ -1,5 +1,3 @@
-const ReactRefreshWebpackPlugin = require('@rspack/plugin-react-refresh');
-
 const { WIDGETS } = require('../../config');
 
 module.exports = () => ({
@@ -15,14 +13,7 @@ module.exports = () => ({
                     options: {
                         jsc: {
                             parser: {
-                                syntax: 'ecmascript',
-                                jsx: true
-                            },
-                            transform: {
-                                react: {
-                                    development: true,
-                                    refresh: true
-                                }
+                                syntax: 'ecmascript'
                             }
                         }
                     }
@@ -32,5 +23,5 @@ module.exports = () => ({
             }
         ]
     },
-    plugins: [new ReactRefreshWebpackPlugin()]
+    plugins: []
 });
