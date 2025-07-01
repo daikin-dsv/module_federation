@@ -16,14 +16,16 @@
     "dependencies": {
         "@daikin-oss/dds-tokens": "^0.3.2",
         "@daikin-oss/design-system-web-components": "^1.1.0",
-        "lit": "^3.1.2"
+        "css-loader": "^7.1.2",
+        "lit": "^3.1.2",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
     },
     "devDependencies": {
         "@module-federation/enhanced": "^0.8.8",
         "@rspack/cli": "^1.1.8",
         "@rspack/core": "^1.1.8",
         "@tailwindcss/postcss": "^4.0.4",
-        "css-loader": "^7.1.2",
         "postcss": "^8.5.1",
         "postcss-loader": "^8.1.1",
         "tailwindcss": "^4.1.8",
