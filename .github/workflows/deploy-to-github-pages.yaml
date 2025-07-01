@@ -38,8 +38,5 @@ jobs:
           git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git config --global user.email "github-actions-bot@github.com"
           git config --global user.name "GitHub Actions Bot"
-          # echo "https://${{ secrets.GITHUB_TOKEN }}@github.com" > ~/.git-credentials
-          # git config --global credential.helper store
       - name: Deploy to GitHub Pages
         run: npm run deploy-github-pages:all
-        # cp dist/index.html dist/404.html
