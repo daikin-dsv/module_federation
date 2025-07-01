@@ -17,6 +17,7 @@ render(
                 <a slot="route" href="/home" active>Home</a>
                 <a slot="route" href="/about">About</a>
                 <a slot="route" href="/contact">Contact</a>
+                <a slot="route" href="/test">Test deploy</a>
             </app-header>
             <app-footer></app-footer>
         </auth-provider>
