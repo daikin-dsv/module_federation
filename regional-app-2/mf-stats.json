@@ -1,8 +1,8 @@
 {
-  "id": "Regional_App_2",
-  "name": "Regional_App_2",
+  "id": "Regional_App_1",
+  "name": "Regional_App_1",
   "metaData": {
-    "name": "Regional_App_2",
+    "name": "Regional_App_1",
     "type": "app",
     "buildInfo": {
       "buildVersion": "1.0.0",
@@ -19,7 +19,7 @@
       "zip": "",
       "api": ""
     },
-    "globalName": "Regional_App_2",
+    "globalName": "Regional_App_1",
     "pluginVersion": "0.8.8",
     "prefetchInterface": false,
     "publicPath": "https://turbo-doodle-2nm87nq.pages.github.io/regional-app-2/"
@@ -32,7 +32,7 @@
       "name": "react-dom",
       "version": "19.0.0",
       "eager": false,
-      "id": "Regional_App_2:react-dom",
+      "id": "Regional_App_1:react-dom",
       "assets": {
         "js": {
           "async": [
@@ -57,7 +57,7 @@
       "name": "react-router",
       "version": "7.1.3",
       "eager": false,
-      "id": "Regional_App_2:react-router",
+      "id": "Regional_App_1:react-router",
       "assets": {
         "js": {
           "async": [
@@ -81,7 +81,7 @@
       "name": "react",
       "version": "19.0.0",
       "eager": false,
-      "id": "Regional_App_2:react",
+      "id": "Regional_App_1:react",
       "assets": {
         "js": {
           "async": [],
@@ -100,7 +100,7 @@
   "remotes": [
     {
       "alias": "Layout",
-      "consumingFederationContainerName": "Regional_App_2",
+      "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Layout",
       "moduleName": "auth",
       "usedIn": [
@@ -110,7 +110,7 @@
     },
     {
       "alias": "Layout",
-      "consumingFederationContainerName": "Regional_App_2",
+      "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Layout",
       "moduleName": "header",
       "usedIn": [
@@ -120,7 +120,7 @@
     },
     {
       "alias": "Layout",
-      "consumingFederationContainerName": "Regional_App_2",
+      "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Layout",
       "moduleName": "user",
       "usedIn": [
@@ -130,7 +130,7 @@
     },
     {
       "alias": "Layout",
-      "consumingFederationContainerName": "Regional_App_2",
+      "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Layout",
       "moduleName": "footer",
       "usedIn": [
@@ -140,7 +140,7 @@
     },
     {
       "alias": "Widget",
-      "consumingFederationContainerName": "Regional_App_2",
+      "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Widget",
       "moduleName": "Alarm",
       "usedIn": [
@@ -150,7 +150,7 @@
     },
     {
       "alias": "Widget",
-      "consumingFederationContainerName": "Regional_App_2",
+      "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Widget",
       "moduleName": "DatabricksDashboard",
       "usedIn": [
@@ -160,7 +160,7 @@
     },
     {
       "alias": "Widget",
-      "consumingFederationContainerName": "Regional_App_2",
+      "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Widget",
       "moduleName": "Light",
       "usedIn": [
@@ -170,7 +170,7 @@
     },
     {
       "alias": "Widget",
-      "consumingFederationContainerName": "Regional_App_2",
+      "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Widget",
       "moduleName": "EnergyGauge",
       "usedIn": [
@@ -180,7 +180,7 @@
     },
     {
       "alias": "Widget",
-      "consumingFederationContainerName": "Regional_App_2",
+      "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Widget",
       "moduleName": "InfoCard",
       "usedIn": [
