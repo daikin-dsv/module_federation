@@ -1,4 +1,5 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
+
 const { REGIONAL_APP_1, LAYOUT, WIDGETS } = require('../../config');
 const shared = require('./moduleFederationShared');
 
