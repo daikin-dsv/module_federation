@@ -46,6 +46,41 @@ module.exports = ({ mode }) => {
                 ]
             },
             plugins: [
+                new ModuleFederationPlugin({
+                    name: REGIONAL_APP_2.NAME,
+                    remotes: mode === 'production'
+                        ? {
+                            Layout: `${LAYOUT.NAME}@${process.env.LAYOUT_URL}/remoteEntry.js`,
+                            Widget: `${WIDGETS.NAME}@${process.env.WIDGETS_URL}/remoteEntry.js`
+                        }
+                        : {
+                            Layout: `${LAYOUT.NAME}@http://localhost:${LAYOUT.PORT}/remoteEntry.js`,
+                            Widget: `${WIDGETS.NAME}@http://localhost:${WIDGETS.PORT}/remoteEntry.js`,
+                        },
+                    shared: {
+                        react: {
+                            singleton: true,
+                            requiredVersion: dependencies.react
+                        },
+                        'react-dom': {
+                            singleton: true,
+                            requiredVersion: dependencies['react-dom']
+                        },
+                        'react-router': {
+                            singleton: true,
+                            requiredVersion: dependencies['react-router']
+                        },
+                        '@daikin-oss/design-system-web-components': {
+                            singleton: true,
+                            requiredVersion:
+                                dependencies['@daikin-oss/design-system-web-components']
+                        },
+                        '@daikin-oss/dds-tokens': {
+                            singleton: true,
+                            requiredVersion: dependencies['@daikin-oss/dds-tokens']
+                        }
+                    }
+                }),
                 new HtmlRspackPlugin({
                     template: './index.html',
                     inject: 'body'
