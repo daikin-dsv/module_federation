@@ -1,8 +1,6 @@
 const ReactRefreshWebpackPlugin = require('@rspack/plugin-react-refresh');
-const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
 
-const { REGIONAL_APP_1, LAYOUT, WIDGETS } = require('../../config');
-const shared = require('./moduleFederationShared');
+const { REGIONAL_APP_1 } = require('../../config');
 
 module.exports = () => ({
     devServer: {
@@ -35,15 +33,5 @@ module.exports = () => ({
             }
         ]
     },
-    plugins: [
-        new ReactRefreshWebpackPlugin(),
-        new ModuleFederationPlugin({
-            name: REGIONAL_APP_1.NAME,
-            remotes: {
-                Layout: `${LAYOUT.NAME}@${process.env.LAYOUT_URL}/remoteEntry.js`,
-                Widget: `${WIDGETS.NAME}@${process.env.WIDGETS_URL}/remoteEntry.js`
-            },
-            shared
-        })
-    ]
+    plugins: [new ReactRefreshWebpackPlugin()]
 });

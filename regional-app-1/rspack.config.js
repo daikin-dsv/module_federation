@@ -1,8 +1,10 @@
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
 const { HtmlRspackPlugin, rspack, DefinePlugin } = require('@rspack/core');
 const { merge } = require('webpack-merge');
 
 const modeConfig = (env) => require(`./build-utils/rspack.${env}`)(env);
-const { REGIONAL_APP_1 } = require('../config');
+const shared = require('./build-utils/moduleFederationShared');
+const { REGIONAL_APP_1, LAYOUT, WIDGETS } = require('../config');
 
 module.exports = ({ mode }) => {
     const config = merge(
@@ -44,6 +46,14 @@ module.exports = ({ mode }) => {
                 ]
             },
             plugins: [
+                new ModuleFederationPlugin({
+                    name: REGIONAL_APP_1.NAME,
+                    remotes: {
+                        Layout: `${LAYOUT.NAME}@http://localhost:${LAYOUT.PORT}/remoteEntry.js`,
+                        Widget: `${WIDGETS.NAME}@http://localhost:${WIDGETS.PORT}/remoteEntry.js`,
+                    },
+                    shared
+                }),
                 new HtmlRspackPlugin({
                     template: './index.html',
                     inject: 'body'
