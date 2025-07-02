@@ -1,9 +1,7 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - '**'
+  workflow_dispatch:
 
 permissions:
   # for github pages branch
