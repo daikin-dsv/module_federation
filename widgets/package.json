@@ -17,9 +17,7 @@
         "@daikin-oss/dds-tokens": "^0.3.2",
         "@daikin-oss/design-system-web-components": "^1.1.0",
         "css-loader": "^7.1.2",
-        "lit": "^3.1.2",
-        "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "lit": "^3.1.2"
     },
     "devDependencies": {
         "@module-federation/enhanced": "^0.8.8",
