@@ -2,11 +2,11 @@ import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 
-import AppRoutes, { NAVIGATION_CONFIG } from './AppRoutes';
+import AppRoutes from './AppRoutes';
 import ErrorBoundary from './ErrorBoundary';
 import ActiveNavLink from './components/ActiveNavLink';
 import './index.css';
-import { bootstrapText, appRoutesText } from './text.json';
+import { appRoutesText, bootstrapText, footerText, headerText, userText } from './text.json';
 import './webcomponents';
 
 const AuthProvider = React.lazy(() =>
@@ -38,32 +38,60 @@ const Footer = React.lazy(() =>
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
-root.render(
-    <AuthProvider>
-        <BrowserRouter>
-            <ErrorBoundary fallback={<div>{bootstrapText.error}</div>}>
-                <div className="flex h-screen flex-col">
-                    <Suspense fallback={bootstrapText.loadingHeader}>
-                        <Header>
-                            <UserProfile />
-                            <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
-                                {NAVIGATION_CONFIG.ALERTS.name}
-                            </ActiveNavLink>
-                            <NavMenu slot="route" parentNav={appRoutesText.settings}>
-                                <ActiveNavLink slot="child-nav" to={NAVIGATION_CONFIG.ALERTSSETTINGS.path}>
-                                    {NAVIGATION_CONFIG.ALERTSSETTINGS.name}
+const SETTINGS_CONFIG = Object.freeze({
+    language: true
+});
+
+
+const languageOptions = [
+    { value: 'en', label: userText['en'].english },
+    { value: 'ja', label: userText['ja'].japanese }
+];
+
+function getNavConfig(lang) {
+    return Object.freeze({
+        ALERTS: { name: appRoutesText[lang].alerts, path: '/' }
+    });
+}
+
+let currentLanguage = 'en';
+
+function renderApp(lang) {
+    currentLanguage = lang;
+    const NAVIGATION_CONFIG = getNavConfig(lang);
+    console.log('Rendering app with language:', currentLanguage);
+
+    root.render(
+        <AuthProvider>
+            <BrowserRouter>
+                <ErrorBoundary fallback={<div>{bootstrapText[lang].error}</div>}>
+                    <div className="flex h-screen flex-col">
+                        <Suspense fallback={headerText[lang].loadingHeader}>
+                            <Header>
+                                <UserProfile text={userText[lang]} settings={SETTINGS_CONFIG} language={{current: lang, options: languageOptions}} />
+                                <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
+                                    {NAVIGATION_CONFIG.ALERTS.name}
                                 </ActiveNavLink>
-                            </NavMenu>
-                        </Header>
-                    </Suspense>
-                    <main className="flex flex-grow flex-col overflow-x-scroll p-4">
-                        <AppRoutes />
-                    </main>
-                    <Suspense fallback={bootstrapText.loadingFooter}>
-                        <Footer copyright={bootstrapText.copyright} />
-                    </Suspense>
-                </div>
-            </ErrorBoundary>
-        </BrowserRouter>
-    </AuthProvider>
-);
+                            </Header>
+                        </Suspense>
+                        <main className="flex flex-grow flex-col overflow-x-scroll p-4">
+                            <AppRoutes text={appRoutesText[lang]} NAVIGATION_CONFIG={NAVIGATION_CONFIG} />
+                        </main>
+                        <Suspense fallback={footerText[lang].loadingFooter}>
+                            <Footer copyright={footerText[lang].copyright} />
+                        </Suspense>
+                    </div>
+                </ErrorBoundary>
+            </BrowserRouter>
+        </AuthProvider>
+    );
+}
+
+// Listen for language change events from the user-profile web component
+window.addEventListener('user-profile-language-changed', (e) => {
+    if (e.detail && e.detail.language) {
+        renderApp(e.detail.language);
+    }
+});
+
+renderApp(currentLanguage);

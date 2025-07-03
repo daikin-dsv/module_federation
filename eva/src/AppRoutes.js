@@ -1,21 +1,18 @@
+
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
-import { appRoutesText } from './text.json';
+function getPathToName(navConfig) {
+    return Object.keys(navConfig).reduce((prev, current) => {
+        prev[navConfig[current].path] = navConfig[current].name;
+        return prev;
+    }, {});
+}
 
-export const NAVIGATION_CONFIG = Object.freeze({
-    ALERTS: { name: appRoutesText.alerts, path: '/', breadcrumb: appRoutesText.alerts },
-    ALERTSSETTINGS: { name: appRoutesText.alerts, path: '/alertssettings', breadcrumb: appRoutesText.alertsSettings }
-});
-
-const PATH_TO_NAME = Object.keys(NAVIGATION_CONFIG).reduce((prev, current) => {
-    prev[NAVIGATION_CONFIG[current].path] = NAVIGATION_CONFIG[current].breadcrumb;
-    return prev;
-}, {});
-
-const AppRoutes = () => {
+const AppRoutes = ({ text, NAVIGATION_CONFIG }) => {
     const location = useLocation();
     const navigate = useNavigate();
+    const PATH_TO_NAME = getPathToName(NAVIGATION_CONFIG);
 
     return (
         <>
@@ -28,7 +25,7 @@ const AppRoutes = () => {
                             navigate(NAVIGATION_CONFIG.ALERTS.path);
                         }}
                     >
-                        {appRoutesText.home}
+                        {text.home}
                     </daikin-breadcrumb-item>
                     <daikin-breadcrumb-item>
                         {PATH_TO_NAME[location.pathname]}
@@ -41,7 +38,7 @@ const AppRoutes = () => {
                     element={
                         <div >
                             <Suspense
-                                fallback={<div>{appRoutesText.loadingAlerts}</div>}
+                                fallback={<div>{text.loadingAlerts}</div>}
                             >
                             </Suspense>
                         </div>
