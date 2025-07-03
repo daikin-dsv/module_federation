@@ -1,6 +1,6 @@
-@import 'tailwindcss';
-
 @import url('@daikin-oss/dds-tokens/css/daikin/Light/variables.css');
+
+@import 'tailwindcss';
 
 @theme {
     --breakpoint-mobile: 360px;

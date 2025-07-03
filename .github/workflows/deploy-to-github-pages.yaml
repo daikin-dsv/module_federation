@@ -1,0 +1,40 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  # for github pages branch
+  contents: write
+  id-token: write
+  actions: write
+  pages: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+        env:
+          LAYOUT_URL: https://turbo-doodle-2nm87nq.pages.github.io/layout
+          WIDGETS_URL: https://turbo-doodle-2nm87nq.pages.github.io/widgets
+          REGIONAL_APP_1_URL: https://turbo-doodle-2nm87nq.pages.github.io/regional-app-1
+          REGIONAL_APP_2_URL: https://turbo-doodle-2nm87nq.pages.github.io/regional-app-2
+          REGIONAL_APP_1_APP_PATH: /regional-app-1
+          REGIONAL_APP_2_APP_PATH: /regional-app-2
+
+      - name: Setup Git Credentials
+        run: |
+          git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git config --global user.email "github-actions-bot@github.com"
+          git config --global user.name "GitHub Actions Bot"
+      - name: Deploy to GitHub Pages
+        run: npm run deploy-github-pages:all
