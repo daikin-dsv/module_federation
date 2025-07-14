@@ -4,7 +4,8 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router';
 import { appRoutesText } from './text.json';
 
 export const NAVIGATION_CONFIG = Object.freeze({
-    ALERTS: { name: appRoutesText.alerts, path: '/' }
+    ALERTS: { name: appRoutesText.alerts, path: '/' },
+    ALERTSSETTINGS: { name: appRoutesText.alerts, path: '/alertssettings' }
 });
 
 const PATH_TO_NAME = Object.keys(NAVIGATION_CONFIG).reduce((prev, current) => {
@@ -41,6 +42,17 @@ const AppRoutes = () => {
                         <div >
                             <Suspense
                                 fallback={<div>{appRoutesText.loadingAlerts}</div>}
+                            >
+                            </Suspense>
+                        </div>
+                    }
+                />
+                <Route
+                    path={NAVIGATION_CONFIG.ALERTSSETTINGS.path}
+                    element={
+                        <div >
+                            <Suspense
+                                fallback={<div>{appRoutesText.loadingAlertsSettings}</div>}
                             >
                             </Suspense>
                         </div>

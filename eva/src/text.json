@@ -2,7 +2,9 @@
     "appRoutesText": {
         "home": "Home",
         "alerts": "Alerts",
-        "loadingAlerts": "Loading alerts..."
+        "loadingAlerts": "Loading alerts...",
+        "settings": "Settings",
+        "loadingAlertsSettings": "Loading alerts settings..."
     },
     "bootstrapText": {
         "error": "Something went wrong",
