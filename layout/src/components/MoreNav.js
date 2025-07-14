@@ -66,25 +66,25 @@ export class MoreNav extends LitElement {
                 this._positionPopover();
             }
         });
+        const slot = this.shadowRoot.querySelector('slot[name="child-nav"]');
+        console.log('MoreNav updateSlot', { slot });
+        // One observer reused for all children
+        const mutationObserver = new MutationObserver(() => this.requestUpdate());
         // Observe slot changes to update button style when active child changes
-        // const updateSlot = () => {
-        //     const slot = this.shadowRoot.querySelector('slot[name="child-nav"]');
-        //     console.log('MoreNav updateSlot', {slot});
-        //     const nodes = slot.assignedElements ? slot.assignedElements() : [];
-        //     console.log('Assigned child-nav elements:', nodes);
-        //     nodes.forEach((node) => {
-        //         node.addEventListener('slotchange', () => {
-        //             console.log('Slot change detected');
-        //             this.requestUpdate();
-        //         });
-        //     });
-        // };
-        // Wait for initial render to ensure slot exists
-        // this.updateComplete.then(updateSlot);
-        // Initial check for active child
-        if (this._hasActiveChild) {
+        //   (re)‑attach the observer whenever the slot's content changes
+        const observeChildren = () => {
+            mutationObserver.disconnect();
+            const nodes = slot.assignedElements ? slot.assignedElements() : [];
+            console.log('Assigned child-nav elements:', nodes);
+            nodes.forEach((node) => {
+                const mutationOpts = { attributeFilter: ['active'] };
+                mutationObserver.observe(node, mutationOpts);
+            });
+            // Make sure the first render is correct too
             this.requestUpdate();
-        }
+        };
+        slot.addEventListener('slotchange', observeChildren);
+        observeChildren();
         // Re-render button styling when href path changes
         // window.addEventListener('popstate', () => {
         //     console.log('Popstate event detected, updating MoreNav');
