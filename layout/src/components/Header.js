@@ -122,7 +122,6 @@ export class HeaderComponent extends LitElement {
         const nodes = Array.from(
             this.querySelectorAll('[slot="route"], [slot="overflow-route"]')
         );
-        // console.log('HeaderComponent firstUpdated - nodes:', nodes);
 
         const container = this.shadowRoot.querySelector('div.nav-list');
         if (!container) return;
@@ -175,28 +174,7 @@ export class HeaderComponent extends LitElement {
         // Observe header for resize; recalculate using cached widths
         const resizeObserver = new ResizeObserver(debounce(measure, 100));
         resizeObserver.observe(this.shadowRoot.querySelector('header'));
-
-        // window.addEventListener('popstate', () => {
-        //     console.log('Popstate event detected, updating Header');
-        //     this.requestUpdate();
-        // });
-        // window.addEventListener('pushstate', () => {
-        //     console.log('Pushstate event detected, updating Header');
-        //     this.requestUpdate();
-        // });
-        // window.addEventListener('replacestate', () => {
-        //     console.log('Replacestate event detected, updating Header');
-        //     this.requestUpdate();
-        // });
-        // window.addEventListener('hashchange', () => {
-        //     console.log('Hashchange event detected, updating Header');
-        //     this.requestUpdate();
-        // });
     }
-
-    // updated(changedProperties) {
-    //     console.log('HeaderComponent updated', { changedProperties });
-    // }
 
     render() {
         return html`

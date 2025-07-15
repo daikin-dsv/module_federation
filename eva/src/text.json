@@ -2,6 +2,7 @@
     "appRoutesText": {
         "home": "Home",
         "alerts": "Alerts",
+        "alertsSettings": "Alerts Settings",
         "loadingAlerts": "Loading alerts...",
         "settings": "Settings",
         "loadingAlertsSettings": "Loading alerts settings..."

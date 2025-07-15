@@ -5,7 +5,6 @@ import { NavLink, useLocation } from 'react-router';
 const ActiveNavLink = ({ to, children, ...props }) => {
     const location = useLocation();
     const isActive = location.pathname === to;
-    console.log(`ActiveNavLink: ${to} is ${isActive ? 'active' : 'inactive'}`);
 
     return (
         <NavLink to={to} {...(isActive ? { active: '' } : {})} {...props}>

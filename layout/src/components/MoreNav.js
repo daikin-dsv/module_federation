@@ -59,15 +59,12 @@ export class MoreNav extends LitElement {
     }
 
     firstUpdated() {
-        console.log('MoreNav firstUpdated');
         window.addEventListener('resize', () => {
             if (this.isOpen) {
-                console.log('Window resized, repositioning popover');
                 this._positionPopover();
             }
         });
         const slot = this.shadowRoot.querySelector('slot[name="child-nav"]');
-        console.log('MoreNav updateSlot', { slot });
         // One observer reused for all children
         const mutationObserver = new MutationObserver(() => this.requestUpdate());
         // Observe slot changes to update button style when active child changes
@@ -75,7 +72,6 @@ export class MoreNav extends LitElement {
         const observeChildren = () => {
             mutationObserver.disconnect();
             const nodes = slot.assignedElements ? slot.assignedElements() : [];
-            console.log('Assigned child-nav elements:', nodes);
             nodes.forEach((node) => {
                 const mutationOpts = { attributeFilter: ['active'] };
                 mutationObserver.observe(node, mutationOpts);
@@ -85,32 +81,7 @@ export class MoreNav extends LitElement {
         };
         slot.addEventListener('slotchange', observeChildren);
         observeChildren();
-        // Re-render button styling when href path changes
-        // window.addEventListener('popstate', () => {
-        //     console.log('Popstate event detected, updating MoreNav');
-        //     this.requestUpdate();
-        // });
-        // window.addEventListener('pushstate', () => {
-        //     console.log('Pushstate event detected, updating MoreNav');
-        //     this.requestUpdate();
-        // });
-        // window.addEventListener('replacestate', () => {
-        //     console.log('Replacestate event detected, updating MoreNav');
-        //     this.requestUpdate();
-        // });
-        // window.addEventListener('hashchange', () => {
-        //     console.log('Hashchange event detected, updating MoreNav');
-        //     this.requestUpdate();
-        // });
     }
-
-    updated(changedProperties) {
-        console.log('MoreNav updated', { changedProperties });
-    }
-
-    // shouldUpdate(changedProperties) {
-    //     console.log('MoreNav shouldUpdate', { changedProperties });
-    // }
 
     _positionPopover() {
         const button = this.shadowRoot.querySelector('button[popovertarget="children-nav"]');
@@ -139,14 +110,10 @@ export class MoreNav extends LitElement {
     get _hasActiveChild() {
         // Check if any slotted child-nav element has the 'active' attribute
         const slot = this.shadowRoot.querySelector('slot[name="child-nav"]');
-        console.log('Checking for active child nav items:', { slot });
         if (!slot) return false;
         const nodes = slot.assignedElements ? slot.assignedElements() : [];
-        console.log(slot.assignedElements);
-        console.log('Checking for active child nav items:', nodes);
         return nodes.some((el) => el.hasAttribute('active'));
     }
-    // <slot name="child-nav" @click="${() => this.updateComplete.then(() => {console.log('what'); return this.requestUpdate()})}"></slot>
 
     render() {
         const buttonClass = [
@@ -161,6 +128,7 @@ export class MoreNav extends LitElement {
                 class=${buttonClass}
                 popovertarget="children-nav"
                 @click="${this._toggleOpen}"
+                data-testId="parent-nav-button"
             >
                 ${this.parentNav}
                 <daikin-icon
@@ -173,11 +141,12 @@ export class MoreNav extends LitElement {
                 id="children-nav"
                 popover
                 class="rounded-md border border-solid border-[var(--dds-color-divider)]"
+                data-testId="children-nav-popover"
             >
                 <daikin-card>
                     <div class="-mx-4">
                         <daikin-list>
-                            <slot name="child-nav" @click="${() => this.updateComplete.then(() => {console.log(this._hasActiveChild); return this.requestUpdate()})}"></slot>
+                            <slot name="child-nav"></slot>
                         </daikin-list>
                     </div>
                 </daikin-card>
