@@ -32,7 +32,7 @@ export default [
         }
     },
     {
-        files: ['{regional-app-1,regional-app-2,widgets,docs}/**/*.{js,mjs,cjs,jsx}'],
+        files: ['{regional-app-1,regional-app-2,eva,docs}/**/*.{js,mjs,cjs,jsx}'],
         ...pluginReact.configs.flat.recommended,
         rules: {
             ...pluginReact.configs.flat.recommended.rules,
@@ -40,11 +40,11 @@ export default [
         }
     },
     {
-        files: ['{regional-app-1,regional-app-2,widgets,docs}/**/*.{js,mjs,cjs,jsx}'],
+        files: ['{regional-app-1,regional-app-2,eva,docs}/**/*.{js,mjs,cjs,jsx}'],
         ...reactHooks.configs['recommended-latest']
     },
     {
-        files: ['{regional-app-1,regional-app-2,widgets,docs}/**/*.{js,mjs,cjs,jsx}'],
+        files: ['{regional-app-1,regional-app-2,eva,docs}/**/*.{js,mjs,cjs,jsx}'],
         ...jsxA11y.flatConfigs.recommended,
         rules: {
             ...jsxA11y.flatConfigs.recommended.rules,
@@ -52,11 +52,11 @@ export default [
         }
     },
     {
-        files: ['layout/**/*.js'],
+        files: ['{layout,widgets}/**/*.js'],
         ...wcConfigs['flat/recommended']
     },
     {
-        files: ['layout/**/*.js'],
+        files: ['{layout,widgets}/**/*.js'],
         ...litConfigs['flat/recommended']
     }
 ];
