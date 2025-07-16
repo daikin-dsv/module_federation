@@ -4,7 +4,7 @@ const { LAYOUT_BASE_URL, WIDGETS_BASE_URL } = process.env;
 
 /**
  * Get User's credentials
- * 
+ *
  * @param {string} user - Username
  */
 async function getUserCredentials(user) {
@@ -16,7 +16,7 @@ async function getUserCredentials(user) {
     }
 }
 
-const loggedInPage = async ({ page, user, cookies }, url, use) => {
+const loggedInPage = async ({ page, user, cookies, context }, url, use) => {
     try {
         await page.goto(url);
 
@@ -38,14 +38,14 @@ const loggedInPage = async ({ page, user, cookies }, url, use) => {
             page.getByRole('button', { name: 'Sign in' }),
             'Sign in button should bes visible'
         ).toBeVisible();
-        await page
-            .getByRole('textbox', { name: 'Username or email' })
-            .fill(username);
+        await page.getByRole('textbox', { name: 'Username or email' }).fill(username);
         await page.getByRole('textbox', { name: 'Password' }).fill(password);
         await page.getByRole('button', { name: 'Sign in' }).click();
         await page.waitForLoadState('domcontentloaded');
 
-        expect(page.url(), 'Should contain layout base URL in page url').toContain(LAYOUT_BASE_URL);
+        expect(page.url(), 'Should contain layout base URL in page url').toContain(
+            LAYOUT_BASE_URL
+        );
 
         await use(page);
 
@@ -56,7 +56,7 @@ const loggedInPage = async ({ page, user, cookies }, url, use) => {
         console.error('An error occurred while logging in:', error);
         throw error;
     }
-}
+};
 
 // Extend basic test by providing fixtures and options that can be used in the tests
 exports.test = test.extend({
@@ -64,11 +64,11 @@ exports.test = test.extend({
     user: [USERS.ADMIN.username, { option: true }],
     cookies: [false, { option: true }],
     // Define `layout` fixture
-    layoutPage: async ({ page, user, cookies }, use) => {
-        await loggedInPage({ page, user, cookies }, LAYOUT_BASE_URL, use);
+    layoutPage: async ({ page, user, cookies, context }, use) => {
+        await loggedInPage({ page, user, cookies, context }, LAYOUT_BASE_URL, use);
     },
     // Define `widgets` fixture
-    widgetsPage: async ({ page, cookies }, use) => {
+    widgetsPage: async ({ page, cookies, context }, use) => {
         const url = WIDGETS_BASE_URL;
         await page.goto(url);
         await use(page);

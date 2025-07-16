@@ -9,7 +9,7 @@
         "test:dev": "npx playwright test --ui",
         "lint": "npm run lint:eslint && npm run lint:lit-analyzer",
         "lint:eslint": "eslint .",
-        "lint:lit-analyzer": "lit-analyzer \"layout/src/**/*.{js,ts}\"",
+        "lint:lit-analyzer": "lit-analyzer \"{layout,widgets}/src/**/*.{js,ts}\"",
         "format": "prettier --write .",
         "build-and-run:layout": "docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest . && docker run -t -p 8080:80 layout:latest",
         "build": "LAYOUT_URL=$LAYOUT_URL npm run build --prefix=layout & WIDGETS_URL=$WIDGETS_URL npm run build --prefix=widgets & LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL REGIONAL_APP_1_URL=$REGIONAL_APP_1_URL APP_PATH=$REGIONAL_APP_1_APP_PATH npm run build --prefix=regional-app-1 & LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL REGIONAL_APP_2_URL=$REGIONAL_APP_2_URL REGIONAL_APP_2_URL=$REGIONAL_APP_2_URL APP_PATH=$REGIONAL_APP_2_APP_PATH npm run build --prefix=regional-app-2",
