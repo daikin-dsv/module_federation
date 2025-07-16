@@ -4,6 +4,8 @@
 # Stage 1: Build the application (uses node:20)
 FROM node:20 AS builder
 
+# Set environment variables for the build stage
+ENV LAYOUT_URL=https://apollo.daikinlab.com/rad/layout
 
 # Define the working directory
 WORKDIR /app/layout
