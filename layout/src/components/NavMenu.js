@@ -2,7 +2,7 @@ import { LitElement, html, css, unsafeCSS } from 'lit';
 
 import tailwindStyles from '../index.css?inline';
 
-export class MoreNav extends LitElement {
+export class NavMenu extends LitElement {
     static properties = {
         parentNav: { type: String },
     };
@@ -55,15 +55,9 @@ export class MoreNav extends LitElement {
     constructor() {
         super();
         this.parentNav = '';
-        this.isOpen = false;
     }
 
     firstUpdated() {
-        window.addEventListener('resize', () => {
-            if (this.isOpen) {
-                this._positionPopover();
-            }
-        });
         const slot = this.shadowRoot.querySelector('slot[name="child-nav"]');
         // One observer reused for all children
         const mutationObserver = new MutationObserver(() => this.requestUpdate());
@@ -71,7 +65,7 @@ export class MoreNav extends LitElement {
         //   (re)‑attach the observer whenever the slot's content changes
         const observeChildren = () => {
             mutationObserver.disconnect();
-            const nodes = slot.assignedElements ? slot.assignedElements() : [];
+            const nodes = slot?.assignedElements ? slot.assignedElements() : [];
             nodes.forEach((node) => {
                 const mutationOpts = { attributeFilter: ['active'] };
                 mutationObserver.observe(node, mutationOpts);
@@ -79,32 +73,8 @@ export class MoreNav extends LitElement {
             // Make sure the first render is correct too
             this.requestUpdate();
         };
-        slot.addEventListener('slotchange', observeChildren);
+        slot?.addEventListener('slotchange', observeChildren);
         observeChildren();
-    }
-
-    _positionPopover() {
-        const button = this.shadowRoot.querySelector('button[popovertarget="children-nav"]');
-        const popover = this.shadowRoot.getElementById('children-nav');
-        if (!button || !popover) return;
-        const rect = button.getBoundingClientRect();
-        // Align popover's right edge to button's right edge
-        const top = rect.bottom + window.scrollY;
-        const right = window.innerWidth - (rect.right + window.scrollX);
-        popover.style.position = 'absolute';
-        popover.style.top = `${top}px`;
-        popover.style.right = `${right}px`;
-        popover.style.left = 'auto';
-        popover.style.bottom = 'auto';
-        popover.style.minWidth = `${rect.width}px`;
-    }
-
-    _toggleOpen() {
-        this.isOpen = !this.isOpen;
-        this.requestUpdate();
-        if (this.isOpen) {
-            this.updateComplete.then(() => this._positionPopover());
-        }
     }
 
     get _hasActiveChild() {
@@ -124,35 +94,26 @@ export class MoreNav extends LitElement {
         ].join(' ');
 
         return html`
-            <button
-                class=${buttonClass}
-                popovertarget="children-nav"
-                @click="${this._toggleOpen}"
-                data-testId="parent-nav-button"
-            >
-                ${this.parentNav}
-                <daikin-icon
-                    color="current"
-                    icon="chevron-down"
-                    size="xl"
-                ></daikin-icon>
-            </button>
-            <div
-                id="children-nav"
-                popover
-                class="rounded-md border border-solid border-[var(--dds-color-divider)]"
-                data-testId="children-nav-popover"
-            >
-                <daikin-card>
-                    <div class="-mx-4">
-                        <daikin-list>
-                            <slot name="child-nav"></slot>
-                        </daikin-list>
-                    </div>
-                </daikin-card>
-            </div>
-        `;
+            <daikin-menu>
+                <button
+                    class=${buttonClass}
+                    data-testId="parent-nav-button"
+                >
+                    ${this.parentNav}
+                    <daikin-icon
+                        color="current"
+                        icon="chevron-down"
+                        size="xl"
+                    ></daikin-icon>
+                </button>
+                <daikin-list slot="menu" data-testId="children-nav-menu">
+                    <daikin-list-item class="-my-3 -mr-6 -ml-4" type="link">
+                        <slot name="child-nav"></slot>
+                    </daikin-list-item>
+                </daikin-list>
+            </daikin-menu>
+            `;
     }
 }
 
-customElements.define('more-nav', MoreNav);
+customElements.define('nav-menu', NavMenu);

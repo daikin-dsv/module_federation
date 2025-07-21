@@ -2,7 +2,7 @@ import { render, html } from 'lit';
 
 import './components/Footer.js';
 import './components/Header.js';
-import './components/MoreNav.js';
+import './components/NavMenu.js';
 import './components/User.js';
 import './context/Auth/index.js';
 import './index.css';
@@ -18,10 +18,10 @@ render(
                 <a slot="route" href="/home" active>Home</a>
                 <a slot="route" href="/about">About</a>
                 <a slot="route" href="/contact">Contact</a>
-                <more-nav slot="route" parentNav="Settings">
+                <nav-menu slot="route" parentNav="Settings">
                     <a slot="child-nav" href="/alerts">Alerts</a>
                     <a slot="child-nav" href="/reports">Reports</a>
-                </more-nav>
+                </nav-menu>
             </app-header>
             <app-footer></app-footer>
         </auth-provider>

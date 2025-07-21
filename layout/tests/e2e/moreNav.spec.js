@@ -1,11 +1,11 @@
 const { expect, test } = require('../../../tests/helper');
 
-test.describe('MoreNav', () => {
+test.describe('NavMenu', () => {
     test('Display parent and child navigation', async ({ layoutPage }) => {
         await expect(layoutPage.getByTestId('parent-nav-button')).toContainText('Settings');
         await layoutPage.getByTestId('parent-nav-button').click();
 
-        await layoutPage.getByTestId('children-nav-popover').waitFor({ state: 'visible' });
+        await layoutPage.getByTestId('children-nav-menu').waitFor({ state: 'visible' });
         await expect(layoutPage.getByRole('link', { name: 'Alerts' })).toBeVisible();
         await expect(layoutPage.getByRole('link', { name: 'Reports' })).toBeVisible();
         await layoutPage.getByRole('link', { name: 'Alerts' }).click();

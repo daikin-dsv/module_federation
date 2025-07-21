@@ -69,7 +69,7 @@ module.exports = ({ mode }) => {
                         './auth': './src/context/Auth/index.js',
                         './footer': './src/components/Footer.js',
                         './header': './src/components/Header.js',
-                        './morenav': './src/components/MoreNav.js',
+                        './navmenu': './src/components/NavMenu.js',
                         './user': './src/components/User.js'
                     },
                     shared: {

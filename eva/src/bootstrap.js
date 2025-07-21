@@ -24,9 +24,9 @@ const UserProfile = React.lazy(() =>
         default: (props) => <user-profile {...props}></user-profile>
     }))
 );
-const MoreNav = React.lazy(() =>
-    import('Layout/morenav').then(() => ({
-        default: (props) => <more-nav {...props}></more-nav>
+const NavMenu = React.lazy(() =>
+    import('Layout/navmenu').then(() => ({
+        default: (props) => <nav-menu {...props}></nav-menu>
     }))
 );
 const Footer = React.lazy(() =>
@@ -49,11 +49,11 @@ root.render(
                             <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
                                 {NAVIGATION_CONFIG.ALERTS.name}
                             </ActiveNavLink>
-                            <MoreNav slot="route" parentNav={appRoutesText.settings}>
+                            <NavMenu slot="route" parentNav={appRoutesText.settings}>
                                 <ActiveNavLink slot="child-nav" to={NAVIGATION_CONFIG.ALERTSSETTINGS.path}>
                                     {NAVIGATION_CONFIG.ALERTSSETTINGS.name}
                                 </ActiveNavLink>
-                            </MoreNav>
+                            </NavMenu>
                         </Header>
                     </Suspense>
                     <main className="flex flex-grow flex-col overflow-x-scroll p-4">
