@@ -6,9 +6,9 @@ test.describe('NavMenu', () => {
         await layoutPage.getByTestId('parent-nav-button').click();
 
         await layoutPage.getByTestId('children-nav-menu').waitFor({ state: 'visible' });
-        await expect(layoutPage.getByRole('link', { name: 'Alerts' })).toBeVisible();
-        await expect(layoutPage.getByRole('link', { name: 'Reports' })).toBeVisible();
-        await layoutPage.getByRole('link', { name: 'Alerts' }).click();
+        await expect(layoutPage.getByRole('link', { name: 'Alerts', exact: true })).toBeVisible();
+        await expect(layoutPage.getByRole('link', { name: 'Reports', exact: true })).toBeVisible();
+        await layoutPage.getByRole('link', { name: 'Alerts', exact: true }).click();
 
         await layoutPage.waitForLoadState('domcontentloaded');
 
