@@ -66,10 +66,11 @@ module.exports = ({ mode }) => {
                     name: LAYOUT.NAME,
                     filename: 'remoteEntry.js',
                     exposes: {
-                        './header': './src/components/Header.js',
+                        './auth': './src/context/Auth/index.js',
                         './footer': './src/components/Footer.js',
-                        './user': './src/components/User.js',
-                        './auth': './src/context/Auth/index.js'
+                        './header': './src/components/Header.js',
+                        './navmenu': './src/components/NavMenu.js',
+                        './user': './src/components/User.js'
                     },
                     shared: {
                         '@daikin-oss/design-system-web-components': {

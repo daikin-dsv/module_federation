@@ -2,6 +2,7 @@ import { render, html } from 'lit';
 
 import './components/Footer.js';
 import './components/Header.js';
+import './components/NavMenu.js';
 import './components/User.js';
 import './context/Auth/index.js';
 import './index.css';
@@ -17,6 +18,10 @@ render(
                 <a slot="route" href="/home" active>Home</a>
                 <a slot="route" href="/about">About</a>
                 <a slot="route" href="/contact">Contact</a>
+                <nav-menu slot="route" parentNav="Settings">
+                    <a slot="child-nav" href="/alerts">Alerts</a>
+                    <a slot="child-nav" href="/reports">Reports</a>
+                </nav-menu>
             </app-header>
             <app-footer></app-footer>
         </auth-provider>
@@ -26,7 +31,7 @@ render(
 
 // Automatically toggle `active` on route links based on current path
 function updateActiveLinks() {
-    const links = root.querySelectorAll('a[slot="route"]');
+    const links = root.querySelectorAll('a[slot="route"], a[slot="child-nav"]');
     const current = window.location.pathname;
     links.forEach((link) => {
         if (link.getAttribute('href') === current) {
