@@ -29,8 +29,8 @@ FROM nginx:stable-alpine AS production
 RUN apk add --no-cache curl
 
 # Add nginx-prometheus-exporter
-ADD https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v1.1.0/nginx-prometheus-exporter-1.1.0-linux-amd64 /usr/bin/nginx-exporter
-RUN chmod +x /usr/bin/nginx-exporter
+RUN curl -L -o /usr/bin/nginx-exporter https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v1.0.0/nginx-prometheus-exporter-1.0.0-linux-amd64 \
+    && chmod +x /usr/bin/nginx-exporter
 
 # Define the working directory
 WORKDIR /app/layout
