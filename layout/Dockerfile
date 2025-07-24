@@ -36,9 +36,12 @@ RUN chmod +x /usr/bin/nginx-exporter
 WORKDIR /app/layout
 
 # Use custom nginx config
-COPY  --from=builder /app/layout/nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /app/layout/nginx.conf /etc/nginx/nginx.conf
 # Copy necessary files from the builder stage
 COPY --from=builder /app/layout/dist/ /usr/share/nginx/html
+
+# Remove default conf.d configs so your nginx.conf is respected
+RUN rm -f /etc/nginx/conf.d/default.conf
 
 # Expose ports for the application
 #  (80 for rad-layout and health probes, 9090 for metrics)
