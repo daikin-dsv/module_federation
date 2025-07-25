@@ -3,20 +3,28 @@
         "en": {
             "home": "Home",
             "alerts": "Alerts",
-            "loadingAlerts": "Loading alerts..."
+            "alertsSettings": "Alerts Settings",
+            "loadingAlerts": "Loading alerts...",
+            "settings": "Settings",
+            "loadingAlertsSettings": "Loading alerts settings..."
         },
         "ja": {
             "home": "ホーム",
             "alerts": "アラート",
-            "loadingAlerts": "アラートを読み込み中..."
+            "alertsSettings": "アラート設定",
+            "loadingAlerts": "アラートを読み込み中...",
+            "settings": "設定",
+            "loadingAlertsSettings": "アラート設定を読み込み中..."
         }
     },
     "bootstrapText": {
         "en": {
-            "error": "Something went wrong"
+            "error": "Something went wrong",
+            "loading": "Loading..."
         },
         "ja": {
-            "error": "問題が発生しました"
+            "error": "問題が発生しました",
+            "loading": "読み込み中..."
         }
     },
     "footerText": {

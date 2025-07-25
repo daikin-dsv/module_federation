@@ -7,6 +7,8 @@
     },
     "userText": {
         "email": "Email",
+        "english": "English",
+        "japanese": "日本語",
         "language": "Language",
         "manageAccount": "Manage Account",
         "name": "Name",

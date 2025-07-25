@@ -8,12 +8,8 @@ import ActiveNavLink from './components/ActiveNavLink';
 import './index.css';
 import { appRoutesText, bootstrapText, footerText, headerText, userText } from './text.json';
 import './webcomponents';
+import { init } from '../../layout/src/context/Auth/keycloak';
 
-const AuthProvider = React.lazy(() =>
-    import('Layout/auth').then(() => ({
-        default: (props) => <auth-provider {...props}></auth-provider>
-    }))
-);
 const Header = React.lazy(() =>
     import('Layout/header').then(() => ({
         default: (props) => <app-header {...props}></app-header>
@@ -35,63 +31,52 @@ const Footer = React.lazy(() =>
     }))
 );
 
-const rootElement = document.getElementById('root');
-const root = createRoot(rootElement);
-
-const SETTINGS_CONFIG = Object.freeze({
-    language: true
-});
-
-
-const languageOptions = [
-    { value: 'en', label: userText['en'].english },
-    { value: 'ja', label: userText['ja'].japanese }
-];
-
 function getNavConfig(lang) {
     return Object.freeze({
-        ALERTS: { name: appRoutesText[lang].alerts, path: '/' }
+        ALERTS: { name: appRoutesText[lang].alerts, path: '/', breadcrumb: appRoutesText[lang].alerts },
+        ALERTSSETTINGS: { name: appRoutesText[lang].alerts, path: '/alertssettings', breadcrumb: appRoutesText[lang].alertsSettings }
     });
 }
 
-let currentLanguage = 'en';
-
-function renderApp(lang) {
-    currentLanguage = lang;
+function AppContainer({ lang, user }) {
     const NAVIGATION_CONFIG = getNavConfig(lang);
-    console.log('Rendering app with language:', currentLanguage);
 
-    root.render(
-        <AuthProvider>
-            <BrowserRouter>
-                <ErrorBoundary fallback={<div>{bootstrapText[lang].error}</div>}>
-                    <div className="flex h-screen flex-col">
-                        <Suspense fallback={headerText[lang].loadingHeader}>
-                            <Header>
-                                <UserProfile text={userText[lang]} settings={SETTINGS_CONFIG} language={{current: lang, options: languageOptions}} />
-                                <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
-                                    {NAVIGATION_CONFIG.ALERTS.name}
+    return (
+        <BrowserRouter>
+            <ErrorBoundary fallback={<div>{bootstrapText[lang].error}</div>}>
+                <div className="flex h-screen flex-col">
+                    <Suspense fallback={headerText[lang].loadingHeader}>
+                        <Header>
+                            <UserProfile text={userText[lang]} user={user} />
+                            <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
+                                {NAVIGATION_CONFIG.ALERTS.name}
+                            </ActiveNavLink>
+                            <NavMenu slot="route" parentNav={appRoutesText[lang].settings}>
+                                <ActiveNavLink slot="child-nav" to={NAVIGATION_CONFIG.ALERTSSETTINGS.path}>
+                                    {NAVIGATION_CONFIG.ALERTSSETTINGS.name}
                                 </ActiveNavLink>
-                            </Header>
-                        </Suspense>
-                        <main className="flex flex-grow flex-col overflow-x-scroll p-4">
-                            <AppRoutes text={appRoutesText[lang]} NAVIGATION_CONFIG={NAVIGATION_CONFIG} />
-                        </main>
-                        <Suspense fallback={footerText[lang].loadingFooter}>
-                            <Footer copyright={footerText[lang].copyright} />
-                        </Suspense>
-                    </div>
-                </ErrorBoundary>
-            </BrowserRouter>
-        </AuthProvider>
+                            </NavMenu>
+                        </Header>
+                    </Suspense>
+                    <main className="flex flex-grow flex-col overflow-x-scroll p-4">
+                        <AppRoutes text={appRoutesText[lang]} NAVIGATION_CONFIG={NAVIGATION_CONFIG} />
+                    </main>
+                    <Suspense fallback={footerText[lang].loadingFooter}>
+                        <Footer copyright={footerText[lang].copyright} />
+                    </Suspense>
+                </div>
+            </ErrorBoundary>
+        </BrowserRouter>
     );
 }
 
-// Listen for language change events from the user-profile web component
-window.addEventListener('user-profile-language-changed', (e) => {
-    if (e.detail && e.detail.language) {
-        renderApp(e.detail.language);
-    }
-});
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
 
-renderApp(currentLanguage);
+(async () => {
+    const sso = await init();
+    const user = sso.tokenParsed;
+    const lang = user && user.locale && appRoutesText[user.locale] ? user.locale : 'en';
+
+    root.render(sso.authenticated ? <AppContainer lang={lang} user={user} /> : <div>{bootstrapText[lang].loading}</div>);
+})();

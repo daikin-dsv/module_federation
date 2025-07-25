@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
-function getPathToName(navConfig) {
+const getPathToName = (navConfig) => {
     return Object.keys(navConfig).reduce((prev, current) => {
-        prev[navConfig[current].path] = navConfig[current].name;
+        prev[navConfig[current].path] = navConfig[current].breadcrumb;
         return prev;
     }, {});
-}
+};
 
 const AppRoutes = ({ text, NAVIGATION_CONFIG }) => {
     const location = useLocation();
@@ -35,10 +35,8 @@ const AppRoutes = ({ text, NAVIGATION_CONFIG }) => {
                 <Route
                     path={NAVIGATION_CONFIG.ALERTS.path}
                     element={
-                        <div >
-                            <Suspense
-                                fallback={<div>{text.loadingAlerts}</div>}
-                            >
+                        <div>
+                            <Suspense fallback={<div>{text.loadingAlerts}</div>}>
                             </Suspense>
                         </div>
                     }
@@ -46,10 +44,8 @@ const AppRoutes = ({ text, NAVIGATION_CONFIG }) => {
                 <Route
                     path={NAVIGATION_CONFIG.ALERTSSETTINGS.path}
                     element={
-                        <div >
-                            <Suspense
-                                fallback={<div>{appRoutesText.loadingAlertsSettings}</div>}
-                            >
+                        <div>
+                            <Suspense fallback={<div>{text.loadingAlertsSettings}</div>}>
                             </Suspense>
                         </div>
                     }

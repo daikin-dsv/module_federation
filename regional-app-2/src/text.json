@@ -26,6 +26,8 @@
     },
     "userText": {
         "email": "Eメール",
+        "japanese": "日本語",
+        "language": "言語",
         "manageAccount": "アカウント管理",
         "name": "名前",
         "profile": "プロフィール",

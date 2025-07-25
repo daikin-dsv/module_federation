@@ -11,8 +11,8 @@ export class UserProfile extends LitElement {
         menu: { type: String },
         user: { type: Object },
         text: { type: Object },
-        settings: { type: Object },
-        language: { type: Object }
+        // Enable settings when needed
+        // settings: { type: Object },
     };
 
     constructor() {
@@ -20,31 +20,12 @@ export class UserProfile extends LitElement {
         this.menu = '';
         this.user = null;
         this.text = userText;
-        this.settings = { language: false };
-        this.language = {
-            current: '',
-            options: []
-        };
+        // this.settings = false;
 
         authStore.addEventListener('auth-changed', (e) => {
             this.user = e.detail;
             this.requestUpdate();
         });
-    }
-
-
-    _changeLanguage(e) {
-        this.language = {
-            ...this.language,
-            current: e.target.value
-        };
-        // Dispatch a custom event to notify the host app of the language change
-        this.dispatchEvent(new CustomEvent('user-profile-language-changed', {
-            detail: { language: this.language.current },
-            bubbles: true,
-            composed: true
-        }));
-        this.requestUpdate();
     }
 
     static styles = css`
@@ -115,7 +96,7 @@ export class UserProfile extends LitElement {
                                                   slot="right-icon"
                                               ></daikin-icon>
                                           </daikin-list-item>
-                                    ${this.settings.language
+                                    ${/* this.settings
                                         ? html`
                                             <daikin-list-item
                                                 @click="${() => this._showMenu('settings')}"
@@ -128,7 +109,7 @@ export class UserProfile extends LitElement {
                                                 ></daikin-icon>
                                             </daikin-list-item>
                                         `
-                                        : null}
+                                        : null */ ''}
                                       </daikin-list>
                                   </div>
                                   <daikin-card-footer>
@@ -173,6 +154,20 @@ export class UserProfile extends LitElement {
                                               >${this.user.email}</span
                                           >
                                       </div>
+                                      <div class="flex flex-col">
+                                          <span class="font-(--dds-font-weight-bold)" data-testId="user-profile-language-label"
+                                              >${this.text.language}</span
+                                          >
+                                          <span class="flex flex-wrap break-all" data-testId="user-profile-language"
+                                              >${
+                                                this.user.locale === 'en' && this.text.english
+                                                  ? this.text.english
+                                                  : this.user.locale === 'ja' && this.text.japanese
+                                                    ? this.text.japanese
+                                                    : this.user.locale
+                                              }</span
+                                          >
+                                      </div>
                                   </div>
                                   <daikin-card-footer>
                                       <daikin-button
@@ -191,7 +186,7 @@ export class UserProfile extends LitElement {
                               </daikin-card>
                           `
                         : null}
-                    ${this.menu === 'settings' && this.settings.language
+                    ${/* this.menu === 'settings'
                         ? html`
                               <daikin-card class="flex w-80 flex-col" data-testId="user-profile-settings-menu">
                                   <daikin-icon-button
@@ -203,40 +198,10 @@ export class UserProfile extends LitElement {
                                       <daikin-icon icon="chevron-left"></daikin-icon>
                                   </daikin-icon-button>
                                   <div class="flex flex-col gap-2">
-                                      <label class="font-(--dds-font-weight-bold)"
-                                          for="language-select"
-                                          data-testId="user-profile-settings-language-label"
-                                      >
-                                        ${this.text.language}
-                                      </label>
-                                      <div class="relative">
-                                          <select
-                                              id="language-select"
-                                              class="border rounded p-3 text-(--dds-color-common-text-primary) appearance-none w-full pr-10"
-                                              @change="${this._changeLanguage}"
-                                              .value="${this.language.current}"
-                                              data-testId="user-language-select"
-                                          >
-                                              ${this.language.options.map(
-                                                  (opt) => {
-                                                    if (opt.value === this.language.current) {
-                                                        return html`<option value="${opt.value}" selected data-testid="user-language-option-selected-${opt.value}">${opt.label}</option>`
-                                                    } else {
-                                                        return html`<option value="${opt.value}" data-testid="user-language-option-${opt.value}">${opt.label}</option>`
-                                                    }
-                                                }
-                                              )}
-                                          </select>
-                                          <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
-                                            <daikin-icon-button variant="ghost" color="neutral">
-                                                <daikin-icon size="l" color="current" icon="chevron-down"></daikin-icon>
-                                            </daikin-icon-button>
-                                          </span>
-                                      </div>
                                   </div>
                               </daikin-card>
                           `
-                        : null}
+                        : null */ ''}
                 </div>
             </div>
         `;
