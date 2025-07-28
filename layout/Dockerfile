@@ -28,6 +28,10 @@ FROM nginx:stable-alpine AS production
 # Define the working directory
 WORKDIR /app/layout
 
+# Use custom nginx config
+# COPY --from=builder /app/layout/nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+
 # Install nginx-prometheus-exporter for metrics
 RUN apk add --no-cache wget tar && \
     wget -O /tmp/nginx_prometheus_exporter.tar.gz https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v1.1.0/nginx-prometheus-exporter_1.1.0_linux_amd64.tar.gz && \
