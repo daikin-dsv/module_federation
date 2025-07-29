@@ -1,9 +1,11 @@
+import '@daikin-oss/design-system-web-components/components/button/index.js';
 import { render, html } from 'lit';
 
 import './components/Alarm.js';
 import './components/EnergyGauge.js';
 import { WaterIcon } from './components/InfoCard.js';
 import './components/Light.js';
+import './components/ConfirmationWindow.js';
 import './index.css';
 import { bootstrapText, lightText } from './text.json';
 
@@ -22,6 +24,17 @@ render(
             <span slot="icon" .innerHTML=${WaterIcon}></span>
         </info-card>
         <light-widget label="${bootstrapText.lobby}" .text=${lightText}></light-widget>
+        <daikin-button
+            @click=${(e) => {
+                e.preventDefault();
+                const confirmationWindow = document.querySelector('widget-confirmation-window');
+                confirmationWindow.open = true;
+            }}
+            data-testid="confirmation-button"
+        >
+            Confirm
+        </daikin-button>
+        <widget-confirmation-window></widget-confirmation-window>
     `,
     root
 );

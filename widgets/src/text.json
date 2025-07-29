@@ -3,13 +3,19 @@
         "alarm": "Alarm",
         "alarms": "Alarms"
     },
-    "lightText": {
-        "on": "On",
-        "off": "Off"
-    },
     "bootstrapText": {
         "dsv": "DSV",
         "water": "Water",
         "lobby": "Lobby"
+    },
+    "confirmationWindowText": {
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "description": "Are you sure you want to proceed?",
+        "header": "Confirmation Required"
+    },
+    "lightText": {
+        "on": "On",
+        "off": "Off"
     }
 }
