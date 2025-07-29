@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const { USERS } = require('./constants');
-const { LAYOUT_BASE_URL, WIDGETS_BASE_URL } = process.env;
+const { LAYOUT_BASE_URL, WIDGETS_BASE_URL, REGIONAL_APP_1_BASE_URL, REGIONAL_APP_2_BASE_URL, EVA_URL } = process.env;
 
 /**
  * Get User's credentials
@@ -36,16 +36,14 @@ const loggedInPage = async ({ page, user, cookies, context }, url, use) => {
         ).toBeVisible();
         await expect(
             page.getByRole('button', { name: 'Sign in' }),
-            'Sign in button should bes visible'
+            'Sign in button should be visible'
         ).toBeVisible();
         await page.getByRole('textbox', { name: 'Username or email' }).fill(username);
         await page.getByRole('textbox', { name: 'Password' }).fill(password);
         await page.getByRole('button', { name: 'Sign in' }).click();
         await page.waitForLoadState('domcontentloaded');
 
-        expect(page.url(), 'Should contain layout base URL in page url').toContain(
-            LAYOUT_BASE_URL
-        );
+        expect(page.url(), `Should contain ${url} in page url`).toContain(url);
 
         await use(page);
 
@@ -75,6 +73,15 @@ exports.test = test.extend({
         if (cookies) {
             await context.clearCookies();
         }
+    },
+    regionalApp1Page: async ({ page, user, cookies, context }, use) => {
+        await loggedInPage({ page, user, cookies, context }, REGIONAL_APP_1_BASE_URL, use);
+    },
+    regionalApp2Page: async ({ page, user, cookies, context }, use) => {
+        await loggedInPage({ page, user, cookies, context }, REGIONAL_APP_2_BASE_URL, use);
+    },
+    evaPage: async ({ page, user, cookies, context }, use) => {
+        await loggedInPage({ page, user, cookies, context }, EVA_URL, use);
     }
 });
 
