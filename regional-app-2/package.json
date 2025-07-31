@@ -4,7 +4,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "rspack serve --env mode=development",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "cd .. && npx playwright test regional-app-2/tests/e2e/",
         "lint": "npx eslint . --config ../eslint.config.mjs",
         "format": "npx prettier --write .",
         "build": "rspack build --env mode=production",
