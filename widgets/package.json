@@ -6,7 +6,7 @@
         "dev": "rspack serve --env mode=development",
         "test": "cd .. && npx playwright test widgets/tests/e2e/",
         "lint": "npm run lint:eslint && npm run lint:lit-analyzer",
-        "lint:eslint": "npx eslint . --config ../eslint.config.mjs",
+        "lint:eslint": "npx eslint .",
         "lint:lit-analyzer": "npx lit-analyzer \"src/**/*.{js,ts}\"",
         "format": "npx prettier --write .",
         "build": "rspack build --env mode=production",
