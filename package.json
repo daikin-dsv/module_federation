@@ -49,6 +49,7 @@
         "./eva"
     ],
     "lint-staged": {
-        "**/*": "prettier --write --ignore-unknown"
+        "*.js": "eslint --cache --cache-location node_modules/.cache/.eslintcache",
+        "*.{js,css,md,json,yml,html}": "prettier --write"
     }
 }
