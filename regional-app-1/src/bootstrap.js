@@ -17,6 +17,9 @@ const AuthProvider = React.lazy(() =>
 const Header = React.lazy(() =>
     import('Layout/header').then(() => ({
         default: (props) => <app-header {...props}></app-header>
+    })),
+    import('Layout/navmenu').then(() => ({
+        default: (props) => <nav-menu {...props}></nav-menu>
     }))
 );
 const UserProfile = React.lazy(() =>
@@ -51,6 +54,7 @@ root.render(
                             <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.NAV3.path}>
                                 {NAVIGATION_CONFIG.NAV3.name}
                             </ActiveNavLink>
+                            {/* <NavMenu /> */}
                         </Header>
                     </Suspense>
                     <main className="flex flex-grow flex-col overflow-x-scroll p-4">

@@ -187,14 +187,9 @@ export class HeaderComponent extends LitElement {
                     <nav class="flex flex-grow justify-start items-center">
                         <ul class="nav-list flex max-h-16 flex-grow flex-wrap overflow-hidden">
                             <slot name="route"></slot>
-                            ${this.showMore
-                                ? html`
-                                    <nav-menu class="more-nav mx-4" parentNav="${this.text.more}">
-                                        <slot name="overflow-route" slot="child-nav"></slot>
-                                    </nav-menu>
-                                    `
-                                : ''
-                            }
+                            <nav-menu class=${this.showMore ? "visible more-nav mx-4" : "invisible more-nav"} parentNav="${this.text.more}">
+                                <slot name="overflow-route" slot="child-nav"></slot>
+                            </nav-menu>
                         </ul>
                     </nav>
                 </div>
