@@ -16,8 +16,6 @@ const COLORS = {
 export class ConfirmationWindowComponent extends LitElement {
     static properties = {
         open: { type: Boolean },
-        onCancel: { type: Function },
-        onConfirm: { type: Function },
         danger: { type: Boolean },
         text: { type: Object }
     };
@@ -25,8 +23,6 @@ export class ConfirmationWindowComponent extends LitElement {
     constructor() {
         super();
         this.open = false;
-        this.onCancel = () => this.open = false;
-        this.onConfirm = () => this.open = false;
         this.danger = false;
         this.text = confirmationWindowText;
     }
