@@ -35,6 +35,14 @@ export class ConfirmationWindowComponent extends LitElement {
         ${unsafeCSS(tailwindStyles)}
     `;
 
+    _handleCancel() {
+        this.dispatchEvent(new CustomEvent('cancel', { bubbles: true }));
+    }
+
+    _handleConfirm() {
+        this.dispatchEvent(new CustomEvent('confirm', { bubbles: true }));
+    }
+
     render() {
         return html`
             <daikin-modal
@@ -58,10 +66,10 @@ export class ConfirmationWindowComponent extends LitElement {
                     <span slot="description" data-testid="confirmation-window-description">${this.text.description}</span>
                 </daikin-modal-header>
                 <daikin-modal-footer>
-                    <daikin-button @click=${this.onCancel} variant="outline" data-testid="confirmation-window-cancel-button">
+                    <daikin-button @click=${this._handleCancel} variant="outline" data-testid="confirmation-window-cancel-button">
                         ${this.text.cancel}
                     </daikin-button>
-                    <daikin-button @click=${this.onConfirm} color="${this.danger ? 'danger' : 'default'}" data-testid="confirmation-window-confirm-button">
+                    <daikin-button @click=${this._handleConfirm} color="${this.danger ? 'danger' : 'default'}" data-testid="confirmation-window-confirm-button">
                         ${this.text.confirm}
                     </daikin-button>
                 </daikin-modal-footer>
