@@ -37,15 +37,20 @@ export class RightPanel extends LitElement {
     render() {
         return this.open
             ? html`
-                <div class="w-100 h-full border-l border-gray-200 p-1 overflow-y-auto">
+                <div
+                    class="w-100 h-full border-l border-gray-200 p-1 overflow-y-auto"
+                    data-testid="right-panel"
+                >
                     <daikin-tabs value="info">
                         <daikin-tab value="info">
                             <h2>${rightPanel.info}</h2>
                         </daikin-tab>
                             <daikin-tab-panels slot="panels">
-                                ${this.type === 'cumulative'
-                    ? this._renderCumulative()
-                    : this._renderInstantaneous()}
+                                ${
+                                this.type === 'cumulative'
+                                    ? this._renderCumulative()
+                                    : this._renderInstantaneous()
+                                }
                             </daikin-tab-panels>
                     </daikin-tabs>
                 </div>
