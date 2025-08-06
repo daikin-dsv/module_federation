@@ -72,5 +72,37 @@
             "signedIn": "ユーザー名",
             "signOut": "サインアウト"
         }
+    },
+    "alertsText": {
+        "en": {
+            "alerts": "Alerts",
+            "showingResults": "Showing <strong>{start}</strong> to <strong>{end}</strong> of <strong>{total}</strong> results",
+            "searchPlaceholder": "Search for building",
+            "alertedAt": "Alerted at",
+            "alert": "Alert",
+            "building": "Building",
+            "data": "Data",
+            "type": "Type",
+            "actions": "Actions",
+            "read": "Read",
+            "unread": "Unread",
+            "markAsRead": "Mark as read",
+            "markAsUnread": "Mark as unread"
+        },
+        "ja": {
+            "alerts": "アラート",
+            "showingResults": "<strong>{start}</strong>から<strong>{end}</strong>まで表示（全<strong>{total}</strong>件）",
+            "searchPlaceholder": "建物で検索",
+            "alertedAt": "アラート時刻",
+            "alert": "アラート",
+            "building": "建物",
+            "data": "データ",
+            "type": "タイプ",
+            "actions": "アクション",
+            "read": "既読",
+            "unread": "未読",
+            "markAsRead": "既読にする",
+            "markAsUnread": "未読にする"
+        }
     }
 }
