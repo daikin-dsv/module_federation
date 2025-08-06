@@ -10,8 +10,7 @@ import { rightPanel } from '../text.json';
 export class RightPanel extends LitElement {
     static properties = {
         open: { type: Boolean },
-        type: { type: String },
-        data: { type: Object },
+        data: { type: Object }
     };
 
     constructor() {
