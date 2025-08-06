@@ -2,13 +2,19 @@ import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 
+import { init } from '../../layout/src/context/Auth/keycloak';
 import AppRoutes from './AppRoutes';
 import ErrorBoundary from './ErrorBoundary';
 import ActiveNavLink from './components/ActiveNavLink';
 import './index.css';
-import { appRoutesText, bootstrapText, footerText, headerText, userText } from './text.json';
+import {
+    appRoutesText,
+    bootstrapText,
+    footerText,
+    headerText,
+    userText
+} from './text.json';
 import './webcomponents';
-import { init } from '../../layout/src/context/Auth/keycloak';
 
 const Header = React.lazy(() =>
     import('Layout/header').then(() => ({
@@ -33,8 +39,16 @@ const Footer = React.lazy(() =>
 
 function getNavConfig(lang) {
     return Object.freeze({
-        ALERTS: { name: appRoutesText[lang].alerts, path: '/', breadcrumb: appRoutesText[lang].alerts },
-        ALERTSSETTINGS: { name: appRoutesText[lang].alerts, path: '/alertssettings', breadcrumb: appRoutesText[lang].alertsSettings }
+        ALERTS: {
+            name: appRoutesText[lang].alerts,
+            path: '/',
+            breadcrumb: appRoutesText[lang].alerts
+        },
+        ALERTSSETTINGS: {
+            name: appRoutesText[lang].alerts,
+            path: '/alertssettings',
+            breadcrumb: appRoutesText[lang].alertsSettings
+        }
     });
 }
 
@@ -48,18 +62,31 @@ function AppContainer({ lang, user }) {
                     <Suspense fallback={headerText[lang].loadingHeader}>
                         <Header>
                             <UserProfile text={userText[lang]} user={user} />
-                            <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
+                            <ActiveNavLink
+                                slot="route"
+                                to={NAVIGATION_CONFIG.ALERTS.path}
+                            >
                                 {NAVIGATION_CONFIG.ALERTS.name}
                             </ActiveNavLink>
-                            <NavMenu slot="route" parentNav={appRoutesText[lang].settings}>
-                                <ActiveNavLink slot="child-nav" to={NAVIGATION_CONFIG.ALERTSSETTINGS.path}>
+                            <NavMenu
+                                slot="route"
+                                parentNav={appRoutesText[lang].settings}
+                            >
+                                <ActiveNavLink
+                                    slot="child-nav"
+                                    to={NAVIGATION_CONFIG.ALERTSSETTINGS.path}
+                                >
                                     {NAVIGATION_CONFIG.ALERTSSETTINGS.name}
                                 </ActiveNavLink>
                             </NavMenu>
                         </Header>
                     </Suspense>
                     <main className="flex flex-grow flex-col overflow-x-scroll p-4">
-                        <AppRoutes text={appRoutesText[lang]} NAVIGATION_CONFIG={NAVIGATION_CONFIG} />
+                        <AppRoutes
+                            text={appRoutesText[lang]}
+                            NAVIGATION_CONFIG={NAVIGATION_CONFIG}
+                            lang={lang}
+                        />
                     </main>
                     <Suspense fallback={footerText[lang].loadingFooter}>
                         <Footer copyright={footerText[lang].copyright} />
@@ -78,5 +105,11 @@ const root = createRoot(rootElement);
     const user = sso.tokenParsed;
     const lang = user && user.locale && appRoutesText[user.locale] ? user.locale : 'en';
 
-    root.render(sso.authenticated ? <AppContainer lang={lang} user={user} /> : <div>{bootstrapText[lang].loading}</div>);
+    root.render(
+        sso.authenticated ? (
+            <AppContainer lang={lang} user={user} />
+        ) : (
+            <div>{bootstrapText[lang].loading}</div>
+        )
+    );
 })();
