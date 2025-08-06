@@ -13,11 +13,6 @@ import { bootstrapText, lightText } from './text.json';
 const root = document.getElementById('root');
 root.replaceChildren();
 
-const type = {
-    cumulative: 'cumulative',
-    instantaneous: 'instantaneous'
-}
-
 const cumulativeData = {
     threshold: '1500',
     aggregate: '2500'
@@ -31,7 +26,6 @@ const instantaneousData = {
 
 let showConfirmation = false;
 let rightPanelOpen = false;
-let rightPanelType = type.cumulative;
 let rightPanelData = cumulativeData;
 
 function update() {
@@ -66,7 +60,6 @@ function update() {
             <daikin-button
                 @click=${() => {
                 rightPanelOpen = !rightPanelOpen;
-                rightPanelType = type.cumulative;
                 rightPanelData = cumulativeData;
                 update();
 
@@ -78,7 +71,6 @@ function update() {
             <daikin-button
                 @click=${() => {
                 rightPanelOpen = !rightPanelOpen;
-                rightPanelType = type.instantaneous;
                 rightPanelData = instantaneousData;
                 update();
             }}
