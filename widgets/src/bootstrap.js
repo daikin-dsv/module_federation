@@ -32,6 +32,7 @@ const instantaneousData = {
 let showConfirmation = false;
 let rightPanelOpen = false;
 let rightPanelType = type.cumulative;
+let rightPanelData = cumulativeData;
 
 function update() {
     render(
@@ -58,14 +59,15 @@ function update() {
                 .open=${showConfirmation}
                 @cancel=${() => { showConfirmation = false; update(); }}
                 @confirm=${() => {
-                    showConfirmation = false;
-                    update();
-                }}
+                showConfirmation = false;
+                update();
+            }}
             ></widget-confirmation-window>
             <daikin-button
                 @click=${() => {
                 rightPanelOpen = !rightPanelOpen;
                 rightPanelType = type.cumulative;
+                rightPanelData = cumulativeData;
                 update();
 
             }}
@@ -77,6 +79,7 @@ function update() {
                 @click=${() => {
                 rightPanelOpen = !rightPanelOpen;
                 rightPanelType = type.instantaneous;
+                rightPanelData = instantaneousData;
                 update();
             }}
                 data-testid="toggle-right-panel-button-instantaneous"
@@ -87,12 +90,7 @@ function update() {
 
             <right-panel 
                 .open=${rightPanelOpen}
-                .type=${rightPanelType}
-                .threshold="${cumulativeData.threshold}"
-                .aggregate="${cumulativeData.aggregate}"
-                .min="${instantaneousData.min}"
-                .max="${instantaneousData.max}"
-                .span="${instantaneousData.span}"
+                .data=${rightPanelData}
             ></right-panel>
             <div>
         `, root);

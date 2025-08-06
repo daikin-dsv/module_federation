@@ -11,23 +11,13 @@ export class RightPanel extends LitElement {
     static properties = {
         open: { type: Boolean },
         type: { type: String },
-        threshold: { type: Number },
-        aggregate: { type: Number },
-        min: { type: Number },
-        max: { type: Number },
-        span: { type: Number }
+        data: { type: Object },
     };
 
     constructor() {
         super();
         this.open = false;
-        // 'cumulative' or 'instantaneous'
-        this.type = 'cumulative';
-        this.threshold = 0;
-        this.aggregate = 0;
-        this.min = 0;
-        this.max = 0;
-        this.span = 0;
+        this.data = {};
     }
 
     static styles = css`
@@ -46,11 +36,7 @@ export class RightPanel extends LitElement {
                             <h2>${rightPanel.info}</h2>
                         </daikin-tab>
                             <daikin-tab-panels slot="panels">
-                                ${
-                                this.type === 'cumulative'
-                                    ? this._renderCumulative()
-                                    : this._renderInstantaneous()
-                                }
+                                ${this._renderDescriptionList(this.data)}
                             </daikin-tab-panels>
                     </daikin-tabs>
                 </div>
@@ -58,35 +44,18 @@ export class RightPanel extends LitElement {
             : html``;
     }
 
-    _renderDescriptionList(properties) {
+    _renderDescriptionList(data) {
         return html`
             <dl slot="panel:info" class="m-1">
-            ${properties.map(property => html`
+                ${Object.keys(data).map(property => html`
                     <dt class=" font-bold mt-4">
-                        ${rightPanel[property]}
+                        ${rightPanel[property] || property}
                     </dt>
                     <dd>
-                        ${this[property]}
+                        ${data[property]}
                     </dd>
-                `)
-            }
-            </dl >
-            `;
-    }
-
-
-    _renderCumulative() {
-        const cumulativeProperties = ['threshold', 'aggregate'];
-
-        return html`
-            ${this._renderDescriptionList(cumulativeProperties)}
-        `;
-    }
-
-    _renderInstantaneous() {
-        const instantaneousProperties = ['min', 'max', 'span'];
-        return html`
-            ${this._renderDescriptionList(instantaneousProperties)}
+                `)}
+            </dl>
         `;
     }
 }
