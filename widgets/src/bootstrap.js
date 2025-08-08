@@ -6,17 +6,33 @@ import './components/EnergyGauge.js';
 import { WaterIcon } from './components/InfoCard.js';
 import './components/Light.js';
 import './components/ConfirmationWindow.js';
+import './components/RightPanel.js';
 import './index.css';
 import { bootstrapText, lightText } from './text.json';
 
 const root = document.getElementById('root');
 root.replaceChildren();
 
+const cumulativeData = {
+    threshold: '1500',
+    aggregate: '2500'
+};
+
+const instantaneousData = {
+    min: '10',
+    max: '100',
+    span: '30'
+};
+
 let showConfirmation = false;
+let rightPanelOpen = false;
+let rightPanelData = cumulativeData;
 
 function update() {
     render(
         html`
+            <div class="grid ${rightPanelOpen ? 'grid-cols-[1fr_400px]' : 'grid-cols-1'} grid-rows-1 gap-x-5 gap-y-0">
+            <div>
             <widget-alarm></widget-alarm>
             <energy-gauge
                 usage="1000"
@@ -41,6 +57,34 @@ function update() {
                     update();
                 }}
             ></widget-confirmation-window>
+            <daikin-button
+                @click=${() => {
+                rightPanelOpen = !rightPanelOpen;
+                rightPanelData = cumulativeData;
+                update();
+
+            }}
+                data-testid="toggle-right-panel-button-cumulative"
+            >
+                Toggle Cumulative Right Panel
+            </daikin-button>
+            <daikin-button
+                @click=${() => {
+                rightPanelOpen = !rightPanelOpen;
+                rightPanelData = instantaneousData;
+                update();
+            }}
+                data-testid="toggle-right-panel-button-instantaneous"
+            >
+                Toggle Instantaneous Right Panel
+            </daikin-button>
+            </div>
+
+            <right-panel 
+                .open=${rightPanelOpen}
+                .data=${rightPanelData}
+            ></right-panel>
+            <div>
         `, root);
 }
 

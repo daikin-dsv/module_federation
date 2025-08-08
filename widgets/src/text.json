@@ -17,5 +17,13 @@
     "lightText": {
         "on": "On",
         "off": "Off"
+    },
+    "rightPanel": {
+        "info": "Info",
+        "threshold": "Threshold",
+        "aggregate": "Aggregate",
+        "min": "Min",
+        "max": "Max",
+        "span": "Span"
     }
 }
