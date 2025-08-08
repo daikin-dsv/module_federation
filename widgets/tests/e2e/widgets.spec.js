@@ -22,18 +22,18 @@ test.describe('Widgets', () => {
 
     test('Right Panel is visible', async ({ widgetsPage }) => {
         await test.step('Open Right Panel with Cumulative Type', async () => {
-            await expect(widgetsPage.getByTestId('right-panel')).not.toBeVisible();
+            await expect(widgetsPage.locator('right-panel')).not.toBeVisible();
             await widgetsPage.getByTestId('toggle-right-panel-button-cumulative').click();
-            await expect(widgetsPage.getByTestId('right-panel')).toBeVisible();
+            await expect(widgetsPage.locator('right-panel')).toBeVisible();
             await widgetsPage.getByTestId('toggle-right-panel-button-cumulative').click();
-            await expect(widgetsPage.getByTestId('right-panel')).not.toBeVisible();
+            await expect(widgetsPage.locator('right-panel')).not.toBeVisible();
         });
         await test.step('Open Right Panel with Instantaneous Type', async () => {
-            await expect(widgetsPage.getByTestId('right-panel')).not.toBeVisible();
+            await expect(widgetsPage.locator('right-panel')).not.toBeVisible();
             await widgetsPage.getByTestId('toggle-right-panel-button-instantaneous').click();
-            await expect(widgetsPage.getByTestId('right-panel')).toBeVisible();
+            await expect(widgetsPage.locator('right-panel')).toBeVisible();
             await widgetsPage.getByTestId('toggle-right-panel-button-instantaneous').click();
-            await expect(widgetsPage.getByTestId('right-panel')).not.toBeVisible();
+            await expect(widgetsPage.locator('right-panel')).not.toBeVisible();
         });
     });
 });
