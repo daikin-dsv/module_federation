@@ -53,9 +53,9 @@ function update() {
                 .open=${showConfirmation}
                 @cancel=${() => { showConfirmation = false; update(); }}
                 @confirm=${() => {
-                showConfirmation = false;
-                update();
-            }}
+                    showConfirmation = false;
+                    update();
+                }}
             ></widget-confirmation-window>
             <daikin-button
                 @click=${() => {
