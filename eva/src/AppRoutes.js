@@ -1,7 +1,8 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
 import Alerts from './Alerts';
+import AlertSettings from './Alerts/AlertSettings';
 
 const getPathToName = (navConfig) => {
     return Object.keys(navConfig).reduce((prev, current) => {
@@ -36,23 +37,11 @@ const AppRoutes = ({ text, NAVIGATION_CONFIG }) => {
             <Routes>
                 <Route
                     path={NAVIGATION_CONFIG.ALERTS.path}
-                    element={
-                        <div>
-                            <Suspense fallback={<div>{text.loadingAlerts}</div>}>
-                                <Alerts lang={text.lang} />
-                            </Suspense>
-                        </div>
-                    }
+                    element={<Alerts lang={text.lang} />}
                 />
                 <Route
                     path={NAVIGATION_CONFIG.ALERTSSETTINGS.path}
-                    element={
-                        <div>
-                            <Suspense
-                                fallback={<div>{text.loadingAlertsSettings}</div>}
-                            ></Suspense>
-                        </div>
-                    }
+                    element={<AlertSettings lang={text.lang} />}
                 />
             </Routes>
         </>

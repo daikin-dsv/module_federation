@@ -147,6 +147,15 @@ test.describe('Alerts Page', () => {
     });
 
     test('sorting by date works', async ({ evaPage }) => {
+        // Wait for table to load
+        await evaPage.waitForSelector('daikin-table-cell[slot*=":alertedAt"]');
+
+        // Get the first row's date text before sorting
+        const firstRowDateBefore = evaPage
+            .locator('daikin-table-cell[slot*=":alertedAt"]')
+            .first();
+        const dateTextBefore = await firstRowDateBefore.textContent();
+
         // Wait for table header to be clickable
         await evaPage.waitForSelector(
             'daikin-table-header-cell[slot="header:alertedAt"]'
@@ -161,7 +170,16 @@ test.describe('Alerts Page', () => {
         // Wait for sort to apply
         await evaPage.waitForTimeout(500);
 
-        // Check that table still contains data (sorting worked)
+        // Get the first row's date text after sorting
+        const firstRowDateAfter = evaPage
+            .locator('daikin-table-cell[slot*=":alertedAt"]')
+            .first();
+        const dateTextAfter = await firstRowDateAfter.textContent();
+
+        // Verify that the first row changed (sorting actually worked)
+        expect(dateTextBefore).not.toBe(dateTextAfter);
+
+        // Verify that the table still contains the expected data
         await expect(evaPage.locator('daikin-table')).toContainText('2025/06/19');
     });
 

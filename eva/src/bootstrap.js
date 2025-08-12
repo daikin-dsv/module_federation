@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter, useNavigate } from 'react-router';
 
 import { init } from '../../layout/src/context/Auth/keycloak';
 import AppRoutes from './AppRoutes';
@@ -45,7 +45,7 @@ function getNavConfig(lang) {
             breadcrumb: appRoutesText[lang].alerts
         },
         ALERTSSETTINGS: {
-            name: appRoutesText[lang].alerts,
+            name: appRoutesText[lang].alertsSettings,
             path: '/alertssettings',
             breadcrumb: appRoutesText[lang].alertsSettings
         }
@@ -53,47 +53,45 @@ function getNavConfig(lang) {
 }
 
 function AppContainer({ lang, user }) {
+    const navigate = useNavigate();
     const NAVIGATION_CONFIG = getNavConfig(lang);
 
     return (
-        <BrowserRouter>
-            <ErrorBoundary fallback={<div>{bootstrapText[lang].error}</div>}>
-                <div className="flex h-screen flex-col">
-                    <Suspense fallback={headerText[lang].loadingHeader}>
-                        <Header>
-                            <UserProfile text={userText[lang]} user={user} />
+        <ErrorBoundary fallback={<div>{bootstrapText[lang].error}</div>}>
+            <div className="flex h-screen flex-col">
+                <Suspense fallback={headerText[lang].loadingHeader}>
+                    <Header>
+                        <UserProfile text={userText[lang]} user={user} />
+                        <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
+                            {NAVIGATION_CONFIG.ALERTS.name}
+                        </ActiveNavLink>
+                        <NavMenu slot="route" parentNav={appRoutesText[lang].settings}>
                             <ActiveNavLink
-                                slot="route"
-                                to={NAVIGATION_CONFIG.ALERTS.path}
+                                // Need this click handler because the <NavLink>
+                                // somehow doesn't work with NavMenu
+                                onClick={() => {
+                                    navigate('/alertssettings');
+                                }}
+                                slot="child-nav"
+                                to={NAVIGATION_CONFIG.ALERTSSETTINGS.path}
                             >
-                                {NAVIGATION_CONFIG.ALERTS.name}
+                                {NAVIGATION_CONFIG.ALERTSSETTINGS.name}
                             </ActiveNavLink>
-                            <NavMenu
-                                slot="route"
-                                parentNav={appRoutesText[lang].settings}
-                            >
-                                <ActiveNavLink
-                                    slot="child-nav"
-                                    to={NAVIGATION_CONFIG.ALERTSSETTINGS.path}
-                                >
-                                    {NAVIGATION_CONFIG.ALERTSSETTINGS.name}
-                                </ActiveNavLink>
-                            </NavMenu>
-                        </Header>
-                    </Suspense>
-                    <main className="flex flex-grow flex-col overflow-x-scroll p-4">
-                        <AppRoutes
-                            text={appRoutesText[lang]}
-                            NAVIGATION_CONFIG={NAVIGATION_CONFIG}
-                            lang={lang}
-                        />
-                    </main>
-                    <Suspense fallback={footerText[lang].loadingFooter}>
-                        <Footer copyright={footerText[lang].copyright} />
-                    </Suspense>
-                </div>
-            </ErrorBoundary>
-        </BrowserRouter>
+                        </NavMenu>
+                    </Header>
+                </Suspense>
+                <main className="flex flex-grow flex-col overflow-x-scroll p-4">
+                    <AppRoutes
+                        text={appRoutesText[lang]}
+                        NAVIGATION_CONFIG={NAVIGATION_CONFIG}
+                        lang={lang}
+                    />
+                </main>
+                <Suspense fallback={footerText[lang].loadingFooter}>
+                    <Footer copyright={footerText[lang].copyright} />
+                </Suspense>
+            </div>
+        </ErrorBoundary>
     );
 }
 
@@ -107,7 +105,9 @@ const root = createRoot(rootElement);
 
     root.render(
         sso.authenticated ? (
-            <AppContainer lang={lang} user={user} />
+            <BrowserRouter>
+                <AppContainer lang={lang} user={user} />
+            </BrowserRouter>
         ) : (
             <div>{bootstrapText[lang].loading}</div>
         )

@@ -4,7 +4,7 @@ import tailwindStyles from '../index.css?inline';
 
 export class NavMenu extends LitElement {
     static properties = {
-        parentNav: { type: String },
+        parentNav: { type: String }
     };
 
     static styles = css`
@@ -87,18 +87,15 @@ export class NavMenu extends LitElement {
 
     render() {
         const buttonClass = [
-            "flex h-16 items-center justify-center gap-2 break-keep -mx-4 px-4 hover:cursor-pointer",
+            'flex h-16 items-center justify-center gap-2 break-keep -mx-4 px-4 hover:cursor-pointer',
             this._hasActiveChild
-                ? "text-(--dds-color-common-brand-default) font-(--dds-font-weight-bold) border-b-4 pt-1 hover:text-(--dds-color-common-brand-hover) focus:text-(--dds-color-common-brand-press) focus:outline-none active:bg-(--dds-color-common-surface-press)"
-                : "text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)"
+                ? 'text-(--dds-color-common-brand-default) font-(--dds-font-weight-bold) border-b-4 pt-1 hover:text-(--dds-color-common-brand-hover) focus:text-(--dds-color-common-brand-press) focus:outline-none active:bg-(--dds-color-common-surface-press)'
+                : 'text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)'
         ].join(' ');
 
         return html`
             <daikin-menu>
-                <button
-                    class=${buttonClass}
-                    data-testId="parent-nav-button"
-                >
+                <button class=${buttonClass} data-testId="parent-nav-button">
                     ${this.parentNav}
                     <daikin-icon
                         color="current"
@@ -107,12 +104,16 @@ export class NavMenu extends LitElement {
                     ></daikin-icon>
                 </button>
                 <daikin-list slot="menu" data-testId="children-nav-menu">
-                    <daikin-list-item class="-my-3 -mr-6 -ml-4" type="link">
+                    <!-- Need the href to enable the onClick handler in react // Will need
+                    to refactor this so that the application enters the list items // DDS
+                    throws an error if daikin-list does not have any items // Will file
+                    bug ticket -->
+                    <daikin-list-item type="link" href="/">
                         <slot name="child-nav"></slot>
                     </daikin-list-item>
                 </daikin-list>
             </daikin-menu>
-            `;
+        `;
     }
 }
 
