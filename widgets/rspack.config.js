@@ -62,11 +62,13 @@ module.exports = ({ mode }) => {
                     filename: 'remoteEntry.js',
                     exposes: {
                         './Alarm': './src/components/Alarm.js',
+                        './ConfirmationWindow': './src/components/ConfirmationWindow.js',
                         './DatabricksDashboard':
                             './src/components/DatabricksDashboard.js',
                         './EnergyGauge': './src/components/EnergyGauge.js',
                         './InfoCard': './src/components/InfoCard.js',
-                        './Light': './src/components/Light.js'
+                        './Light': './src/components/Light.js',
+                        './TablePagination': './src/components/TablePagination.js'
                     },
                     shared: {
                         '@daikin-oss/design-system-web-components': {

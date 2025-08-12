@@ -4,17 +4,13 @@
             "home": "Home",
             "alerts": "Alerts",
             "alertsSettings": "Alerts Settings",
-            "loadingAlerts": "Loading alerts...",
-            "settings": "Settings",
-            "loadingAlertsSettings": "Loading alerts settings..."
+            "settings": "Settings"
         },
         "ja": {
             "home": "ホーム",
             "alerts": "アラート",
             "alertsSettings": "アラート設定",
-            "loadingAlerts": "アラートを読み込み中...",
-            "settings": "設定",
-            "loadingAlertsSettings": "アラート設定を読み込み中..."
+            "settings": "設定"
         }
     },
     "bootstrapText": {
@@ -103,6 +99,40 @@
             "unread": "未読",
             "markAsRead": "既読にする",
             "markAsUnread": "未読にする"
+        }
+    },
+    "alertSettingsText": {
+        "en": {
+            "alertSettings": "Alert Settings",
+            "showingResults": "Showing <strong>{start}</strong> to <strong>{end}</strong> of <strong>{total}</strong> results",
+            "searchPlaceholder": "Search for building",
+            "alert": "Alert",
+            "building": "Building",
+            "data": "Data",
+            "updatedAt": "Updated at",
+            "createAlert": "Create Alert",
+            "delete": "Delete",
+            "edit": "Edit",
+            "confirmDeleteHeader": "Delete alert setting",
+            "confirmDeleteDescription": "Delete \"{alert}\" for {building}? This action cannot be undone.",
+            "cancel": "Cancel",
+            "confirm": "Delete"
+        },
+        "ja": {
+            "alertSettings": "アラート設定",
+            "showingResults": "<strong>{start}</strong>から<strong>{end}</strong>まで表示（全<strong>{total}</strong>件）",
+            "searchPlaceholder": "建物で検索",
+            "alert": "アラート",
+            "building": "建物",
+            "data": "データ",
+            "updatedAt": "更新日時",
+            "createAlert": "アラート作成",
+            "delete": "削除",
+            "edit": "編集",
+            "confirmDeleteHeader": "アラート設定を削除",
+            "confirmDeleteDescription": "{alert} （{building}）を削除しますか？この操作は取り消せません。",
+            "cancel": "キャンセル",
+            "confirm": "削除"
         }
     }
 }

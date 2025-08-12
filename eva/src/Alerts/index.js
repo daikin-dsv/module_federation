@@ -1,90 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
+import { useTableData } from '../hooks/useTableData';
 import { alertsText } from '../text.json';
 
 const Alerts = ({ lang }) => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const [sortColumn, setSortColumn] = useState('alertedAt');
-    const [sortDirection, setSortDirection] = useState('desc');
-    const [alerts, setAlerts] = useState(mockAlerts);
-    const [filteredAlerts, setFilteredAlerts] = useState(mockAlerts);
-    const itemsPerPage = 10;
-
-    // Listen to <daikin-table>'s custom events
-    const tableRef = useRef(null);
-
-    // Filter alerts based on search term
-    useEffect(() => {
-        const filtered = alerts.filter((alert) =>
-            alert.building.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredAlerts(filtered);
-        setCurrentPage(1);
-    }, [searchTerm, alerts]);
-
-    // Listen for the custom "change-sort" event emitted by <daikin-table>
-    useEffect(() => {
-        const tableEl = tableRef.current;
-        if (!tableEl) return;
-
-        const handleSortChange = (e) => {
-            const column = e.target.sort;
-            const direction = e.target.order;
-            if (column) setSortColumn(column);
-            if (direction) setSortDirection(direction);
-        };
-
-        tableEl.addEventListener('change-sort', handleSortChange);
-        return () => {
-            tableEl.removeEventListener('change-sort', handleSortChange);
-        };
-    }, []);
-
-    // Sort alerts
-    const sortAlerts = (column) => {
-        const direction =
-            sortColumn === column && sortDirection === 'asc' ? 'desc' : 'asc';
-        setSortColumn(column);
-        setSortDirection(direction);
-    };
-    // Get sorted and paginated alerts
-    const getSortedAlerts = () => {
-        const sorted = [...filteredAlerts].sort((a, b) => {
-            let aValue = a[sortColumn];
-            let bValue = b[sortColumn];
-
-            if (sortColumn === 'alertedAt') {
-                aValue = new Date(aValue);
-                bValue = new Date(bValue);
-            }
-
-            if (sortDirection === 'asc') {
-                return aValue > bValue ? 1 : -1;
-            } else {
-                return aValue < bValue ? 1 : -1;
-            }
-        });
-
-        return sorted;
-    };
-
-    const sortedAlerts = getSortedAlerts();
-    const totalPages = Math.ceil(sortedAlerts.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentAlerts = sortedAlerts.slice(startIndex, endIndex);
-
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
+    const {
+        searchTerm,
+        setSearchTerm,
+        currentPage,
+        currentItems: currentAlerts,
+        totalPages,
+        startIndex,
+        endIndex,
+        tableRef,
+        sortItems,
+        handlePageChange,
+        updateItem
+    } = useTableData(mockAlerts, 'building', 10, 'alertedAt', 'desc');
 
     const handleMarkAsRead = (alertId) => {
-        setAlerts((prev) =>
-            prev.map((alert) =>
-                alert.id === alertId ? { ...alert, isRead: !alert.isRead } : alert
-            )
-        );
+        updateItem(alertId, {
+            isRead: !currentAlerts.find((alert) => alert.id === alertId)?.isRead
+        });
     };
 
     return (
@@ -117,10 +54,10 @@ const Alerts = ({ lang }) => {
                     // May be a bug on DDS side
                     headers={[
                         { key: 'alertedAt' },
-                        { key: 'alert', label: alertsText[lang || 'en'].alert },
-                        { key: 'building', label: alertsText[lang || 'en'].building },
-                        { key: 'data', label: alertsText[lang || 'en'].data },
-                        { key: 'type', label: alertsText[lang || 'en'].type },
+                        { key: 'alert' },
+                        { key: 'building' },
+                        { key: 'data' },
+                        { key: 'type' },
                         { key: 'actions' }
                     ]}
                     rows={currentAlerts.map((alert) => ({
@@ -139,11 +76,20 @@ const Alerts = ({ lang }) => {
                         key="alertedAt"
                         slot="header:alertedAt"
                         sortable
-                        onClick={() => sortAlerts('alertedAt')}
+                        onClick={() => sortItems('alertedAt')}
                         className="w-[200px]"
                     >
                         {alertsText[lang || 'en'].alertedAt}
                     </daikin-table-header-cell>
+                    {['alert', 'building', 'data', 'type'].map((key) => (
+                        <daikin-table-header-cell
+                            key={key}
+                            slot={`header:${key}`}
+                            className="min-w-[200px]"
+                        >
+                            {alertsText[lang || 'en'][key]}
+                        </daikin-table-header-cell>
+                    ))}
 
                     {/* data rows overrides */}
                     {currentAlerts.map((alert) => (
@@ -206,26 +152,17 @@ const Alerts = ({ lang }) => {
                 </daikin-table>
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-2.5">
-                <div
-                    className="text-dds-color-common-neutral-default grow-[1000] text-sm"
-                    dangerouslySetInnerHTML={{
-                        __html: alertsText[lang || 'en'].showingResults
-                            .replace('{start}', startIndex + 1)
-                            .replace('{end}', Math.min(endIndex, sortedAlerts.length))
-                            .replace('{total}', sortedAlerts.length)
-                    }}
-                />
-                <div className="flex grow items-center justify-center gap-1">
-                    <daikin-pagination
-                        total={totalPages}
-                        current={currentPage}
-                        onChange={(e) => {
-                            handlePageChange(e.target.current);
-                        }}
-                    ></daikin-pagination>
-                </div>
-            </div>
+            <table-pagination
+                startIndex={startIndex}
+                endIndex={endIndex}
+                totalItems={currentAlerts.length}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                lang={lang}
+                text={JSON.stringify({ alertsText })}
+                textKey="alertsText"
+                onPageChange={(e) => handlePageChange(e.detail.page)}
+            ></table-pagination>
         </div>
     );
 };
