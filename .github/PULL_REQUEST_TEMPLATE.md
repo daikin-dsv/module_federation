@@ -28,6 +28,6 @@
 
 ## Other info
 
-- Information for review this PR to the reviewer.
+- Information to help reviewers understand this PR.
 
 ## Related issues
