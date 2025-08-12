@@ -1,5 +1,5 @@
 # Build: docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest .
-# Run: docker run -d -t -p 8080:80 -p 9113:9113 layout:latest
+# Run: docker run -d -t -p 8080:80 layout:latest
 
 # Stage 1: Build the application (uses node:20)
 FROM node:20 AS builder
@@ -28,10 +28,6 @@ FROM nginx:stable-alpine AS production
 # Define the working directory
 WORKDIR /app/layout
 
-# Use custom nginx config
-# COPY --from=builder /app/layout/nginx.conf /etc/nginx/nginx.conf
-COPY nginx.conf /etc/nginx/nginx.conf
-
 # Install nginx-prometheus-exporter for metrics
 RUN apk add --no-cache wget tar && \
     wget -O /tmp/nginx_prometheus_exporter.tar.gz https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v1.1.0/nginx-prometheus-exporter_1.1.0_linux_amd64.tar.gz && \
@@ -47,6 +43,5 @@ COPY --from=builder /app/layout/dist/ /usr/share/nginx/html
 #  (80 for rad-layout and health probes, 9090 for metrics)
 EXPOSE 80 9090
 
-# CMD ["nginx", "-g", "daemon off;"]
 # Run both NGINX and exporter
 CMD ["/bin/sh", "-c", "nginx -g 'daemon off;' & nginx-prometheus-exporter -nginx.scrape-uri http://127.0.0.1/ -web.listen-address :9090"]
