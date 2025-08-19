@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 
-import { authStore } from '../context/Auth/context.js';
+import { getCurrentUser, onAuthChange } from '../context/Auth';
 import { logout, accountManagement } from '../context/Auth/keycloak.js';
 import tailwindStyles from '../index.css?inline';
 import { userText } from '../text.json';
@@ -22,7 +22,11 @@ export class UserProfile extends LitElement {
         this.text = userText;
         // this.settings = false;
 
-        authStore.addEventListener('auth-changed', (e) => {
+        const user = getCurrentUser();
+        if (user) {
+            this.user = user;
+        }
+        onAuthChange((e) => {
             this.user = e.detail;
             this.requestUpdate();
         });

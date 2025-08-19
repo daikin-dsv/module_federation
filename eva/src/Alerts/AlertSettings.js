@@ -1,12 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 
+import { getCurrentUser } from 'Layout/auth';
+
 import { useTableData } from '../hooks/useTableData';
 import { alertSettingsText } from '../text.json';
 
-const AlertSettings = ({ lang }) => {
+const AlertSettings = () => {
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [pendingDelete, setPendingDelete] = useState(null);
     const confirmRef = useRef(null);
+
+    const { locale } = getCurrentUser();
 
     const {
         searchTerm,
@@ -71,14 +75,14 @@ const AlertSettings = ({ lang }) => {
         <div className="font-daikin-serif rounded-lg bg-white p-6">
             <div className="mb-6">
                 <h1 className="text-dds-color-common-neutral-default text-xl">
-                    {alertSettingsText[lang || 'en'].alertSettings}
+                    {alertSettingsText[locale || 'en'].alertSettings}
                 </h1>
             </div>
 
             <div className="mb-6 flex items-center justify-between">
                 <div className="mr-2 max-w-md">
                     <daikin-text-field
-                        placeholder={alertSettingsText[lang || 'en'].searchPlaceholder}
+                        placeholder={alertSettingsText[locale || 'en'].searchPlaceholder}
                         value={searchTerm}
                         // There is a bug where clicking on the "x" doesn't trigger input change
                         // Requested fix: DDS-2468
@@ -92,7 +96,7 @@ const AlertSettings = ({ lang }) => {
                         size="medium"
                         onClick={handleCreateAlert}
                     >
-                        {alertSettingsText[lang || 'en'].createAlert}
+                        {alertSettingsText[locale || 'en'].createAlert}
                     </daikin-button>
                 </div>
             </div>
@@ -125,7 +129,7 @@ const AlertSettings = ({ lang }) => {
                         onClick={() => sortItems('alert')}
                         className="min-w-[200px]"
                     >
-                        {alertSettingsText[lang || 'en'].alert}
+                        {alertSettingsText[locale || 'en'].alert}
                     </daikin-table-header-cell>
 
                     <daikin-table-header-cell
@@ -135,7 +139,7 @@ const AlertSettings = ({ lang }) => {
                         onClick={() => sortItems('building')}
                         className="min-w-[200px]"
                     >
-                        {alertSettingsText[lang || 'en'].building}
+                        {alertSettingsText[locale || 'en'].building}
                     </daikin-table-header-cell>
 
                     <daikin-table-header-cell
@@ -143,7 +147,7 @@ const AlertSettings = ({ lang }) => {
                         slot="header:data"
                         className="min-w-[300px]"
                     >
-                        {alertSettingsText[lang || 'en'].data}
+                        {alertSettingsText[locale || 'en'].data}
                     </daikin-table-header-cell>
 
                     <daikin-table-header-cell
@@ -153,7 +157,7 @@ const AlertSettings = ({ lang }) => {
                         onClick={() => sortItems('updatedAt')}
                         className="min-w-[200px]"
                     >
-                        {alertSettingsText[lang || 'en'].updatedAt}
+                        {alertSettingsText[locale || 'en'].updatedAt}
                     </daikin-table-header-cell>
 
                     {/* data rows overrides */}
@@ -197,9 +201,9 @@ const AlertSettings = ({ lang }) => {
                                         variant="ghost"
                                         color="default"
                                         onClick={() => handleRequestDelete(setting)}
-                                        title={alertSettingsText[lang || 'en'].delete}
+                                        title={alertSettingsText[locale || 'en'].delete}
                                         buttonAriaLabel={
-                                            alertSettingsText[lang || 'en'].delete
+                                            alertSettingsText[locale || 'en'].delete
                                         }
                                     >
                                         <svg
@@ -219,9 +223,9 @@ const AlertSettings = ({ lang }) => {
                                         variant="ghost"
                                         color="default"
                                         onClick={() => handleEdit(setting.id)}
-                                        title={alertSettingsText[lang || 'en'].edit}
+                                        title={alertSettingsText[locale || 'en'].edit}
                                         buttonAriaLabel={
-                                            alertSettingsText[lang || 'en'].edit
+                                            alertSettingsText[locale || 'en'].edit
                                         }
                                     >
                                         <svg
@@ -242,14 +246,15 @@ const AlertSettings = ({ lang }) => {
                     open={confirmOpen}
                     danger={true}
                     text={{
-                        header: alertSettingsText[lang || 'en'].confirmDeleteHeader,
+                        header: alertSettingsText[locale || 'en'].confirmDeleteHeader,
                         description: (
-                            alertSettingsText[lang || 'en'].confirmDeleteDescription || ''
+                            alertSettingsText[locale || 'en'].confirmDeleteDescription ||
+                            ''
                         )
                             .replace('{alert}', pendingDelete?.alert || '')
                             .replace('{building}', pendingDelete?.building || ''),
-                        cancel: alertSettingsText[lang || 'en'].cancel,
-                        confirm: alertSettingsText[lang || 'en'].confirm
+                        cancel: alertSettingsText[locale || 'en'].cancel,
+                        confirm: alertSettingsText[locale || 'en'].confirm
                     }}
                 ></widget-confirmation-window>
             </div>
@@ -260,7 +265,7 @@ const AlertSettings = ({ lang }) => {
                 totalItems={currentAlertSettings.length}
                 currentPage={currentPage}
                 totalPages={totalPages}
-                lang={lang}
+                locale={locale}
                 text={JSON.stringify({ alertSettingsText })}
                 textKey="alertSettingsText"
                 onPageChange={(e) => handlePageChange(e.detail.page)}
