@@ -1,6 +1,12 @@
 const { test, expect } = require('@playwright/test');
 const { USERS } = require('./constants');
-const { LAYOUT_BASE_URL, WIDGETS_BASE_URL, REGIONAL_APP_1_BASE_URL, REGIONAL_APP_2_BASE_URL, EVA_URL } = process.env;
+const {
+    LAYOUT_BASE_URL,
+    WIDGETS_BASE_URL,
+    REGIONAL_APP_1_BASE_URL,
+    REGIONAL_APP_2_BASE_URL,
+    EVA_URL
+} = process.env;
 
 /**
  * Get User's credentials
@@ -75,10 +81,18 @@ exports.test = test.extend({
         }
     },
     regionalApp1Page: async ({ page, user, cookies, context }, use) => {
-        await loggedInPage({ page, user, cookies, context }, REGIONAL_APP_1_BASE_URL, use);
+        await loggedInPage(
+            { page, user, cookies, context },
+            REGIONAL_APP_1_BASE_URL,
+            use
+        );
     },
     regionalApp2Page: async ({ page, user, cookies, context }, use) => {
-        await loggedInPage({ page, user, cookies, context }, REGIONAL_APP_2_BASE_URL, use);
+        await loggedInPage(
+            { page, user, cookies, context },
+            REGIONAL_APP_2_BASE_URL,
+            use
+        );
     },
     evaPage: async ({ page, user, cookies, context }, use) => {
         await loggedInPage({ page, user, cookies, context }, EVA_URL, use);

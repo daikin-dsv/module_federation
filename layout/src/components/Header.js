@@ -11,7 +11,7 @@ export class HeaderComponent extends LitElement {
     // Reactive properties for the header component
     static properties = {
         text: { type: Object },
-        showMore: { type: Boolean },
+        showMore: { type: Boolean }
     };
 
     constructor() {
@@ -124,7 +124,8 @@ export class HeaderComponent extends LitElement {
 
         // Helper to compute overflow index based on cached widths and a given container width
         const computeOverflow = (containerWidth) => {
-            let total = this.shadowRoot.querySelector('nav-menu.more-nav')?.offsetWidth + 32 || 0; // 32px for margin
+            let total =
+                this.shadowRoot.querySelector('nav-menu.more-nav')?.offsetWidth + 32 || 0; // 32px for margin
             let index = nodes.length;
             for (let i = 0; i < this.__cachedWidths.length; i++) {
                 total += this.__cachedWidths[i];
@@ -184,10 +185,17 @@ export class HeaderComponent extends LitElement {
                         </a>
                     </slot>
 
-                    <nav class="flex flex-grow justify-start items-center">
-                        <ul class="nav-list flex max-h-16 flex-grow flex-wrap overflow-hidden">
+                    <nav class="flex flex-grow items-center justify-start">
+                        <ul
+                            class="nav-list flex max-h-16 flex-grow flex-wrap overflow-hidden"
+                        >
                             <slot name="route"></slot>
-                            <nav-menu class=${this.showMore ? "visible more-nav mx-4" : "invisible more-nav"} parentNav="${this.text.more}">
+                            <nav-menu
+                                class=${this.showMore
+                                    ? 'visible more-nav mx-4'
+                                    : 'invisible more-nav'}
+                                parentNav="${this.text.more}"
+                            >
                                 <slot name="overflow-route" slot="child-nav"></slot>
                             </nav-menu>
                         </ul>

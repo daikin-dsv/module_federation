@@ -1,8 +1,8 @@
 import '@daikin-oss/design-system-web-components/components/button/index.js';
 import '@daikin-oss/design-system-web-components/components/icon/index.js';
-import "@daikin-oss/design-system-web-components/components/modal/index.js";
-import "@daikin-oss/design-system-web-components/components/modal-footer/index.js";
-import "@daikin-oss/design-system-web-components/components/modal-header/index.js";
+import '@daikin-oss/design-system-web-components/components/modal-footer/index.js';
+import '@daikin-oss/design-system-web-components/components/modal-header/index.js';
+import '@daikin-oss/design-system-web-components/components/modal/index.js';
 import { LitElement, html, css, unsafeCSS } from 'lit';
 
 import tailwindStyles from '../index.css?inline';
@@ -49,8 +49,15 @@ export class ConfirmationWindowComponent extends LitElement {
                 modal-role="alertdialog"
             >
                 <daikin-modal-header>
-                    <div class="flex items-center" data-testid="confirmation-window-header">
-                        <div class="${this.danger ? COLORS.red : COLORS.yellow} h-8 w-8 mr-2">
+                    <div
+                        class="flex items-center"
+                        data-testid="confirmation-window-header"
+                    >
+                        <div
+                            class="${this.danger
+                                ? COLORS.red
+                                : COLORS.yellow} mr-2 h-8 w-8"
+                        >
                             <daikin-icon
                                 icon="warning"
                                 color="current"
@@ -59,13 +66,23 @@ export class ConfirmationWindowComponent extends LitElement {
                         </div>
                         <span>${this.text.header}</span>
                     </div>
-                    <span slot="description" data-testid="confirmation-window-description">${this.text.description}</span>
+                    <span slot="description" data-testid="confirmation-window-description"
+                        >${this.text.description}</span
+                    >
                 </daikin-modal-header>
                 <daikin-modal-footer>
-                    <daikin-button @click=${this._handleCancel} variant="outline" data-testid="confirmation-window-cancel-button">
+                    <daikin-button
+                        @click=${this._handleCancel}
+                        variant="outline"
+                        data-testid="confirmation-window-cancel-button"
+                    >
                         ${this.text.cancel}
                     </daikin-button>
-                    <daikin-button @click=${this._handleConfirm} color="${this.danger ? 'danger' : 'default'}" data-testid="confirmation-window-confirm-button">
+                    <daikin-button
+                        @click=${this._handleConfirm}
+                        color="${this.danger ? 'danger' : 'default'}"
+                        data-testid="confirmation-window-confirm-button"
+                    >
                         ${this.text.confirm}
                     </daikin-button>
                 </daikin-modal-footer>

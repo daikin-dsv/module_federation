@@ -8,17 +8,27 @@ test.describe('Widgets', () => {
     });
 
     test('Confirmation window is visible', async ({ widgetsPage }) => {
-            await widgetsPage.getByTestId('confirmation-button').click();
+        await widgetsPage.getByTestId('confirmation-button').click();
 
-            await widgetsPage.getByRole('alertdialog', { name: 'Confirmation window' }).waitFor({ state: 'visible' });
-            await expect(widgetsPage.getByTestId('confirmation-window-header')).toContainText('Confirmation Required');
-            await expect(widgetsPage.getByTestId('confirmation-window-description')).toContainText('Are you sure you want to proceed?');
-            await expect(widgetsPage.getByTestId('confirmation-window-cancel-button')).toContainText('Cancel');
-            await expect(widgetsPage.getByTestId('confirmation-window-confirm-button')).toContainText('Confirm');
-            await widgetsPage.getByTestId('confirmation-window-cancel-button').click();
+        await widgetsPage
+            .getByRole('alertdialog', { name: 'Confirmation window' })
+            .waitFor({ state: 'visible' });
+        await expect(widgetsPage.getByTestId('confirmation-window-header')).toContainText(
+            'Confirmation Required'
+        );
+        await expect(
+            widgetsPage.getByTestId('confirmation-window-description')
+        ).toContainText('Are you sure you want to proceed?');
+        await expect(
+            widgetsPage.getByTestId('confirmation-window-cancel-button')
+        ).toContainText('Cancel');
+        await expect(
+            widgetsPage.getByTestId('confirmation-window-confirm-button')
+        ).toContainText('Confirm');
+        await widgetsPage.getByTestId('confirmation-window-cancel-button').click();
 
-            await expect(widgetsPage.getByTestId('confirmation-window')).not.toBeVisible();
-        });
+        await expect(widgetsPage.getByTestId('confirmation-window')).not.toBeVisible();
+    });
 
     test('Right Panel is visible', async ({ widgetsPage }) => {
         await test.step('Open Right Panel with Cumulative Type', async () => {
@@ -30,9 +40,13 @@ test.describe('Widgets', () => {
         });
         await test.step('Open Right Panel with Instantaneous Type', async () => {
             await expect(widgetsPage.locator('right-panel')).not.toBeVisible();
-            await widgetsPage.getByTestId('toggle-right-panel-button-instantaneous').click();
+            await widgetsPage
+                .getByTestId('toggle-right-panel-button-instantaneous')
+                .click();
             await expect(widgetsPage.locator('right-panel')).toBeVisible();
-            await widgetsPage.getByTestId('toggle-right-panel-button-instantaneous').click();
+            await widgetsPage
+                .getByTestId('toggle-right-panel-button-instantaneous')
+                .click();
             await expect(widgetsPage.locator('right-panel')).not.toBeVisible();
         });
     });

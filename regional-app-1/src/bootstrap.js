@@ -14,10 +14,11 @@ const AuthProvider = React.lazy(() =>
         default: (props) => <auth-provider {...props}></auth-provider>
     }))
 );
-const Header = React.lazy(() =>
-    import('Layout/header').then(() => ({
-        default: (props) => <app-header {...props}></app-header>
-    })),
+const Header = React.lazy(
+    () =>
+        import('Layout/header').then(() => ({
+            default: (props) => <app-header {...props}></app-header>
+        })),
     import('Layout/navmenu').then(() => ({
         default: (props) => <nav-menu {...props}></nav-menu>
     }))
