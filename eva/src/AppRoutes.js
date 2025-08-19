@@ -1,21 +1,20 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router';
 
-import { appRoutesText } from './text.json';
+import Alerts from './Alerts';
+import AlertSettings from './Alerts/AlertSettings';
 
-export const NAVIGATION_CONFIG = Object.freeze({
-    ALERTS: { name: appRoutesText.alerts, path: '/', breadcrumb: appRoutesText.alerts },
-    ALERTSSETTINGS: { name: appRoutesText.alerts, path: '/alertssettings', breadcrumb: appRoutesText.alertsSettings }
-});
+const getPathToName = (navConfig) => {
+    return Object.keys(navConfig).reduce((prev, current) => {
+        prev[navConfig[current].path] = navConfig[current].breadcrumb;
+        return prev;
+    }, {});
+};
 
-const PATH_TO_NAME = Object.keys(NAVIGATION_CONFIG).reduce((prev, current) => {
-    prev[NAVIGATION_CONFIG[current].path] = NAVIGATION_CONFIG[current].breadcrumb;
-    return prev;
-}, {});
-
-const AppRoutes = () => {
+const AppRoutes = ({ text, NAVIGATION_CONFIG }) => {
     const location = useLocation();
     const navigate = useNavigate();
+    const PATH_TO_NAME = getPathToName(NAVIGATION_CONFIG);
 
     return (
         <>
@@ -28,7 +27,7 @@ const AppRoutes = () => {
                             navigate(NAVIGATION_CONFIG.ALERTS.path);
                         }}
                     >
-                        {appRoutesText.home}
+                        {text.home}
                     </daikin-breadcrumb-item>
                     <daikin-breadcrumb-item>
                         {PATH_TO_NAME[location.pathname]}
@@ -38,25 +37,11 @@ const AppRoutes = () => {
             <Routes>
                 <Route
                     path={NAVIGATION_CONFIG.ALERTS.path}
-                    element={
-                        <div >
-                            <Suspense
-                                fallback={<div>{appRoutesText.loadingAlerts}</div>}
-                            >
-                            </Suspense>
-                        </div>
-                    }
+                    element={<Alerts lang={text.lang} />}
                 />
                 <Route
                     path={NAVIGATION_CONFIG.ALERTSSETTINGS.path}
-                    element={
-                        <div >
-                            <Suspense
-                                fallback={<div>{appRoutesText.loadingAlertsSettings}</div>}
-                            >
-                            </Suspense>
-                        </div>
-                    }
+                    element={<AlertSettings lang={text.lang} />}
                 />
             </Routes>
         </>

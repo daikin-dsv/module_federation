@@ -1,19 +1,21 @@
 import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter, useNavigate } from 'react-router';
 
-import AppRoutes, { NAVIGATION_CONFIG } from './AppRoutes';
+import { init } from '../../layout/src/context/Auth/keycloak';
+import AppRoutes from './AppRoutes';
 import ErrorBoundary from './ErrorBoundary';
 import ActiveNavLink from './components/ActiveNavLink';
 import './index.css';
-import { bootstrapText, appRoutesText } from './text.json';
+import {
+    appRoutesText,
+    bootstrapText,
+    footerText,
+    headerText,
+    userText
+} from './text.json';
 import './webcomponents';
 
-const AuthProvider = React.lazy(() =>
-    import('Layout/auth').then(() => ({
-        default: (props) => <auth-provider {...props}></auth-provider>
-    }))
-);
 const Header = React.lazy(() =>
     import('Layout/header').then(() => ({
         default: (props) => <app-header {...props}></app-header>
@@ -35,35 +37,79 @@ const Footer = React.lazy(() =>
     }))
 );
 
+function getNavConfig(lang) {
+    return Object.freeze({
+        ALERTS: {
+            name: appRoutesText[lang].alerts,
+            path: '/',
+            breadcrumb: appRoutesText[lang].alerts
+        },
+        ALERTSSETTINGS: {
+            name: appRoutesText[lang].alertsSettings,
+            path: '/alertssettings',
+            breadcrumb: appRoutesText[lang].alertsSettings
+        }
+    });
+}
+
+function AppContainer({ lang, user }) {
+    const navigate = useNavigate();
+    const NAVIGATION_CONFIG = getNavConfig(lang);
+
+    return (
+        <ErrorBoundary fallback={<div>{bootstrapText[lang].error}</div>}>
+            <div className="flex h-screen flex-col">
+                <Suspense fallback={headerText[lang].loadingHeader}>
+                    <Header>
+                        <UserProfile text={userText[lang]} user={user} />
+                        <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
+                            {NAVIGATION_CONFIG.ALERTS.name}
+                        </ActiveNavLink>
+                        <NavMenu slot="route" parentNav={appRoutesText[lang].settings}>
+                            <ActiveNavLink
+                                // Need this click handler because the <NavLink>
+                                // somehow doesn't work with NavMenu
+                                onClick={() => {
+                                    navigate('/alertssettings');
+                                }}
+                                slot="child-nav"
+                                to={NAVIGATION_CONFIG.ALERTSSETTINGS.path}
+                            >
+                                {NAVIGATION_CONFIG.ALERTSSETTINGS.name}
+                            </ActiveNavLink>
+                        </NavMenu>
+                    </Header>
+                </Suspense>
+                <main className="flex flex-grow flex-col overflow-x-scroll p-4">
+                    <AppRoutes
+                        text={appRoutesText[lang]}
+                        NAVIGATION_CONFIG={NAVIGATION_CONFIG}
+                        lang={lang}
+                    />
+                </main>
+                <Suspense fallback={footerText[lang].loadingFooter}>
+                    <Footer copyright={footerText[lang].copyright} />
+                </Suspense>
+            </div>
+        </ErrorBoundary>
+    );
+}
+
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
-root.render(
-    <AuthProvider>
-        <BrowserRouter>
-            <ErrorBoundary fallback={<div>{bootstrapText.error}</div>}>
-                <div className="flex h-screen flex-col">
-                    <Suspense fallback={bootstrapText.loadingHeader}>
-                        <Header>
-                            <UserProfile />
-                            <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
-                                {NAVIGATION_CONFIG.ALERTS.name}
-                            </ActiveNavLink>
-                            <NavMenu slot="route" parentNav={appRoutesText.settings}>
-                                <ActiveNavLink slot="child-nav" to={NAVIGATION_CONFIG.ALERTSSETTINGS.path}>
-                                    {NAVIGATION_CONFIG.ALERTSSETTINGS.name}
-                                </ActiveNavLink>
-                            </NavMenu>
-                        </Header>
-                    </Suspense>
-                    <main className="flex flex-grow flex-col overflow-x-scroll p-4">
-                        <AppRoutes />
-                    </main>
-                    <Suspense fallback={bootstrapText.loadingFooter}>
-                        <Footer copyright={bootstrapText.copyright} />
-                    </Suspense>
-                </div>
-            </ErrorBoundary>
-        </BrowserRouter>
-    </AuthProvider>
-);
+(async () => {
+    const sso = await init();
+    const user = sso.tokenParsed;
+    const lang = user && user.locale && appRoutesText[user.locale] ? user.locale : 'en';
+
+    root.render(
+        sso.authenticated ? (
+            <BrowserRouter>
+                <AppContainer lang={lang} user={user} />
+            </BrowserRouter>
+        ) : (
+            <div>{bootstrapText[lang].loading}</div>
+        )
+    );
+})();
