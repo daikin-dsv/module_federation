@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { getCurrentUser } from 'Layout/auth';
+
 import { useTableData } from '../hooks/useTableData';
 import { alertsText } from '../text.json';
 
-const Alerts = ({ lang }) => {
+const Alerts = () => {
     const {
         searchTerm,
         setSearchTerm,
@@ -18,6 +20,8 @@ const Alerts = ({ lang }) => {
         updateItem
     } = useTableData(mockAlerts, 'building', 10, 'alertedAt', 'desc');
 
+    const { locale } = getCurrentUser();
+
     const handleMarkAsRead = (alertId) => {
         updateItem(alertId, {
             isRead: !currentAlerts.find((alert) => alert.id === alertId)?.isRead
@@ -28,14 +32,14 @@ const Alerts = ({ lang }) => {
         <div className="font-daikin-serif rounded-lg bg-white p-6">
             <div className="mb-6">
                 <h1 className="text-dds-color-common-neutral-default text-xl">
-                    {alertsText[lang || 'en'].alerts}
+                    {alertsText[locale || 'en'].alerts}
                 </h1>
             </div>
 
             <div className="mb-6">
                 <div className="max-w-md">
                     <daikin-text-field
-                        placeholder={alertsText[lang || 'en'].searchPlaceholder}
+                        placeholder={alertsText[locale || 'en'].searchPlaceholder}
                         value={searchTerm}
                         // There is a bug where clicking on the "x" doesn't trigger input change
                         // Requested fix: DDS-2468
@@ -79,7 +83,7 @@ const Alerts = ({ lang }) => {
                         onClick={() => sortItems('alertedAt')}
                         className="w-[200px]"
                     >
-                        {alertsText[lang || 'en'].alertedAt}
+                        {alertsText[locale || 'en'].alertedAt}
                     </daikin-table-header-cell>
                     {['alert', 'building', 'data', 'type'].map((key) => (
                         <daikin-table-header-cell
@@ -87,7 +91,7 @@ const Alerts = ({ lang }) => {
                             slot={`header:${key}`}
                             className="min-w-[200px]"
                         >
-                            {alertsText[lang || 'en'][key]}
+                            {alertsText[locale || 'en'][key]}
                         </daikin-table-header-cell>
                     ))}
 
@@ -117,13 +121,13 @@ const Alerts = ({ lang }) => {
                                     onClick={() => handleMarkAsRead(alert.id)}
                                     title={
                                         alert.isRead
-                                            ? alertsText[lang || 'en'].markAsUnread
-                                            : alertsText[lang || 'en'].markAsRead
+                                            ? alertsText[locale || 'en'].markAsUnread
+                                            : alertsText[locale || 'en'].markAsRead
                                     }
                                     buttonAriaLabel={
                                         alert.isRead
-                                            ? alertsText[lang || 'en'].read
-                                            : alertsText[lang || 'en'].unread
+                                            ? alertsText[locale || 'en'].read
+                                            : alertsText[locale || 'en'].unread
                                     }
                                 >
                                     {alert.isRead ? (
@@ -158,7 +162,7 @@ const Alerts = ({ lang }) => {
                 totalItems={currentAlerts.length}
                 currentPage={currentPage}
                 totalPages={totalPages}
-                lang={lang}
+                locale={locale}
                 text={JSON.stringify({ alertsText })}
                 textKey="alertsText"
                 onPageChange={(e) => handlePageChange(e.detail.page)}

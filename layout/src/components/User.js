@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 
-import { authStore } from '../context/Auth/context.js';
+import { getCurrentUser, onAuthChange } from '../context/Auth';
 import { logout, accountManagement } from '../context/Auth/keycloak.js';
 import tailwindStyles from '../index.css?inline';
 import { userText } from '../text.json';
@@ -10,7 +10,7 @@ export class UserProfile extends LitElement {
     static properties = {
         menu: { type: String },
         user: { type: Object },
-        text: { type: Object },
+        text: { type: Object }
         // Enable settings when needed
         // settings: { type: Object },
     };
@@ -22,7 +22,11 @@ export class UserProfile extends LitElement {
         this.text = userText;
         // this.settings = false;
 
-        authStore.addEventListener('auth-changed', (e) => {
+        const user = getCurrentUser();
+        if (user) {
+            this.user = user;
+        }
+        onAuthChange((e) => {
             this.user = e.detail;
             this.requestUpdate();
         });
@@ -72,14 +76,19 @@ export class UserProfile extends LitElement {
                 >
                     ${this.menu === 'main'
                         ? html`
-                              <daikin-card class="flex w-80 flex-col" data-testId="user-profile-main-menu">
+                              <daikin-card
+                                  class="flex w-80 flex-col"
+                                  data-testId="user-profile-main-menu"
+                              >
                                   <div class="flex flex-col">
-                                      <span data-testId="user-profile-signed-in">${this.text.signedIn}</span>
+                                      <span data-testId="user-profile-signed-in"
+                                          >${this.text.signedIn}</span
+                                      >
                                       <span
                                           class="flex flex-wrap font-(--dds-font-weight-bold) break-all"
                                           data-testId="user-profile-username"
                                       >
-                                        ${this.user.preferred_username}
+                                          ${this.user.preferred_username}
                                       </span>
                                   </div>
                                   <div
@@ -96,7 +105,8 @@ export class UserProfile extends LitElement {
                                                   slot="right-icon"
                                               ></daikin-icon>
                                           </daikin-list-item>
-                                    ${/* this.settings
+                                          ${
+                                              /* this.settings
                                         ? html`
                                             <daikin-list-item
                                                 @click="${() => this._showMenu('settings')}"
@@ -109,7 +119,8 @@ export class UserProfile extends LitElement {
                                                 ></daikin-icon>
                                             </daikin-list-item>
                                         `
-                                        : null */ ''}
+                                        : null */ ''
+                                          }
                                       </daikin-list>
                                   </div>
                                   <daikin-card-footer>
@@ -127,7 +138,10 @@ export class UserProfile extends LitElement {
                         : null}
                     ${this.menu === 'profile'
                         ? html`
-                              <daikin-card class="flex w-80 flex-col" data-testId="user-profile-profile-menu">
+                              <daikin-card
+                                  class="flex w-80 flex-col"
+                                  data-testId="user-profile-profile-menu"
+                              >
                                   <daikin-icon-button
                                       color="neutral"
                                       variant="ghost"
@@ -138,34 +152,46 @@ export class UserProfile extends LitElement {
                                   </daikin-icon-button>
                                   <div class="flex flex-col gap-2">
                                       <div class="flex flex-col">
-                                          <span class="font-(--dds-font-weight-bold)" data-testId="user-profile-name-label"
+                                          <span
+                                              class="font-(--dds-font-weight-bold)"
+                                              data-testId="user-profile-name-label"
                                               >${this.text.name}</span
                                           >
-                                          <span class="flex flex-wrap break-all" data-testId="user-profile-name"
+                                          <span
+                                              class="flex flex-wrap break-all"
+                                              data-testId="user-profile-name"
                                               >${this.user.given_name}
                                               ${this.user.family_name}</span
                                           >
                                       </div>
                                       <div class="flex flex-col">
-                                          <span class="font-(--dds-font-weight-bold)" data-testId="user-profile-email-label"
+                                          <span
+                                              class="font-(--dds-font-weight-bold)"
+                                              data-testId="user-profile-email-label"
                                               >${this.text.email}</span
                                           >
-                                          <span class="flex flex-wrap break-all" data-testId="user-profile-email"
+                                          <span
+                                              class="flex flex-wrap break-all"
+                                              data-testId="user-profile-email"
                                               >${this.user.email}</span
                                           >
                                       </div>
                                       <div class="flex flex-col">
-                                          <span class="font-(--dds-font-weight-bold)" data-testId="user-profile-language-label"
+                                          <span
+                                              class="font-(--dds-font-weight-bold)"
+                                              data-testId="user-profile-language-label"
                                               >${this.text.language}</span
                                           >
-                                          <span class="flex flex-wrap break-all" data-testId="user-profile-language"
-                                              >${
-                                                this.user.locale === 'en' && this.text.english
+                                          <span
+                                              class="flex flex-wrap break-all"
+                                              data-testId="user-profile-language"
+                                              >${this.user.locale === 'en' &&
+                                              this.text.english
                                                   ? this.text.english
-                                                  : this.user.locale === 'ja' && this.text.japanese
+                                                  : this.user.locale === 'ja' &&
+                                                      this.text.japanese
                                                     ? this.text.japanese
-                                                    : this.user.locale
-                                              }</span
+                                                    : this.user.locale}</span
                                           >
                                       </div>
                                   </div>
@@ -186,7 +212,8 @@ export class UserProfile extends LitElement {
                               </daikin-card>
                           `
                         : null}
-                    ${/* this.menu === 'settings'
+                    ${
+                        /* this.menu === 'settings'
                         ? html`
                               <daikin-card class="flex w-80 flex-col" data-testId="user-profile-settings-menu">
                                   <daikin-icon-button
@@ -201,7 +228,8 @@ export class UserProfile extends LitElement {
                                   </div>
                               </daikin-card>
                           `
-                        : null */ ''}
+                        : null */ ''
+                    }
                 </div>
             </div>
         `;

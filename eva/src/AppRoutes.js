@@ -35,13 +35,10 @@ const AppRoutes = ({ text, NAVIGATION_CONFIG }) => {
                 </daikin-breadcrumb>
             </div>
             <Routes>
-                <Route
-                    path={NAVIGATION_CONFIG.ALERTS.path}
-                    element={<Alerts lang={text.lang} />}
-                />
+                <Route path={NAVIGATION_CONFIG.ALERTS.path} element={<Alerts />} />
                 <Route
                     path={NAVIGATION_CONFIG.ALERTSSETTINGS.path}
-                    element={<AlertSettings lang={text.lang} />}
+                    element={<AlertSettings />}
                 />
             </Routes>
         </>

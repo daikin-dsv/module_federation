@@ -1,13 +1,17 @@
 import { LitElement, html } from 'lit';
 
-import { authStore } from './context.js';
+import {
+    setAuthSnapshot,
+    getCurrentUser,
+    isAuthenticated,
+    onAuthChange,
+    offAuthChange,
+    clearAuthSnapshot
+} from './context.js';
 import { init } from './keycloak.js';
 
 export class AuthProvider extends LitElement {
-    static properties = {
-        isAuthenticated: { type: Boolean },
-        user: { type: Object }
-    };
+    static properties = { isAuthenticated: { type: Boolean }, user: { type: Object } };
 
     constructor() {
         super();
@@ -24,7 +28,7 @@ export class AuthProvider extends LitElement {
         const sso = await init();
         this.isAuthenticated = sso.authenticated;
         this.user = sso.tokenParsed;
-        authStore.dispatchEvent(new CustomEvent('auth-changed', { detail: this.user }));
+        setAuthSnapshot({ user: this.user, isAuthenticated: this.isAuthenticated });
         this.requestUpdate();
     }
 
@@ -34,3 +38,12 @@ export class AuthProvider extends LitElement {
 }
 
 customElements.define('auth-provider', AuthProvider);
+
+// Re-exports for consumers (React, vanilla, other WCs)
+export {
+    getCurrentUser,
+    isAuthenticated,
+    onAuthChange,
+    offAuthChange,
+    clearAuthSnapshot
+};

@@ -2,7 +2,8 @@ import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, useNavigate } from 'react-router';
 
-import { init } from '../../layout/src/context/Auth/keycloak';
+import { getCurrentUser, onAuthChange, offAuthChange } from 'Layout/auth';
+
 import AppRoutes from './AppRoutes';
 import ErrorBoundary from './ErrorBoundary';
 import ActiveNavLink from './components/ActiveNavLink';
@@ -15,6 +16,12 @@ import {
     userText
 } from './text.json';
 import './webcomponents';
+
+const AuthProvider = React.lazy(() =>
+    import('Layout/auth').then(() => ({
+        default: (props) => <auth-provider {...props}></auth-provider>
+    }))
+);
 
 const Header = React.lazy(() =>
     import('Layout/header').then(() => ({
@@ -52,20 +59,51 @@ function getNavConfig(lang) {
     });
 }
 
-function AppContainer({ lang, user }) {
-    const navigate = useNavigate();
-    const NAVIGATION_CONFIG = getNavConfig(lang);
+// bootstrap.js
+function AppWithAuth() {
+    const [authReady, setAuthReady] = React.useState(false);
+
+    React.useEffect(() => {
+        // If the provider has already initialized, grab the snapshot synchronously
+        const initial = getCurrentUser?.();
+        if (initial) {
+            setAuthReady(true);
+        }
+
+        const onAuthChanged = () => {
+            setAuthReady(true);
+        };
+
+        onAuthChange(onAuthChanged);
+        return () => offAuthChange(onAuthChanged);
+    }, []);
 
     return (
-        <ErrorBoundary fallback={<div>{bootstrapText[lang].error}</div>}>
+        <AuthProvider>
+            {authReady ? (
+                <BrowserRouter>
+                    <AppContainer />
+                </BrowserRouter>
+            ) : null}
+        </AuthProvider>
+    );
+}
+
+function AppContainer() {
+    const navigate = useNavigate();
+    const { locale } = getCurrentUser();
+    const NAVIGATION_CONFIG = getNavConfig(locale);
+
+    return (
+        <ErrorBoundary fallback={<div>{bootstrapText[locale].error}</div>}>
             <div className="flex h-screen flex-col">
-                <Suspense fallback={headerText[lang].loadingHeader}>
+                <Suspense fallback={headerText[locale].loadingHeader}>
                     <Header>
-                        <UserProfile text={userText[lang]} user={user} />
+                        <UserProfile text={userText[locale]} />
                         <ActiveNavLink slot="route" to={NAVIGATION_CONFIG.ALERTS.path}>
                             {NAVIGATION_CONFIG.ALERTS.name}
                         </ActiveNavLink>
-                        <NavMenu slot="route" parentNav={appRoutesText[lang].settings}>
+                        <NavMenu slot="route" parentNav={appRoutesText[locale].settings}>
                             <ActiveNavLink
                                 // Need this click handler because the <NavLink>
                                 // somehow doesn't work with NavMenu
@@ -82,13 +120,12 @@ function AppContainer({ lang, user }) {
                 </Suspense>
                 <main className="flex flex-grow flex-col overflow-x-scroll p-4">
                     <AppRoutes
-                        text={appRoutesText[lang]}
+                        text={appRoutesText[locale]}
                         NAVIGATION_CONFIG={NAVIGATION_CONFIG}
-                        lang={lang}
                     />
                 </main>
-                <Suspense fallback={footerText[lang].loadingFooter}>
-                    <Footer copyright={footerText[lang].copyright} />
+                <Suspense fallback={footerText[locale].loadingFooter}>
+                    <Footer copyright={footerText[locale].copyright} />
                 </Suspense>
             </div>
         </ErrorBoundary>
@@ -98,18 +135,4 @@ function AppContainer({ lang, user }) {
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
-(async () => {
-    const sso = await init();
-    const user = sso.tokenParsed;
-    const lang = user && user.locale && appRoutesText[user.locale] ? user.locale : 'en';
-
-    root.render(
-        sso.authenticated ? (
-            <BrowserRouter>
-                <AppContainer lang={lang} user={user} />
-            </BrowserRouter>
-        ) : (
-            <div>{bootstrapText[lang].loading}</div>
-        )
-    );
-})();
+root.render(<AppWithAuth />);
