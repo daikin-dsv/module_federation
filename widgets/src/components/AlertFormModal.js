@@ -1,11 +1,11 @@
 import '@daikin-oss/design-system-web-components/components/button/index.js';
 import '@daikin-oss/design-system-web-components/components/modal/index.js';
-import "@daikin-oss/design-system-web-components/components/modal-footer/index.js";
-import "@daikin-oss/design-system-web-components/components/modal-header/index.js";
-import "@daikin-oss/design-system-web-components/components/input-group/index.js";
-import "@daikin-oss/design-system-web-components/components/text-field/index.js";
+import '@daikin-oss/design-system-web-components/components/modal-footer/index.js';
+import '@daikin-oss/design-system-web-components/components/modal-header/index.js';
+import '@daikin-oss/design-system-web-components/components/input-group/index.js';
+import '@daikin-oss/design-system-web-components/components/text-field/index.js';
 import '@daikin-oss/design-system-web-components/components/radio-group/index.js';
-import "@daikin-oss/design-system-web-components/components/radio/index.js";
+import '@daikin-oss/design-system-web-components/components/radio/index.js';
 
 import { LitElement, html, css, unsafeCSS } from 'lit';
 
@@ -40,9 +40,7 @@ export class AlertFormModalComponent extends LitElement {
         this.aggregate = '';
     }
 
-    static styles = css`
-        ${unsafeCSS(tailwindStyles)}
-    `;
+    static styles = css([tailwindStyles]);
 
     _handleCancel() {
         this.dispatchEvent(new CustomEvent('cancel', { bubbles: true }));
@@ -50,32 +48,8 @@ export class AlertFormModalComponent extends LitElement {
     _handleConfirm() {
         this.dispatchEvent(new CustomEvent('save', { bubbles: true }));
     }
-    _handleNameInputChange(e) {
-        this.name = e.target.value
-    }
-    _handleBuildingInputChange(e) {
-        this.building = e.target.value
-    }
-    _handleDataInputChange(e) {
-        this.data = e.target.value
-    }
-    _handleTypeInputChange(e) {
-        this.type = e.target.value;
-    }
-    _handleMinInputChange(e) {
-        this.min = e.target.value;
-    }
-    _handleMaxInputChange(e) {
-        this.max = e.target.value;
-    }
-    _handleSpanInputChange(e) {
-        this.span = e.target.value;
-    }
-    _handleThresholdInputChange(e) {
-        this.threshold = e.target.value;
-    }
-    _handleAggregateInputChange(e) {
-        this.aggregate = e.target.value;
+    _handleInputChange(e) {
+        this[e.target.id] = e.target.value;
     }
 
     _renderCumulativeInputGroup() {
@@ -87,7 +61,7 @@ export class AlertFormModalComponent extends LitElement {
                 <daikin-text-field
                     id="min"
                     .value=${this.min}
-                    @input=${this._handleMinInputChange}
+                    @input=${this._handleInputChange}
                 ></daikin-text-field>
             </daikin-input-group>
             <daikin-input-group
@@ -97,7 +71,7 @@ export class AlertFormModalComponent extends LitElement {
                 <daikin-text-field
                     id="max"
                     .value=${this.max}
-                    @input=${this._handleMaxInputChange}
+                    @input=${this._handleInputChange}
                 ></daikin-text-field>
             </daikin-input-group>
             <daikin-input-group
@@ -107,7 +81,7 @@ export class AlertFormModalComponent extends LitElement {
                 <daikin-text-field
                     id="span"
                     .value=${this.span}
-                    @input=${this._handleSpanInputChange}
+                    @input=${this._handleInputChange}
                 ></daikin-text-field>
             </daikin-input-group>
         `;
@@ -122,7 +96,7 @@ export class AlertFormModalComponent extends LitElement {
                 <daikin-text-field
                     id="min"
                     .value=${this.threshold}
-                    @input=${this._handleThresholdInputChange}
+                    @input=${this._handleInputChange}
                 ></daikin-text-field>
             </daikin-input-group>
             <daikin-input-group
@@ -132,7 +106,7 @@ export class AlertFormModalComponent extends LitElement {
                 <daikin-text-field
                     id="max"
                     .value=${this.aggregate}
-                    @input=${this._handleAggregateInputChange}
+                    @input=${this._handleInputChange}
                 ></daikin-text-field>
             </daikin-input-group>
         `;
@@ -160,7 +134,7 @@ export class AlertFormModalComponent extends LitElement {
                                 <daikin-text-field
                                     id="name"
                                     .value=${this.name}
-                                    @input=${this._handleNameInputChange}
+                                    @input=${this._handleInputChange}
                                 ></daikin-text-field>
                             </daikin-input-group>
                             <daikin-input-group
@@ -170,7 +144,7 @@ export class AlertFormModalComponent extends LitElement {
                                 <daikin-text-field
                                     id="building"
                                     .value=${this.building}
-                                    @input=${this._handleBuildingInputChange}
+                                    @input=${this._handleInputChange}
                                 ></daikin-text-field>
                             </daikin-input-group>
                             <daikin-input-group
@@ -180,14 +154,14 @@ export class AlertFormModalComponent extends LitElement {
                                 <daikin-text-field
                                     id="data"
                                     .value=${this.data}
-                                    @input=${this._handleDataInputChange}
+                                    @input=${this._handleInputChange}
                                 ></daikin-text-field>
                             </daikin-input-group>
                         </div>
                         <daikin-radio-group
                             label="Type"
                             .value=${this.type}
-                            @input=${this._handleTypeInputChange}
+                            @input=${this._handleInputChange}
                         >
                             <daikin-radio name="type" value="cumulative" label=${alertFormModalText.cumulative}></daikin-radio>
                             <daikin-radio name="type" value="instantaneous" label=${alertFormModalText.instantaneous}></daikin-radio>
