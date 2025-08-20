@@ -1,6 +1,5 @@
 import '@daikin-oss/design-system-web-components/components/button/index.js';
 import '@daikin-oss/design-system-web-components/components/pagination/index.js';
-import '@daikin-oss/design-system-web-components/components/text-field/index.js';
 import { render, html } from 'lit';
 
 import './components/Alarm.js';

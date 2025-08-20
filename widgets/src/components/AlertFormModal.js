@@ -163,8 +163,8 @@ export class AlertFormModalComponent extends LitElement {
                             .value=${this.type}
                             @input=${this._handleInputChange}
                         >
-                            <daikin-radio name="type" value="cumulative" label=${alertFormModalText.cumulative}></daikin-radio>
-                            <daikin-radio name="type" value="instantaneous" label=${alertFormModalText.instantaneous}></daikin-radio>
+                            <daikin-radio name="type" id="type" value="cumulative" label=${alertFormModalText.cumulative}></daikin-radio>
+                            <daikin-radio name="type" id="type" value="instantaneous" label=${alertFormModalText.instantaneous}></daikin-radio>
                         </daikin-radio-group>
                         <div class="flex gap-2">
                             ${this.type === 'cumulative'
