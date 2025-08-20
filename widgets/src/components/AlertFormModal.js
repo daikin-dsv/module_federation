@@ -7,7 +7,7 @@ import '@daikin-oss/design-system-web-components/components/text-field/index.js'
 import '@daikin-oss/design-system-web-components/components/radio-group/index.js';
 import '@daikin-oss/design-system-web-components/components/radio/index.js';
 
-import { LitElement, html, css, unsafeCSS } from 'lit';
+import { LitElement, html, css } from 'lit';
 
 import tailwindStyles from '../index.css?inline';
 import { alertFormModalText } from '../text.json';
@@ -46,10 +46,50 @@ export class AlertFormModalComponent extends LitElement {
         this.dispatchEvent(new CustomEvent('cancel', { bubbles: true }));
     }
     _handleConfirm() {
-        this.dispatchEvent(new CustomEvent('save', { bubbles: true }));
+        this.dispatchEvent(new CustomEvent('save', { bubbles: true, detail: this._collectFormData() }));
     }
     _handleInputChange(e) {
         this[e.target.id] = e.target.value;
+    }
+    _isFormValid() {
+        const isCumulativeDataValid = this.type === 'cumulative'
+            ? !!this.min && !!this.max && !!this.span
+            : true;
+        const isInstantaneousDataValid = this.type === 'instantaneous'
+            ? !!this.threshold && !!this.aggregate
+            : true;
+        const isFormValid = !!this.name
+            && !!this.building
+            && !!this.data
+            && !!this.type
+            && isCumulativeDataValid
+            && isInstantaneousDataValid;
+
+        return isFormValid;
+    }
+    _collectFormData() {
+        const cumulativeData = {
+            min: this.min,
+            max: this.max,
+            span: this.span
+        };
+        const instantaneousData = {
+            threshold: this.threshold,
+            aggregate: this.aggregate
+        };
+
+        return {
+            name: this.name,
+            building: this.building,
+            data: this.data,
+            type: this.type,
+            ...(this.type === 'cumulative' && {
+                ...cumulativeData
+            }),
+            ...(this.type === 'instantaneous' && {
+                ...instantaneousData
+            })
+        };
     }
 
     _renderCumulativeInputGroup() {
@@ -94,7 +134,7 @@ export class AlertFormModalComponent extends LitElement {
                 required="*"
             >
                 <daikin-text-field
-                    id="min"
+                    id="threshold"
                     .value=${this.threshold}
                     @input=${this._handleInputChange}
                 ></daikin-text-field>
@@ -104,7 +144,7 @@ export class AlertFormModalComponent extends LitElement {
                 required="*"
             >
                 <daikin-text-field
-                    id="max"
+                    id="aggregate"
                     .value=${this.aggregate}
                     @input=${this._handleInputChange}
                 ></daikin-text-field>
@@ -117,7 +157,7 @@ export class AlertFormModalComponent extends LitElement {
             <daikin-modal
                 id="confirmation-window"
                 ?open=${this.open}
-                persistent
+                persistent="true"
                 modal-aria-label="Alert Form Modal"
                 modal-role="alertdialog"
             >
@@ -168,9 +208,8 @@ export class AlertFormModalComponent extends LitElement {
                         </daikin-radio-group>
                         <div class="flex gap-2">
                             ${this.type === 'cumulative'
-                ? this._renderCumulativeInputGroup()
-                : this._renderInstantaneousInputGroup()
-            }
+                                ? this._renderCumulativeInputGroup()
+                                : this._renderInstantaneousInputGroup()}
                         </div>
                     </div>
                 </daikin-modal-header>
@@ -178,7 +217,7 @@ export class AlertFormModalComponent extends LitElement {
                     <daikin-button @click=${this._handleCancel} variant="outline">
                         ${alertFormModalText.cancel}
                     </daikin-button>
-                    <daikin-button @click=${this._handleConfirm}>
+                    <daikin-button @click=${this._handleConfirm} .disabled=${!this._isFormValid()}>
                         ${alertFormModalText.save}
                     </daikin-button>
                 </daikin-modal-footer>
