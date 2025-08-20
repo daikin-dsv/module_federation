@@ -1,5 +1,6 @@
 import '@daikin-oss/design-system-web-components/components/button/index.js';
 import '@daikin-oss/design-system-web-components/components/pagination/index.js';
+import '@daikin-oss/design-system-web-components/components/text-field/index.js';
 import { render, html } from 'lit';
 
 import './components/Alarm.js';
@@ -9,6 +10,7 @@ import { WaterIcon } from './components/InfoCard.js';
 import './components/Light.js';
 import './components/RightPanel.js';
 import './components/TablePagination.js';
+import './components/AlertFormModal.js';
 import './index.css';
 import { bootstrapText, lightText } from './text.json';
 
@@ -29,6 +31,7 @@ const instantaneousData = {
 let showConfirmation = false;
 let rightPanelOpen = false;
 let rightPanelData = cumulativeData;
+let showAlertFormModal = false;
 
 function update() {
     render(
@@ -92,6 +95,26 @@ function update() {
                     >
                         Toggle Instantaneous Right Panel
                     </daikin-button>
+                    <daikin-button
+                        @click=${() => {
+                            showAlertFormModal = !showAlertFormModal;
+                            update();
+                        }}
+                        data-testid="open-alert-form-modal-button"
+                    >
+                        Open Alert Form Modal
+                    </daikin-button>
+                    <alert-form-modal
+                        .open=${showAlertFormModal}
+                        @cancel=${() => {
+                            showAlertFormModal = false;
+                            update();
+                        }}
+                        @save=${() => {
+                            showAlertFormModal = false;
+                            update();
+                        }}
+                    ></alert-form-modal>
                     <table-pagination
                         start-index="0"
                         end-index="10"
