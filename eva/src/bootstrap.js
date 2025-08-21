@@ -68,7 +68,7 @@ function AppContainer({ lang, user }) {
                         <NavMenu slot="route" parentNav={appRoutesText[lang].settings}>
                             <ActiveNavLink
                                 // Need this click handler because the <NavLink>
-                                // somehow doesn't work with NavMenu
+                                // somehow doesn't work with NavMenu DDS-2428
                                 onClick={() => {
                                     navigate('/alertssettings');
                                 }}
