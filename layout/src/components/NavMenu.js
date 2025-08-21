@@ -85,7 +85,7 @@ export class NavMenu extends LitElement {
 
         // Observe nav-menu overflow on resize
         const resizeObserver = new ResizeObserver(debounce(overflow, 20));
-        resizeObserver.observe(document.querySelector('nav-menu'));
+        resizeObserver.observe(this);
     }
 
     get _hasActiveChild() {
