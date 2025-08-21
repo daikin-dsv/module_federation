@@ -23,7 +23,6 @@ render(
                     <a
                         slot="child-nav"
                         href="/alerts"
-                        
                         @click=${(e) => {
                             e.preventDefault();
                             window.history.pushState({}, '', '/alerts');
