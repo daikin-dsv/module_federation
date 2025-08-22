@@ -19,8 +19,25 @@ render(
                 <a slot="route" href="/about">About</a>
                 <a slot="route" href="/contact">Contact</a>
                 <nav-menu slot="route" parentNav="Settings">
-                    <a slot="child-nav" href="/alerts">Alerts</a>
-                    <a slot="child-nav" href="/reports">Reports</a>
+                    <!-- Need click handler due to bug DDS-2428 -->
+                    <a
+                        slot="child-nav"
+                        href="/alerts"
+                        @click=${(e) => {
+                            e.preventDefault();
+                            window.history.pushState({}, '', '/alerts');
+                            updateActiveLinks();
+                        }}
+                    >Alerts</a>
+                    <a
+                        slot="child-nav"
+                        href="/reports"
+                        @click=${(e) => {
+                            e.preventDefault();
+                            window.history.pushState({}, '', '/reports');
+                            updateActiveLinks();
+                        }}
+                    >Reports</a>
                 </nav-menu>
             </app-header>
             <app-footer></app-footer>

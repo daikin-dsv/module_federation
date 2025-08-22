@@ -162,10 +162,10 @@ export class HeaderComponent extends LitElement {
 
             this.requestUpdate();
         };
-        measure();
 
-        // Observe header for resize; recalculate using cached widths
+        // Observe header for resize and each route and overflow-route element; recalculate using cached widths
         const resizeObserver = new ResizeObserver(debounce(measure, 20));
+        nodes.forEach(node => resizeObserver.observe(node));
         resizeObserver.observe(this.shadowRoot.querySelector('header'));
     }
 
