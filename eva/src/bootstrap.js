@@ -91,7 +91,7 @@ function AppWithAuth() {
 
 function AppContainer() {
     const navigate = useNavigate();
-    const { locale } = getCurrentUser();
+    const { locale } = getCurrentUser() || {};
     const NAVIGATION_CONFIG = getNavConfig(locale);
 
     return (
