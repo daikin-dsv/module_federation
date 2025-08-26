@@ -20,7 +20,7 @@ const Alerts = () => {
         updateItem
     } = useTableData(mockAlerts, 'building', 10, 'alertedAt', 'desc');
 
-    const { locale } = getCurrentUser();
+    const { locale } = getCurrentUser() || {};
 
     const handleMarkAsRead = (alertId) => {
         updateItem(alertId, {
