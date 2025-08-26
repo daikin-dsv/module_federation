@@ -10,7 +10,7 @@ const AlertSettings = () => {
     const [pendingDelete, setPendingDelete] = useState(null);
     const confirmRef = useRef(null);
 
-    const { locale } = getCurrentUser();
+    const { locale } = getCurrentUser() || {};
 
     const {
         searchTerm,
