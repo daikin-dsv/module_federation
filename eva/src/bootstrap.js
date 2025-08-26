@@ -65,7 +65,7 @@ function AppWithAuth() {
 
     React.useEffect(() => {
         // If the provider has already initialized, grab the snapshot synchronously
-        const initial = getCurrentUser?.();
+        const initial = getCurrentUser();
         if (initial) {
             setAuthReady(true);
         }
