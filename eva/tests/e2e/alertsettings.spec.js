@@ -443,4 +443,44 @@ test.describe('Alert Settings Page', () => {
             .first();
         await expect(firstRowActions).toBeVisible();
     });
+
+    test('Create Alert Setting', async ({ evaPage }) => {
+        await evaPage.goto(`${process.env.EVA_URL}/alertssettings`);
+
+        await evaPage.getByTestId('create-alert').click();
+
+        const saveButton = evaPage.getByTestId('save-button');
+        await expect(saveButton).toHaveAttribute('disabled');
+
+        const alertSettings = {
+            name: 'High CO2 in Lobby',
+            building: 'Daikin Osaka Building B',
+            data: 'CO2 sensor status',
+        }
+        await test.step('Fill required fields', async () => {
+            await evaPage.getByTestId('name-input').locator('input').fill(alertSettings.name);
+
+            await evaPage.getByTestId('building-input').locator('input').fill(alertSettings.building);
+            await evaPage
+                .getByRole('option', alertSettings.building)
+                .getByText(alertSettings.building)
+                .click();
+
+            await evaPage.getByTestId('data-input').locator('input').fill(alertSettings.data);
+            await evaPage
+                .getByRole('option', alertSettings.data)
+                .getByText(alertSettings.data)
+                .click();
+
+            await evaPage.getByTestId('threshold-input').locator('input').fill('1000');
+        });
+
+        await expect(saveButton).not.toHaveAttribute('disabled');
+
+        await saveButton.click();
+
+        await expect(evaPage.locator('daikin-table')).toContainText(alertSettings.name);
+        await expect(evaPage.locator('daikin-table')).toContainText(alertSettings.building);
+        await expect(evaPage.locator('daikin-table')).toContainText(alertSettings.data);
+    });
 });
