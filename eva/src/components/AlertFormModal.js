@@ -187,10 +187,8 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                                 onChange={(e, newValue, reason) => {
                                     e.stopPropagation();
                                     if (reason === 'selectOption') {
-                                        // setSearchInputForData(newValue.name);
                                         setSelectedBuilding(newValue);
                                     } else if (reason === 'clear') {
-                                        // setSearchInputForData('');
                                         setSelectedBuilding(null);
                                     }
                                 }}
@@ -223,10 +221,8 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                                 onChange={(e, newValue, reason) => {
                                     e.stopPropagation();
                                     if (reason === 'selectOption') {
-                                        // setSearchInputForData(newValue.name);
                                         setSelectedData(newValue);
                                     } else if (reason === 'clear') {
-                                        // setSearchInputForData('');
                                         setSelectedData(null);
                                     }
                                 }}
