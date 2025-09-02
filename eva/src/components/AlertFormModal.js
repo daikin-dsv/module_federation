@@ -204,12 +204,16 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                                 options={dataList}
                                 groupBy={(option) => option.group}
                                 value={selectedData}
-                                renderInput={(params) => <TextField {...params} sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                        height: 48,
-                                        minHeight: 48,
-                                    }
-                                }} />}
+                                renderInput={(params) => <TextField
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            height: 48,
+                                            minHeight: 48,
+                                        }
+                                    }}
+                                    placeholder={isDataFieldDisabled() ? alertFormModalText.specifyBuilding : ""}
+                                    {...params}
+                                />}
                                 onChange={(e, newValue, reason) => {
                                     e.stopPropagation();
                                     if (reason === 'selectOption') {
