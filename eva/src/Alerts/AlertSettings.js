@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import { getCurrentUser } from 'Layout/auth';
+import AlertFormModal, { alertSettingInitialState } from '../components/AlertFormModal';
 
 import { useTableData } from '../hooks/useTableData';
 import { alertSettingsText } from '../text.json';
 
-const AlertSettings = () => {
+const AlertSettings = ({ lang }) => {
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [pendingDelete, setPendingDelete] = useState(null);
+    const [openAlertFormModal, setOpenAlertFormModal] = useState(false);
+    const [alertSettingToUpdate, changeAlertSettingToUpdate] = useState({ ...alertSettingInitialState });
     const confirmRef = useRef(null);
 
     const { locale } = getCurrentUser() || {};
@@ -23,6 +26,7 @@ const AlertSettings = () => {
         tableRef,
         sortItems,
         handlePageChange,
+        addItem,
         removeItem
     } = useTableData(mockAlertSettings, 'building', 10, 'updatedAt', 'desc');
 
@@ -51,9 +55,11 @@ const AlertSettings = () => {
 
         el.addEventListener('cancel', onCancel);
         el.addEventListener('confirm', onConfirm);
+        el.addEventListener('create', onCreateAlertFormSubmit);
         return () => {
             el.removeEventListener('cancel', onCancel);
             el.removeEventListener('confirm', onConfirm);
+            el.removeEventListener('create', onCreateAlertFormSubmit);
         };
     }, [removeItem, pendingDelete]);
 
@@ -64,11 +70,29 @@ const AlertSettings = () => {
     const handleEdit = (settingId) => {
         // TODO: Implement edit functionality
         console.log('Edit setting:', settingId);
+        const alertSetting = mockAlertSettings.find((setting) => setting.id === settingId);
+        changeAlertSettingToUpdate({ ...alertSetting });
+        setOpenAlertFormModal(true);
     };
 
     const handleCreateAlert = () => {
         // TODO: Implement create alert functionality
         console.log('Create new alert');
+        setOpenAlertFormModal(true);
+    };
+
+    const onCreateAlertFormSubmit = (data) => {
+        const id = mockAlertSettings.length + 1;
+        const updatedAt = new Date().toLocaleString('sv-SE').replace(/-/g, '/');
+        console.log('Created:', data);
+        addItem({ ...data, id, updatedAt });
+        setOpenAlertFormModal(false);
+        changeAlertSettingToUpdate({ ...alertSettingInitialState });
+    };
+
+    const onCancelAlertFormModal = () => {
+        setOpenAlertFormModal(false);
+        changeAlertSettingToUpdate({ ...alertSettingInitialState });
     };
 
     return (
@@ -270,6 +294,14 @@ const AlertSettings = () => {
                 textKey="alertSettingsText"
                 onPageChange={(e) => handlePageChange(e.detail.page)}
             ></table-pagination>
+            <AlertFormModal
+                open={openAlertFormModal}
+                setOpen={setOpenAlertFormModal}
+                submit={onCreateAlertFormSubmit}
+                cancel={onCancelAlertFormModal}
+                buildings={[...new Set(mockAlertSettings.map((setting) => setting.building))]}
+                alertSetting={alertSettingToUpdate}
+            />
         </div>
     );
 };

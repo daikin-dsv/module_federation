@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { Autocomplete, TextField } from '@mui/material';
 
 import { alertFormModalText } from './text.json';
 
-const AlertFormModal = ({ open, alertSetting, submit, cancel }) => {
+export const alertSettingInitialState = {
+    id: '',
+    alert: '',
+    building: '',
+    data: '',
+    type: 'cumulative',
+    min: '',
+    max: '',
+    span: '',
+    threshold: '',
+    aggregate: ''
+};
+
+const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
     const [name, setName] = useState(alertSetting.alert || '');
-    const [building, setBuilding] = useState(alertSetting.building || '');
-    const [data, setData] = useState(alertSetting.data || '');
+    const [selectedBuilding, setSelectedBuilding] = useState({ label: alertSetting.building } || null);
+    const [selectedData, setSelectedData] = useState({ label: alertSetting.data } || null);
     const [type, setType] = useState(alertSetting.type || 'cumulative');
     const [min, setMin] = useState(alertSetting.min || '');
     const [max, setMax] = useState(alertSetting.max || '');
@@ -13,10 +27,12 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel }) => {
     const [threshold, setThreshold] = useState(alertSetting.threshold || '');
     const [aggregate, setAggregate] = useState(alertSetting.aggregate || '');
 
+    const buildingList = buildings.map((building) => ({ label: building }));
+
     useEffect(() => {
         setName(alertSetting.alert || '');
-        setBuilding(alertSetting.building || '');
-        setData(alertSetting.data || '');
+        setSelectedBuilding(alertSetting.building ? { label: alertSetting.building } : null);
+        setSelectedData(alertSetting.data ? { label: alertSetting.data } : null);
         setType(alertSetting.type || 'cumulative');
         setMin(alertSetting.min || '');
         setMax(alertSetting.max || '');
@@ -33,16 +49,15 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel }) => {
 
         submit({
             alert: name,
-            building,
-            data,
+            building: selectedBuilding.label,
+            data: selectedData.label,
             type,
             ...(type === 'cumulative' && { ...cumulativeData }),
             ...(type === 'instantaneous' && { ...instantaneousData })
         });
     };
 
-    const isDataFieldDisabled = () => !building.length;
-    // console.log({ isDataFieldDisabled: isDataFieldDisabled() });
+    const isDataFieldDisabled = () => !selectedBuilding;
 
     const isFormValid = () => {
         const isCumulativeDataValid = type === 'cumulative'
@@ -52,8 +67,8 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel }) => {
             ? !!threshold && !!aggregate
             : true;
         const isFormValid = !!name
-            && !!building
-            && !!data
+            && !!selectedBuilding
+            && !!selectedData
             && !!type
             && isCumulativeDataValid
             && isInstantaneousDataValid;
@@ -153,24 +168,66 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel }) => {
                             label={alertFormModalText.building}
                             required="*"
                         >
-                            <daikin-text-field
+                            <Autocomplete
+                                disablePortal
                                 id="building"
-                                value={building}
-                                onInput={(e) => setBuilding(e.target.value)}
-                            ></daikin-text-field>
+                                options={buildingList}
+                                value={selectedBuilding}
+                                renderInput={(params) => <TextField {...params} sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        height: 48,
+                                        minHeight: 48,
+                                    }
+                                }} />}
+                                onChange={(e, newValue, reason) => {
+                                    e.stopPropagation();
+                                    if (reason === 'selectOption') {
+                                        // setSearchInputForData(newValue.name);
+                                        setSelectedBuilding(newValue);
+                                    } else if (reason === 'clear') {
+                                        // setSearchInputForData('');
+                                        setSelectedBuilding(null);
+                                    }
+                                }}
+                                sx={{
+                                    '& fieldset': { borderColor: 'var(--color-border)' }
+                                }}
+                            />
                         </daikin-input-group>
                         <daikin-input-group
                             label={alertFormModalText.data}
                             required="*"
                         >
-                            <daikin-text-field
+                            <Autocomplete
+                                disablePortal
                                 id="data"
-                                value={data}
+                                options={dataList}
+                                groupBy={(option) => option.group}
+                                value={selectedData}
+                                renderInput={(params) => <TextField {...params} sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        height: 48,
+                                        minHeight: 48,
+                                    }
+                                }} />}
+                                onChange={(e, newValue, reason) => {
+                                    e.stopPropagation();
+                                    if (reason === 'selectOption') {
+                                        // setSearchInputForData(newValue.name);
+                                        setSelectedData(newValue);
+                                    } else if (reason === 'clear') {
+                                        // setSearchInputForData('');
+                                        setSelectedData(null);
+                                    }
+                                }}
+                                sx={{
+                                    '& fieldset': { borderColor: 'var(--color-border)' }
+                                }}
                                 disabled={isDataFieldDisabled()}
-                                placeholder={isDataFieldDisabled() ? alertFormModalText.specifyBuilding : ''}
-                                onInput={(e) => setData(e.target.value)}
-                            ></daikin-text-field>
+                            />
                         </daikin-input-group>
+
+
                     </div>
                     <daikin-input-group
                         label={alertFormModalText.type}
@@ -215,3 +272,24 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel }) => {
 };
 
 export default AlertFormModal;
+
+const dataList = [
+    {
+        label: 'CO2 sensor status'
+    },
+    {
+        label: 'Lobby CO2 maintenance',
+    },
+    {
+        label: 'CO2 detection calculation',
+        group: 'Custom Data'
+    },
+    {
+        label: 'Zone 12 CO2 level',
+        group: 'Equipment 1'
+    },
+    {
+        label: 'Zone 15 CO2 level',
+        group: 'Equipment 2'
+    }
+];
