@@ -13,7 +13,7 @@ export const alertSettingInitialState = {
     max: '',
     span: '',
     threshold: '',
-    aggregate: ''
+    aggregate: 'Daily'
 };
 
 const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
@@ -25,7 +25,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
     const [max, setMax] = useState(alertSetting.max || '');
     const [span, setSpan] = useState(alertSetting.span || '');
     const [threshold, setThreshold] = useState(alertSetting.threshold || '');
-    const [aggregate, setAggregate] = useState(alertSetting.aggregate || '');
+    const [aggregate, setAggregate] = useState(alertSetting.aggregate || 'Daily');
 
     const buildingList = buildings.map((building) => ({ label: building }));
 
@@ -38,14 +38,14 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
         setMax(alertSetting.max || '');
         setSpan(alertSetting.span || '');
         setThreshold(alertSetting.threshold || '');
-        setAggregate(alertSetting.aggregate || '');
+        setAggregate(alertSetting.aggregate || 'Daily');
     }, [alertSetting]);
 
     const handleCancel = () => cancel();
 
     const handleSave = () => {
-        const cumulativeData = { min, max, span };
-        const instantaneousData = { threshold, aggregate };
+        const cumulativeData = { threshold, aggregate };
+        const instantaneousData = { min, max, span };
 
         submit({
             alert: name,
@@ -61,10 +61,10 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
 
     const isFormValid = () => {
         const isCumulativeDataValid = type === 'cumulative'
-            ? !!min && !!max && !!span
+            ? !!threshold && !!aggregate
             : true;
         const isInstantaneousDataValid = type === 'instantaneous'
-            ? !!threshold && !!aggregate
+            ? !!min && !!max && !!span
             : true;
         const isFormValid = !!name
             && !!selectedBuilding
@@ -77,6 +77,33 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
     };
 
     const renderCumulativeInputGroup = () => {
+        return (
+            <>
+                <daikin-input-group
+                    label={alertFormModalText.threshold}
+                    required="*"
+                >
+                    <daikin-text-field
+                        id="threshold"
+                        value={threshold}
+                        onInput={(e) => setThreshold(e.target.value)}
+                    ></daikin-text-field>
+                </daikin-input-group>
+                <daikin-input-group
+                    label={alertFormModalText.aggregate}
+                    required="*"
+                >
+                    <daikin-select id="aggregate" value={aggregate} onInput={(e) => setAggregate(e.target.value)}>
+                        <select name="select">
+                            <option value="daily">{alertFormModalText.daily}</option>
+                        </select>
+                    </daikin-select>
+                </daikin-input-group>
+            </>
+        )
+    };
+
+    const renderInstantaneousInputGroup = () => {
         return (
             <>
                 <daikin-input-group
@@ -108,33 +135,6 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                         value={span}
                         onInput={(e) => setSpan(e.target.value)}
                     ></daikin-text-field>
-                </daikin-input-group>
-            </>
-        )
-    };
-
-    const renderInstantaneousInputGroup = () => {
-        return (
-            <>
-                <daikin-input-group
-                    label={alertFormModalText.threshold}
-                    required="*"
-                >
-                    <daikin-text-field
-                        id="threshold"
-                        value={threshold}
-                        onInput={(e) => setThreshold(e.target.value)}
-                    ></daikin-text-field>
-                </daikin-input-group>
-                <daikin-input-group
-                    label={alertFormModalText.aggregate}
-                    required="*"
-                >
-                    <daikin-select id="aggregate" value={aggregate} onInput={(e) => setAggregate(e.target.value)}>
-                        <select name="select">
-                            <option value="daily">{alertFormModalText.daily}</option>
-                        </select>
-                    </daikin-select>
                 </daikin-input-group>
             </>
         )
