@@ -25,21 +25,5 @@
         "min": "Min",
         "max": "Max",
         "span": "Span"
-    },
-    "alertFormModalText": {
-        "header": "Create Alert",
-        "save": "Save",
-        "cancel": "Cancel",
-        "name": "Name",
-        "building": "Building",
-        "data": "Data",
-        "type": "Type",
-        "cumulative": "Cumulative",
-        "instantaneous": "Instantaneous",
-        "threshold": "Threshold",
-        "aggregate": "Aggregate",
-        "min": "Min",
-        "max": "Max",
-        "span": "Span (minutes)"
     }
 }
