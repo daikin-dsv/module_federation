@@ -69,7 +69,6 @@ const AlertSettings = ({ lang }) => {
 
     const handleEdit = (settingId) => {
         // TODO: Implement edit functionality
-        console.log('Edit setting:', settingId);
         const alertSetting = mockAlertSettings.find((setting) => setting.id === settingId);
         changeAlertSettingToUpdate({ ...alertSetting });
         setOpenAlertFormModal(true);
@@ -77,14 +76,12 @@ const AlertSettings = ({ lang }) => {
 
     const handleCreateAlert = () => {
         // TODO: Implement create alert functionality
-        console.log('Create new alert');
         setOpenAlertFormModal(true);
     };
 
     const onCreateAlertFormSubmit = (data) => {
         const id = mockAlertSettings.length + 1;
         const updatedAt = new Date().toLocaleString('sv-SE').replace(/-/g, '/');
-        console.log('Created:', data);
         addItem({ ...data, id, updatedAt });
         setOpenAlertFormModal(false);
         changeAlertSettingToUpdate({ ...alertSettingInitialState });

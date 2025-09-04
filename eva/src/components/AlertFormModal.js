@@ -233,8 +233,6 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                                 data-testid="data-input"
                             />
                         </daikin-input-group>
-
-
                     </div>
                     <daikin-input-group
                         label={alertFormModalText.type}
@@ -269,12 +267,14 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                 </div>
             </daikin-modal-header>
             <daikin-modal-footer>
-                <daikin-button onClick={handleCancel} variant="outline" data-testid="cancel-button">
-                    {alertFormModalText.cancel}
-                </daikin-button>
-                <daikin-button onClick={handleSave} disabled={!isFormValid()} data-testid="save-button">
-                    {alertFormModalText.save}
-                </daikin-button>
+                <div className="flex w-full justify-between">
+                    <daikin-button onClick={handleCancel} variant="outline" data-testid="cancel-button">
+                        {alertFormModalText.cancel}
+                    </daikin-button>
+                    <daikin-button onClick={handleSave} disabled={!isFormValid()} data-testid="save-button">
+                        {alertFormModalText.save}
+                    </daikin-button>
+                </div>
             </daikin-modal-footer>
         </daikin-modal>
     );
