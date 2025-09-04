@@ -157,7 +157,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                     {alertFormModalText.header}
                 </div>
                 <div slot="description">
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 my-4">
                         <daikin-input-group
                             label={alertFormModalText.name}
                             required="*"
@@ -237,6 +237,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                     <daikin-input-group
                         label={alertFormModalText.type}
                         required="*"
+                        className="my-4"
                     >
                         <daikin-radio-group
                             label="Type"
@@ -267,7 +268,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                 </div>
             </daikin-modal-header>
             <daikin-modal-footer>
-                <div className="flex w-full justify-between">
+                <div className="flex w-full justify-between my-4">
                     <daikin-button onClick={handleCancel} variant="outline" data-testid="cancel-button">
                         {alertFormModalText.cancel}
                     </daikin-button>
