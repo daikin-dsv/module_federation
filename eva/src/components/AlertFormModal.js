@@ -88,7 +88,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                         value={threshold}
                         onInput={(e) => setThreshold(e.target.value)}
                         data-testid="threshold-input"
-                    ></daikin-text-field>
+                    />
                 </daikin-input-group>
                 <daikin-input-group
                     label={alertFormModalText.aggregate}
@@ -96,7 +96,9 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                 >
                     <daikin-select id="aggregate" value={aggregate} onInput={(e) => setAggregate(e.target.value)}>
                         <select name="select" data-testid="aggregate-select">
-                            <option value="daily">{alertFormModalText.daily}</option>
+                            <option value="Daily">{alertFormModalText.daily}</option>
+                            <option value="Monthly">{alertFormModalText.monthly}</option>
+                            <option value="Yearly">{alertFormModalText.yearly}</option>
                         </select>
                     </daikin-select>
                 </daikin-input-group>
@@ -116,7 +118,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                         value={min}
                         onInput={(e) => setMin(e.target.value)}
                         data-testid="min-input"
-                    ></daikin-text-field>
+                    />
                 </daikin-input-group>
                 <daikin-input-group
                     label={alertFormModalText.max}
@@ -127,7 +129,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                         value={max}
                         onInput={(e) => setMax(e.target.value)}
                         data-testid="max-input"
-                    ></daikin-text-field>
+                    />
                 </daikin-input-group>
                 <daikin-input-group
                     label={alertFormModalText.span}
@@ -138,7 +140,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                         value={span}
                         onInput={(e) => setSpan(e.target.value)}
                         data-testid="span-input"
-                    ></daikin-text-field>
+                    />
                 </daikin-input-group>
             </>
         )
@@ -167,7 +169,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                                 value={name}
                                 onInput={(e) => setName(e.target.value)}
                                 data-testid="name-input"
-                            ></daikin-text-field>
+                            />
                         </daikin-input-group>
                         <daikin-input-group
                             label={alertFormModalText.building}
