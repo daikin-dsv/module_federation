@@ -270,7 +270,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                 </div>
             </daikin-modal-header>
             <daikin-modal-footer>
-                <div className="flex w-full justify-between my-4">
+                <div className="flex w-full justify-between mt-4">
                     <daikin-button onClick={handleCancel} variant="outline" data-testid="cancel-button">
                         {alertFormModalText.cancel}
                     </daikin-button>
