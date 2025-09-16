@@ -6,7 +6,7 @@ import AlertFormModal, { alertSettingInitialState } from '../components/AlertFor
 import { useTableData } from '../hooks/useTableData';
 import { alertSettingsText } from '../text.json';
 
-const AlertSettings = ({ lang }) => {
+const AlertSettings = () => {
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [pendingDelete, setPendingDelete] = useState(null);
     const [openAlertFormModal, setOpenAlertFormModal] = useState(false);
