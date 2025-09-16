@@ -18,8 +18,8 @@ export const alertSettingInitialState = {
 
 const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
     const [name, setName] = useState(alertSetting.alert || '');
-    const [selectedBuilding, setSelectedBuilding] = useState({ label: alertSetting.building } || null);
-    const [selectedData, setSelectedData] = useState({ label: alertSetting.data } || null);
+    const [selectedBuilding, setSelectedBuilding] = useState(alertSetting.building ? { label: alertSetting.building } : null);
+    const [selectedData, setSelectedData] = useState(alertSetting.data ? { label: alertSetting.data } : null);
     const [type, setType] = useState(alertSetting.type || 'cumulative');
     const [min, setMin] = useState(alertSetting.min || '');
     const [max, setMax] = useState(alertSetting.max || '');
