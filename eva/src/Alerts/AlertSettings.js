@@ -69,7 +69,7 @@ const AlertSettings = ({ lang }) => {
 
     const handleEdit = (settingId) => {
         // TODO: Implement edit functionality
-        const alertSetting = mockAlertSettings.find((setting) => setting.id === settingId);
+        const alertSetting = currentAlertSettings.find((setting) => setting.id === settingId);
         changeAlertSettingToUpdate({ ...alertSetting });
         setOpenAlertFormModal(true);
     };
