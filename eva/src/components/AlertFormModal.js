@@ -143,7 +143,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                     />
                 </daikin-input-group>
             </>
-        )
+        );
     };
 
     return (
