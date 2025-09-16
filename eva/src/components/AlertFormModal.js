@@ -103,7 +103,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                     </daikin-select>
                 </daikin-input-group>
             </>
-        )
+        );
     };
 
     const renderInstantaneousInputGroup = () => {
