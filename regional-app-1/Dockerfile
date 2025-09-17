@@ -8,8 +8,7 @@ FROM node:20 AS builder
 ENV LAYOUT_URL=https://apollo.daikinlab.com/rad/layout
 ENV WIDGETS_URL=https://apollo.daikinlab.com/rad/widgets
 ENV REGIONAL_APP_1_URL=https://apollo.daikinlab.com/rad/regional-app-1
-# ENV REGIONAL_APP_1_APP_PATH=/regional-app-1
-
+ENV REGIONAL_APP_1_APP_PATH=/regional-app-1
 
 # Define the working directory
 WORKDIR /app/regional-app-1
