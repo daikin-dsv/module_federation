@@ -42,9 +42,6 @@ RUN apk add --no-cache wget tar && \
 # Copy necessary files from the builder stage
 COPY --from=builder /app/regional-app-1/dist/ /usr/share/nginx/html
 
-# Replace default server config
-COPY regional-app-1/nginx.conf /etc/nginx/conf.d/default.conf
-
 EXPOSE 80 9090
 
 # Run both NGINX and exporter
