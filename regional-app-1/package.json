@@ -7,7 +7,7 @@
         "test": "cd .. && npx playwright test regional-app-1/tests/e2e/",
         "lint": "npx eslint .",
         "format": "npx prettier --write .",
-        "build": "LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL REGIONAL_APP_2_URL=$REGIONAL_APP_2_URL APP_PATH=$REGIONAL_APP_2_APP_PATH rspack build --env mode=production",
+        "build": "LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL REGIONAL_APP_1_URL=$REGIONAL_APP_1_URL APP_PATH=$REGIONAL_APP_1_APP_PATH rspack build --env mode=production",
         "build-docker": "pwsh ../build-service.ps1 -ServiceName $npm_package_name -ServiceVersion $npm_package_version"
     },
     "author": "",
