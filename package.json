@@ -47,6 +47,7 @@
         "./layout",
         "./widgets",
         "./regional-app-1",
+        "./regional-app-2",
         "./eva"
     ],
     "lint-staged": {
