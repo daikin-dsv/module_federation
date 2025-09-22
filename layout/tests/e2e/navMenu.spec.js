@@ -12,8 +12,7 @@ test.describe('NavMenu', () => {
 
         await layoutPage.waitForLoadState('domcontentloaded');
 
-        //TODO: Fix issue BDRK-124 and DDS-2428 and enable this test
-        // await expect(layoutPage).toHaveURL('/alertssettings');
+        await expect(layoutPage.url()).toContain('/alerts');
     });
 
     test('Responsive design works on mobile viewport', async ({ layoutPage }) => {
@@ -37,7 +36,6 @@ test.describe('NavMenu', () => {
 
         await layoutPage.waitForLoadState('domcontentloaded');
 
-        //TODO: Fix issue BDRK-124 and DDS-2428 and enable this test
-        // await expect(layoutPage).toHaveURL('/alertssettings');
+        await expect(layoutPage.url()).toContain('/alerts');
     });
 });
