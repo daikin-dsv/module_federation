@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
+import { getCurrentUser } from 'Layout/auth';
 
 import { alertFormModalText } from '../text.json';
 
@@ -17,6 +18,8 @@ export const alertSettingInitialState = {
 };
 
 const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
+    const { locale: lang } = getCurrentUser() || {};
+
     const [name, setName] = useState(alertSetting.alert || '');
     const [selectedBuilding, setSelectedBuilding] = useState(alertSetting.building ? { label: alertSetting.building } : null);
     const [selectedData, setSelectedData] = useState(alertSetting.data ? { label: alertSetting.data } : null);
@@ -26,8 +29,6 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
     const [span, setSpan] = useState(alertSetting.span || '');
     const [threshold, setThreshold] = useState(alertSetting.threshold || '');
     const [aggregate, setAggregate] = useState(alertSetting.aggregate || 'Daily');
-
-    const { locale: lang } = getCurrentUser() || {};
 
     const buildingList = buildings.map((building) => ({ label: building }));
 
