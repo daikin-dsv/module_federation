@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 
-import { alertFormModalText } from './text.json';
+import { alertFormModalText } from '../text.json';
 
 export const alertSettingInitialState = {
     id: '',
@@ -26,6 +26,8 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
     const [span, setSpan] = useState(alertSetting.span || '');
     const [threshold, setThreshold] = useState(alertSetting.threshold || '');
     const [aggregate, setAggregate] = useState(alertSetting.aggregate || 'Daily');
+
+    const { locale: lang } = getCurrentUser() || {};
 
     const buildingList = buildings.map((building) => ({ label: building }));
 
@@ -80,7 +82,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
         return (
             <>
                 <daikin-input-group
-                    label={alertFormModalText.threshold}
+                    label={alertFormModalText[lang].threshold}
                     required="*"
                 >
                     <daikin-text-field
@@ -91,14 +93,14 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                     />
                 </daikin-input-group>
                 <daikin-input-group
-                    label={alertFormModalText.aggregate}
+                    label={alertFormModalText[lang].aggregate}
                     required="*"
                 >
                     <daikin-select id="aggregate" value={aggregate} onInput={(e) => setAggregate(e.target.value)}>
                         <select name="select" data-testid="aggregate-select">
-                            <option value="Daily">{alertFormModalText.daily}</option>
-                            <option value="Monthly">{alertFormModalText.monthly}</option>
-                            <option value="Yearly">{alertFormModalText.yearly}</option>
+                            <option value="Daily">{alertFormModalText[lang].daily}</option>
+                            <option value="Monthly">{alertFormModalText[lang].monthly}</option>
+                            <option value="Yearly">{alertFormModalText[lang].yearly}</option>
                         </select>
                     </daikin-select>
                 </daikin-input-group>
@@ -110,7 +112,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
         return (
             <>
                 <daikin-input-group
-                    label={alertFormModalText.min}
+                    label={alertFormModalText[lang].min}
                     required="*"
                 >
                     <daikin-text-field
@@ -121,7 +123,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                     />
                 </daikin-input-group>
                 <daikin-input-group
-                    label={alertFormModalText.max}
+                    label={alertFormModalText[lang].max}
                     required="*"
                 >
                     <daikin-text-field
@@ -132,7 +134,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                     />
                 </daikin-input-group>
                 <daikin-input-group
-                    label={alertFormModalText.span}
+                    label={alertFormModalText[lang].span}
                     required="*"
                 >
                     <daikin-text-field
@@ -156,12 +158,12 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
         >
             <daikin-modal-header>
                 <div className="flex items-center">
-                    {alertFormModalText.header}
+                    {alertFormModalText[lang].header}
                 </div>
                 <div slot="description">
                     <div className="flex gap-2 my-4">
                         <daikin-input-group
-                            label={alertFormModalText.name}
+                            label={alertFormModalText[lang].name}
                             required="*"
                         >
                             <daikin-text-field
@@ -172,7 +174,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                             />
                         </daikin-input-group>
                         <daikin-input-group
-                            label={alertFormModalText.building}
+                            label={alertFormModalText[lang].building}
                             required="*"
                         >
                             <Autocomplete
@@ -201,7 +203,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                             />
                         </daikin-input-group>
                         <daikin-input-group
-                            label={alertFormModalText.data}
+                            label={alertFormModalText[lang].data}
                             required="*"
                         >
                             <Autocomplete
@@ -217,7 +219,7 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                                             minHeight: 48,
                                         }
                                     }}
-                                    placeholder={isDataFieldDisabled() ? alertFormModalText.specifyBuilding : ""}
+                                    placeholder={isDataFieldDisabled() ? alertFormModalText[lang].specifyBuilding : ""}
                                     {...params}
                                 />}
                                 onChange={(e, newValue, reason) => {
@@ -237,12 +239,12 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                         </daikin-input-group>
                     </div>
                     <daikin-input-group
-                        label={alertFormModalText.type}
+                        label={alertFormModalText[lang].type}
                         required="*"
                         className="my-4"
                     >
                         <daikin-radio-group
-                            label="Type"
+                            label={alertFormModalText[lang].type}
                             value={type}
                             onInput={(e) => setType(e.target.value)}
                         >
@@ -250,14 +252,14 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
                                 name="type"
                                 id="type"
                                 value="cumulative"
-                                label={alertFormModalText.cumulative}
+                                label={alertFormModalText[lang].cumulative}
                                 data-testid="cumulative-radio"
                             ></daikin-radio>
                             <daikin-radio
                                 name="type"
                                 id="type"
                                 value="instantaneous"
-                                label={alertFormModalText.instantaneous}
+                                label={alertFormModalText[lang].instantaneous}
                                 data-testid="instantaneous-radio"
                             ></daikin-radio>
                         </daikin-radio-group>
@@ -272,10 +274,10 @@ const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
             <daikin-modal-footer>
                 <div className="flex w-full justify-between mt-4">
                     <daikin-button onClick={handleCancel} variant="outline" data-testid="cancel-button">
-                        {alertFormModalText.cancel}
+                        {alertFormModalText[lang].cancel}
                     </daikin-button>
                     <daikin-button onClick={handleSave} disabled={!isFormValid()} data-testid="save-button">
-                        {alertFormModalText.save}
+                        {alertFormModalText[lang].save}
                     </daikin-button>
                 </div>
             </daikin-modal-footer>
