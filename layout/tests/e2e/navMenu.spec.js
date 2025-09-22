@@ -1,7 +1,7 @@
 const { expect, test } = require('../../../tests/helper');
 
 test.describe('NavMenu', () => {
-    test.only('Display parent and child navigation', async ({ layoutPage }) => {
+    test('Display parent and child navigation', async ({ layoutPage }) => {
         await expect(layoutPage.getByTestId('parent-nav-button-Settings')).toContainText('Settings');
         await layoutPage.getByTestId('parent-nav-button-Settings').click();
 
@@ -15,7 +15,7 @@ test.describe('NavMenu', () => {
         await expect(layoutPage.url()).toContain('/alerts');
     });
 
-    test.only('Responsive design works on mobile viewport', async ({ layoutPage }) => {
+    test('Responsive design works on mobile viewport', async ({ layoutPage }) => {
         // Set mobile viewport
         await layoutPage.setViewportSize({ width: 412, height: 915 });
 
