@@ -81,7 +81,7 @@ function AppWithAuth() {
     return (
         <AuthProvider>
             {authReady ? (
-                <BrowserRouter>
+                <BrowserRouter basename={process.env.APP_PATH}>
                     <AppContainer />
                 </BrowserRouter>
             ) : null}

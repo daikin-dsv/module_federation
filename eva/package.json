@@ -7,7 +7,7 @@
         "test": "cd .. && npx playwright test eva/tests/e2e/",
         "lint": "npx eslint .",
         "format": "npx prettier --write .",
-        "build": "rspack build --env mode=production",
+        "build": "LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL EVA_URL=$EVA_URL APP_PATH=$EVA_APP_PATH rspack build --env mode=production",
         "build-docker": "pwsh ../build-service.ps1 -ServiceName $npm_package_name -ServiceVersion $npm_package_version"
     },
     "author": "",
