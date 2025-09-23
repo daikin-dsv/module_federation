@@ -134,5 +134,47 @@
             "cancel": "キャンセル",
             "confirm": "削除"
         }
+    },
+    "alertFormModalText": {
+        "en": {
+            "header": "Create Alert",
+            "save": "Save",
+            "cancel": "Cancel",
+            "name": "Name",
+            "building": "Building",
+            "data": "Data",
+            "specifyBuilding": "Specify applicable building",
+            "type": "Type",
+            "cumulative": "Cumulative",
+            "instantaneous": "Instantaneous",
+            "threshold": "Threshold",
+            "aggregate": "Aggregate",
+            "daily": "Daily",
+            "monthly": "Monthly",
+            "yearly": "Yearly",
+            "min": "Min",
+            "max": "Max",
+            "span": "Span (minutes)"
+        },
+        "ja": {
+            "header": "アラート作成",
+            "save": "保存",
+            "cancel": "キャンセル",
+            "name": "名前",
+            "building": "物件",
+            "data": "データ",
+            "specifyBuilding": "適用する物件を指定",
+            "type": "タイプ",
+            "cumulative": "累積",
+            "instantaneous": "瞬時",
+            "threshold": "しきい値",
+            "aggregate": "集計",
+            "daily": "日次",
+            "monthly": "月次",
+            "yearly": "年次",
+            "min": "最小",
+            "max": "最大",
+            "span": "期間（分）"
+        }
     }
 }
