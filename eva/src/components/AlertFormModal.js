@@ -18,7 +18,7 @@ export const alertSettingInitialState = {
 };
 
 const AlertFormModal = ({ open, alertSetting, submit, cancel, buildings }) => {
-    const { locale: lang } = getCurrentUser() || {};
+    const { locale: lang = 'en' } = getCurrentUser() || {};
 
     const [name, setName] = useState(alertSetting.alert || '');
     const [selectedBuilding, setSelectedBuilding] = useState(alertSetting.building ? { label: alertSetting.building } : null);
