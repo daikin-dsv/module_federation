@@ -2,6 +2,8 @@
 
 @import 'tailwindcss';
 
+@source './components/**/*.{js,jsx,ts,tsx}';
+
 @theme {
     --breakpoint-mobile: 360px;
 }

@@ -1,11 +1,21 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 // Remove these if you plan to use native <a> tags
-import debounce from 'lodash/debounce';
+import debounce from 'lodash/debounce.js';
 
 import Logo from '../assets/daikin_logo.png';
 import tailwindStyles from '../index.css?inline';
-import { headerText } from '../text.json';
-import '../webcomponents';
+import text from '../text.json';
+import '../webcomponents.js';
+
+/**
+ * @typedef {Object} HeaderText
+ * @property {string} more
+ */
+
+/** @type {HeaderText} */
+const defaultHeaderText = {
+    more: text.headerText?.more ?? 'More'
+};
 
 export class HeaderComponent extends LitElement {
     // Reactive properties for the header component
@@ -16,7 +26,8 @@ export class HeaderComponent extends LitElement {
 
     constructor() {
         super();
-        this.text = headerText;
+        /** @type {HeaderText} */
+        this.text = text.headerText ?? defaultHeaderText;
         this.showMore = false;
         // Cache widths of route elements because widths change when in overflow
         this.__cachedWidths = [];
@@ -165,7 +176,7 @@ export class HeaderComponent extends LitElement {
 
         // Observe header for resize and each route and overflow-route element; recalculate using cached widths
         const resizeObserver = new ResizeObserver(debounce(measure, 20));
-        nodes.forEach(node => resizeObserver.observe(node));
+        nodes.forEach((node) => resizeObserver.observe(node));
         resizeObserver.observe(this.shadowRoot.querySelector('header'));
     }
 
@@ -209,4 +220,6 @@ export class HeaderComponent extends LitElement {
     }
 }
 
-customElements.define('app-header', HeaderComponent);
+if (!customElements.get('app-header')) {
+    customElements.define('app-header', HeaderComponent);
+}

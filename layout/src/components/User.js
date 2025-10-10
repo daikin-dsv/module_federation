@@ -1,16 +1,32 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 
-import { getCurrentUser, onAuthChange } from '../context/Auth';
+import { getCurrentUser, onAuthChange } from '../context/Auth/index.js';
 import { logout, accountManagement } from '../context/Auth/keycloak.js';
 import tailwindStyles from '../index.css?inline';
-import { userText } from '../text.json';
-import '../webcomponents';
+import text from '../text.json';
+import '../webcomponents.js';
+
+/**
+ * @typedef {Object} UserText
+ * @property {string} email
+ * @property {string} english
+ * @property {string} japanese
+ * @property {string} language
+ * @property {string} manageAccount
+ * @property {string} name
+ * @property {string} profile
+ * @property {string} settings
+ * @property {string} signedIn
+ * @property {string} signOut
+ */
 
 export class UserProfile extends LitElement {
     static properties = {
         menu: { type: String },
         user: { type: Object },
-        text: { type: Object }
+        text: { type: Object },
+        logoutLink: { type: String },
+        accountManagementLink: { type: String }
         // Enable settings when needed
         // settings: { type: Object },
     };
@@ -19,17 +35,27 @@ export class UserProfile extends LitElement {
         super();
         this.menu = '';
         this.user = null;
-        this.text = userText;
+        /** @type {UserText} */
+        this.text = text.userText;
+        this.logoutLink = null;
+        this.accountManagementLink = null;
         // this.settings = false;
+    }
 
-        const user = getCurrentUser();
-        if (user) {
-            this.user = user;
+    connectedCallback() {
+        super.connectedCallback();
+
+        // Only fetch user from context if not passed as a prop
+        if (!this.user) {
+            const user = getCurrentUser();
+            if (user) {
+                this.user = user;
+            }
+            onAuthChange((e) => {
+                this.user = e.detail;
+                this.requestUpdate();
+            });
         }
-        onAuthChange((e) => {
-            this.user = e.detail;
-            this.requestUpdate();
-        });
     }
 
     static styles = css`
@@ -126,7 +152,11 @@ export class UserProfile extends LitElement {
                                   <daikin-card-footer>
                                       <daikin-button
                                           class="w-full"
-                                          @click="${logout}"
+                                          @click="${this.logoutLink
+                                              ? () =>
+                                                    (window.location.href =
+                                                        this.logoutLink)
+                                              : logout}"
                                           variant="outline"
                                           data-testId="user-sign-out-button"
                                       >
@@ -198,7 +228,13 @@ export class UserProfile extends LitElement {
                                   <daikin-card-footer>
                                       <daikin-button
                                           class="w-full"
-                                          @click="${accountManagement}"
+                                          @click="${this.accountManagementLink
+                                              ? () =>
+                                                    window.open(
+                                                        this.accountManagementLink,
+                                                        '_blank'
+                                                    )
+                                              : accountManagement}"
                                           variant="outline"
                                           data-testId="user-manage-account-button"
                                       >
@@ -236,4 +272,6 @@ export class UserProfile extends LitElement {
     }
 }
 
-customElements.define('user-profile', UserProfile);
+if (!customElements.get('user-profile')) {
+    customElements.define('user-profile', UserProfile);
+}

@@ -50,7 +50,7 @@ module.exports = ({ mode }) => {
                     name: REGIONAL_APP_2.NAME,
                     remotes: {
                         Layout: `${LAYOUT.NAME}@${mode === 'production' ? process.env.LAYOUT_URL : `http://localhost:${LAYOUT.PORT}`}/remoteEntry.js`,
-                        Widget: `${WIDGETS.NAME}@${mode === 'production' ? process.env.WIDGETS_URL : `http://localhost:${WIDGETS.PORT}`}/remoteEntry.js`,
+                        Widget: `${WIDGETS.NAME}@${mode === 'production' ? process.env.WIDGETS_URL : `http://localhost:${WIDGETS.PORT}`}/remoteEntry.js`
                     },
                     shared: {
                         react: {

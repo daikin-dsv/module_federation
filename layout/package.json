@@ -1,7 +1,11 @@
 {
     "name": "layout",
     "version": "1.0.0",
-    "main": "index.js",
+    "type": "module",
+    "main": "./src/index.js",
+    "exports": {
+        "./components/*": "./src/components/*.js"
+    },
     "scripts": {
         "dev": "rspack serve --env mode=development",
         "test": "cd .. && npx playwright test layout/tests/e2e/",
@@ -16,8 +20,8 @@
     "license": "ISC",
     "description": "",
     "dependencies": {
-        "@daikin-oss/dds-tokens": "^0.3.2",
-        "@daikin-oss/design-system-web-components": "^1.2.0",
+        "@daikin-oss/dds-tokens": "^0.4.2",
+        "@daikin-oss/design-system-web-components": "^1.3.0",
         "css-loader": "^7.1.2",
         "keycloak-js": "^26.2.0",
         "lit": "^3.3.0",

@@ -1,12 +1,12 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash/debounce.js';
 
 import tailwindStyles from '../index.css?inline';
 
 export class NavMenu extends LitElement {
     static properties = {
         parentNav: { type: String },
-        overflow: { type: Boolean },
+        overflow: { type: Boolean }
     };
 
     static styles = css`
@@ -81,7 +81,7 @@ export class NavMenu extends LitElement {
 
         const overflow = () => {
             this.overflow = this.getAttribute('slot') === 'overflow-route';
-        }
+        };
 
         // Observe nav-menu overflow on resize
         const resizeObserver = new ResizeObserver(debounce(overflow, 20));
@@ -98,17 +98,20 @@ export class NavMenu extends LitElement {
 
     render() {
         const buttonClass = [
-            "flex items-center justify-center gap-2 break-keep -mx-4 px-4 hover:cursor-pointer",
+            'flex items-center justify-center gap-2 break-keep -mx-4 px-4 hover:cursor-pointer',
             this._hasActiveChild
-                ? "text-(--dds-color-common-brand-default) font-(--dds-font-weight-bold) pt-1 hover:text-(--dds-color-common-brand-hover) focus:text-(--dds-color-common-brand-press) focus:outline-none active:bg-(--dds-color-common-surface-press)"
-                : "text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)",
-            !this.overflow ? "h-16" : "",
-            !this.overflow && this._hasActiveChild ? "border-b-4" : ""
+                ? 'text-(--dds-color-common-brand-default) font-(--dds-font-weight-bold) pt-1 hover:text-(--dds-color-common-brand-hover) focus:text-(--dds-color-common-brand-press) focus:outline-none active:bg-(--dds-color-common-surface-press)'
+                : 'text-(--dds-color-common-neutral-default) hover:text-(--dds-color-common-neutral-hover) focus:text-(--dds-color-common-neutral-press)',
+            !this.overflow ? 'h-16' : '',
+            !this.overflow && this._hasActiveChild ? 'border-b-4' : ''
         ].join(' ');
 
         return html`
             <daikin-menu>
-                <button class=${buttonClass} data-testId=${`parent-nav-button-${this.parentNav}`}>
+                <button
+                    class=${buttonClass}
+                    data-testId=${`parent-nav-button-${this.parentNav}`}
+                >
                     ${this.parentNav}
                     <daikin-icon
                         color="current"
@@ -130,4 +133,6 @@ export class NavMenu extends LitElement {
     }
 }
 
-customElements.define('nav-menu', NavMenu);
+if (!customElements.get('nav-menu')) {
+    customElements.define('nav-menu', NavMenu);
+}

@@ -37,7 +37,9 @@ export class AuthProvider extends LitElement {
     }
 }
 
-customElements.define('auth-provider', AuthProvider);
+if (!customElements.get('auth-provider')) {
+    customElements.define('auth-provider', AuthProvider);
+}
 
 // Re-exports for consumers (React, vanilla, other WCs)
 export {
