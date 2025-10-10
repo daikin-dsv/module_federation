@@ -1,6 +1,8 @@
-const { LAYOUT } = require('../../config');
+import config from '../../config.js';
 
-module.exports = () => ({
+const { LAYOUT } = config;
+
+export default () => ({
     devServer: {
         historyApiFallback: true, // Redirects all requests to index.html
         port: LAYOUT.PORT

@@ -1,13 +1,26 @@
+import { createRequire } from 'module';
+
+import appConfig from '../config.js';
+import developmentConfig from './build-utils/rspack.development.js';
+import productionConfig from './build-utils/rspack.production.js';
+
+const require = createRequire(import.meta.url);
 const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
 const { HtmlRspackPlugin, CssExtractRspackPlugin } = require('@rspack/core');
 const { merge } = require('webpack-merge');
+const { dependencies } = require('./package.json');
 
-const modeConfig = (env) => require(`./build-utils/rspack.${env}`)(env);
-const dependencies = require('./package.json').dependencies;
-const { LAYOUT } = require('../config');
+const { LAYOUT } = appConfig;
 
-module.exports = ({ mode }) => {
-    const config = merge(
+const envConfigMap = {
+    development: developmentConfig,
+    production: productionConfig
+};
+
+export default ({ mode }) => {
+    const envOverrides = (envConfigMap[mode] ?? (() => ({})))(mode);
+
+    return merge(
         {
             mode,
             entry: './src/index.js',
@@ -91,7 +104,6 @@ module.exports = ({ mode }) => {
                 new CssExtractRspackPlugin({})
             ]
         },
-        modeConfig(mode)
+        envOverrides
     );
-    return config;
 };

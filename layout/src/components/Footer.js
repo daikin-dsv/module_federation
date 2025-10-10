@@ -1,7 +1,17 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 
 import tailwindStyles from '../index.css?inline';
-import { footerText } from '../text.json';
+import text from '../text.json';
+
+/**
+ * @typedef {Object} FooterText
+ * @property {string} copyright
+ */
+
+/** @type {FooterText} */
+const defaultFooterText = {
+    copyright: text.footerText?.copyright ?? text.footerText.daikin
+};
 
 export class FooterComponent extends LitElement {
     static properties = {
@@ -16,7 +26,7 @@ export class FooterComponent extends LitElement {
         super();
 
         const year = new Date().getFullYear();
-        this.copyright = `${year} ${footerText.daikin}`;
+        this.copyright = `${year} ${defaultFooterText.copyright}`;
     }
 
     render() {
@@ -35,4 +45,6 @@ export class FooterComponent extends LitElement {
     }
 }
 
-customElements.define('app-footer', FooterComponent);
+if (!customElements.get('app-footer')) {
+    customElements.define('app-footer', FooterComponent);
+}

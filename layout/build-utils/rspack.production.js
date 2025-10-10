@@ -1,6 +1,6 @@
-module.exports = () => ({
+export default () => ({
     output: {
         filename: 'bundle.[contenthash].js',
-        publicPath: `${process.env.LAYOUT_URL}/`,
+        publicPath: `${process.env.LAYOUT_URL}/`
     }
 });
