@@ -28,18 +28,17 @@
   "remotes": [],
   "exposes": [
     {
-      "path": "./header",
-      "id": "Layout:header",
-      "name": "header",
+      "path": "./auth",
+      "id": "Layout:auth",
+      "name": "auth",
       "requires": [],
-      "file": "src/components/Header.js",
+      "file": "src/context/Auth/index.js",
       "assets": {
         "js": {
           "sync": [
-            "bundle.62c59697e9f40f98.js",
-            "bundle.a6115e47febaf8f0.js",
-            "bundle.48ccd7781afbcf75.js",
-            "bundle.bace5ba1bfa5960c.js"
+            "bundle.908cfe5f902dc88a.js",
+            "bundle.9fddea5c5067f054.js",
+            "bundle.b8ba3f76dd334c8c.js"
           ],
           "async": []
         },
@@ -58,9 +57,52 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.62c59697e9f40f98.js",
-            "bundle.48ccd7781afbcf75.js",
-            "bundle.85e5e8ee28a3f976.js"
+            "bundle.22efb0799d645232.js",
+            "bundle.bca3705ff7a54d43.js",
+            "bundle.08679a8b2c31515c.js"
+          ],
+          "async": []
+        },
+        "css": {
+          "sync": [],
+          "async": []
+        }
+      }
+    },
+    {
+      "path": "./header",
+      "id": "Layout:header",
+      "name": "header",
+      "requires": [],
+      "file": "src/components/Header.js",
+      "assets": {
+        "js": {
+          "sync": [
+            "bundle.22efb0799d645232.js",
+            "bundle.72655d36b3fba21b.js",
+            "bundle.bca3705ff7a54d43.js",
+            "bundle.e97c235836f25357.js"
+          ],
+          "async": []
+        },
+        "css": {
+          "sync": [],
+          "async": []
+        }
+      }
+    },
+    {
+      "path": "./navmenu",
+      "id": "Layout:navmenu",
+      "name": "navmenu",
+      "requires": [],
+      "file": "src/components/NavMenu.js",
+      "assets": {
+        "js": {
+          "sync": [
+            "bundle.22efb0799d645232.js",
+            "bundle.bca3705ff7a54d43.js",
+            "bundle.0a7bd8c9f9957714.js"
           ],
           "async": []
         },
@@ -79,31 +121,12 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.62c59697e9f40f98.js",
-            "bundle.a6115e47febaf8f0.js",
+            "bundle.22efb0799d645232.js",
+            "bundle.72655d36b3fba21b.js",
             "bundle.908cfe5f902dc88a.js",
-            "bundle.48ccd7781afbcf75.js",
-            "bundle.2d3b7e9504dae6ea.js"
-          ],
-          "async": []
-        },
-        "css": {
-          "sync": [],
-          "async": []
-        }
-      }
-    },
-    {
-      "path": "./auth",
-      "id": "Layout:auth",
-      "name": "auth",
-      "requires": [],
-      "file": "src/context/Auth/index.js",
-      "assets": {
-        "js": {
-          "sync": [
-            "bundle.908cfe5f902dc88a.js",
-            "bundle.3f3c7f9b24ad7583.js"
+            "bundle.bca3705ff7a54d43.js",
+            "bundle.9fddea5c5067f054.js",
+            "bundle.64511b606b812651.js"
           ],
           "async": []
         },
