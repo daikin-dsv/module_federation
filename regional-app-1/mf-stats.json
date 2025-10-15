@@ -30,17 +30,17 @@
       "requiredVersion": "^19.0.0",
       "shareScope": "default",
       "name": "react-dom",
-      "version": "19.0.0",
+      "version": "19.1.0",
       "eager": false,
       "id": "Regional_App_1:react-dom",
       "assets": {
         "js": {
           "async": [
-            "bundle.7992dd9b283ce22a.js"
+            "bundle.01ebf237146e1dbc.js"
           ],
           "sync": [
-            "bundle.e41ca2d2f3ce6925.js",
-            "bundle.f245ac92c82f705f.js"
+            "bundle.aa1ad59bad93adaf.js",
+            "bundle.4f1fb33ac2f59889.js"
           ]
         },
         "css": {
@@ -61,7 +61,7 @@
       "assets": {
         "js": {
           "async": [
-            "bundle.7992dd9b283ce22a.js"
+            "bundle.01ebf237146e1dbc.js"
           ],
           "sync": [
             "bundle.53a2573fc40d097f.js"
@@ -79,14 +79,14 @@
       "requiredVersion": "^19.0.0",
       "shareScope": "default",
       "name": "react",
-      "version": "19.0.0",
+      "version": "19.1.0",
       "eager": false,
       "id": "Regional_App_1:react",
       "assets": {
         "js": {
           "async": [],
           "sync": [
-            "bundle.7992dd9b283ce22a.js"
+            "bundle.01ebf237146e1dbc.js"
           ]
         },
         "css": {
@@ -113,6 +113,16 @@
       "consumingFederationContainerName": "Regional_App_1",
       "federationContainerName": "Layout",
       "moduleName": "header",
+      "usedIn": [
+        "src/bootstrap.js + 5 modules"
+      ],
+      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+    },
+    {
+      "alias": "Layout",
+      "consumingFederationContainerName": "Regional_App_1",
+      "federationContainerName": "Layout",
+      "moduleName": "navmenu",
       "usedIn": [
         "src/bootstrap.js + 5 modules"
       ],
