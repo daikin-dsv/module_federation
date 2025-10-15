@@ -33,10 +33,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.e6b638e8660bb21b.js",
-            "bundle.93bbeb9edc410ef7.js",
-            "bundle.626db43058c3e19c.js",
-            "bundle.cce55cf5ebfbc0ac.js"
+            "bundle.2e5188701d9cb67d.js",
+            "bundle.367a105c0382b449.js",
+            "bundle.e8e197d26dffde1a.js",
+            "bundle.bee1715bafb1d6ad.js"
           ],
           "async": []
         },
@@ -48,14 +48,35 @@
       "path": "./Alarm"
     },
     {
+      "id": "Widget:ConfirmationWindow",
+      "name": "ConfirmationWindow",
+      "assets": {
+        "js": {
+          "sync": [
+            "bundle.2e5188701d9cb67d.js",
+            "bundle.367a105c0382b449.js",
+            "bundle.792edc4ba22b256b.js",
+            "bundle.e8e197d26dffde1a.js",
+            "bundle.c774673f897962f6.js"
+          ],
+          "async": []
+        },
+        "css": {
+          "sync": [],
+          "async": []
+        }
+      },
+      "path": "./ConfirmationWindow"
+    },
+    {
       "id": "Widget:DatabricksDashboard",
       "name": "DatabricksDashboard",
       "assets": {
         "js": {
           "sync": [
-            "bundle.e6b638e8660bb21b.js",
-            "bundle.626db43058c3e19c.js",
-            "bundle.ba977e119da7da16.js"
+            "bundle.2e5188701d9cb67d.js",
+            "bundle.e8e197d26dffde1a.js",
+            "bundle.76927dbc6534ebc2.js"
           ],
           "async": []
         },
@@ -72,10 +93,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.e6b638e8660bb21b.js",
-            "bundle.93bbeb9edc410ef7.js",
-            "bundle.626db43058c3e19c.js",
-            "bundle.81e887be1b136284.js"
+            "bundle.2e5188701d9cb67d.js",
+            "bundle.367a105c0382b449.js",
+            "bundle.e8e197d26dffde1a.js",
+            "bundle.2c220f13fb9a52aa.js"
           ],
           "async": []
         },
@@ -92,10 +113,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.e6b638e8660bb21b.js",
-            "bundle.93bbeb9edc410ef7.js",
-            "bundle.626db43058c3e19c.js",
-            "bundle.50d10798ba7f59c9.js"
+            "bundle.2e5188701d9cb67d.js",
+            "bundle.367a105c0382b449.js",
+            "bundle.e8e197d26dffde1a.js",
+            "bundle.5f605340871d8d73.js"
           ],
           "async": []
         },
@@ -112,10 +133,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.e6b638e8660bb21b.js",
-            "bundle.93bbeb9edc410ef7.js",
-            "bundle.626db43058c3e19c.js",
-            "bundle.5b7e12f3d8341db8.js"
+            "bundle.2e5188701d9cb67d.js",
+            "bundle.367a105c0382b449.js",
+            "bundle.e8e197d26dffde1a.js",
+            "bundle.451240ef7517ec1e.js"
           ],
           "async": []
         },
@@ -125,6 +146,23 @@
         }
       },
       "path": "./Light"
+    },
+    {
+      "id": "Widget:TablePagination",
+      "name": "TablePagination",
+      "assets": {
+        "js": {
+          "sync": [
+            "bundle.36328c9f6d9a2301.js"
+          ],
+          "async": []
+        },
+        "css": {
+          "sync": [],
+          "async": []
+        }
+      },
+      "path": "./TablePagination"
     }
   ]
 }
