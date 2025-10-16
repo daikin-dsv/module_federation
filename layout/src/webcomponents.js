@@ -5,4 +5,5 @@ import '@daikin-oss/design-system-web-components/components/icon-button/index.js
 import '@daikin-oss/design-system-web-components/components/icon/index.js';
 import '@daikin-oss/design-system-web-components/components/list-item/index.js';
 import '@daikin-oss/design-system-web-components/components/list/index.js';
+import '@daikin-oss/design-system-web-components/components/logo/index.js';
 import '@daikin-oss/design-system-web-components/components/menu/index.js';

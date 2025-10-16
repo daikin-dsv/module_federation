@@ -2,7 +2,6 @@ import { LitElement, html, css, unsafeCSS } from 'lit';
 // Remove these if you plan to use native <a> tags
 import debounce from 'lodash/debounce.js';
 
-import Logo from '../assets/daikin_logo.png';
 import tailwindStyles from '../index.css?inline';
 import text from '../text.json';
 import '../webcomponents.js';
@@ -188,11 +187,7 @@ export class HeaderComponent extends LitElement {
                 <div class="flex flex-grow items-center gap-5">
                     <slot name="logo">
                         <a href="/" class="flex h-16 items-center">
-                            <img
-                                src="${Logo}"
-                                alt="Daikin"
-                                class="h-8 min-w-[115.52px]"
-                            />
+                            <daikin-logo class="h-8 min-w-[115.52px]"></daikin-logo>
                         </a>
                     </slot>
 

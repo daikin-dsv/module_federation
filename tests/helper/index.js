@@ -5,8 +5,7 @@ const {
     WIDGETS_BASE_URL,
     REGIONAL_APP_1_BASE_URL,
     REGIONAL_APP_2_BASE_URL,
-    EVA_URL,
-    RAD_URL
+    EVA_URL
 } = process.env;
 
 /**
@@ -23,14 +22,9 @@ async function getUserCredentials(user) {
     }
 }
 
-const loggedInPage = async ({ page, user, cookies, context }, url, use, options = {}) => {
+const loggedInPage = async ({ page, user, cookies, context }, url, use) => {
     try {
         await page.goto(url);
-
-        const { beforeLogin } = options;
-        if (typeof beforeLogin === 'function') {
-            await beforeLogin(page);
-        }
 
         const credentials = await getUserCredentials(user);
 
@@ -102,21 +96,6 @@ exports.test = test.extend({
     },
     evaPage: async ({ page, user, cookies, context }, use) => {
         await loggedInPage({ page, user, cookies, context }, EVA_URL, use);
-    },
-    radPage: async ({ page, user, cookies, context }, use) => {
-        await loggedInPage({ page, user, cookies, context }, RAD_URL, use, {
-            beforeLogin: async (currentPage) => {
-                const keycloakButton = currentPage.getByRole('button', {
-                    name: 'Sign in with Keycloak'
-                });
-                await expect(
-                    keycloakButton,
-                    'Keycloak sign-in button should be visible'
-                ).toBeVisible();
-                await keycloakButton.click();
-                await currentPage.waitForLoadState('domcontentloaded');
-            }
-        });
     }
 });
 

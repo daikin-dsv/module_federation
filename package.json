@@ -48,8 +48,7 @@
         "./widgets",
         "./regional-app-1",
         "./regional-app-2",
-        "./eva",
-        "./rad-template"
+        "./eva"
     ],
     "lint-staged": {
         "*.js": "eslint --cache --cache-location node_modules/.cache/.eslintcache",
