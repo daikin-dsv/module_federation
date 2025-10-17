@@ -98,7 +98,7 @@ export class UserProfile extends LitElement {
                 <div
                     id="popover-panel"
                     popover
-                    class="absolute top-[48px] right-[20px] bottom-auto left-auto rounded-md border border-solid border-[var(--dds-color-divider)]"
+                    class="absolute top-[48px] right-[20px] bottom-auto left-auto overflow-auto overflow-x-hidden rounded-md border border-solid border-[var(--dds-color-divider)]"
                 >
                     ${this.menu === 'main'
                         ? html`
