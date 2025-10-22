@@ -22,7 +22,7 @@
     "globalName": "Regional_App_2",
     "pluginVersion": "0.8.8",
     "prefetchInterface": false,
-    "publicPath": "https://turbo-doodle-2nm87nq.pages.github.io/regional-app-2/"
+    "publicPath": "https://laughing-doodle-gz3872k.pages.github.io/regional-app-2/"
   },
   "shared": [
     {
@@ -93,61 +93,61 @@
       "federationContainerName": "Layout",
       "moduleName": "auth",
       "alias": "Layout",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/layout/remoteEntry.js"
     },
     {
       "federationContainerName": "Layout",
       "moduleName": "header",
       "alias": "Layout",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/layout/remoteEntry.js"
     },
     {
       "federationContainerName": "Layout",
       "moduleName": "navmenu",
       "alias": "Layout",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/layout/remoteEntry.js"
     },
     {
       "federationContainerName": "Layout",
       "moduleName": "user",
       "alias": "Layout",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/layout/remoteEntry.js"
     },
     {
       "federationContainerName": "Layout",
       "moduleName": "footer",
       "alias": "Layout",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/layout/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/layout/remoteEntry.js"
     },
     {
       "federationContainerName": "Widget",
       "moduleName": "Alarm",
       "alias": "Widget",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/widgets/remoteEntry.js"
     },
     {
       "federationContainerName": "Widget",
       "moduleName": "DatabricksDashboard",
       "alias": "Widget",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/widgets/remoteEntry.js"
     },
     {
       "federationContainerName": "Widget",
       "moduleName": "Light",
       "alias": "Widget",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/widgets/remoteEntry.js"
     },
     {
       "federationContainerName": "Widget",
       "moduleName": "EnergyGauge",
       "alias": "Widget",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/widgets/remoteEntry.js"
     },
     {
       "federationContainerName": "Widget",
       "moduleName": "InfoCard",
       "alias": "Widget",
-      "entry": "https://turbo-doodle-2nm87nq.pages.github.io/widgets/remoteEntry.js"
+      "entry": "https://laughing-doodle-gz3872k.pages.github.io/widgets/remoteEntry.js"
     }
   ],
   "exposes": []
