@@ -24,10 +24,10 @@ jobs:
       - name: Build Project
         run: npm run build
         env:
-          LAYOUT_URL: https://turbo-doodle-2nm87nq.pages.github.io/layout
-          WIDGETS_URL: https://turbo-doodle-2nm87nq.pages.github.io/widgets
-          REGIONAL_APP_1_URL: https://turbo-doodle-2nm87nq.pages.github.io/regional-app-1
-          REGIONAL_APP_2_URL: https://turbo-doodle-2nm87nq.pages.github.io/regional-app-2
+          LAYOUT_URL: https://laughing-doodle-gz3872k.pages.github.io/layout
+          WIDGETS_URL: https://laughing-doodle-gz3872k.pages.github.io/widgets
+          REGIONAL_APP_1_URL: https://laughing-doodle-gz3872k.pages.github.io/regional-app-1
+          REGIONAL_APP_2_URL: https://laughing-doodle-gz3872k.pages.github.io/regional-app-2
           REGIONAL_APP_1_APP_PATH: /regional-app-1
           REGIONAL_APP_2_APP_PATH: /regional-app-2
 
