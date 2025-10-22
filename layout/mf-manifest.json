@@ -22,7 +22,7 @@
     "globalName": "Layout",
     "pluginVersion": "0.8.8",
     "prefetchInterface": false,
-    "publicPath": "https://turbo-doodle-2nm87nq.pages.github.io/layout/"
+    "publicPath": "https://laughing-doodle-gz3872k.pages.github.io/layout/"
   },
   "shared": [],
   "remotes": [],
@@ -34,7 +34,7 @@
         "js": {
           "sync": [
             "344.9b9fc331adc4d353.js",
-            "624.f3cbc66dfdf6e5a2.js",
+            "624.4258151bb1fc1e96.js",
             "__federation_expose_auth.6ac2f59eead95ae2.js"
           ],
           "async": []
@@ -114,7 +114,7 @@
             "798.76a2f0110a8c0c68.js",
             "344.9b9fc331adc4d353.js",
             "291.b2bcefbff0186271.js",
-            "624.f3cbc66dfdf6e5a2.js",
+            "624.4258151bb1fc1e96.js",
             "__federation_expose_user.4b6898042aa472d1.js"
           ],
           "async": []
