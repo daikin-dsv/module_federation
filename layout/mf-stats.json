@@ -36,9 +36,9 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.908cfe5f902dc88a.js",
-            "bundle.9fddea5c5067f054.js",
-            "bundle.b8ba3f76dd334c8c.js"
+            "344.9b9fc331adc4d353.js",
+            "624.f3cbc66dfdf6e5a2.js",
+            "__federation_expose_auth.6ac2f59eead95ae2.js"
           ],
           "async": []
         },
@@ -57,9 +57,9 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.22efb0799d645232.js",
-            "bundle.bca3705ff7a54d43.js",
-            "bundle.08679a8b2c31515c.js"
+            "261.f017aa5b2c094a9e.js",
+            "291.b2bcefbff0186271.js",
+            "__federation_expose_footer.316ffbe1abbb7e80.js"
           ],
           "async": []
         },
@@ -78,10 +78,10 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.22efb0799d645232.js",
-            "bundle.72655d36b3fba21b.js",
-            "bundle.bca3705ff7a54d43.js",
-            "bundle.e97c235836f25357.js"
+            "261.f017aa5b2c094a9e.js",
+            "798.76a2f0110a8c0c68.js",
+            "291.b2bcefbff0186271.js",
+            "__federation_expose_header.d8013a41e2dc5a85.js"
           ],
           "async": []
         },
@@ -100,9 +100,9 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.22efb0799d645232.js",
-            "bundle.bca3705ff7a54d43.js",
-            "bundle.0a7bd8c9f9957714.js"
+            "261.f017aa5b2c094a9e.js",
+            "291.b2bcefbff0186271.js",
+            "__federation_expose_navmenu.dbf84fce40f88157.js"
           ],
           "async": []
         },
@@ -121,12 +121,12 @@
       "assets": {
         "js": {
           "sync": [
-            "bundle.22efb0799d645232.js",
-            "bundle.72655d36b3fba21b.js",
-            "bundle.908cfe5f902dc88a.js",
-            "bundle.bca3705ff7a54d43.js",
-            "bundle.9fddea5c5067f054.js",
-            "bundle.64511b606b812651.js"
+            "261.f017aa5b2c094a9e.js",
+            "798.76a2f0110a8c0c68.js",
+            "344.9b9fc331adc4d353.js",
+            "291.b2bcefbff0186271.js",
+            "624.f3cbc66dfdf6e5a2.js",
+            "__federation_expose_user.4b6898042aa472d1.js"
           ],
           "async": []
         },
