@@ -1,5 +1,5 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
-const { HtmlRspackPlugin, rspack } = require('@rspack/core');
+const { HtmlRspackPlugin, rspack, DefinePlugin } = require('@rspack/core');
 const { merge } = require('webpack-merge');
 
 const modeConfig = (env) => require(`./build-utils/rspack.${env}`)(env);
@@ -49,8 +49,8 @@ module.exports = ({ mode }) => {
                 new ModuleFederationPlugin({
                     name: EVA.NAME,
                     remotes: {
-                        Layout: `${LAYOUT.NAME}@http://localhost:${LAYOUT.PORT}/remoteEntry.js`,
-                        Widget: `${WIDGETS.NAME}@http://localhost:${WIDGETS.PORT}/remoteEntry.js`
+                        Layout: `${LAYOUT.NAME}@${mode === 'production' ? process.env.LAYOUT_URL : `http://localhost:${LAYOUT.PORT}`}/remoteEntry.js`,
+                        Widget: `${WIDGETS.NAME}@${mode === 'production' ? process.env.WIDGETS_URL : `http://localhost:${WIDGETS.PORT}`}/remoteEntry.js`
                     },
                     shared: {
                         react: {
@@ -80,7 +80,10 @@ module.exports = ({ mode }) => {
                     template: './index.html',
                     inject: 'body'
                 }),
-                new rspack.CssExtractRspackPlugin({})
+                new rspack.CssExtractRspackPlugin({}),
+                new DefinePlugin({
+                    'process.env.APP_PATH': JSON.stringify(process.env.APP_PATH || '')
+                })
             ]
         },
         modeConfig(mode)

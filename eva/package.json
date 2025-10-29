@@ -7,7 +7,7 @@
         "test": "cd .. && npx playwright test eva/tests/e2e/",
         "lint": "npx eslint .",
         "format": "npx prettier --write .",
-        "build": "rspack build --env mode=production",
+        "build": "LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL EVA_URL=$EVA_URL APP_PATH=$EVA_APP_PATH rspack build --env mode=production",
         "build-docker": "pwsh ../build-service.ps1 -ServiceName $npm_package_name -ServiceVersion $npm_package_version"
     },
     "author": "",
@@ -19,9 +19,11 @@
         "@emotion/react": "^11.11.0",
         "@emotion/styled": "^11.11.0",
         "@mui/material": "^5.18.0",
+        "css-loader": "^7.1.2",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-router": "^7.1.3"
+        "react-router": "^7.1.3",
+        "tailwindcss": "^3.4.17"
     },
     "devDependencies": {
         "@daikin-oss/tailwind": "^0.3.0",
@@ -30,11 +32,9 @@
         "@rspack/core": "^1.1.8",
         "@rspack/plugin-react-refresh": "^1.0.1",
         "@tailwindcss/postcss": "^4.0.0",
-        "css-loader": "^7.1.2",
         "postcss": "^8.5.1",
         "postcss-loader": "^8.1.1",
         "react-refresh": "^0.16.0",
-        "tailwindcss": "^4.1.8",
         "webpack-merge": "^6.0.1"
     }
 }

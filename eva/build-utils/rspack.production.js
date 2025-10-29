@@ -1,6 +1,6 @@
 module.exports = () => ({
     output: {
         filename: 'bundle.[contenthash].js',
-        publicPath: ''
+        publicPath: process.env.EVA_URL ? `${process.env.EVA_URL}/` : '',
     }
 });
