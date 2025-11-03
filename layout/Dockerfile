@@ -5,7 +5,7 @@
 FROM node:20 AS builder
 
 # Set environment variables for the build stage
-ENV LAYOUT_URL=https://apollo.daikinlab.com/rad/layout
+ENV LAYOUT_URL=https://ss-apollo.daikinlab.com/rad/layout
 
 # Define the working directory
 WORKDIR /app/layout

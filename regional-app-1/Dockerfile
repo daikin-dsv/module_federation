@@ -5,9 +5,9 @@
 FROM node:20 AS builder
 
 # Set environment variables for the build stage\
-ENV LAYOUT_URL=https://apollo.daikinlab.com/rad/layout
-ENV WIDGETS_URL=https://apollo.daikinlab.com/rad/widgets
-ENV REGIONAL_APP_1_URL=https://apollo.daikinlab.com/rad/regional-app-1
+ENV LAYOUT_URL=https://ss-apollo.daikinlab.com/rad/layout
+ENV WIDGETS_URL=https://ss-apollo.daikinlab.com/rad/widgets
+ENV REGIONAL_APP_1_URL=https://ss-apollo.daikinlab.com/rad/regional-app-1
 ENV REGIONAL_APP_1_APP_PATH=/rad/regional-app-1
 
 # Define the working directory

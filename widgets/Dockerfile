@@ -5,7 +5,7 @@
 FROM node:20 AS builder
 
 # Set environment variables for the build stage
-ENV WIDGETS_URL=https://apollo.daikinlab.com/rad/widgets
+ENV WIDGETS_URL=https://ss-apollo.daikinlab.com/rad/widgets
 
 # Define the working directory
 WORKDIR /app/widgets
