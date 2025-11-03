@@ -29,9 +29,9 @@ FROM nginx:stable-alpine AS production
 WORKDIR /app/layout
 
 # Fix permissions for NGINX cache directories
-RUN mkdir -p /var/cache/nginx /var/run /var/log/nginx && \
-    chown -R nginx:nginx /var/cache/nginx /var/run /var/log/nginx && \
-    chmod -R 775 /var/cache/nginx /var/run /var/log/nginx
+RUN mkdir -p /var/cache/nginx /var/run /var/log/nginx /run && \
+    chown -R nginx:nginx /var/cache/nginx /var/run /var/log/nginx /run && \
+    chmod -R 775 /var/cache/nginx /var/run /var/log/nginx /run
 
 # Install nginx-prometheus-exporter for metrics
 RUN apk add --no-cache wget tar && \
