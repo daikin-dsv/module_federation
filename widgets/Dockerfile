@@ -5,7 +5,7 @@
 FROM node:20 AS builder
 
 # Set environment variables for the build stage
-ENV WIDGETS_URL=https://apollo.daikinlab.com/rad/widgets
+ENV WIDGETS_URL=https://ss-apollo.daikinlab.com/rad/widgets
 
 # Define the working directory
 WORKDIR /app/widgets
@@ -28,6 +28,11 @@ FROM nginx:stable-alpine AS production
 # Define the working directory
 WORKDIR /app/widgets
 
+# Fix permissions for NGINX cache directories
+RUN mkdir -p /var/cache/nginx /var/run /var/log/nginx /run && \
+    chown -R nginx:nginx /var/cache/nginx /var/run /var/log/nginx /run && \
+    chmod -R 775 /var/cache/nginx /var/run /var/log/nginx /run
+
 # Install nginx-prometheus-exporter for metrics
 RUN apk add --no-cache wget tar && \
     wget -O /tmp/nginx_prometheus_exporter.tar.gz https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v1.1.0/nginx-prometheus-exporter_1.1.0_linux_amd64.tar.gz && \
@@ -42,4 +47,4 @@ COPY --from=builder /app/widgets/dist/ /usr/share/nginx/html
 EXPOSE 80 9090
 
 # Run both NGINX and exporter
-CMD ["/bin/sh", "-c", "nginx -g 'daemon off;' & nginx-prometheus-exporter -nginx.scrape-uri http://127.0.0.1/ -web.listen-address :9090"]
+CMD ["/bin/sh", "-c", "nginx -g 'daemon off;' & nginx-prometheus-exporter --nginx.scrape-uri http://127.0.0.1/ --web.listen-address :9090"]
