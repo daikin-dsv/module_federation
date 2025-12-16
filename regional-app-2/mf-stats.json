@@ -36,7 +36,7 @@
       "assets": {
         "js": {
           "async": [
-            "bundle.b6b7b2275eb91af8.js"
+            "bundle.1b673beb810ac508.js"
           ],
           "sync": [
             "bundle.186fc45240322003.js",
@@ -61,7 +61,7 @@
       "assets": {
         "js": {
           "async": [
-            "bundle.b6b7b2275eb91af8.js"
+            "bundle.1b673beb810ac508.js"
           ],
           "sync": [
             "bundle.affabc3c4d0f3d2f.js"
@@ -79,14 +79,14 @@
       "requiredVersion": "^19.0.0",
       "shareScope": "default",
       "name": "react",
-      "version": "19.1.0",
+      "version": "19.2.3",
       "eager": false,
       "id": "Regional_App_2:react",
       "assets": {
         "js": {
           "async": [],
           "sync": [
-            "bundle.b6b7b2275eb91af8.js"
+            "bundle.1b673beb810ac508.js"
           ]
         },
         "css": {
