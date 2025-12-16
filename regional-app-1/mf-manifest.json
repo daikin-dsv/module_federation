@@ -34,7 +34,7 @@
       "assets": {
         "js": {
           "async": [
-            "bundle.01ebf237146e1dbc.js"
+            "bundle.8869a6c58ebbd639.js"
           ],
           "sync": [
             "bundle.aa1ad59bad93adaf.js",
@@ -56,7 +56,7 @@
       "assets": {
         "js": {
           "async": [
-            "bundle.01ebf237146e1dbc.js"
+            "bundle.8869a6c58ebbd639.js"
           ],
           "sync": [
             "bundle.53a2573fc40d097f.js"
@@ -71,14 +71,14 @@
     {
       "id": "Regional_App_1:react",
       "name": "react",
-      "version": "19.1.0",
+      "version": "19.2.3",
       "singleton": true,
       "requiredVersion": "^19.0.0",
       "assets": {
         "js": {
           "async": [],
           "sync": [
-            "bundle.01ebf237146e1dbc.js"
+            "bundle.8869a6c58ebbd639.js"
           ]
         },
         "css": {
