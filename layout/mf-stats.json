@@ -79,7 +79,7 @@
         "js": {
           "sync": [
             "261.f017aa5b2c094a9e.js",
-            "798.76a2f0110a8c0c68.js",
+            "798.445f257ae919e821.js",
             "291.b2bcefbff0186271.js",
             "__federation_expose_header.d8013a41e2dc5a85.js"
           ],
@@ -122,11 +122,11 @@
         "js": {
           "sync": [
             "261.f017aa5b2c094a9e.js",
-            "798.76a2f0110a8c0c68.js",
+            "798.445f257ae919e821.js",
             "344.9b9fc331adc4d353.js",
             "291.b2bcefbff0186271.js",
             "624.4258151bb1fc1e96.js",
-            "__federation_expose_user.4b6898042aa472d1.js"
+            "__federation_expose_user.255fc5ec025b1206.js"
           ],
           "async": []
         },
