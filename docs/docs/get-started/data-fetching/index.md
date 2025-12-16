@@ -2,6 +2,6 @@
 sidebar_position: 5
 ---
 
-# Daikin Design System
+# Data Fetching
 
 Coming soon...

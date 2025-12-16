@@ -71,6 +71,11 @@ export class UserProfile extends LitElement {
             return html``;
         }
 
+        const translations = {
+            ...text.userText,
+            ...(this.text && typeof this.text === 'object' ? this.text : {})
+        };
+
         return html`
             <div>
                 <button popovertarget="popover-panel">
@@ -108,7 +113,7 @@ export class UserProfile extends LitElement {
                               >
                                   <div class="flex flex-col">
                                       <span data-testId="user-profile-signed-in"
-                                          >${this.text.signedIn}</span
+                                          >${translations.signedIn}</span
                                       >
                                       <span
                                           class="flex flex-wrap font-(--dds-font-weight-bold) break-all"
@@ -125,7 +130,7 @@ export class UserProfile extends LitElement {
                                               @click="${() => this._showMenu('profile')}"
                                               data-testId="user-profile-item"
                                           >
-                                              ${this.text.profile}
+                                              ${translations.profile}
                                               <daikin-icon
                                                   icon="chevron-right"
                                                   slot="right-icon"
@@ -160,7 +165,7 @@ export class UserProfile extends LitElement {
                                           variant="outline"
                                           data-testId="user-sign-out-button"
                                       >
-                                          ${this.text.signOut}
+                                          ${translations.signOut}
                                       </daikin-button>
                                   </daikin-card-footer>
                               </daikin-card>
@@ -185,7 +190,7 @@ export class UserProfile extends LitElement {
                                           <span
                                               class="font-(--dds-font-weight-bold)"
                                               data-testId="user-profile-name-label"
-                                              >${this.text.name}</span
+                                              >${translations.name}</span
                                           >
                                           <span
                                               class="flex flex-wrap break-all"
@@ -198,7 +203,7 @@ export class UserProfile extends LitElement {
                                           <span
                                               class="font-(--dds-font-weight-bold)"
                                               data-testId="user-profile-email-label"
-                                              >${this.text.email}</span
+                                              >${translations.email}</span
                                           >
                                           <span
                                               class="flex flex-wrap break-all"
@@ -210,17 +215,17 @@ export class UserProfile extends LitElement {
                                           <span
                                               class="font-(--dds-font-weight-bold)"
                                               data-testId="user-profile-language-label"
-                                              >${this.text.language}</span
+                                              >${translations.language}</span
                                           >
                                           <span
                                               class="flex flex-wrap break-all"
                                               data-testId="user-profile-language"
                                               >${this.user.locale === 'en' &&
-                                              this.text.english
-                                                  ? this.text.english
+                                              translations.english
+                                                  ? translations.english
                                                   : this.user.locale === 'ja' &&
-                                                      this.text.japanese
-                                                    ? this.text.japanese
+                                                      translations.japanese
+                                                    ? translations.japanese
                                                     : this.user.locale}</span
                                           >
                                       </div>
@@ -238,7 +243,7 @@ export class UserProfile extends LitElement {
                                           variant="outline"
                                           data-testId="user-manage-account-button"
                                       >
-                                          ${this.text.manageAccount}
+                                          ${translations.manageAccount}
                                           <daikin-icon
                                               icon="arrow-top-right-on-square"
                                               slot="right-icon"

@@ -12,12 +12,13 @@
         "lint:lit-analyzer": "lit-analyzer \"{layout,widgets}/src/**/*.{js,ts}\"",
         "format": "prettier --write .",
         "build-and-run:layout": "docker buildx build -f layout/Dockerfile --progress=plain -t layout:latest . && docker run -t -p 8080:80 layout:latest",
-        "build": "LAYOUT_URL=$LAYOUT_URL npm run build --prefix=layout & WIDGETS_URL=$WIDGETS_URL npm run build --prefix=widgets & LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL REGIONAL_APP_1_URL=$REGIONAL_APP_1_URL APP_PATH=$REGIONAL_APP_1_APP_PATH npm run build --prefix=regional-app-1 & LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL REGIONAL_APP_2_URL=$REGIONAL_APP_2_URL REGIONAL_APP_2_URL=$REGIONAL_APP_2_URL APP_PATH=$REGIONAL_APP_2_APP_PATH npm run build --prefix=regional-app-2",
+        "build": "LAYOUT_URL=$LAYOUT_URL npm run build --prefix=layout & WIDGETS_URL=$WIDGETS_URL npm run build --prefix=widgets & LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL REGIONAL_APP_1_URL=$REGIONAL_APP_1_URL APP_PATH=$REGIONAL_APP_1_APP_PATH npm run build --prefix=regional-app-1 & LAYOUT_URL=$LAYOUT_URL WIDGETS_URL=$WIDGETS_URL REGIONAL_APP_2_URL=$REGIONAL_APP_2_URL REGIONAL_APP_2_URL=$REGIONAL_APP_2_URL APP_PATH=$REGIONAL_APP_2_APP_PATH npm run build --prefix=regional-app-2 & npm run build --prefix=docs",
         "deploy-github-pages:layout": "NODE_DEBUG=gh-pages gh-pages -d layout/dist -b gh-pages --dest layout",
         "deploy-github-pages:widgets": "gh-pages -d widgets/dist -b gh-pages --dest widgets",
         "deploy-github-pages:regional-app-1": "gh-pages -d regional-app-1/dist -b gh-pages --dest regional-app-1",
         "deploy-github-pages:regional-app-2": "gh-pages -d regional-app-2/dist -b gh-pages --dest regional-app-2",
-        "deploy-github-pages:all": "npm run deploy-github-pages:layout && npm run deploy-github-pages:widgets && npm run deploy-github-pages:regional-app-1 && npm run deploy-github-pages:regional-app-2"
+        "deploy-github-pages:docs": "gh-pages -d docs/build -b gh-pages --dest docs",
+        "deploy-github-pages:all": "npm run deploy-github-pages:layout && npm run deploy-github-pages:widgets && npm run deploy-github-pages:regional-app-1 && npm run deploy-github-pages:regional-app-2 && npm run deploy-github-pages:docs"
     },
     "author": "",
     "license": "ISC",
@@ -48,7 +49,8 @@
         "./widgets",
         "./regional-app-1",
         "./regional-app-2",
-        "./eva"
+        "./eva",
+        "./docs"
     ],
     "lint-staged": {
         "*.js": "eslint --cache --cache-location node_modules/.cache/.eslintcache",
