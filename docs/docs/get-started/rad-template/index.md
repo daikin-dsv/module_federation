@@ -7,18 +7,18 @@ sidebar_position: 4
 ## Why Use This Template?
 
 - Ship a full-stack app quickly with Next.js App Router, TypeScript, and React 19.
-- Built-in Daikin design system web components via `public/webcomponents.js`, with React wrappers for seamless usage.
+- Built-in DDS web components via `public/webcomponents.js`, with React wrappers for seamless usage.
 - Opinionated auth with NextAuth + Keycloak; local bypass available for rapid development.
 - Strong defaults: strict TypeScript, Tailwind utilities, and ready-to-run E2E + component tests.
-- Repository: https://github.com/daikin-dsv/rad-template/
-- Live deployment: https://rad-template.netlify.app/
+- [Repository](https://github.com/daikin-dsv/rad-template/)
+- [Live deployment](https://rad-template.netlify.app/)
 
 ## What’s Inside
 
 - **Next.js (App Router):** Routes, layouts, and server actions under `app/`.
-- **Design System:** Custom elements bundled via Vite; React wrappers in `app/components/dds-wrappers.tsx`; registration in `app/webcomponents.ts`.
+- **DDS:** Custom elements bundled via Vite; React wrappers in `app/components/dds-wrappers.tsx`; registration in `app/webcomponents.ts`.
 - **Auth:** NextAuth wired for Keycloak; helpers live in `lib/auth/`.
-- **Styling:** Global styles in `app/globals.css`; design tokens documented in `CSS_VARIABLES.md`; Tailwind utilities available.
+- **Styling:** Global styles in `app/globals.css`; DDS tokens documented in `CSS_VARIABLES.md`; Tailwind utilities available.
 - **Tests:** Playwright E2E in `tests/`; Vitest component tests via `npm run test:component`.
 - **Types:** Shared declarations in `types/`.
 
@@ -46,7 +46,7 @@ sidebar_position: 4
     ```bash
     npm run dev    # http://localhost:3006
     ```
-4. Develop the design system bundle when touching web components:
+4. Develop the DDS web component bundle when touching web components:
     ```bash
     npm run dev:webcomponents
     ```
@@ -54,18 +54,18 @@ sidebar_position: 4
 ## Common Scripts
 
 - `npm run dev` — Start Next.js dev server.
-- `npm run dev:webcomponents` — Watch/rebuild design system bundle.
+- `npm run dev:webcomponents` — Watch/rebuild DDS web component bundle.
 - `npm run build` — Production build (runs Vite bundle then Next.js build).
 - `npm run lint` — ESLint + Prettier (Tailwind plugin).
 - `npm run format` — Prettier format.
 - `npm run test:component` — Vitest component tests.
 - `ENV="local" npm run test:e2e` — Playwright E2E (requires dev server).
 
-## Working With the Design System
+## Working With DDS
 
 - Use React wrappers in `app/components/dds-wrappers.tsx`.
 - Register new custom elements in `app/webcomponents.ts`.
-- Update `CSS_VARIABLES.md` when adding or renaming design tokens.
+- Update `CSS_VARIABLES.md` when adding or renaming DDS tokens.
 
 ## Localization
 
@@ -92,7 +92,7 @@ sidebar_position: 4
 ## Useful Paths
 
 - App routes and components: `app/`
-- React design system wrappers: `app/components/dds-wrappers.tsx`
+- React DDS wrappers: `app/components/dds-wrappers.tsx`
 - Web component registration: `app/webcomponents.ts`
 - Auth helpers: `lib/auth/`
 - Global styles: `app/globals.css`

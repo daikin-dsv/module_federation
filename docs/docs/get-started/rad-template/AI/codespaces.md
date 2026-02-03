@@ -2,49 +2,50 @@
 sidebar_position: 1
 ---
 
-# Github Codespace Integration
+# GitHub Codespaces Integration
+
+## Prerequisites
+
+- A GitHub account with access to Codespaces.
+- Access to the [daikin-dsv/rad-template](https://github.com/daikin-dsv/rad-template) repository.
+- If you want to use built-in AI chat, a GitHub plan with GitHub Copilot access.
 
 ## Setup
 
-Go to [daikin-dsv/rad-template](https://github.com/daikin-dsv/rad-template)
-
-On the top-right hand corner, click on `Use this template` → `Open in a codespace`
-
-Codespaces will initialize the project, automatically installing dependencies.
-
-After that is done, run:
+1. Open [daikin-dsv/rad-template](https://github.com/daikin-dsv/rad-template).
+2. In the top-right corner, click `Use this template` -> `Open in a codespace`.
+3. Wait for Codespaces to initialize dependencies.
+4. Run:
 
 ```bash
-// Use Node v22
-nvm use 22
-// copy env example to usable file
+# Use Node v24
+nvm use 24
+# Copy env example to local file
 cp .env.example .env.local
-// build web component bundle
+# Build web component bundle
 npm run build
-// run dev server
+# Run dev server
 npm run dev
 ```
 
 ## Preview App
 
-While running the dev server, you can go to the `Ports` tab on the bottom to view the forwarded address:
+While the dev server is running, open the `Ports` tab at the bottom to find the forwarded URL:
 
 <p style={{ textAlign: 'center' }}>
     ![UI Preview available in forwarded address](/img/github-codespace-ports.png)
 </p>
 
-You can make any changes, and it will reflect automatically in the forwarded address.
-The idle time is very short, so don’t expect it to persist for a long time after being inactive.
+Changes are reflected automatically in the forwarded address. The idle timeout is short, so expect the environment to stop after inactivity.
 
 ## Using AI to Build UI
 
-On the bottom right, you can select the available LLM Model that you have access to. (The options may be limited based on your subscription/plans)
+In the bottom-right of Codespaces, choose the LLM model available to your account (options vary by subscription/plan).
 
 <p style={{ textAlign: 'center' }}>
     ![Use chat to build UI](/img/github-codespace-chat.png)
 </p>
 
-Choose any model and ask it to build a UI for you.
-The template provides instructions to the LLM via `AGENTS.md` and `CLAUDE.md`.
+Ask the model to build the UI you want. The template provides guidance to AI tools via `AGENTS.md` and `CLAUDE.md`.
 
-⚠️ Note: Some models may look for specific files. Models other than OpenAI, Claude, and Grok have not been tested.
+⚠️ Note: Some models may rely on specific files. OpenAI, Claude, and Grok have been tested; other models have not.

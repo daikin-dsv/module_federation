@@ -4,16 +4,16 @@ sidebar_position: 3
 
 # CI/CD Pipelines
 
-Use these Github workflows to keep RAD Template healthy and prove changes before release. Both pipelines live in `.github/workflows/`.
+Use these GitHub workflows to keep RAD Template healthy and prove changes before release. Both pipelines live in `.github/workflows/`.
 
 ## Pull Request CI (`pr-ci.yml`)
 
 Runs automatically on every pull request and can be triggered manually (`workflow_dispatch`) or by other workflows (`workflow_call`). It fans out a build matrix so problems surface independently:
 
 - **Build** — Executes `npm run build`, which includes the Vite web component bundle followed by the Next.js build.
-- **Component Tests** — Executes `npm run test:component` (Vitest). Keep Vitest green when touching components or shared libraries.
+- **Component Tests** — Executes `npm run test:component` ([Vitest](https://vitest.dev/)). Keep Vitest green when touching components or shared libraries.
 - **Lint** — Executes `npm run lint` with eslint + TypeScript rules.
-- **Format Check** — Executes `npx prettier --check .` to enforce the Tailwind-aware Prettier config.
+- **Format Check** — Executes `npx prettier --check .` to enforce the Tailwind-aware [Prettier](https://prettier.io/) config.
 
 A single failure stops only that matrix entry, so reruns can focus on the failing slice. If you add a new validation script, extend the `matrix.include` list so it participates in PR gating.
 
@@ -21,7 +21,7 @@ A single failure stops only that matrix entry, so reruns can focus on the failin
 
 This workflow is manually triggered via the **Run workflow** button in GitHub Actions. It accepts two inputs:
 
-- `rad_url` — URL that Playwright should target (defaults to the Netlify preview).
+- `rad_url` — URL that [Playwright](https://playwright.dev/) should target (defaults to the Netlify preview).
 - `bypass_auth` — Whether `BYPASS_AUTH` should be `true` or `false` for the run.
 
 The job:

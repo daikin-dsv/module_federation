@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Layouts
 
-The Layout package contains the shared “chrome” (header, footer, auth, nav) that every application needs. A standalone npm package is in progress; until it’s published, Layout ships as part of this repository and can be referenced as a workspace dependency. The details below describe the API that the package exposes so teams can prepare for the switch.
+The Layout package contains the shared "chrome" (header, footer, auth, navigation) that every application needs. A standalone npm package is in progress; until it is published, Layout ships as part of this repository and can be referenced as a workspace dependency.
 
 ## Package At A Glance
 
@@ -14,28 +14,31 @@ The Layout package contains the shared “chrome” (header, footer, auth, nav) 
 
 ## What's Inside the Layout Package
 
-- Lit-powered components compiled with Rspack.
-- Tailwind-aware stylesheet plus Daikin design tokens for consistent typography, color, and spacing.
+- [Lit](https://lit.dev/) components compiled with [Rspack](https://rspack.dev/).
+- Tailwind-aware stylesheet plus DDS tokens for consistent typography, color, and spacing.
 - Web component registrations so every `daikin-*` primitive is ready to use.
 - Keycloak-auth provider and framework-agnostic helpers that broadcast auth changes.
-- Playwright smoke tests that cover navigation overflow and user menu journeys.
+- [Playwright](https://playwright.dev/) smoke tests that cover navigation overflow and user menu journeys.
 
 ## Package Install Quick Start
 
-1. **Add the dependency (coming soon).** Publishing to npm (or an internal registry) is underway. Inside this mono-repo you can already depend on the Layout workspace via your package manager’s workspace linking; external consumers will eventually run `npm install layout`.
+1. **Add the dependency (coming soon).** Publishing to npm (or an internal registry) is underway. Inside this mono-repo you can already depend on the Layout workspace via your package manager's workspace linking; external consumers will eventually run `npm install layout`.
 2. **Register custom elements and shared assets once.** _(These are the planned entrypoints; until the package is published, import directly from the equivalent files in the Layout workspace.)_
+
     ```ts
     // Registers app-header/footer/nav-menu/user-profile
     import 'layout/auth';
     // Registers daikin-* primitives
     import 'layout/components';
     import 'layout/styles';
-    // Tailwind base + Daikin tokens
+    // Tailwind base + DDS tokens
     import 'layout/webcomponents';
 
     // Registers auth-provider + exposes helpers
     ```
+
 3. **Render the tags anywhere (React example).**
+
     ```tsx
     export function Chrome() {
         return (
@@ -82,12 +85,12 @@ Because the components are Lit-based custom elements, they work in any framework
 
 ## Customization & Theming
 
-- **Text/localization:** Override via attributes/props (e.g., `<app-footer copyright="2025 Daikin Tokyo">`) or pass an object to `<user-profile text={...}>`.
+- **Text/localization:** Override via attributes/props (for example, `<app-footer copyright="2025 Daikin Tokyo">`) or pass an object to `<user-profile text={...}>`.
 - **Slots:** All navigation links/buttons are provided via slots so hosts can render React components, plain anchors, or other custom elements.
-- **Tokens:** Styling leans heavily on Daikin CSS variables (e.g., `--dds-color-common-brand-default`). Override these tokens in your host CSS to tweak colors without forking the components.
+- **DDS tokens:** Styling leans heavily on DDS CSS variables (for example, `--dds-color-common-brand-default`). Override these tokens in host CSS to adjust colors without forking components.
 
 ## Auth & SSO Notes
 
-- Defaults target the Daikin dev Keycloak realm (`https://sso-dev.daikinlab.com/auth`, realm `daikin`, client `rad-application`). Update the package-level Keycloak config for other environments.
-- Tokens live in `localStorage` as `kc_token` / `kc_refreshToken`. The refresh loop runs every 10 seconds and only refreshes when expiry is near.
-- `logout(options)` clears tokens and calls the Keycloak logout endpoint; `accountManagement()` opens the account console. Both helpers ship with the package for hosts to call directly when needed.
+- Defaults target the Daikin dev Keycloak realm (`https://sso-dev.daikinlab.com/auth`, realm `daikin`, client `rad-application`). Update package-level Keycloak config for other environments.
+- Keycloak access/refresh tokens live in `localStorage` as `kc_token` / `kc_refreshToken`. The refresh loop runs every 10 seconds and only refreshes when expiry is near.
+- `logout(options)` clears auth tokens and calls the Keycloak logout endpoint; `accountManagement()` opens the account console. Both helpers ship with the package for hosts to call directly when needed.
