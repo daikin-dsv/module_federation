@@ -6,7 +6,7 @@ RAD Template is set up to be AI-friendly: these docs give language models (and n
 
 - `AGENTS.md` — Canonical brief for language models: architecture snapshot, key directories, workflows, env vars, and contribution expectations. Treat it as the source of truth when prompting an LLM about the project.
 - `CLAUDE.md` — Claude-specific operating notes and boundaries (mirrors `AGENTS.md` intent; ensure any AI helper reads it if using Claude).
-- `CSS_VARIABLES.md` — Design token reference; update when adding or renaming tokens.
+- `CSS_VARIABLES.md` — DDS token reference; update when adding or renaming tokens.
 
 Many LLMs will look for `AGENTS.md` (and `CLAUDE.md` if using Claude) automatically.
 

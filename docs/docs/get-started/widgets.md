@@ -4,21 +4,21 @@ sidebar_position: 2
 
 # Widgets
 
-Our widgets bundle delivers ready-to-use data visualization and interaction components (alarm tiles, confirmation modals, gauges, pagination helpers, etc.). A standalone npm package is in progress.
+Our widgets bundle delivers ready-to-use data visualization and interaction components (alarm tiles, confirmation modals, gauges, pagination helpers, and more). A standalone npm package is in progress.
 
 ## Package At A Glance
 
 - Coming soon: installable via `npm install widgets` (or its final scoped name). Until the package is published, treat this document as a preview of the API surface.
-- Components are Lit-based custom elements that sit on top of the Daikin Design System web components and design tokens.
-- Each widget focuses on a narrow task (alerts, telemetry, confirmation flows) so hosts can mix/match without recreating UI fundamentals.
+- Components are Lit-based custom elements that sit on top of DDS web components and DDS tokens.
+- Each widget focuses on a narrow task (alerts, telemetry, confirmation flows) so hosts can mix and match without rebuilding UI fundamentals.
 
 ## What's Inside
 
-- Storyboard/demo shell that showcases how the components work together.
-- Tailwind-aware stylesheet plus Daikin tokens for color/typography consistency.
+- Storyboard/demo shell that shows how the components work together.
+- Tailwind-aware stylesheet plus DDS tokens for color and typography consistency.
 - Lit components covering alarms, confirmation flows, energy usage, water/gas cards, IoT toggles, Databricks embeds, and paginated tables.
 - Localization defaults for alarms, confirmation windows, lights, right-panel metadata, and pagination.
-- Playwright coverage validating alarms, confirmation modals, and right-panel interactions.
+- [Playwright](https://playwright.dev/) coverage validating alarms, confirmation modals, and right-panel interactions.
 
 ## Package Install Quick Start
 
@@ -40,7 +40,7 @@ Our widgets bundle delivers ready-to-use data visualization and interaction comp
 
 3. **Render them anywhere.**
 
-    ```tsx
+    ```html
     import { WaterIcon } from 'widgets/components/InfoCard.js';
 
     export function Dashboard() {
@@ -117,11 +117,11 @@ Because they are custom elements, React/Vue/Angular/vanilla hosts can all use th
 
 ## Customization & Localization
 
-- Each widget ships with sensible text defaults. Pass a `text` object to components (Alarm, Confirmation Window, Light, TablePagination) to override copy or provide translations.
-- Colors lean on Daikin tokens (e.g., `--dds-color-common-brand-default`). Override tokens in your host CSS to re-theme without touching the components.
-- Slots: `<info-card>` exposes an `icon` slot; future widgets will follow the same pattern for custom visuals.
+- **Text/localization:** Each widget ships with sensible copy defaults. Pass `text` overrides to Alarm, Confirmation Window, Light, and Table Pagination for translation/custom wording.
+- **DDS tokens:** Colors and spacing lean on DDS CSS variables (for example, `--dds-color-common-brand-default`). Override tokens in host CSS to re-theme without touching components.
+- **Slots:** `<info-card>` exposes an `icon` slot; future widgets follow the same pattern for custom visuals.
 
 ## Auth & Integration Notes
 
-- Widgets themselves are presentation-only; they do not couple to Keycloak or the Layout auth helpers. Use them inside `<auth-provider>` (from Layout) or any other context as needed.
-- For data-driven widgets (gauges, cards, right panel), you control the props. No network requests happen inside the components.
+- Widgets are presentation-only; they do not couple to Keycloak or Layout auth helpers. Use them inside `<auth-provider>` (from Layout) or any other context.
+- For data-driven widgets (gauges, cards, right panel), you control all props. No network requests happen inside the components.

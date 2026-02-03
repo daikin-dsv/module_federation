@@ -6,12 +6,20 @@ sidebar_position: 8
 
 ## Netlify
 
-Netlify is the recommended deployment target for PoCs using RAD Template because it pairs cleanly with GitHub:
+[Netlify](https://www.netlify.com/) is the recommended deployment target for PoCs using RAD Template because it pairs cleanly with [GitHub](https://github.com/):
 
 - **Tight GitHub integration** — connect the repository once and let Netlify manage build hooks for `main`, release branches, or ad-hoc refs.
 - **Deploy Previews** — every pull request receives an isolated preview URL so reviewers and QA can validate UI, localization, and authentication changes without running the project locally.
 - **Branch auto-deploy** — select a branch (e.g., `main` or `release/*`) that should continuously ship to the production site, while other branches can map to staging/sandbox sites.
-- **Next.js support** — Netlify’s Next.js adapter handles Edge/SSR functions automatically and respects `npm run build`.
+- **[Next.js](https://nextjs.org/) support** — Netlify’s Next.js adapter handles Edge/SSR functions automatically and respects `npm run build`.
+
+### Prerequisites
+
+Before connecting a RAD Template project:
+
+- Create a Netlify account (or join your team workspace).
+- Ensure your GitHub account can access the RAD Template repository you plan to deploy.
+- Confirm your project can run `npm run build` locally before connecting CI.
 
 ### Basic Netlify setup
 
@@ -21,12 +29,12 @@ Netlify is the recommended deployment target for PoCs using RAD Template because
 4. **Environment variables**: configure the same values found in `.env.local`, such as `RAD_URL`, `AUTH_SECRET`, `AUTH_KEYCLOAK_*`, and `BYPASS_AUTH` for preview environments. Netlify supports per-environment overrides so you can keep production secrets separate from previews.
 5. **Deploy contexts**: enable Deploy Previews for pull requests and branch deploys for long-lived environments (e.g., map `develop` to a QA site).
 
-After Netlify finishes a deploy, it posts status checks back to GitHub. Combine those with the GitHub Actions workflows in `.github/workflows/` for full CI/CD coverage (lint/tests via Actions, hosting via Netlify).
+After Netlify finishes a deploy, it posts status checks back to GitHub. Combine those with [GitHub Actions](https://docs.github.com/actions) workflows in `.github/workflows/` for full CI/CD coverage (lint/tests via Actions, hosting via Netlify).
 
 ### Operational tips
 
-- Use the Netlify CLI (`netlify link` + `netlify deploy`) when you need to generate an on-demand preview that is not tied to a PR.
-- Keep Playwright E2E runs pointed at the Netlify preview URL by overriding the `rad_url` input in the `E2E Tests` workflow.
+- Use the [Netlify CLI](https://docs.netlify.com/cli/get-started/) (`netlify link` + `netlify deploy`) when you need to generate an on-demand preview that is not tied to a PR.
+- Keep [Playwright](https://playwright.dev/) E2E runs pointed at the Netlify preview URL by overriding the `rad_url` input in the `E2E Tests` workflow.
 - When adding new environment variables, update Netlify’s Env UI and document the change in `.env.example` so the settings stay in sync.
 
 ## In-progress target: Bedrock cluster

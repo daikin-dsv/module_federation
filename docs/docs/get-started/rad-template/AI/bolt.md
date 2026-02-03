@@ -4,29 +4,31 @@ sidebar_position: 2
 
 # Bolt Integration
 
-Prerequisites: Sign up for https://bolt.new and a github account
+## Prerequisites
 
-Go to rad-template's [next14 branch](https://github.com/daikin-dsv/rad-template/tree/next14)
+- A [Bolt](https://bolt.new) account.
+- A [GitHub](https://github.com) account.
 
-Click on the `use template` button, and initialize with these settings:
+## Setup
+
+1. Go to the RAD Template [`next14` branch](https://github.com/daikin-dsv/rad-template/tree/next14).
+2. Click the `Use template` button and initialize with these settings:
 
 <p style={{ textAlign: 'center' }}>
     ![Use Template](/img/rad-template-next-14-use-template.png)
 </p>
 
-Note that Bolt currently only supports personal github repos at this time
-
-Go to the repository settings and change the `default branch` to `next14`.
-This step is needed because Bolt currently only supports next14.
+3. Bolt currently supports personal GitHub repositories, so create the clone under your personal account.
+4. In repository settings, change the `default branch` to `next14`. This step is required because Bolt currently targets `next14`.
 
 <p style={{ textAlign: 'center' }}>
     ![Change default branch](/img/rad-template-next-14-change-default-branch.png)
 </p>
 
-Go to bolt.new, click on `import from Github`, and from `Your repositories` choose the cloned repo you just made
+5. Go back to [bolt.new](https://bolt.new), click `Import from GitHub`, and select the repository you just created.
 
 <p style={{ textAlign: 'center' }}>
-    ![Change default branch](/img/rad-template-next-14-bolt-init.png)
+    ![Initialize in Bolt](/img/rad-template-next-14-bolt-init.png)
 </p>
 
 Bolt will initialize your app and try to run it.
@@ -42,4 +44,4 @@ npm run build
 npm run dev
 ```
 
-⚠️ Note: If you refresh the app, you have to rerun npm run build again
+⚠️ Note: If you refresh the app, rerun `npm run build`.
