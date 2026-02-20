@@ -41,6 +41,7 @@ sidebar_position: 4
     AUTH_KEYCLOAK_SECRET=
     AUTH_KEYCLOAK_ISSUER=
     BYPASS_AUTH=true   # for local dev to skip Keycloak
+    PUBLIC_DOCS=false  # whether to lock the documentation behind SSO or not
     ```
 3. Run the app:
     ```bash
