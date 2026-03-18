@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # OpenTelemetry
 
-The template includes built-in [OpenTelemetry](https://opentelemetry.io/) instrumentation for both the server and the browser.
+The template includes built-in [OpenTelemetry](https://opentelemetry.io/) instrumentation for the server.
 
 ## Server-Side Tracing
 
@@ -17,29 +17,11 @@ The Next.js [instrumentation hook](https://nextjs.org/docs/app/building-your-api
 import { registerOTel } from '@vercel/otel';
 
 export function register() {
-    registerOTel({ serviceName: 'rad-template-server' });
+    registerOTel({ serviceName: 'rad-template' });
 }
 ```
 
 > **When you fork this template**, change `serviceName` to match your application name so traces are identifiable in your observability backend.
-
-## Browser-Side Tracing
-
-Client-side tracing runs in the browser via `app/components/OpenTelemetryProvider.tsx`, a `'use client'` component that wraps the application in `app/layout.tsx`. It initializes once on mount and automatically instruments:
-
-- **Document loads** - page load timing and resource fetches
-- **Fetch requests** - all `fetch()` calls made by the application
-- **XMLHttpRequests** - legacy XHR calls, if any
-
-Trace context is propagated on same-origin requests so browser spans can be correlated with server-side traces.
-
-By default, traces are exported via OTLP HTTP to `/api/otel`. To point at a different collector, set `NEXT_PUBLIC_OTEL_COLLECTOR_URL` in `.env.local`:
-
-```bash
-NEXT_PUBLIC_OTEL_COLLECTOR_URL=http://localhost:4318
-```
-
-The browser service name is `rad-template-browser`. When you fork the template, update the `ATTR_SERVICE_NAME` value in `OpenTelemetryProvider.tsx` to match your application.
 
 ## Connecting a Collector
 
@@ -104,20 +86,6 @@ The following packages power the instrumentation:
 | `@opentelemetry/instrumentation` | Core instrumentation API used by `@vercel/otel` |
 | `@opentelemetry/api-logs` | Logs API for structured log correlation |
 | `@opentelemetry/sdk-logs` | Logs SDK implementation |
-
-### Browser
-
-| Package | Purpose |
-|---|---|
-| `@opentelemetry/sdk-trace-web` | Browser-optimized trace SDK |
-| `@opentelemetry/sdk-trace-base` | Core trace SDK (span processors, exporters) |
-| `@opentelemetry/exporter-trace-otlp-http` | OTLP/HTTP trace exporter |
-| `@opentelemetry/resources` | Resource attribution (service name, etc.) |
-| `@opentelemetry/semantic-conventions` | Standard attribute constants |
-| `@opentelemetry/context-zone` | Zone.js-based async context propagation for the browser |
-| `@opentelemetry/instrumentation-document-load` | Auto-instrumentation for page load performance |
-| `@opentelemetry/instrumentation-fetch` | Auto-instrumentation for `fetch()` calls |
-| `@opentelemetry/instrumentation-xml-http-request` | Auto-instrumentation for XMLHttpRequest |
 
 # Learn More
 
