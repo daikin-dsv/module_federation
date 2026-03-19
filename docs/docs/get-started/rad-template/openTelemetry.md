@@ -15,13 +15,14 @@ The Next.js [instrumentation hook](https://nextjs.org/docs/app/building-your-api
 
 ```ts
 import { registerOTel } from '@vercel/otel';
+import { name } from './package.json';
 
 export function register() {
-    registerOTel({ serviceName: 'rad-template' });
+    registerOTel({ serviceName: name });
 }
 ```
 
-> **When you fork this template**, change `serviceName` to match your application name so traces are identifiable in your observability backend.
+The `serviceName` is automatically derived from the `name` field in `package.json`, so traces are identifiable in your observability backend without any extra configuration.
 
 ## Connecting a Collector
 
