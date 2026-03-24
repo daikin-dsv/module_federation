@@ -28,6 +28,7 @@ This guide demonstrates how to implement and consume GraphQL APIs in the RAD Tem
     The server runs on `http://localhost:3006` by default.
 
 2. **GraphQL endpoint:**
+
     - Development: `http://localhost:3006/api/graphql`
     - Production: `<your-domain>/api/graphql`
 
@@ -262,10 +263,12 @@ expect(data.errors[0].extensions.code).toBe('BAD_USER_INPUT');
 ### Server-Side Implementation
 
 1. **Schema Definition:** `app/api/graphql/schema.ts`
+
     - Define your GraphQL types, queries, and mutations
     - Use GraphQL SDL (Schema Definition Language)
 
 2. **Resolvers:** `app/api/graphql/resolvers.ts`
+
     - Implement the business logic for each query/mutation
     - Handle input validation and data transformation
 
@@ -276,10 +279,12 @@ expect(data.errors[0].extensions.code).toBe('BAD_USER_INPUT');
 ### Client-Side Implementation
 
 1. **GraphQL Client Setup:** `app/graphql/graphqlClient.ts`
+
     - Configure `graphql-request` client
     - Create reusable query functions with React Query integration
 
 2. **React Component:** `app/graphql/TemperatureConverter.tsx`
+
     - Example of using queries in a React component
     - Demonstrates loading states and error handling
 
@@ -289,6 +294,7 @@ expect(data.errors[0].extensions.code).toBe('BAD_USER_INPUT');
 ### Testing Examples
 
 1. **Playwright E2E Tests:** `tests/graphql/graphql.spec.js`
+
     - End-to-end GraphQL query testing
     - Response validation
 
