@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Skills
 
-Skills are reusable packages of domain-specific knowledge that extend GitHub Copilot's capabilities within VS Code. Each skill provides Copilot with context and instructions for a particular tool or technology, enabling it to give more accurate and relevant assistance. Skills can be invoked automatically based on your prompt or explicitly via slash commands.
+Skills are reusable packages of domain-specific knowledge that extend an AI coding assistant's capabilities within VS Code. Each skill provides the assistant with context and instructions for a particular tool or technology, enabling it to give more accurate and relevant assistance. Skills can be invoked automatically based on your prompt or explicitly via slash commands.
 
 ## Installed Skills
 
@@ -12,13 +12,13 @@ Skills are reusable packages of domain-specific knowledge that extend GitHub Cop
 
 **Source:** [`databricks/databricks-agent-skills`](https://skills.sh/databricks/databricks-agent-skills/databricks)
 
-Provides Copilot with up-to-date knowledge of Databricks CLI operations including authentication, profile management, data exploration, and bundle deployment.
+Provides the AI assistant with up-to-date knowledge of Databricks CLI operations including authentication, profile management, data exploration, and bundle deployment.
 
 #### How to Use
 
-**Slash command:** Type `/databricks` in VS Code Copilot Chat to explicitly invoke the skill. This is useful when your prompt might not obviously relate to Databricks.
+**Slash command:** Type `/databricks` in the VS Code AI chat to explicitly invoke the skill. This is useful when your prompt might not obviously relate to Databricks.
 
-**Automatic activation:** The skill also loads automatically when Copilot detects a Databricks-related request, so you can simply describe what you need in plain language.
+**Automatic activation:** The skill also loads automatically when the assistant detects a Databricks-related request, so you can simply describe what you need in plain language.
 
 #### Example Prompts
 
