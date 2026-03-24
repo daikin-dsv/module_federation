@@ -22,15 +22,15 @@ Provides Copilot with up-to-date knowledge of Databricks CLI operations includin
 
 #### Example Prompts
 
-| Prompt | What Happens |
-|--------|--------------|
+| Prompt                                                              | What Happens                                               |
+| ------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `/databricks explore the agency table in bedrock_ss_apollo catalog` | Uses AI tools to discover schema, columns, and sample data |
-| `How do I list all warehouses in Databricks?` | Auto-activates and shows the correct CLI command |
+| `How do I list all warehouses in Databricks?`                       | Auto-activates and shows the correct CLI command           |
 
 #### Prerequisites
 
 - **Databricks CLI:** The skill will guide you through installation if the CLI is missing or outdated.
-- **Authenticated profile:**  Run `databricks auth profiles` to verify. The skill walks you through setup if needed.
+- **Authenticated profile:** Run `databricks auth profiles` to verify. The skill walks you through setup if needed.
 
 #### Skill Reference Files
 
