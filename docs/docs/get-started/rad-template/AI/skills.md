@@ -35,3 +35,48 @@ Provides the AI assistant with up-to-date knowledge of Databricks CLI operations
 #### Skill Reference Files
 
 Detailed instructions live in `.agents/skills/databricks/`
+
+---
+
+### Bedrock
+
+**Source:** [`daikin-dsv/rad-platform`](https://github.com/daikin-dsv/rad-platform)
+
+Provides the AI assistant with guidance for writing GraphQL queries and mutations against the Project Bedrock API, including React Query integration, authenticated requests, and schema exploration.
+
+#### How to Use
+
+**Slash command:** Type `/bedrock` in the VS Code AI chat to explicitly invoke the skill. This is useful when your prompt might not obviously relate to Bedrock.
+
+**Automatic activation:** The skill also loads automatically when the assistant detects a Bedrock-related request, so you can simply describe what you need in plain language.
+
+#### Example Prompts
+
+| Prompt                                                                  | What Happens                                                                 |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `/bedrock write a query to fetch all users`                             | Generates a GraphQL query using `graphql-request` with `gql` tagged template |
+| `/bedrock create a query for fetching equipment details`     | Scaffolds a query factory with `queryKey` and `queryFn` using React Query    |
+| `How do I set up the Bedrock GraphQL client with authentication?`       | Auto-activates and shows the client initialization with Bearer token pattern |
+
+#### Prerequisites
+
+- **`graphql-request`:** Used for the GraphQL client (`gql` tagged templates).
+- **`graphql`:** Runtime dependency used with `graphql-request`.
+- **`@tanstack/react-query`:** Used for React Query integration.
+
+#### Installation
+
+```sh
+npx skills add https://github.com/daikin-dsv/rad-platform --skill bedrock
+```
+
+#### What's Included
+
+| Path                          | Description                                                                  |
+| ----------------------------- | ---------------------------------------------------------------------------- |
+| `skills/bedrock/SKILL.md`     | Agent skill with GraphQL client patterns, auth setup, and React Query conventions |
+| `ai/bedrock/schema.graphql`   | Full Bedrock GraphQL schema (auto-synced daily from `daikin-dsv/microservice`)    |
+
+#### Skill Reference Files
+
+Detailed instructions live in `.agents/skills/bedrock/`
