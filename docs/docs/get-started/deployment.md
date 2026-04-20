@@ -4,41 +4,73 @@ sidebar_position: 8
 
 # Deployment
 
-## Netlify
+[Netlify](https://www.netlify.com/) is the recommended deployment target for apps built with RAD Template. A **Provision Netlify Project** GitHub Actions workflow automates the entire setup. This pipeline creates a Netlify site, links your repository, installs a deploy key to your Github repository, and configures all required environment variables in a single run.
 
-[Netlify](https://www.netlify.com/) is the recommended deployment target for PoCs using RAD Template because it pairs cleanly with [GitHub](https://github.com/):
+Once provisioned, every push to your default branch triggers a production build.
 
-- **Tight GitHub integration** — connect the repository once and let Netlify manage build hooks for `main`, release branches, or ad-hoc refs.
-- **Deploy Previews** — every pull request receives an isolated preview URL so reviewers and QA can validate UI, localization, and authentication changes without running the project locally.
-- **Branch auto-deploy** — select a branch (e.g., `main` or `release/*`) that should continuously ship to the production site, while other branches can map to staging/sandbox sites.
-- **[Next.js](https://nextjs.org/) support** — Netlify’s Next.js adapter handles Edge/SSR functions automatically and respects `npm run build`.
+## What You Get
 
-### Prerequisites
+After the provisioning workflow completes, your repository will have:
 
-Before connecting a RAD Template project:
+- A **Netlify site** linked to your GitHub repository with automatic builds on push.
+- All required **environment variables** pre-configured on the Netlify site.
+- A **deploy key** installed on your repository for secure Netlify access.
 
-- Create a Netlify account (or join your team workspace).
-- Ensure your GitHub account can access the RAD Template repository you plan to deploy.
-- Confirm your project can run `npm run build` locally before connecting CI.
+## Prerequisites
 
-### Basic Netlify setup
+Before requesting provisioning, make sure:
 
-1. **Connect repository**: In Netlify, choose _Import from Git_ → GitHub → select `your-rad-template-clone`.
-2. **Build command**: `npm run build`. (This runs the Vite build first, then the Next.js build.)
-3. **Publish directory**: `.next`.
-4. **Environment variables**: configure the same values found in `.env.local`, such as `RAD_URL`, `AUTH_SECRET`, `AUTH_KEYCLOAK_*`, and `BYPASS_AUTH` for preview environments. Netlify supports per-environment overrides so you can keep production secrets separate from previews.
-5. **Deploy contexts**: enable Deploy Previews for pull requests and branch deploys for long-lived environments (e.g., map `develop` to a QA site).
+- Your repository lives in the `daikin-dsv` GitHub organization.
+- Your project can run `npm run build` locally without errors.
 
-After Netlify finishes a deploy, it posts status checks back to GitHub. Combine those with [GitHub Actions](https://docs.github.com/actions) workflows in `.github/workflows/` for full CI/CD coverage (lint/tests via Actions, hosting via Netlify).
+## Running the Workflow
 
-### Operational tips
+This is a **one-time setup workflow** triggered via manual dispatch.
 
-- Use the [Netlify CLI](https://docs.netlify.com/cli/get-started/) (`netlify link` + `netlify deploy`) when you need to generate an on-demand preview that is not tied to a PR.
-- Keep [Playwright](https://playwright.dev/) E2E runs pointed at the Netlify preview URL by overriding the `rad_url` input in the `E2E Tests` workflow.
-- When adding new environment variables, update Netlify’s Env UI and document the change in `.env.example` so the settings stay in sync.
+1. Go to the **Actions** tab in the `rad-platform` repository.
+2. Select **"Provision Netlify Project"** from the left sidebar.
+3. Click **"Run workflow"**.
+4. Fill in the inputs and click the green **"Run workflow"** button.
 
-## In-progress target: Bedrock cluster
+### Workflow Inputs
 
-The team is also investing in a Bedrock cluster deployment path for Shared Service development. This is still **under active development**.
+| Input | Required | Default | Description |
+|---|---|---|---|
+| `repo_url` | Yes | — | Full GitHub URL of your repository (e.g., `https://github.com/daikin-dsv/my-app`) |
+| `site_name` | No | Derived from repo name | Custom Netlify site name. If omitted, the repo name is used (e.g., `my-app`) |
+| `env_vars` | No | `{}` | JSON object of environment variable overrides (e.g., `{"BYPASS_AUTH": "true"}`) |
 
-Updates on the Bedrock work will be published here as it becomes available.
+## Default Environment Variables
+
+The workflow automatically configures the following environment variables on your Netlify site:
+
+| Variable | Default Value | Description |
+|---|---|---|
+| `AUTH_KEYCLOAK_ID` | `rad-test2` | Keycloak client ID |
+| `AUTH_KEYCLOAK_ISSUER` | `https://sso.dev.daikinlab.com/realms/daikin` | Keycloak issuer URL |
+| `AUTH_TRUST_HOST` | `true` | Trust the host header for auth callbacks |
+| `BYPASS_AUTH` | `false` | Skip authentication (useful for testing) |
+| `RAD_URL` | _(auto-set to the new site URL)_ | The application's public URL |
+| `AUTH_URL` | _(auto-set to the new site URL)_ | The auth callback URL |
+| `BEDROCK_API_URL` | `https://apollo.daikinlab.com/api` | Bedrock API endpoint |
+| `PUBLIC_DOCS` | `false` | Whether docs are publicly accessible |
+| `AUTH_SECRET` | _(from GitHub secret)_ | Authentication signing secret |
+| `DATABRICKS_ACCESS_TOKEN` | _(from GitHub secret)_ | Databricks access token |
+| `DATABRICKS_HTTP_PATH` | _(from GitHub secret)_ | Databricks SQL warehouse HTTP path |
+| `DATABRICKS_WORKSPACE_URL` | _(from GitHub secret)_ | Databricks workspace URL |
+
+Any of these defaults can be overridden by passing a JSON object in the `env_vars` input.
+
+## Customization
+
+### Override environment variables
+
+Pass a JSON object in the `env_vars` input to override any default value or add new variables:
+
+```json
+{"BYPASS_AUTH": "true", "CUSTOM_VAR": "value"}
+```
+
+### Use a custom site name
+
+By default, the site name is derived from the repository name. To specify a custom name, fill in the `site_name` input when triggering the workflow.
