@@ -83,12 +83,74 @@ npx skills add https://github.com/daikin-dsv/rad-platform --skill bedrock
 
 #### Example Prompts
 
-| Prompt | What Happens |
-| --- | --- |
-| `/bedrock write a query to fetch all users` | Generates a GraphQL query using `graphql-request` with `gql` tagged template |
-| `/bedrock create a query for fetching equipment details` | Scaffolds a query factory with `queryKey` and `queryFn` using React Query |
+| Prompt                                                            | What Happens                                                                 |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `/bedrock write a query to fetch all users`                       | Generates a GraphQL query using `graphql-request` with `gql` tagged template |
+| `/bedrock create a query for fetching equipment details`          | Scaffolds a query factory with `queryKey` and `queryFn` using React Query    |
 | `How do I set up the Bedrock GraphQL client with authentication?` | Auto-activates and shows the client initialization with Bearer token pattern |
 
 #### Skill Reference Files
 
 Detailed instructions live in `.agents/skills/bedrock/`
+
+---
+
+### Daikin Design System
+
+**Source:** <a href="https://github.com/daikin-dsv/rad-platform">`daikin-dsv/rad-platform`</a>
+
+Provides the AI assistant with up-to-date knowledge of the Daikin Design System (DDS) web components and design tokens — component props, events, slots, CSS custom properties, and the full token catalogue with matching Tailwind v4 utility names. The skill is generated from the installed `@daikin-oss/design-system-web-components` package's Custom Elements Manifest, so its contents always match the version of DDS your app is on.
+
+The same Custom Elements Manifest is also consumed at build time by the [`generate-dds-react-wrappers` script](../../packages/generate-dds-react-wrappers) to produce the app's typed React wrappers.
+
+#### Prerequisites
+
+- **`@daikin-oss/design-system-web-components`:** The skill is generated against this package; its installed version determines what the assistant sees.
+- **`@daikin-oss/dds-tokens`:** Source of the design token CSS variables and Tailwind v4 utility names referenced by the skill.
+- **`@daikin-oss/tailwind`** _(optional)_: Wires the DDS tokens up as Tailwind v4 utilities. Recommended if you want utility-class access (`bg-dds-color-common-brand-default`, etc.) rather than only `var(--dds-*)` references.
+
+#### Installation
+
+```sh
+npx skills add https://github.com/daikin-dsv/rad-platform --skill daikin-design-system
+```
+
+#### Upgrading
+
+The skill content is regenerated upstream in `daikin-dsv/rad-platform` whenever the DDS package version is bumped. After upgrading `@daikin-oss/design-system-web-components` in this repo, refresh **both** the React wrappers and the skill so they stay in lockstep:
+
+```sh
+npm install @daikin-oss/design-system-web-components@<new-version>
+npm run generate:dds   # regenerate React wrappers — see the generate-dds-react-wrappers page
+npm run sync:skills    # pull the matching skill content from rad-platform
+```
+
+`skills-lock.json` records the upstream source and the DDS package version the skill was generated against. See the [`generate-dds-react-wrappers` script docs](../../packages/generate-dds-react-wrappers) for details on what the codegen produces.
+
+#### What's Included
+
+| Path                                                   | Description                                                                                                                          |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `skills/daikin-design-system/SKILL.md`                 | Skill entry point: how to use DDS React wrappers, event/prop conventions, styling guidance                                           |
+| `skills/daikin-design-system/tokens.md`                | Complete design-token catalogue (CSS variable names + Tailwind v4 utility names) for color, spacing, radius, border, and typography  |
+| `skills/daikin-design-system/patterns.md`              | Recipes for non-obvious patterns (theming, Light/Dark, common compositions)                                                          |
+| `skills/daikin-design-system/components/<tag-name>.md` | One reference page per DDS component (60+) generated from the Custom Elements Manifest — props, events, slots, CSS custom properties |
+
+#### How to Use
+
+**Slash command:** Type `/daikin-design-system` in the AI chat to explicitly invoke the skill. Useful when your prompt doesn't obviously mention DDS but you want the assistant to lean on the component reference (e.g. "build a settings form").
+
+**Automatic activation:** The skill also loads automatically when the assistant detects a DDS-related request — references to `daikin-*` web components, DDS tokens, or wrapper components — so you can simply describe what you need in plain language.
+
+#### Example Prompts
+
+| Prompt                                                                            | What Happens                                                                                           |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `/daikin-design-system build a confirmation dialog with primary + cancel buttons` | Uses the `daikin-modal` and `daikin-button` reference pages to wire props, slots, and events correctly |
+| `What CSS variable should I use for a danger button background?`                  | Auto-activates and points to `--dds-color-common-danger-default` (and the matching Tailwind utility)   |
+| `How do I theme this app for Dark mode?`                                          | Auto-activates and shows the `daikin/Dark/variables.css` import + scoping pattern from `patterns.md`   |
+| `Style this card with DDS spacing and radius tokens`                              | Auto-activates and uses tokens like `--dds-space-400` / `--dds-border-radius-100` from `tokens.md`     |
+
+#### Skill Reference Files
+
+Detailed instructions live in `.agents/skills/daikin-design-system/`. Do **not** edit these files by hand — they are regenerated upstream from the DDS package; fix the generator in `daikin-dsv/rad-platform` instead.
