@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 4
 ---
 
 # Deployment
@@ -34,30 +34,30 @@ This is a **one-time setup workflow** triggered via manual dispatch.
 
 ### Workflow Inputs
 
-| Input | Required | Default | Description |
-|---|---|---|---|
-| `repo_url` | Yes | — | Full GitHub URL of your repository (e.g., `https://github.com/daikin-dsv/my-app`) |
-| `site_name` | No | Derived from repo name | Custom Netlify site name. If omitted, the repo name is used (e.g., `my-app`) |
-| `env_vars` | No | `{}` | JSON object of environment variable overrides (e.g., `{"BYPASS_AUTH": "true"}`) |
+| Input       | Required | Default                | Description                                                                       |
+| ----------- | -------- | ---------------------- | --------------------------------------------------------------------------------- |
+| `repo_url`  | Yes      | —                      | Full GitHub URL of your repository (e.g., `https://github.com/daikin-dsv/my-app`) |
+| `site_name` | No       | Derived from repo name | Custom Netlify site name. If omitted, the repo name is used (e.g., `my-app`)      |
+| `env_vars`  | No       | `{}`                   | JSON object of environment variable overrides (e.g., `{"BYPASS_AUTH": "true"}`)   |
 
 ## Default Environment Variables
 
 The workflow automatically configures the following environment variables on your Netlify site:
 
-| Variable | Default Value | Description |
-|---|---|---|
-| `AUTH_KEYCLOAK_ID` | `rad-test2` | Keycloak client ID |
-| `AUTH_KEYCLOAK_ISSUER` | `https://sso.dev.daikinlab.com/realms/daikin` | Keycloak issuer URL |
-| `AUTH_TRUST_HOST` | `true` | Trust the host header for auth callbacks |
-| `BYPASS_AUTH` | `false` | Skip authentication (useful for testing) |
-| `RAD_URL` | _(auto-set to the new site URL)_ | The application's public URL |
-| `AUTH_URL` | _(auto-set to the new site URL)_ | The auth callback URL |
-| `BEDROCK_API_URL` | `https://apollo.daikinlab.com/api` | Bedrock API endpoint |
-| `PUBLIC_DOCS` | `false` | Whether docs are publicly accessible |
-| `AUTH_SECRET` | _(from GitHub secret)_ | Authentication signing secret |
-| `DATABRICKS_ACCESS_TOKEN` | _(from GitHub secret)_ | Databricks access token |
-| `DATABRICKS_HTTP_PATH` | _(from GitHub secret)_ | Databricks SQL warehouse HTTP path |
-| `DATABRICKS_WORKSPACE_URL` | _(from GitHub secret)_ | Databricks workspace URL |
+| Variable                   | Default Value                                 | Description                              |
+| -------------------------- | --------------------------------------------- | ---------------------------------------- |
+| `AUTH_KEYCLOAK_ID`         | `rad-test2`                                   | Keycloak client ID                       |
+| `AUTH_KEYCLOAK_ISSUER`     | `https://sso.dev.daikinlab.com/realms/daikin` | Keycloak issuer URL                      |
+| `AUTH_TRUST_HOST`          | `true`                                        | Trust the host header for auth callbacks |
+| `BYPASS_AUTH`              | `false`                                       | Skip authentication (useful for testing) |
+| `RAD_URL`                  | _(auto-set to the new site URL)_              | The application's public URL             |
+| `AUTH_URL`                 | _(auto-set to the new site URL)_              | The auth callback URL                    |
+| `BEDROCK_API_URL`          | `https://apollo.daikinlab.com/api`            | Bedrock API endpoint                     |
+| `PUBLIC_DOCS`              | `false`                                       | Whether docs are publicly accessible     |
+| `AUTH_SECRET`              | _(from GitHub secret)_                        | Authentication signing secret            |
+| `DATABRICKS_ACCESS_TOKEN`  | _(from GitHub secret)_                        | Databricks access token                  |
+| `DATABRICKS_HTTP_PATH`     | _(from GitHub secret)_                        | Databricks SQL warehouse HTTP path       |
+| `DATABRICKS_WORKSPACE_URL` | _(from GitHub secret)_                        | Databricks workspace URL                 |
 
 Any of these defaults can be overridden by passing a JSON object in the `env_vars` input.
 
@@ -68,7 +68,7 @@ Any of these defaults can be overridden by passing a JSON object in the `env_var
 Pass a JSON object in the `env_vars` input to override any default value or add new variables:
 
 ```json
-{"BYPASS_AUTH": "true", "CUSTOM_VAR": "value"}
+{ "BYPASS_AUTH": "true", "CUSTOM_VAR": "value" }
 ```
 
 ### Use a custom site name
