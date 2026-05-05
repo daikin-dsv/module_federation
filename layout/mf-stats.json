@@ -57,8 +57,8 @@
       "assets": {
         "js": {
           "sync": [
-            "261.f017aa5b2c094a9e.js",
-            "291.b2bcefbff0186271.js",
+            "602.8bcc04c4a06b6f6d.js",
+            "291.c9c016851244d455.js",
             "__federation_expose_footer.316ffbe1abbb7e80.js"
           ],
           "async": []
@@ -78,10 +78,10 @@
       "assets": {
         "js": {
           "sync": [
-            "261.f017aa5b2c094a9e.js",
-            "798.445f257ae919e821.js",
-            "291.b2bcefbff0186271.js",
-            "__federation_expose_header.d8013a41e2dc5a85.js"
+            "602.8bcc04c4a06b6f6d.js",
+            "309.b156b87a8bb8b59d.js",
+            "291.c9c016851244d455.js",
+            "__federation_expose_header.bfd68e5b0662f70e.js"
           ],
           "async": []
         },
@@ -100,8 +100,8 @@
       "assets": {
         "js": {
           "sync": [
-            "261.f017aa5b2c094a9e.js",
-            "291.b2bcefbff0186271.js",
+            "602.8bcc04c4a06b6f6d.js",
+            "291.c9c016851244d455.js",
             "__federation_expose_navmenu.dbf84fce40f88157.js"
           ],
           "async": []
@@ -121,12 +121,12 @@
       "assets": {
         "js": {
           "sync": [
-            "261.f017aa5b2c094a9e.js",
-            "798.445f257ae919e821.js",
+            "602.8bcc04c4a06b6f6d.js",
+            "309.b156b87a8bb8b59d.js",
             "344.9b9fc331adc4d353.js",
-            "291.b2bcefbff0186271.js",
+            "291.c9c016851244d455.js",
             "624.4258151bb1fc1e96.js",
-            "__federation_expose_user.255fc5ec025b1206.js"
+            "__federation_expose_user.e32114349310536c.js"
           ],
           "async": []
         },
