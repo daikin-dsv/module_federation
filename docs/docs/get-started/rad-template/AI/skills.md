@@ -99,7 +99,7 @@ Detailed instructions live in `.agents/skills/bedrock/`
 
 **Source:** <a href="https://github.com/daikin-dsv/rad-platform">`daikin-dsv/rad-platform`</a>
 
-Provides the AI assistant with up-to-date knowledge of the Daikin Design System (DDS) web components and design tokens — component props, events, slots, CSS custom properties, and the full token catalogue with matching Tailwind v4 utility names. The skill is generated from the installed `@daikin-oss/design-system-web-components` package's Custom Elements Manifest, so its contents always match the version of DDS your app is on.
+Provides the AI assistant with up-to-date knowledge of the Daikin Design System (DDS) web components and design tokens — component props, events, slots, CSS custom properties, and the full token catalogue with matching Tailwind v4 utility names. The skill is generated from the `@daikin-oss/design-system-web-components` package's Custom Elements Manifest, so its contents should match the latest version of DDS, although published skill content may lag until it has been regenerated upstream.
 
 The same Custom Elements Manifest is also consumed at build time by the [`generate-dds-react-wrappers` script](../../packages/generate-dds-react-wrappers) to produce the app's typed React wrappers.
 
@@ -120,9 +120,9 @@ npx skills add https://github.com/daikin-dsv/rad-platform --skill daikin-design-
 The skill content is regenerated upstream in `daikin-dsv/rad-platform` whenever the DDS package version is bumped. After upgrading `@daikin-oss/design-system-web-components` in this repo, refresh **both** the React wrappers and the skill so they stay in lockstep:
 
 ```sh
-npm install @daikin-oss/design-system-web-components@<new-version>
-npm run generate:dds   # regenerate React wrappers — see the generate-dds-react-wrappers page
-npm run sync:skills    # pull the matching skill content from rad-platform
+npm install @daikin-oss/design-system-web-components@latest @daikin-oss/dds-tokens@latest
+npx @daikin-dsv/generate-dds-react-wrappers   # regenerate React wrappers — see the generate-dds-react-wrappers page
+npx skills add https://github.com/daikin-dsv/rad-platform --copy    # pull the matching skill content from rad-platform
 ```
 
 `skills-lock.json` records the upstream source and the DDS package version the skill was generated against. See the [`generate-dds-react-wrappers` script docs](../../packages/generate-dds-react-wrappers) for details on what the codegen produces.
