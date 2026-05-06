@@ -13,8 +13,7 @@ This template ships the full Daikin Design System on two layers:
 - **Components** — the DDS component library
   ([`@daikin-oss/design-system-web-components`](https://www.npmjs.com/package/@daikin-oss/design-system-web-components))
   ships as Lit-based custom elements. This template wraps them for React via codegen,
-  so you write idiomatic `<Button>` / `<Modal>` JSX with typed props, typed events,
-  and typed refs.
+  so you write idiomatic React JSX with typed props, typed events, and typed refs.
 
 You should never write a hex code, and you should never `import` a custom-element
 class by hand.
@@ -157,7 +156,7 @@ npm run sync:skills    # refreshes tokens.md inside the skill and the per-compon
 `app/components/dds-wrappers.generated.tsx` and `app/webcomponents.generated.ts`.
 
 `sync:skills` pulls the latest skill content from `daikin-dsv/rad-platform`,
-which regenerates `tokens.md` from the latest `@daikin-oss/dds-tokens`. If you
-upgrade tokens locally, run `sync:skills` to keep the LLM reference in step.
+which updates `tokens.md` from the latest `@daikin-oss/dds-tokens` and component skills from `@daikin-oss/design-system-web-components`. If you
+upgrade locally, run `sync:skills` to keep the LLM reference in step.
 
 For more information, please read the [generate-dds-react-wrappers](../packages/generate-dds-react-wrappers) and [skills](../rad-template/AI/skills) docs.
