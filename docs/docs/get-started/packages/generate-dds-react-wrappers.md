@@ -52,7 +52,7 @@ The default output paths match the `--out-react` and `--out-register` flag defau
 
 | Path (default)                              | Description                                                                                                                                                                                       |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app/components/dds-wrappers.generated.tsx` | Typed React wrappers built with `@lit/react`'s `createComponent`. One named export per DDS element (e.g. `Button`, `Modal`, `Combobox`).                                                          |
+| `app/components/dds-wrappers.generated.tsx` | Typed React wrappers built with `@lit/react`'s `createComponent`. One named export per DDS element (e.g. `DaikinButton`, `DaikinModal`, `DaikinCombobox`).                                        |
 | `app/webcomponents.generated.ts`            | Side-effect imports of every `@daikin-oss/design-system-web-components/components/<name>/index.js`. Import this file at startup to register the custom elements before any React wrapper renders. |
 
 Both generated files start with an auto-generated banner and are written via a `writeIfChanged` helper, so re-running the script when nothing changed is a no-op (no spurious diffs).
