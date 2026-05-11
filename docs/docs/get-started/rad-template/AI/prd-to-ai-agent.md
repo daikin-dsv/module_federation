@@ -8,7 +8,7 @@ This guide walks you through a workflow for converting a Product Requirements Do
 
 ## Overview
 
-Most PRDs live in Word documents, PDFs, or Confluence pages, formats that AI coding agents cannot read natively. The workflow below uses open-source **agent skills** to:
+Most PRDs live in Word documents, PDFs, or PowerPoint presentations, formats that AI coding agents cannot read natively. The workflow below uses open-source **agent skills** to:
 
 1. **Convert** the document into markdown
 2. **Define** and validate requirements (optional)
@@ -16,7 +16,7 @@ Most PRDs live in Word documents, PDFs, or Confluence pages, formats that AI cod
 4. **Build** the code incrementally
 
 ```
-Step 1  ↓  Convert document to markdown         (docx / pdf skill)
+Step 1  ↓  Convert document to markdown         (docx / pdf / pptx skill)
 Step 2  ↓  Validate & clarify requirements      (requirements-analysis skill)
 Step 3  ↓  Break PRD into implementation plan   (prd-to-plan skill)
 Step 4  ↓  Build code incrementally             (incremental-implementation skill)
@@ -25,7 +25,7 @@ Step 4  ↓  Build code incrementally             (incremental-implementation sk
 ## Prerequisites
 
 - An AI coding agent that supports the [Agent Skills standard](https://skills.sh) (for example: Claude Code, Cursor, Copilot, Codex, Windsurf, Gemini CLI)
-- Your PRD in `.docx`, `.pdf`, `.pptx`, or accessible via Confluence/Jira
+- Your PRD in `.docx`, `.pdf`, or `.pptx`
 
 ## What is skills.sh?
 
@@ -52,8 +52,6 @@ The top skills that mention "PRD" in their names are generators, they walk you t
 | `docx` | [docx by anthropics/skills](https://skills.sh/anthropics/skills/docx) | Reading Word documents including images |
 | `pdf` | [pdf by anthropics/skills](https://skills.sh/anthropics/skills/pdf) | PDF reading |
 | `pptx` | [pptx by anthropics/skills](https://skills.sh/anthropics/skills/pptx) | Read PowerPoint presentations |
-| `xlsx` | [xlsx by anthropics/skills](https://skills.sh/anthropics/skills/xlsx) | Spreadsheet handling |
-| `atlassian-mcp` | [atlassian-mcp by jeffallan/claude-skills](https://skills.sh/jeffallan/claude-skills/atlassian-mcp) | Read Jira work items or Confluence pages |
 
 Additional skills can be found on [The Agent Skills Directory](https://skills.sh). Also noteworthy: [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — production-grade engineering skills for AI coding agents.
 
