@@ -72,6 +72,8 @@ Across the PRD skills listed above, there is significant overlap in what they ex
 
 Use the `docx` (or `pdf` / `pptx`) skill to convert your PRD into a clean markdown file that the agent can work with.
 
+Attach your PRD file (`.docx`, `.pdf`, or `.pptx`) to the chat message along with the prompt below. In VS Code Copilot Chat, use the paperclip icon or drag-and-drop; in Claude Code or other CLI agents, reference the file path directly.
+
 #### Prompt
 
 ```
