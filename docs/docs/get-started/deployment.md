@@ -27,7 +27,7 @@ Before requesting provisioning, make sure:
 
 This is a **one-time setup workflow** triggered via manual dispatch.
 
-1. Go to the **Actions** tab in the `rad-platform` repository.
+1. Go to the **Actions** tab in the `rad-platform` [repository](https://github.com/daikin-dsv/rad-platform/actions).
 2. Select **"Provision Netlify Project"** from the left sidebar.
 3. Click **"Run workflow"**.
 4. Fill in the inputs and click the green **"Run workflow"** button.
