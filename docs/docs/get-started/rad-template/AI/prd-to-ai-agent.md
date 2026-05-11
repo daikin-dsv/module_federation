@@ -62,7 +62,7 @@ Across the PRD skills listed above, there is significant overlap in what they ex
 - **Title & summary**: one-paragraph description of what is being built
 - **Goals & non-goals**: what is in scope and what is explicitly out of scope
 - **User stories / requirements**: numbered, testable requirements
-- **Technical constraints**: frameworks, APIs, infra boundaries
+- **Technical constraints**: frameworks, APIs, infra boundaries. For RAD Template, these are already defined: Next.js (React), Daikin Design System (DDS), GraphQL, Bedrock APIs, Tailwind CSS, and Keycloak for authentication. Your PRD should reference these rather than specifying alternatives, and instruct the agent to use the existing integrations in the codebase.
 - **Acceptance criteria**: how to verify each requirement is met
 - **Open questions**: anything unresolved that needs clarification
 
