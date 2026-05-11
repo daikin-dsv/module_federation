@@ -37,9 +37,9 @@ Step 4  ↓  Build code incrementally             (incremental-implementation sk
 
 | Skill | Link | Purpose |
 |-------|------|---------|
-| `requirements-analysis` (Optional) | [requirements-analysis by jwynia/agent-skills](https://skills.sh/skills/jwynia/agent-skills/requirements-analysis) | Audit and restructure requirements into an AI-friendly PRD |
-| `prd-to-plan` | [prd-to-plan by mattpocock/skills](https://skills.sh/skills/mattpocock/skills/prd-to-plan) | Break a PRD into a phased implementation plan and write it to `./plans/<feature>.md` |
-| `incremental-implementation` | [incremental-implementation by addyosmani/agent-skills](https://skills.sh/skills/addyosmani/agent-skills/incremental-implementation) | Build in small components, test, verify, then expand |
+| `requirements-analysis` (Optional) | [requirements-analysis by jwynia/agent-skills](https://skills.sh/jwynia/agent-skills/requirements-analysis) | Audit and restructure requirements into an AI-friendly PRD |
+| `prd-to-plan` | [prd-to-plan by mattpocock/skills](https://skills.sh/mattpocock/skills/prd-to-plan) | Break a PRD into a phased implementation plan and write it to `./plans/<feature>.md` |
+| `incremental-implementation` | [incremental-implementation by addyosmani/agent-skills](https://skills.sh/addyosmani/agent-skills/incremental-implementation) | Build in small components, test, verify, then expand |
 
 :::note
 The top skills that mention "PRD" in their names are generators, they walk you through creating a new PRD from scratch. There is no skill on skills.sh whose sole job is to read an existing PRD and output an AI-consumable version, but the skills above cover that gap when combined.
@@ -49,11 +49,11 @@ The top skills that mention "PRD" in their names are generators, they walk you t
 
 | Skill | Link | Purpose |
 |-------|------|---------|
-| `docx` | [docx by anthropics/skills](https://skills.sh/skills/anthropics/skills/docx) | Reading Word documents including images |
-| `pdf` | [pdf by anthropics/skills](https://skills.sh/skills/anthropics/skills/pdf) | PDF reading |
-| `pptx` | [pptx by anthropics/skills](https://skills.sh/skills/anthropics/skills/pptx) | Read PowerPoint presentations |
-| `xlsx` | [xlsx by anthropics/skills](https://skills.sh/skills/anthropics/skills/xlsx) | Spreadsheet handling |
-| `atlassian-mcp` | [atlassian-mcp by jeffallan/claude-skills](https://skills.sh/skills/jeffallan/claude-skills/atlassian-mcp) | Read Jira work items or Confluence pages |
+| `docx` | [docx by anthropics/skills](https://skills.sh/anthropics/skills/docx) | Reading Word documents including images |
+| `pdf` | [pdf by anthropics/skills](https://skills.sh/anthropics/skills/pdf) | PDF reading |
+| `pptx` | [pptx by anthropics/skills](https://skills.sh/anthropics/skills/pptx) | Read PowerPoint presentations |
+| `xlsx` | [xlsx by anthropics/skills](https://skills.sh/anthropics/skills/xlsx) | Spreadsheet handling |
+| `atlassian-mcp` | [atlassian-mcp by jeffallan/claude-skills](https://skills.sh/jeffallan/claude-skills/atlassian-mcp) | Read Jira work items or Confluence pages |
 
 Additional skills can be found on [The Agent Skills Directory](https://skills.sh). Also noteworthy: [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — production-grade engineering skills for AI coding agents.
 
@@ -137,10 +137,9 @@ The skill builds in small increments, implement, test, verify, expand, reducing 
 
 ## Quick Reference
 
-| Step | Skill | What it does |
-|------|-------|-------------|
-| 1 | `docx` / `pdf` / `pptx` | Converts the PRD document to markdown |
-| 2 | `requirements-analysis` | Audits requirements for completeness (optional) |
-| 3 | `prd-to-plan` | Creates a phased implementation plan |
-| 4 | `incremental-implementation` | Builds code in small, tested increments |
-
+| Step | Skill                        | What it does                                    |
+| ---- | ---------------------------- | ----------------------------------------------- |
+| 1    | `docx` / `pdf` / `pptx`      | Converts the PRD document to markdown           |
+| 2    | `requirements-analysis`      | Audits requirements for completeness (optional) |
+| 3    | `prd-to-plan`                | Creates a phased implementation plan            |
+| 4    | `incremental-implementation` | Builds code in small, tested increments         |

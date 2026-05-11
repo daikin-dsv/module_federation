@@ -180,10 +180,10 @@ Enables the AI assistant to read and process Word (.docx) documents, including e
 
 #### Example Prompts
 
-| Prompt                                                        | What Happens                                                    |
-| ------------------------------------------------------------- | --------------------------------------------------------------- |
-| `/docx convert this PRD to markdown`                          | Reads the Word document and outputs a structured markdown file  |
-| `Extract all tables from requirements.docx`                   | Auto-activates and extracts tabular data from the document      |
+| Prompt                                      | What Happens                                                   |
+| ------------------------------------------- | -------------------------------------------------------------- |
+| `/docx convert this PRD to markdown`        | Reads the Word document and outputs a structured markdown file |
+| `Extract all tables from requirements.docx` | Auto-activates and extracts tabular data from the document     |
 
 #### Skill Reference Files
 
@@ -212,9 +212,9 @@ Enables the AI assistant to read, extract, create, merge, split, and manipulate 
 
 #### Example Prompts
 
-| Prompt                                                  | What Happens                                                      |
-| ------------------------------------------------------- | ----------------------------------------------------------------- |
-| `/pdf extract all tables from report.pdf`               | Uses pdfplumber to extract tabular data into structured format    |
+| Prompt                                    | What Happens                                                   |
+| ----------------------------------------- | -------------------------------------------------------------- |
+| `/pdf extract all tables from report.pdf` | Uses pdfplumber to extract tabular data into structured format |
 
 #### Skill Reference Files
 
@@ -241,10 +241,10 @@ Enables the AI assistant to read and process PowerPoint (.pptx) presentations, i
 
 #### Example Prompts
 
-| Prompt                                                     | What Happens                                                    |
-| ---------------------------------------------------------- | --------------------------------------------------------------- |
-| `/pptx extract all text from presentation.pptx`           | Reads each slide and outputs the text content                   |
-| `/pptx convert this presentation to markdown`              | Extracts content and structures it as a markdown document       |
+| Prompt                                          | What Happens                                              |
+| ----------------------------------------------- | --------------------------------------------------------- |
+| `/pptx extract all text from presentation.pptx` | Reads each slide and outputs the text content             |
+| `/pptx convert this presentation to markdown`   | Extracts content and structures it as a markdown document |
 
 #### Skill Reference Files
 
@@ -274,11 +274,11 @@ Diagnoses requirements-level problems in software projects using a state-machine
 
 #### Example Prompts
 
-| Prompt                                                                          | What Happens                                                           |
-| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `/requirements-analysis audit this PRD against states RA0–RA4`                  | Flags which state's symptoms apply and asks key questions              |
-| `Are my requirements specific enough to implement?`                             | Auto-activates and runs the RA2 (Vague Needs) diagnostic              |
-| `/requirements-analysis what constraints am I missing?`                         | Walks through the RA3 (Hidden Constraints) discovery process           |
+| Prompt                                                         | What Happens                                                 |
+| -------------------------------------------------------------- | ------------------------------------------------------------ |
+| `/requirements-analysis audit this PRD against states RA0–RA4` | Flags which state's symptoms apply and asks key questions    |
+| `Are my requirements specific enough to implement?`            | Auto-activates and runs the RA2 (Vague Needs) diagnostic     |
+| `/requirements-analysis what constraints am I missing?`        | Walks through the RA3 (Hidden Constraints) discovery process |
 
 #### Skill Reference Files
 
@@ -301,10 +301,10 @@ Breaks a Product Requirements Document into a phased implementation plan using v
 
 #### What's Included
 
-| Path                          | Description                                                      |
-| ----------------------------- | ---------------------------------------------------------------- |
-| `skills/to-issues/SKILL.md`  | Skill for breaking PRDs/plans into phased implementation issues  |
-| `skills/to-prd/SKILL.md`     | Skill for synthesizing conversation context into a PRD           |
+| Path                        | Description                                                     |
+| --------------------------- | --------------------------------------------------------------- |
+| `skills/to-issues/SKILL.md` | Skill for breaking PRDs/plans into phased implementation issues |
+| `skills/to-prd/SKILL.md`    | Skill for synthesizing conversation context into a PRD          |
 
 #### How to Use
 
@@ -314,11 +314,11 @@ Breaks a Product Requirements Document into a phased implementation plan using v
 
 #### Example Prompts
 
-| Prompt                                                                                              | What Happens                                                          |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `Convert this PRD into a phased implementation plan using vertical slices`                           | Reads the PRD and codebase, outputs a phased plan                     |
-| `/to-issues break this plan into GitHub issues`                                                     | Creates independently-grabbable issues from the plan                  |
-| `Take a look at the codebase first so the architectural decisions match what we already have`        | Analyzes existing patterns before generating the plan                 |
+| Prompt                                                                                        | What Happens                                          |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `Convert this PRD into a phased implementation plan using vertical slices`                    | Reads the PRD and codebase, outputs a phased plan     |
+| `/to-issues break this plan into GitHub issues`                                               | Creates independently-grabbable issues from the plan  |
+| `Take a look at the codebase first so the architectural decisions match what we already have` | Analyzes existing patterns before generating the plan |
 
 #### Skill Reference Files
 
@@ -345,9 +345,9 @@ npx skills add https://github.com/addyosmani/agent-skills --skill incremental-im
 
 #### What's Included
 
-| Path                                          | Description                                                                  |
-| --------------------------------------------- | ---------------------------------------------------------------------------- |
-| `skills/incremental-implementation/SKILL.md`  | Execution skill with slicing strategies, implementation rules, and checklist  |
+| Path                                         | Description                                                                  |
+| -------------------------------------------- | ---------------------------------------------------------------------------- |
+| `skills/incremental-implementation/SKILL.md` | Execution skill with slicing strategies, implementation rules, and checklist |
 
 #### How to Use
 
@@ -357,11 +357,11 @@ npx skills add https://github.com/addyosmani/agent-skills --skill incremental-im
 
 #### Example Prompts
 
-| Prompt                                                                                  | What Happens                                                              |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `Implement Task 3 from the plan. Start with the API endpoint, don't touch the UI yet`  | Implements one vertical slice, runs tests, then awaits next instruction    |
-| `/incremental-implementation add rate limiting to the Express API`                      | Breaks the feature into slices and implements one at a time               |
-| `Build this feature incrementally with tests after each step`                           | Auto-activates and follows the implement → test → verify → commit cycle   |
+| Prompt                                                                                | What Happens                                                            |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `Implement Task 3 from the plan. Start with the API endpoint, don't touch the UI yet` | Implements one vertical slice, runs tests, then awaits next instruction |
+| `/incremental-implementation add rate limiting to the Express API`                    | Breaks the feature into slices and implements one at a time             |
+| `Build this feature incrementally with tests after each step`                         | Auto-activates and follows the implement → test → verify → commit cycle |
 
 #### Skill Reference Files
 
