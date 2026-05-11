@@ -6,8 +6,6 @@ sidebar_position: 7
 
 Skills are reusable packages of domain-specific knowledge that extend an AI coding assistant's capabilities within VS Code. Each skill provides the assistant with context and instructions for a particular tool or technology, enabling it to give more accurate and relevant assistance. Skills can be invoked automatically based on your prompt or explicitly via slash commands.
 
-## Installed Skills
-
 ### Databricks
 
 **Source:** [`databricks/databricks-agent-skills`](https://skills.sh/databricks/databricks-agent-skills/databricks)
