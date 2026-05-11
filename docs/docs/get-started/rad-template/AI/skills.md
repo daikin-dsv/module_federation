@@ -170,7 +170,6 @@ Enables the AI assistant to read and process Word (.docx) documents, including e
 #### Prerequisites
 
 - **Python environment:** Required for document processing libraries.
-- **`python-docx`:** Python library for reading and writing Word documents.
 
 #### How to Use
 
