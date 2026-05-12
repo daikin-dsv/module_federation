@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
 
-# GitHub Codespaces Integration
+# Using GitHub Codespaces
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ Changes are reflected automatically in the forwarded address. The idle timeout i
 
 ## Using AI to Build UI
 
-In the bottom-right of Codespaces, choose the LLM model available to your account (options vary by subscription/plan).
+In the bottom-right of Codespaces, choose the LLM model available to your account (options vary by subscription/plan). Claude Opus 4.6+ recommended.
 
 <p style={{ textAlign: 'center' }}>
     ![Use chat to build UI](/img/github-codespace-chat.png)

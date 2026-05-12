@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 ---
 
-# Bolt Integration
+# Using Bolt
 
 ## Prerequisites
 

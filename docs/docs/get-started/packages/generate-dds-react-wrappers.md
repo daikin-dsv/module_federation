@@ -6,7 +6,7 @@ sidebar_position: 1
 
 `generate-dds-react-wrappers` is the codegen script that produces typed React wrappers and custom-element registrations from the [Daikin Design System][dds-pkg] package's Custom Elements Manifest (CEM). It is the bridge between the upstream `@daikin-oss/design-system-web-components` package and your React app — every `daikin-*` component you import as a React component exists because this script wrote it.
 
-It is closely paired with the [Daikin Design System skill](../rad-template/AI/skills#daikin-design-system) — the skill is the LLM-facing reference for the same CEM, while this script is the build-time consumer of it. When you upgrade DDS, you will typically run both to keep the wrappers and skill content in sync.
+It is closely paired with the [Daikin Design System skill](../skills#daikin-design-system) — the skill is the LLM-facing reference for the same CEM, while this script is the build-time consumer of it. When you upgrade DDS, you will typically run both to keep the wrappers and skill content in sync.
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ Both generated files start with an auto-generated banner and are written via a `
 ## How it fits with the DDS skill
 
 - **`generate-dds-react-wrappers`** (this script) consumes the CEM at _build_ time and writes runtime React code into the app.
-- **The [Daikin Design System skill](../rad-template/AI/skills#daikin-design-system)** consumes the CEM at _skill-regeneration_ time (in `daikin-dsv/rad-platform`) and writes per-component reference markdown that the AI assistant reads.
+- **The [Daikin Design System skill](../skills#daikin-design-system)** consumes the CEM at _skill-regeneration_ time (in `daikin-dsv/rad-platform`) and writes per-component reference markdown that the AI assistant reads.
 
 Both should target the same DDS package version. After upgrading `@daikin-oss/design-system-web-components`, run **both** to keep the wrappers and skill content in sync:
 

@@ -20,7 +20,7 @@ To find these values:
 
 - **Workspace URL** — The URL you use to access your Databricks workspace (e.g., `https://mycompany.cloud.databricks.com`).
 - **HTTP Path** — In the Databricks UI, go to **SQL Warehouses → Select your warehouse → Connection details → HTTP Path**.
-- **Access Token** — Generate a personal access token under **Settings → Developer → Access tokens** in your Databricks workspace.
+- **Access Token** — Generate a personal access token under **Settings → Developer → Access tokens** in your Databricks workspace with the applicable scope based on your needs.
 
 ## Architecture
 

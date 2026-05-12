@@ -2,6 +2,15 @@
 
 RAD Template is set up to be AI-friendly: these docs give language models (and newcomers) the exact context they need to work safely and quickly.
 
+## LLM (Large Language Model)
+
+Choosing the right model matters. Based on current findings:
+
+- **Recommended: Claude Opus** — Claude Opus (4.6 and above) delivers the most consistent and reliable results for RAD Template development. It handles complex multi-file edits, DDS component wiring, and GraphQL patterns accurately.
+- Claude Sonnet has shown inconsistencies in output quality during testing. It may produce correct results for simpler tasks, but for full-stack scaffolding, component integration, and multi-step workflows, Opus is the safer choice.
+
+When configuring your AI assistant (GitHub Copilot, Codespaces chat, or similar tools), select Claude Opus as the active model for the best experience.
+
 ## Key Files
 
 - `AGENTS.md` — Canonical brief for language models: architecture snapshot, key directories, workflows, env vars, and contribution expectations. Treat it as the source of truth when prompting an LLM about the project.
