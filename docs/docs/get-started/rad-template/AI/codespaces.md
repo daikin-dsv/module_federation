@@ -2,31 +2,44 @@
 sidebar_position: 3
 ---
 
-# Using GitHub Codespaces
+# Using `GitHub` `Codespaces`
 
 ## Prerequisites
 
-- A GitHub account with access to Codespaces.
+- A `GitHub` account with access to `Codespaces`.
 - Access to the [daikin-dsv/rad-template](https://github.com/daikin-dsv/rad-template) repository.
-- If you want to use built-in AI chat, a GitHub plan with GitHub Copilot access.
+- If you want to use built-in AI chat, a `GitHub` plan with `GitHub` `Copilot` access.
 
 ## Setup
 
 1. Open [daikin-dsv/rad-template](https://github.com/daikin-dsv/rad-template).
 2. In the top-right corner, click `Use this template` -> `Open in a codespace`.
-3. Wait for Codespaces to initialize dependencies.
-4. Run:
+3. Wait for `Codespaces` to initialize dependencies.
+4. Run the following steps:
 
-```bash
-# Use Node v24
-nvm use 24
-# Copy env example to local file
-cp .env.example .env.local
-# Build web component bundle
-npm run build
-# Run dev server
-npm run dev
-```
+    Use Node v24:
+
+    ```bash
+    nvm use 24
+    ```
+
+    Copy the env example to a local file:
+
+    ```bash
+    cp .env.example .env.local
+    ```
+
+    Build the web component bundle:
+
+    ```bash
+    npm run build
+    ```
+
+    Start the dev server:
+
+    ```bash
+    npm run dev
+    ```
 
 ## Preview App
 
@@ -40,7 +53,7 @@ Changes are reflected automatically in the forwarded address. The idle timeout i
 
 ## Using AI to Build UI
 
-In the bottom-right of Codespaces, choose the LLM model available to your account (options vary by subscription/plan). Claude Opus 4.6+ recommended.
+In the bottom-right of `Codespaces`, choose the LLM model available to your account (options vary by subscription/plan). `Claude Opus` 4.6+ recommended.
 
 <p style={{ textAlign: 'center' }}>
     ![Use chat to build UI](/img/github-codespace-chat.png)
@@ -48,4 +61,4 @@ In the bottom-right of Codespaces, choose the LLM model available to your accoun
 
 Ask the model to build the UI you want. The template provides guidance to AI tools via `AGENTS.md` and `CLAUDE.md`.
 
-⚠️ Note: Some models may rely on specific files. OpenAI, Claude, and Grok have been tested; other models have not.
+⚠️ Note: Some models may rely on specific files. OpenAI, `Claude`, and Grok have been tested; other models have not.

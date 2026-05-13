@@ -8,9 +8,9 @@ The template includes built-in [OpenTelemetry](https://opentelemetry.io/) instru
 
 ## Server-Side Tracing
 
-Server-side tracing is powered by [`@vercel/otel`](https://www.npmjs.com/package/@vercel/otel) and automatically captures traces for Next.js route handlers, server components, and middleware.
+Server-side tracing is powered by [`@vercel/otel`](https://www.npmjs.com/package/@vercel/otel) and automatically captures traces for `Next.js` route handlers, server components, and middleware.
 
-The Next.js [instrumentation hook](https://nextjs.org/docs/app/building-your-api-reference/file-conventions/instrumentation) in `instrumentation.ts` registers the OpenTelemetry SDK at startup:
+The `Next.js` [instrumentation hook](https://nextjs.org/docs/app/building-your-api-reference/file-conventions/instrumentation) in `instrumentation.ts` registers the OpenTelemetry SDK at startup:
 
 ```ts
 import { registerOTel } from '@vercel/otel';
@@ -38,16 +38,22 @@ services:
     otel-collector:
         image: otel/opentelemetry-collector-contrib:latest
         ports:
-            - '4318:4318' # OTLP HTTP
+            - '4318:4318'
         volumes:
             - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
 
     jaeger:
         image: jaegertracing/all-in-one:latest
         ports:
-            - '16686:16686' # Jaeger UI
-            - '4317:4317' # OTLP gRPC (used by collector)
+            - '16686:16686'
+            - '4317:4317'
 ```
+
+| Port  | Service          | Purpose                              |
+| ----- | ---------------- | ------------------------------------ |
+| 4318  | `otel-collector` | OTLP HTTP (receives traces from app) |
+| 16686 | `jaeger`         | Jaeger UI                            |
+| 4317  | `jaeger`         | OTLP gRPC (used by the collector)    |
 
 Then set in `.env.local`:
 
@@ -81,14 +87,14 @@ The following packages power the instrumentation:
 
 ### Server
 
-| Package                          | Purpose                                                                          |
-| -------------------------------- | -------------------------------------------------------------------------------- |
-| `@vercel/otel`                   | High-level wrapper that wires the OTel SDK into the Next.js instrumentation hook |
-| `@opentelemetry/instrumentation` | Core instrumentation API used by `@vercel/otel`                                  |
-| `@opentelemetry/api-logs`        | Logs API for structured log correlation                                          |
-| `@opentelemetry/sdk-logs`        | Logs SDK implementation                                                          |
+| Package                          | Purpose                                                                            |
+| -------------------------------- | ---------------------------------------------------------------------------------- |
+| `@vercel/otel`                   | High-level wrapper that wires the OTel SDK into the `Next.js` instrumentation hook |
+| `@opentelemetry/instrumentation` | Core instrumentation API used by `@vercel/otel`                                    |
+| `@opentelemetry/api-logs`        | Logs API for structured log correlation                                            |
+| `@opentelemetry/sdk-logs`        | Logs SDK implementation                                                            |
 
 # Learn More
 
 - [OpenTelemetry Documentation](https://opentelemetry.io/docs/)
-- [Next.js Instrumentation](https://nextjs.org/docs/app/building-your-api-reference/file-conventions/instrumentation)
+- [`Next.js` Instrumentation](https://nextjs.org/docs/app/building-your-api-reference/file-conventions/instrumentation)

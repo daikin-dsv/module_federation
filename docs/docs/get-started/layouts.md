@@ -14,28 +14,23 @@ The Layout package contains the shared "chrome" (header, footer, auth, navigatio
 
 ## What's Inside the Layout Package
 
-- [Lit](https://lit.dev/) components compiled with [Rspack](https://rspack.dev/).
-- Tailwind-aware stylesheet plus DDS tokens for consistent typography, color, and spacing.
+- [`Lit`](https://lit.dev/) components compiled with [Rspack](https://rspack.dev/).
+- `Tailwind`-aware stylesheet plus `DDS` tokens for consistent typography, color, and spacing.
 - Web component registrations so every `daikin-*` primitive is ready to use.
-- Keycloak-auth provider and framework-agnostic helpers that broadcast auth changes.
-- [Playwright](https://playwright.dev/) smoke tests that cover navigation overflow and user menu journeys.
+- `Keycloak`-auth provider and framework-agnostic helpers that broadcast auth changes.
+- [`Playwright`](https://playwright.dev/) smoke tests that cover navigation overflow and user menu journeys.
 
 ## Package Install Quick Start
 
 1. **Add the dependency (coming soon).** Publishing to npm (or an internal registry) is underway. Inside this mono-repo you can already depend on the Layout workspace via your package manager's workspace linking; external consumers will eventually run `npm install layout`.
 2. **Register custom elements and shared assets once.** _(These are the planned entrypoints; until the package is published, import directly from the equivalent files in the Layout workspace.)_
 
-    ```ts
-    // Registers app-header/footer/nav-menu/user-profile
-    import 'layout/auth';
-    // Registers daikin-* primitives
-    import 'layout/components';
-    import 'layout/styles';
-    // Tailwind base + DDS tokens
-    import 'layout/webcomponents';
-
-    // Registers auth-provider + exposes helpers
-    ```
+    | Import                          | What it registers                                      |
+    | ------------------------------- | ------------------------------------------------------ |
+    | `import 'layout/auth'`          | `app-header`, `app-footer`, `nav-menu`, `user-profile` |
+    | `import 'layout/components'`    | `daikin-*` primitives                                  |
+    | `import 'layout/styles'`        | Tailwind base and DDS tokens                           |
+    | `import 'layout/webcomponents'` | `auth-provider` and auth helper exports                |
 
 3. **Render the tags anywhere (React example).**
 
@@ -60,37 +55,37 @@ The Layout package contains the shared "chrome" (header, footer, auth, navigatio
     }
     ```
 
-Because the components are Lit-based custom elements, they work in any framework after import; hosts just need to manage routing state (setting/removing `active` attributes) and provide slot content.
+Because the components are `Lit`-based custom elements, they work in any framework after import; hosts just need to manage routing state (setting/removing `active` attributes) and provide slot content.
 
 ## Exported Modules & Custom Elements
 
-| Import specifier               | Custom element    | Summary                                                                                                                                                   |
-| ------------------------------ | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `layout/auth`                  | `<auth-provider>` | Initializes Keycloak, keeps an in-memory snapshot, and exports `getCurrentUser`, `isAuthenticated`, `onAuthChange`, `offAuthChange`, `clearAuthSnapshot`. |
-| `layout/components/Header.js`  | `<app-header>`    | Responsive top nav with slots for `logo`, `route`, `overflow-route` (managed automatically), and right-aligned actions.                                   |
-| `layout/components/NavMenu.js` | `<nav-menu>`      | Dropdown/overflow controller that keeps `parentNav` buttons in sync with active `child-nav` links.                                                        |
-| `layout/components/User.js`    | `<user-profile>`  | Avatar button that shows Keycloak identity details, locale-aware language labels, and logout/account management actions.                                  |
-| `layout/components/Footer.js`  | `<app-footer>`    | Minimal responsive footer with a copyright slot and a `footer-items` slot for external links.                                                             |
+| Import specifier               | Custom element    | Summary                                                                                                                                                     |
+| ------------------------------ | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `layout/auth`                  | `<auth-provider>` | Initializes `Keycloak`, keeps an in-memory snapshot, and exports `getCurrentUser`, `isAuthenticated`, `onAuthChange`, `offAuthChange`, `clearAuthSnapshot`. |
+| `layout/components/Header.js`  | `<app-header>`    | Responsive top nav with slots for `logo`, `route`, `overflow-route` (managed automatically), and right-aligned actions.                                     |
+| `layout/components/NavMenu.js` | `<nav-menu>`      | Dropdown/overflow controller that keeps `parentNav` buttons in sync with active `child-nav` links.                                                          |
+| `layout/components/User.js`    | `<user-profile>`  | Avatar button that shows `Keycloak` identity details, locale-aware language labels, and logout/account management actions.                                  |
+| `layout/components/Footer.js`  | `<app-footer>`    | Minimal responsive footer with a copyright slot and a `footer-items` slot for external links.                                                               |
 
 ### Component Details
 
-- **`<auth-provider>`** wraps your routing tree, waits for Keycloak to finish, and emits an `auth-changed` event through the shared auth store. Tokens persist to `localStorage` and refresh automatically.
+- **`<auth-provider>`** wraps your routing tree, waits for `Keycloak` to finish, and emits an `auth-changed` event through the shared auth store. Tokens persist to `localStorage` and refresh automatically.
 - **`<app-header>`** measures route widths once, caches them, and uses a `ResizeObserver` + `<nav-menu>` to overflow excess links into a “More” dropdown. Hosts own navigation state via the `active` attribute.
 - **`<nav-menu>`** listens for slot mutations/resizes and highlights whichever `child-nav` element has `active`. Works both inline and when auto-moved into overflow.
 - **`<user-profile>`** reads the shared auth snapshot and exposes optional props:
     - `text` for localization overrides (merges with the package’s default copy).
     - `logoutLink` to redirect instead of calling the provided `logout()` helper.
-    - `accountManagementLink` to replace the default Keycloak console URL.
+    - `accountManagementLink` to replace the default `Keycloak` console URL.
 - **`<app-footer>`** derives the current year automatically and exposes a `footer-items` slot for custom links, badges, or legal copy.
 
 ## Customization & Theming
 
 - **Text/localization:** Override via attributes/props (for example, `<app-footer copyright="2025 Daikin Tokyo">`) or pass an object to `<user-profile text={...}>`.
 - **Slots:** All navigation links/buttons are provided via slots so hosts can render React components, plain anchors, or other custom elements.
-- **DDS tokens:** Styling leans heavily on DDS CSS variables (for example, `--dds-color-common-brand-default`). Override these tokens in host CSS to adjust colors without forking components.
+- **`DDS` tokens:** Styling leans heavily on `DDS` CSS variables (for example, `--dds-color-common-brand-default`). Override these tokens in host CSS to adjust colors without forking components.
 
 ## Auth & SSO Notes
 
-- Defaults target the Daikin dev Keycloak realm (`https://sso-dev.daikinlab.com/auth`, realm `daikin`, client `rad-application`). Update package-level Keycloak config for other environments.
-- Keycloak access/refresh tokens live in `localStorage` as `kc_token` / `kc_refreshToken`. The refresh loop runs every 10 seconds and only refreshes when expiry is near.
-- `logout(options)` clears auth tokens and calls the Keycloak logout endpoint; `accountManagement()` opens the account console. Both helpers ship with the package for hosts to call directly when needed.
+- Defaults target the Daikin dev `Keycloak` realm (`https://sso-dev.daikinlab.com/auth`, realm Daikin, client `rad-application`). Update package-level `Keycloak` config for other environments.
+- `Keycloak` access/refresh tokens live in `localStorage` as `kc_token` / `kc_refreshToken`. The refresh loop runs every 10 seconds and only refreshes when expiry is near.
+- `logout(options)` clears auth tokens and calls the `Keycloak` logout endpoint; `accountManagement()` opens the account console. Both helpers ship with the package for hosts to call directly when needed.

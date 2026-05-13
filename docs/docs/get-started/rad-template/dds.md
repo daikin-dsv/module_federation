@@ -9,20 +9,20 @@ This template ships the full Daikin Design System on two layers:
 
 - **Tokens** — every color, spacing, radius, border, and typography value comes from
   [`@daikin-oss/dds-tokens`](https://www.npmjs.com/package/@daikin-oss/dds-tokens) as
-  `--dds-*` CSS custom properties (and matching Tailwind v4 utilities).
-- **Components** — the DDS component library
+  `--dds-*` CSS custom properties (and matching `Tailwind` v4 utilities).
+- **Components** — the `DDS` component library
   ([`@daikin-oss/design-system-web-components`](https://www.npmjs.com/package/@daikin-oss/design-system-web-components))
-  ships as Lit-based custom elements. This template wraps them for React via codegen,
+  ships as `Lit`-based custom elements. This template wraps them for React via codegen,
   so you write idiomatic React JSX with typed props, typed events, and typed refs.
 
 You should never write a hex code, and you should never `import` a custom-element
 class by hand.
 
-Please refer to the [DDS documentation](https://www.daikindesign.com/) for the full API.
+Please refer to the [`DDS` documentation](https://www.daikindesign.com/) for the full API.
 
 ## What's wired up out of the box
 
-**Tokens.** `app/globals.css` imports the token CSS and the Tailwind plugin:
+**Tokens.** `app/globals.css` imports the token CSS and the `Tailwind` plugin:
 
 ```css
 @import url('@daikin-oss/dds-tokens/css/daikin/Light/variables.css');
@@ -31,7 +31,7 @@ Please refer to the [DDS documentation](https://www.daikindesign.com/) for the f
 ```
 
 That single import gives you ~200 `--dds-*` CSS custom properties and the matching
-Tailwind v4 utilities globally.
+`Tailwind` v4 utilities globally.
 
 **Components.** `app/webcomponents.ts` re-exports `app/webcomponents.generated.ts`,
 which registers every `daikin-*` custom element with the browser at startup. The
@@ -44,11 +44,11 @@ just works.
 
 ## Components
 
-DDS components ship as Lit-based custom elements. Lit is great in vanilla HTML but
+`DDS` components ship as `Lit`-based custom elements. `Lit` is great in vanilla HTML but
 awkward in React: React 18 and earlier mis-handle custom events and pass non-string
 props as string attributes. To bridge that, this template generates typed React
 wrappers from the package's Custom Elements Manifest (via `@lit/react`'s
-`createComponent`), so you write idiomatic React and the wrapper handles the Lit
+`createComponent`), so you write idiomatic React and the wrapper handles the `Lit`
 interop for you.
 
 ### Importing and using a wrapper
@@ -122,20 +122,20 @@ Read the matching skill page, not the wrapper source:
 <div className="bg-[var(--dds-color-common-brand-default)]" />
 ```
 
-### 2. As a Tailwind v4 utility
+### 2. As a `Tailwind` v4 utility
 
-The same token is exposed as a typed Tailwind utility:
+The same token is exposed as a typed `Tailwind` utility:
 
 ```tsx
 <div className="bg-dds-color-common-brand-default text-dds-color-common-text-inverse p-dds-space-400 rounded-dds-border-radius-100" />
 ```
 
 The utility name is always the CSS variable name with the leading `--` dropped,
-prefixed by Tailwind's namespace (`bg-*`, `text-*`, `p-*`, `m-*`, `rounded-*`, …).
+prefixed by `Tailwind`'s namespace (`bg-*`, `text-*`, `p-*`, `m-*`, `rounded-*`, …).
 
 ## Component-specific overrides
 
-Most DDS components expose a few `--dds-*-*` knobs of their own
+Most `DDS` components expose a few `--dds-*-*` knobs of their own
 (e.g. `--dds-button-corner-radius`). These are listed per-component in the skill
 at `.agents/skills/daikin-design-system/components/<tag>.md` under
 `## CSS custom properties`. For finer-grained styling, components also expose
@@ -148,9 +148,11 @@ parts, and the documented per-component custom properties.
 
 ```bash
 npm install @daikin-oss/dds-tokens@latest @daikin-oss/design-system-web-components@latest
-npm run generate:dds   # refreshes the React wrappers + element registrations
-npm run sync:skills    # refreshes tokens.md inside the skill and the per-component skill pages
+npm run generate:dds
+npm run sync:skills
 ```
+
+`generate:dds` refreshes the React wrappers and element registrations. `sync:skills` refreshes `tokens.md` inside the skill and the per-component skill pages.
 
 `generate:dds` re-reads the package's Custom Elements Manifest and rewrites
 `app/components/dds-wrappers.generated.tsx` and `app/webcomponents.generated.ts`.

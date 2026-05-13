@@ -2,18 +2,18 @@
 sidebar_position: 4
 ---
 
-# GraphQL APIs
+# `GraphQL` APIs
 
-This guide demonstrates how to implement and consume GraphQL APIs in the RAD Template. The examples use temperature conversion queries (`toFahrenheit` and `toCelsius`) as a reference implementation that you can use as a template for your own APIs.
+This guide demonstrates how to implement and consume `GraphQL` APIs in the `RAD Template`. The examples use temperature conversion queries (`toFahrenheit` and `toCelsius`) as a reference implementation that you can use as a template for your own APIs.
 
 ## Table of Contents
 
 - [Local Development Setup](#local-development-setup)
-- [GraphQL Playground](#graphql-playground)
+- [`GraphQL` Playground](#graphql-playground)
 - [Making API Requests](#making-api-requests)
     - [Plain HTTP Requests](#plain-http-requests)
-    - [Using the GraphQL Client](#using-the-graphql-client)
-    - [Testing with Playwright](#testing-with-playwright)
+    - [Using the `GraphQL` Client](#using-the-graphql-client)
+    - [Testing with `Playwright`](#testing-with-playwright)
 - [Error Handling](#error-handling)
 - [Code Examples](#code-examples)
 
@@ -27,8 +27,7 @@ This guide demonstrates how to implement and consume GraphQL APIs in the RAD Tem
 
     The server runs on `http://localhost:3006` by default.
 
-2. **GraphQL endpoint:**
-
+2. **`GraphQL` endpoint:**
     - Development: `http://localhost:3006/api/graphql`
     - Production: `<your-domain>/api/graphql`
 
@@ -38,14 +37,14 @@ This guide demonstrates how to implement and consume GraphQL APIs in the RAD Tem
     RAD_URL=http://localhost:3006
     ```
 
-## GraphQL Playground
+## `GraphQL` Playground
 
-Apollo Server provides an interactive GraphQL Playground for exploring and testing queries.
+`Apollo` Server provides an interactive `GraphQL` Playground for exploring and testing queries.
 
 **Access the Playground:**
 
 - Navigate to `http://localhost:3006/api/graphql` in your browser
-- The embedded Apollo Studio sandbox opens automatically
+- The embedded `Apollo` Studio sandbox opens automatically
 
 **Using the Playground:**
 
@@ -78,7 +77,7 @@ query ToFahrenheit($celsius: Float!) {
 
 ### Plain HTTP Requests
 
-For plain HTTP requests without a GraphQL client, send a JSON object with a `query` key containing the stringified GraphQL query.
+For plain HTTP requests without a `GraphQL` client, send a JSON object with a `query` key containing the stringified `GraphQL` query.
 
 <table>
     <th nowrap>Method</th>
@@ -125,9 +124,9 @@ For plain HTTP requests without a GraphQL client, send a JSON object with a `que
 }
 ```
 
-### Using the GraphQL Client
+### Using the `GraphQL` Client
 
-The template includes a pre-configured GraphQL client using `graphql-request` that integrates seamlessly with React Query.
+The template includes a pre-configured `GraphQL` client using `graphql-request` that integrates seamlessly with `React Query`.
 
 **Implementation:** See `app/graphql/graphqlClient.ts`
 
@@ -135,24 +134,27 @@ The template includes a pre-configured GraphQL client using `graphql-request` th
 
 ```typescript
 import { useQuery } from '@tanstack/react-query';
+
 import { toFahrenheit, toCelsius } from './graphqlClient';
+```
 
-// Convert Celsius to Fahrenheit
-const { data, isLoading, error } = useQuery(
-  toFahrenheit({ celsius: 0 })
-);
+Convert Celsius to Fahrenheit:
 
-// Convert Fahrenheit to Celsius
-const { data, isLoading, error } = useQuery(
-  toCelsius({ fahrenheit: 32 })
-);
+```typescript
+const { data, isLoading, error } = useQuery(toFahrenheit({ celsius: 0 }));
+```
+
+Convert Fahrenheit to Celsius:
+
+```typescript
+const { data, isLoading, error } = useQuery(toCelsius({ fahrenheit: 32 }));
 ```
 
 **Example Component:** See `app/graphql/TemperatureConverter.tsx`
 
-### Testing with Playwright
+### Testing with `Playwright`
 
-The template includes Playwright tests demonstrating GraphQL API testing patterns.
+The template includes `Playwright` tests demonstrating `GraphQL` API testing patterns.
 
 **Test Implementation:** See `tests/graphql/graphql.spec.js`
 
@@ -162,11 +164,11 @@ The template includes Playwright tests demonstrating GraphQL API testing pattern
 ENV="local" npm run test:e2e
 ```
 
-**Test Helper:** See `tests/graphql/helper/index.js` for reusable GraphQL request utilities.
+**Test Helper:** See `tests/graphql/helper/index.js` for reusable `GraphQL` request utilities.
 
 ## Error Handling
 
-GraphQL returns a `200 OK` status even when there are errors. Errors are included in the response body under the `errors` array.
+`GraphQL` returns a `200 OK` status even when there are errors. Errors are included in the response body under the `errors` array.
 
 ### Common Error Patterns
 
@@ -219,41 +221,45 @@ GraphQL returns a `200 OK` status even when there are errors. Errors are include
 
 **With graphql-request:**
 
+The `try` block handles a successful response. Inside `catch`, `error.response?.errors` indicates a GraphQL error (e.g. bad input); anything else is a network or transport failure.
+
 ```typescript
 try {
     const data = await client.request(query, variables);
-    // Handle success
 } catch (error) {
     if (error.response?.errors) {
-        // GraphQL errors
         console.error('GraphQL errors:', error.response.errors);
     } else {
-        // Network or other errors
         console.error('Request failed:', error);
     }
 }
 ```
 
-**With React Query:**
+**With `React Query`:**
+
+When the query fails, `error.response.errors` contains the GraphQL errors array:
 
 ```typescript
 const { data, error } = useQuery(toFahrenheit({ celsius: 0 }));
 
 if (error) {
-    // error.response.errors contains GraphQL errors
     console.error('Query failed:', error);
 }
 ```
 
-**In Playwright Tests:**
+**In `Playwright` Tests:**
+
+Check for errors:
 
 ```javascript
 const data = await response.json();
 
-// Check for errors
 expect(data.errors).toBeUndefined();
+```
 
-// Or explicitly test error cases
+Or explicitly test error cases:
+
+```javascript
 expect(data.errors).toBeDefined();
 expect(data.errors[0].extensions.code).toBe('BAD_USER_INPUT');
 ```
@@ -263,45 +269,40 @@ expect(data.errors[0].extensions.code).toBe('BAD_USER_INPUT');
 ### Server-Side Implementation
 
 1. **Schema Definition:** `app/api/graphql/schema.ts`
-
-    - Define your GraphQL types, queries, and mutations
-    - Use GraphQL SDL (Schema Definition Language)
+    - Define your `GraphQL` types, queries, and mutations
+    - Use `GraphQL` SDL (Schema Definition Language)
 
 2. **Resolvers:** `app/api/graphql/resolvers.ts`
-
     - Implement the business logic for each query/mutation
     - Handle input validation and data transformation
 
 3. **Route Handler:** `app/api/graphql/route.ts`
-    - Apollo Server configuration
-    - Next.js API route integration
+    - `Apollo` Server configuration
+    - `Next.js` API route integration
 
 ### Client-Side Implementation
 
-1. **GraphQL Client Setup:** `app/graphql/graphqlClient.ts`
-
+1. **`GraphQL` Client Setup:** `app/graphql/graphqlClient.ts`
     - Configure `graphql-request` client
-    - Create reusable query functions with React Query integration
+    - Create reusable query functions with `React Query` integration
 
 2. **React Component:** `app/graphql/TemperatureConverter.tsx`
-
     - Example of using queries in a React component
     - Demonstrates loading states and error handling
 
-3. **GraphQL Page:** `app/graphql/page.tsx`
+3. **`GraphQL` Page:** `app/graphql/page.tsx`
     - Server component with QueryClientProvider setup
 
 ### Testing Examples
 
-1. **Playwright E2E Tests:** `tests/graphql/graphql.spec.js`
-
-    - End-to-end GraphQL query testing
+1. **`Playwright` E2E Tests:** `tests/graphql/graphql.spec.js`
+    - End-to-end `GraphQL` query testing
     - Response validation
 
 2. **Test Helpers:** `tests/graphql/helper/index.js`
-    - Reusable utilities for GraphQL testing
+    - Reusable utilities for `GraphQL` testing
     - Request formatting and error handling
 
 ---
 
-**Note:** Use these examples as templates when implementing your own GraphQL APIs. The patterns demonstrated here (schema definition, resolvers, client setup, and testing) apply to any GraphQL query or mutation you create.
+**Note:** Use these examples as templates when implementing your own `GraphQL` APIs. The patterns demonstrated here (schema definition, resolvers, client setup, and testing) apply to any `GraphQL` query or mutation you create.

@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# Dosatsu
+# `Dosatsu`
 
 Coming soon...
 
@@ -26,6 +26,6 @@ Coming soon...
 
 Coming soon...
 
-## GraphQL
+## `GraphQL`
 
 Coming soon...
