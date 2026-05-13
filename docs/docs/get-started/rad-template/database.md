@@ -5,7 +5,7 @@ sidebar_position: 6
 
 # Database
 
-RAD Template ships with a working Drizzle + Neon PostgreSQL example. Use this guide when you are building on the template and need to provision a local database, verify the sample guestbook integration, or prepare schema changes for deployment.
+`RAD Template` ships with a working Drizzle + Neon PostgreSQL example. Use this guide when you are building on the template and need to provision a local database, verify the sample guestbook integration, or prepare schema changes for deployment.
 
 ## Quick Start
 
@@ -138,13 +138,13 @@ Keep the seed script idempotent with `.onConflictDoNothing()` or an equivalent g
 | `npm run db:seed`     | Run `db/seed.ts`                             | Populate local development data                              |
 | `npm run db:claim`    | Open the Neon claim URL                      | Keep an ephemeral database permanently                       |
 
-## Deployment Expectations for RAD Template Users
+## Deployment Expectations for `RAD Template` Users
 
 You do not need to maintain the shared platform workflows to use the template, but your repository changes still need to follow their expectations:
 
 - Commit generated SQL files from `db/migrations/` whenever `db/schema.ts` changes.
 - Do not rely on `db:push` outside local development.
-- Expect deployment automation to run `npm run db:migrate`, not to infer schema changes from TypeScript alone.
+- Expect deployment automation to run `npm run db:migrate`, not to infer schema changes from `TypeScript` alone.
 - If your repository uses a custom database in CI/CD, `CUSTOM_DATABASE_URL` can be provided as a repository secret so automation skips auto-provisioning.
 
 ## Environment Variables

@@ -1,23 +1,23 @@
 # Building with AI
 
-RAD Template is set up to be AI-friendly: these docs give language models (and newcomers) the exact context they need to work safely and quickly.
+`RAD Template` is set up to be AI-friendly: these docs give language models (and newcomers) the exact context they need to work safely and quickly.
 
 ## LLM (Large Language Model)
 
 Choosing the right model matters. Based on current findings:
 
-- **Recommended: Claude Opus** — Claude Opus (4.6 and above) delivers the most consistent and reliable results for RAD Template development. It handles complex multi-file edits, DDS component wiring, and GraphQL patterns accurately.
-- Claude Sonnet has shown inconsistencies in output quality during testing. It may produce correct results for simpler tasks, but for full-stack scaffolding, component integration, and multi-step workflows, Opus is the safer choice.
+- **Recommended: `Claude Opus`** — `Claude Opus` (4.6 and above) delivers the most consistent and reliable results for `RAD Template` development. It handles complex multi-file edits, `DDS` component wiring, and `GraphQL` patterns accurately.
+- `Claude Sonnet` has shown inconsistencies in output quality during testing. It may produce correct results for simpler tasks, but for full-stack scaffolding, component integration, and multi-step workflows, `Opus` is the safer choice.
 
-When configuring your AI assistant (GitHub Copilot, Codespaces chat, or similar tools), select Claude Opus as the active model for the best experience.
+When configuring your AI assistant (`GitHub Copilot`, `Codespaces` chat, or similar tools), select `Claude Opus` as the active model for the best experience.
 
 ## Key Files
 
 - `AGENTS.md` — Canonical brief for language models: architecture snapshot, key directories, workflows, env vars, and contribution expectations. Treat it as the source of truth when prompting an LLM about the project.
-- `CLAUDE.md` — Claude-specific operating notes and boundaries (mirrors `AGENTS.md` intent; ensure any AI helper reads it if using Claude).
-- `CSS_VARIABLES.md` — DDS token reference; update when adding or renaming tokens.
+- `CLAUDE.md` — `Claude`-specific operating notes and boundaries (mirrors `AGENTS.md` intent; ensure any AI helper reads it if using `Claude`).
+- `CSS_VARIABLES.md` — `DDS` token reference; update when adding or renaming tokens.
 
-Many LLMs will look for `AGENTS.md` (and `CLAUDE.md` if using Claude) automatically.
+Many LLMs will look for `AGENTS.md` (and `CLAUDE.md` if using `Claude`) automatically.
 
 ## When to Update
 
@@ -32,24 +32,24 @@ Many LLMs will look for `AGENTS.md` (and `CLAUDE.md` if using Claude) automatica
 
 ## Troubleshooting
 
-### Hallucinating DDS component APIs
+### Hallucinating `DDS` component APIs
 
-The LLM will make up how the DDS components work.
+The LLM will make up how the `DDS` components work.
 Most of the time, if you point it to the component gallery, it will pick up the correct usage from that.
 
-```bash
-//example
+:::tip Example prompt
 The table of content is not showing. Please refer to the component gallery for usage.
-```
+:::
 
 ### Runtime Errors
 
 LLMs are oblivious to any runtime errors that occur.
 In that case, copy/pasting the error usually works.
 
-```bash
-//example
+:::tip Example prompt
 Getting these errors:
+
+```text
 Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
 A server/client branch if (typeof window !== 'undefined').
 Variable input such as Date.now() or Math.random() which changes each time it's called.
@@ -59,18 +59,21 @@ Invalid HTML tag nesting.
 It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
 ```
 
+:::
+
 ### Manual Debugging
 
 Sometimes, it is faster if you spend time doing manual debugging.
 
-```bash
-// example
+:::tip Example prompt
 The issue is that the value is dynamic:
 
+```diff
 -                                 2025-11-17 02:00:00
-
-*                                 2025-11-17 10:00:00
++                                 2025-11-17 10:00:00
 ```
+
+:::
 
 <p style={{ textAlign: 'center' }}>
     ![AI Response](/img/ai-manual-debugging-answer.png)

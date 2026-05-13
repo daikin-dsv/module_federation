@@ -9,16 +9,16 @@ Our widgets bundle delivers ready-to-use data visualization and interaction comp
 ## Package At A Glance
 
 - Coming soon: installable via `npm install widgets` (or its final scoped name). Until the package is published, treat this document as a preview of the API surface.
-- Components are Lit-based custom elements that sit on top of DDS web components and DDS tokens.
+- Components are `Lit`-based custom elements that sit on top of `DDS` web components and `DDS` tokens.
 - Each widget focuses on a narrow task (alerts, telemetry, confirmation flows) so hosts can mix and match without rebuilding UI fundamentals.
 
 ## What's Inside
 
 - Storyboard/demo shell that shows how the components work together.
-- Tailwind-aware stylesheet plus DDS tokens for color and typography consistency.
-- Lit components covering alarms, confirmation flows, energy usage, water/gas cards, IoT toggles, Databricks embeds, and paginated tables.
+- `Tailwind`-aware stylesheet plus `DDS` tokens for color and typography consistency.
+- `Lit` components covering alarms, confirmation flows, energy usage, water/gas cards, IoT toggles, `Databricks` embeds, and paginated tables.
 - Localization defaults for alarms, confirmation windows, lights, right-panel metadata, and pagination.
-- [Playwright](https://playwright.dev/) coverage validating alarms, confirmation modals, and right-panel interactions.
+- [`Playwright`](https://playwright.dev/) coverage validating alarms, confirmation modals, and right-panel interactions.
 
 ## Package Install Quick Start
 
@@ -73,7 +73,7 @@ Our widgets bundle delivers ready-to-use data visualization and interaction comp
     }
     ```
 
-Because they are custom elements, React/Vue/Angular/vanilla hosts can all use the same tags; you just pass attributes/props and listen for DOM events.
+Because they are custom elements, `React`/`Vue`/`Angular`/vanilla hosts can all use the same tags; you just pass attributes/props and listen for DOM events.
 
 ## Available Widgets
 
@@ -84,7 +84,7 @@ Because they are custom elements, React/Vue/Angular/vanilla hosts can all use th
 | `widgets/components/EnergyGauge.js`         | `<energy-gauge>`               | Semi-circular usage gauge with gradient fill, current kWh, and building label.            |
 | `widgets/components/InfoCard.js`            | `<info-card>`                  | Compact icon+label+value card—good for water/gas/occupancy stats (slot for custom icons). |
 | `widgets/components/Light.js`               | `<light-widget>`               | Interactive light-tile that toggles between on/off states with an overlay menu.           |
-| `widgets/components/DatabricksDashboard.js` | `<databricks-dashboard>`       | Thin iframe wrapper for embedding Databricks dashboards with load/error hooks.            |
+| `widgets/components/DatabricksDashboard.js` | `<databricks-dashboard>`       | Thin iframe wrapper for embedding `Databricks` dashboards with load/error hooks.          |
 | `widgets/components/TablePagination.js`     | `<table-pagination>`           | Results summary + `<daikin-pagination>` wrapper emitting `page-change` events.            |
 | `widgets/components/RightPanel.js`          | `<right-panel>`                | Optional contextual side panel rendering key/value metadata inside tabs.                  |
 
@@ -112,16 +112,16 @@ Because they are custom elements, React/Vue/Angular/vanilla hosts can all use th
     - Props: `start-index`, `end-index`, `total-items`, `current-page`, `total-pages`, `lang`, `text-key`, `text` (to override copy entirely).
     - Emits `page-change` with `{ page }` whenever users interact with the pagination control.
 - **`<right-panel>`**
-    - Props: `open`, `data` (plain object). When `open` is true it renders a tabbed panel that maps object keys to the built-in localization dictionary.
+    - Props: `open`, `data` (plain object). When `open` is `true` it renders a tabbed panel that maps object keys to the built-in localization dictionary.
     - Useful for showing metadata like thresholds, aggregates, or min/max spans alongside charts.
 
 ## Customization & Localization
 
 - **Text/localization:** Each widget ships with sensible copy defaults. Pass `text` overrides to Alarm, Confirmation Window, Light, and Table Pagination for translation/custom wording.
-- **DDS tokens:** Colors and spacing lean on DDS CSS variables (for example, `--dds-color-common-brand-default`). Override tokens in host CSS to re-theme without touching components.
+- **`DDS` tokens:** Colors and spacing lean on `DDS` CSS variables (for example, `--dds-color-common-brand-default`). Override tokens in host CSS to re-theme without touching components.
 - **Slots:** `<info-card>` exposes an `icon` slot; future widgets follow the same pattern for custom visuals.
 
 ## Auth & Integration Notes
 
-- Widgets are presentation-only; they do not couple to Keycloak or Layout auth helpers. Use them inside `<auth-provider>` (from Layout) or any other context.
+- Widgets are presentation-only; they do not couple to `Keycloak` or Layout auth helpers. Use them inside `<auth-provider>` (from Layout) or any other context.
 - For data-driven widgets (gauges, cards, right panel), you control all props. No network requests happen inside the components.
