@@ -1,3 +1,0 @@
-# Frontend Performance
-
-Coming soon...

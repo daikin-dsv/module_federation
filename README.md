@@ -6,15 +6,10 @@ PoC to demonstrate a micro-frontend architecture for Daikin energy-management ex
 - `widgets` exposes customizable application content
 - `regional-app-1` and `regional-app-2` are host apps that consume shared packages
 - `eva` contains another consuming app surface
-- `docs` contains the Docusaurus documentation site for onboarding and implementation guidance
 
 ## Documentation
 
-For full setup and implementation guidance, start with `docs/docs/get-started/introduction.md`.
-
-- Run the docs site locally: `npm run start --prefix docs`
-- Build static docs output: `npm run build --prefix docs`
-- GitHub Pages deployment target for docs is `/docs/` (via `npm run deploy-github-pages:docs`)
+The RAD documentation site now lives in the [`rad-platform`](https://github.com/daikin-dsv/rad-platform) repository and is published at https://daikin-dsv.github.io/rad-platform/docs/.
 
 ## Running the Demo
 
